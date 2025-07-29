@@ -454,7 +454,7 @@ class _CategoryList extends StatelessWidget {
               child: Container(
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Color(0xFFE96508).withOpacity(0.9), // 明るい茶色
+                  color:  Color(0xFF4AD64C).withOpacity(0.9), // 明るい茶色
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
                 ),
@@ -630,24 +630,40 @@ class _FormulaList extends StatelessWidget {
         padding: EdgeInsets.all(8),
         children: groupedFormulas.entries.expand((entry) {
           return [
+            // サブカテゴリヘッダー
             Container(
               width: double.infinity,
-              color: Colors.grey[200],
+              color: Colors.grey[100],
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: Text(entry.key, style: TextStyle(fontWeight: FontWeight.bold)),
+              child: Text(
+                entry.key,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
             ),
+            // 公式リスト
             ...entry.value.map((f) => ListTile(
-                  title: Math.tex(f.latex!, textStyle: TextStyle(fontSize: 16)),
-                  trailing: Text(f.relatedVideo.costRating, style: TextStyle(color: HexColor.fromHex('#FF9900'))),
+                  title: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Math.tex(
+                      f.latex,
+                      textStyle: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  trailing: Text(
+                    f.relatedVideo.costRating,
+                    style: TextStyle(color: HexColor.fromHex('#FF9900')),
+                  ),
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (_) => VideoDetailView(video: f.relatedVideo)),
+                    MaterialPageRoute(
+                        builder: (_) => VideoDetailView(video: f.relatedVideo)),
                   ),
-                )),
+                ))
           ];
         }).toList(),
       );
 }
+
 class VideoDetailView extends StatelessWidget {
   final Video video;
   VideoDetailView({required this.video});
@@ -847,12 +863,14 @@ class _LatexWebViewState extends State<LatexWebView> {
     p {
       margin: 0 0 1em;
     }
-    .math-box {
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      padding: 6px 0;
-    }
+    math-box {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 0;
+  }
+  .math-box img { display: inline-block; }
   </style>
 </head>
 <body>

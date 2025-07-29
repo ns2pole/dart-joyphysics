@@ -24,7 +24,6 @@ final moonOrbit = Video(
         <div class="common-box">② 月の公転周期を「27.3日」として計算</div>
         <p>\$\$T = 27.3 \\times 24 \\times 60 \\times 60 = 2.36 \\times 10^6 \\ [\\mathrm{s}]\$\$</p>
         <p>\$\$a^3 = \\frac{GM T^2}{4\\pi^2} = \\frac{3.97 \\times 10^{14} \\times (2.36 \\times 10^6)^2}{4\\pi^2}\$\$</p>
-        <p>\$\$(2.36 \\times 10^6)^2 = 5.57 \\times 10^{12}\$\$</p>
         <p>\$\$\\Rightarrow a^3 \\fallingdotseq \\frac{3.97 \\times 5.57}{39.5} \\times 10^{26} \\fallingdotseq 5.60 \\times 10^{25}\$\$</p>
         <p>\$\$\\Rightarrow a \\fallingdotseq \\sqrt[3]{5.60 \\times 10^{25}} \\fallingdotseq 3.84 \\times 10^8 \\ [\\mathrm{m}]\$\$</p>
         <div class="common-box">答え</div>
