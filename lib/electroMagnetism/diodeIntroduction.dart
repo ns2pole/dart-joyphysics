@@ -8,7 +8,7 @@ final diodeIntroduction = Video(
     costRating: "★★☆", latex: """
 <div class="common-box">ポイント</div>
 <div style="text-align:center; margin:1em 0;">
-  <img src="diodeIntroduction.png"
+  <img src="assets/electroMagnetismDetail/diodeIntroduction.png"
        alt="ダイオード"
        style="max-width:40%; height:auto;" />
 </div>

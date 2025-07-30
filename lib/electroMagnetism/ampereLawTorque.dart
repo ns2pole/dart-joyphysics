@@ -17,7 +17,7 @@ final ampereLawTorque = Video(
 <li>\$r\$：直線電流からの距離（m）</li>
 </ul>
 <div style="text-align:center; margin:1em 0;">
-  <img src="ampereLawTorque.png"
+  <img src="assets/electroMagnetismDetail/ampereLawTorque.png"
        alt="直線電流の作る磁場"
        style="max-width:50%; height:auto;" />
 </div>

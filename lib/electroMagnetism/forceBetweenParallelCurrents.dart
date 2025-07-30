@@ -26,7 +26,7 @@ final forceBetweenParallelCurrents = Video(
 導線が短い場合は端の影響を無視できず、実際の力はこの式からずれる。</p>
 
 <div style="text-align:center; margin:1em 0;">
-  <img src="forceBetweenParallelCurrents.png"
+  <img src="assets/electroMagnetismDetail/forceBetweenParallelCurrents.png"
        alt="平行電流間に働く力"
        style="max-width:50%; height:auto;" />
 </div>

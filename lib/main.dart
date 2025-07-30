@@ -5,6 +5,8 @@ import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:joyphysics/data.dart';
 import 'package:joyphysics/model.dart';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 
 // 色コードからColor生成拡張
 extension HexColor on Color {
@@ -370,11 +372,15 @@ final List<FormulaEntry> formulaList = [
 void main() => runApp(JoyPhysicsApp());
 
 class JoyPhysicsApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: '実験で学ぶ高校物理',
-        theme: ThemeData(primarySwatch: Colors.blue),
-        home: ContentView(),
+        theme: ThemeData(
+          // フォントファミリーを指定
+          fontFamily: 'Quicksand', // ここでカスタムフォント名を指定
+          primarySwatch: Colors.blue),
+          home: ContentView(),
       );
 }
 
@@ -760,8 +766,13 @@ class _LatexHtmlViewState extends State<LatexHtmlView> {
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     body { font-family: sans-serif; padding: 12px; }
-    .common-box { background:#eee; padding:6px; margin:10px 0; border-radius:4px; }
-  </style>
+    .common-box {
+      background: #eee;
+      padding: 6px;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    </style>
 </head>
 <body>
 ${widget.htmlContent}
@@ -786,17 +797,18 @@ ${widget.htmlContent}
   }
 }
 class LatexWebView extends StatefulWidget {
-  final String latexHtml; // HTML + LaTeX混在テキスト
+  final String latexHtml; // 数式＋画像タグなどのHTML
 
-  const LatexWebView({Key? key, required this.latexHtml}) : super(key: key);
+  const LatexWebView({super.key, required this.latexHtml});
 
   @override
-  _LatexWebViewState createState() => _LatexWebViewState();
+  State<LatexWebView> createState() => _LatexWebViewState();
 }
 
 class _LatexWebViewState extends State<LatexWebView> {
   late final WebViewController _controller;
-  double webViewHeight = 100; // 初期高さ
+  double webViewHeight = 100;
+  final Map<String, String> _base64Cache = {};
 
   @override
   void initState() {
@@ -809,9 +821,9 @@ class _LatexWebViewState extends State<LatexWebView> {
         'SizeChannel',
         onMessageReceived: (JavaScriptMessage message) {
           final height = double.tryParse(message.message);
-          if (height != null && height != webViewHeight) {
+          if (height != null && (height - webViewHeight).abs() > 1) {
             setState(() {
-              webViewHeight = height + 24; // 少し余裕をもたせる
+              webViewHeight = height + 24;
             });
           }
         },
@@ -827,56 +839,82 @@ class _LatexWebViewState extends State<LatexWebView> {
           },
         ),
       );
+
+    _prepareAndLoad();
   }
 
-  String get htmlContent => '''
+  Future<void> _prepareAndLoad() async {
+    final processedHtml = await _embedBase64Images(widget.latexHtml);
+    _controller.loadHtmlString(_wrapHtml(processedHtml));
+  }
+
+  /// HTML内の <img src="assets/..." > をBase64に変換して埋め込みます
+  Future<String> _embedBase64Images(String html) async {
+    final regex = RegExp(r'<img\s+[^>]*src="([^"]+)"[^>]*>', caseSensitive: false);
+    var newHtml = html;
+    for (final match in regex.allMatches(html)) {
+      final src = match.group(1);
+      if (src != null && src.startsWith('assets/')) {
+        if (!_base64Cache.containsKey(src)) {
+          try {
+            final bytes = await rootBundle.load(src);
+            final b64 = base64Encode(bytes.buffer.asUint8List());
+            _base64Cache[src] = b64;
+          } catch (e) {
+            _base64Cache[src] = '';
+          }
+        }
+        final b64 = _base64Cache[src];
+        if (b64 != null && b64.isNotEmpty) {
+          final base64Src = 'data:image/png;base64,$b64';
+          newHtml = newHtml.replaceAll(src, base64Src);
+        }
+      }
+    }
+    return newHtml;
+  }
+
+  String _wrapHtml(String bodyHtml) => '''
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
   window.MathJax = {
-    tex: {
-      inlineMath: [['\$', '\$'], ['\\\\(', '\\\\)']]
-    },
-    svg: { fontCache: 'global' }
+    options: {localStorage: false},
+    tex: {inlineMath: [['\$', '\$'], ['\\\\(', '\\\\)']]},
+    svg: {fontCache: 'global'}
   };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <style>
-    html, body {
-      margin: 0; padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-      font-size: 17px;
-      background-color: transparent;
-    }
-    .common-box {
-      width: 100%;
-      background-color: #e5e5e5;
-      padding: 8px 16px;
-      font-weight: 600;
-      font-size: 17px;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-    p {
-      margin: 0 0 1em;
-    }
-    math-box {
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  html, body {
+    margin:0; padding:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    font-size:17px;
+    background-color: transparent;
+  }
+  .common-box {
+    background: #eee;
+    padding: 6px;
+    margin: 10px 0;
+    border-radius: 4px;
+  }
+  .math-box {
+    width: 100%;
+    padding: 8px 16px;
+    box-sizing: border-box;
     white-space: nowrap;
     overflow-x: auto;
-    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    padding: 6px 0;
   }
-  .math-box img { display: inline-block; }
-  </style>
+</style>
 </head>
 <body>
-  <div class="math-box">
-  ${widget.latexHtml}
-  </div>
+<div class="math-box">
+$bodyHtml
+</div>
 </body>
 </html>
 ''';
@@ -885,7 +923,7 @@ class _LatexWebViewState extends State<LatexWebView> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: webViewHeight,
-      child: WebViewWidget(controller: _controller..loadHtmlString(htmlContent)),
+      child: WebViewWidget(controller: _controller),
     );
   }
 }

@@ -24,7 +24,7 @@ final rcCircuit = Video(
 
 <div class="common-box">問題設定</div>
 <div style="text-align:center; margin:1em 0;">
-  <img src="rcCircuit.webp"
+  <img src="assets/electroMagnetismDetail/rcCircuit.webp"
        alt="RC回路"
        style="max-width:100%; height:auto;" />
 </div>

@@ -19,7 +19,7 @@ final magneticFieldCircularLoop = Video(
 </ul>
 
 <div style="text-align:center; margin:1em 0;">
-  <img src="magneticFieldCircularLoop.png"
+  <img src="assets/electroMagnetismDetail/magneticFieldCircularLoop.png"
        alt="円形電流の中心における磁場"
        style="max-width:50%; height:auto;" />
 </div>

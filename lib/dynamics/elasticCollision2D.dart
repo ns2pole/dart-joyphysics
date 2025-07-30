@@ -15,7 +15,7 @@ final elasticCollision2D = Video(
 <div class="common-box">問題設定</div>
 <p>静止している質量\$m\$の物体に対して、同じ質量\$m\$の物体が速度\$\\overrightarrow{v}\$で弾性衝突した場合、衝突後の2つの速度ベクトル\$\\overrightarrow{v_1}, \\overrightarrow{v_2}\$のなす角度を求めて下さい。</p>
 <div style="text-align:center; margin:1em 0;">
-  <img src="elasticCollision2D.png"
+  <img src="assets/dynamicsDetail/elasticCollision2D.png"
        alt="2次元弾性衝突"
        style="max-width:100%; height:auto;" />
 </div>

@@ -17,7 +17,7 @@ final oneSideLift = Video(
         <div class="common-box">理論値計算</div>
         <p>力とモーメントのつり合い条件により、持ち上げに必要な力を求める。</p>
         <div style="text-align:center; margin:1em 0;">
-          <img src="oneSideLift.png"
+          <img src="assets/dynamicsDetail/oneSideLift.png"
                alt="片側持ち上げの模式図"
                style="max-width:100%; height:auto;" />
         </div>

@@ -10,7 +10,7 @@ final planets = Video(
     latex: """
         <div class="common-box">天文データ</div>
         <div style="text-align:center; margin:1em 0;">
-          <img src="planets.webp"
+          <img src="assets/dynamicsDetail/planets.webp"
                alt="惑星データ"
                style="max-width:98%; height:auto;" />
         </div>

@@ -11,12 +11,10 @@ final jupiter = Video(
     latex: """
         <div class="common-box">データ</div>
         <div style="text-align:center; margin:1em 0;">
-          <img src="jupiter.png"
-               alt="ガリレオ衛星
-    衛星データ"
+          <img src="assets/dynamicsDetail/jupiter.png"
+               alt="ガリレオ衛星データ"
                style="max-width:98%; height:auto;" />
         </div>
-
                 <div class="common-box">ポイント</div>
                 <p>木星の質量を \$M\$、万有引力定数を \$G\$ とする。木星が衛星に比べて十分重いという近似のもとで、全衛星の公転周期 \$T\$ と軌道長半径 \$a\$ は\$\\displaystyle \\frac{T^2}{a^3} =  \\frac{4\\pi^2}{GM}\$を満たす（ケプラーの第3法則）</p>
                 <div class="common-box">具体的な理論値計算とデータとの照合</div>    

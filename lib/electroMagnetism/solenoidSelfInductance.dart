@@ -28,7 +28,7 @@ final solenoidSelfInductance = Video(
     <div class=\"common-box\">問題設定</div>
     <p>単層のソレノイドコイル（長さ30cm、管半径4mm、巻き数300回、導線半径0.275mm）の自己インダクタンスを求めよ。</p>
     <div style="text-align:center; margin:1em 0;">
-      <img src="solenoidCrossSection.png"
+      <img src="assets/electroMagnetismDetail/solenoidCrossSection.png"
            alt=" ソレノイド断面"
            style="max-width:65%; height:auto;" />
     </div>

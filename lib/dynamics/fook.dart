@@ -12,13 +12,13 @@ final fook = Video(
     <div class="common-box">解説</div>
     <p>今回の実験の結果は下記の通り。</p>
     <div style="text-align:center; margin:1em 0;">
-      <img src="fook_data.webp"
+      <img src="assets/dynamicsDetail/fook_data.webp"
            alt="データ一覧"
            style="max-width:100%; height:auto;" />
     </div>
     <p>Pythonで最小二乗法での回帰直線を引いて見てみると、y=3.95x+0.09でかなり良くフィッティング出来ている事が分かる。</p>
     <div style="text-align:center; margin:1em 0;">
-      <img src="dynamics_detail/fook_regression.webp"
+      <img src="assets/dynamicsDetail/fook_regression.webp"
            alt="回帰直線"
            style="max-width:100%; height:auto;" />
     </div>
