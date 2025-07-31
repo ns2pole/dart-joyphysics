@@ -524,14 +524,14 @@ class AboutView extends StatelessWidget {
 
 コンテンツはこれからも随時追加していく予定です。
 
-扱ってほしいテーマがあれば、YouTubeやTikTokのコメント欄、またはアプリの評価欄にぜひご記入ください。できる限りリクエストにお応えしていきます。
+扱ってほしいテーマがあれば、YouTubeやTikTokのコメント欄、またはアプリの評価欄にぜひご記入ください。できる限り、リクエストにお応えしていきます。
 
 このアプリのテーマは、「実験を通して物理を楽しんで学んでもらう」こと。
 「物理がわからない」「楽しくない」「もっとちゃんと学びたい」——そんな悩みや思いを持つ方の力になれたら嬉しいです。
 
 AIの発展によって、多くの情報が無料で手に入るようになりました。だからこそ今、体験を通じて学ぶことの価値がより大きくなっていると感じています。
 物理を、もっと身近に。もっと楽しく。あなたの学びの一歩になれば幸いです。
-''', style: TextStyle(fontSize: 16)),
+''', style: TextStyle(fontSize: 17)),
         ),
       );
 }
@@ -632,7 +632,7 @@ class _VideoCategoryList extends StatelessWidget {
               child: Text(
                 sub.name,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -700,7 +700,7 @@ class _FormulaList extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(
                 entry.key,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
             // 公式リスト（タイトル＋数式＋区切り線）
@@ -717,14 +717,14 @@ class _FormulaList extends StatelessWidget {
                       children: [
                         Text(
                           f.title,
-                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: 4),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Math.tex(
                             f.latex,
-                            textStyle: TextStyle(fontSize: 16),
+                            textStyle: TextStyle(fontSize: 18),
                           ),
                         ),
                       ],
@@ -793,16 +793,20 @@ class VideoDetailView extends StatelessWidget {
     );
   }
 } 
+
+
 class CostLegendSection extends StatelessWidget {
   const CostLegendSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const starColor = Color.fromRGBO(255, 153, 0, 1.0); // Swiftの (1.0, 0.6, 0.0) に近い
+    const starColor = Color.fromRGBO(255, 153, 0, 1.0);
+
+    const legendTextStyle = TextStyle(fontSize: 16);  // ← ここでフォントサイズ指定
 
     return Container(
       width: double.infinity,
-      color: Colors.grey[100], // Swiftの systemGray6 相当
+      color: Colors.grey[100],
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -811,8 +815,8 @@ class CostLegendSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("★", style: TextStyle(color: starColor)),
-              Text("・・・実験コスト"),
+              Text("★", style: TextStyle(color: starColor, fontSize: 18)),
+              Text("・・・実験コスト", style: TextStyle(fontSize: 18)),
             ],
           ),
           const SizedBox(height: 4),
@@ -821,22 +825,22 @@ class CostLegendSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("★☆☆", style: TextStyle(color: starColor)),
-              Text(" = 500円未満"),
+              Text("★☆☆", style: TextStyle(color: starColor, fontSize: 16)),
+              Text(" = 500円未満", style: legendTextStyle),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("★★☆", style: TextStyle(color: starColor)),
-              Text(" = 1500円未満"),
+              Text("★★☆", style: TextStyle(color: starColor, fontSize: 16)),
+              Text(" = 1500円未満", style: legendTextStyle),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("★★★", style: TextStyle(color: starColor)),
-              Text(" = 1500円以上"),
+              Text("★★★", style: TextStyle(color: starColor, fontSize: 16)),
+              Text(" = 1500円以上", style: legendTextStyle),
             ],
           ),
         ],
@@ -854,24 +858,39 @@ class EquipmentListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         margin: EdgeInsets.only(top: 16),
-        decoration: BoxDecoration(color: Colors.grey[100], borderRadius: BorderRadius.circular(8)),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              decoration: BoxDecoration(color: HexColor.fromHex('#E5E5E5'), borderRadius: BorderRadius.circular(5)),
-              child: Text('実験道具', style: TextStyle(fontWeight: FontWeight.bold)),
+              decoration: BoxDecoration(
+                color: HexColor.fromHex('#E5E5E5'),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Text(
+                '実験道具',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18, // ← フォントサイズ16に指定
+                ),
+              ),
             ),
             ...equipment.map((e) => Padding(
                   padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                  child: Text('・$e'),
+                  child: Text(
+                    '・$e',
+                    style: TextStyle(fontSize: 16), // ← フォントサイズ16に指定
+                  ),
                 )),
           ],
         ),
       );
 }
+
 class YouTubeWebView extends StatefulWidget {
   final String videoURL;
   const YouTubeWebView({super.key, required this.videoURL});

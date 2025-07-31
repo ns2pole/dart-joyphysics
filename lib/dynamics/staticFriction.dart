@@ -9,9 +9,9 @@ final staticFriction = Video(
     latex: """
     <div class="common-box">ポイント</div>
     <ul>
-      <li><strong>最大静止摩擦力</strong>：物体が動き出す直前に働く静止摩擦力の最大値。\${F_s}\$ で表される。</li>
+      <li><strong>最大静止摩擦力 \$F_s\$：</strong>：物体が動き出す直前に働く静止摩擦力の最大値。</li>
       <li><strong>静止摩擦係数 \${\\mu_s}\$</strong>：最大静止摩擦力と垂直抗力の比で定義される無次元量。</li>
-      <li><strong>関係式</strong>：\$F_s = \\mu_s N\$ が成り立つ。</li>
+      <li><strong>定義より、</strong>\$ \\mu_s = \\frac{F_s}{N}\$ が成り立つ。</li>
     </ul>
     <div class="common-box">問題設定</div>
     <p>（1）机の上にある質量 \${m}\$ の物体に糸を取り付け徐々に引く力を増やしていき、物体が動き始める直前の最大の力 \${F_{s}}\$ が測定できた。このときの静止摩擦係数 \${\\mu_s}\$ を求めて下さい。</p>

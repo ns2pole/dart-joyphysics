@@ -9,9 +9,9 @@ final kineticFriction = Video(
     latex: """
     <div class="common-box">ポイント</div>
     <ul>
-      <li><strong>動摩擦力</strong>：物体が動いているときに働く摩擦力で、進行方向と逆向き。</li>
+      <li><strong>動摩擦力 \$F_k\$</strong>：物体が動いているときに働く摩擦力で、進行方向と逆向き。</li>
       <li><strong>動摩擦係数 \$\\mu_k\$</strong>：動摩擦力と垂直抗力の比で定義される。</li>
-      <li><strong>関係式</strong>：\$F_k = \\mu_k N\$ が成り立つ。</li>
+      <li><strong>定義より、</strong>\$ \\mu_k = \\frac{F_k}{N}\$ が成り立つ。</li>
       <li>水平面上では \$N = mg\$ より、\$\\displaystyle \\mu_k = \\frac{F_k}{mg}\$ が導かれる。</li>
       <li>等速ならば張力 \$T\$ と動摩擦力 \$F_k\$ はつり合う：\$F_k = T\$。</li>
     </ul>
