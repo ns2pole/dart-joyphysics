@@ -442,7 +442,6 @@ class _Header extends StatelessWidget {
         ],
       );
 }
-
 class _CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ListView.builder(
@@ -450,15 +449,16 @@ class _CategoryList extends StatelessWidget {
         itemCount: categories.length + 1,
         itemBuilder: (context, index) {
           if (index == categories.length) {
-            // 「アプリについて」のボタン
+            // 「アプリについて」のボタン（そのまま）
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 40),
               child: GestureDetector(
-                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AboutView())),
+                onTap: () => Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => AboutView())),
                 child: Container(
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.9), // 背景をグレーに
+                    color: Colors.grey.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
                   ),
@@ -467,8 +467,14 @@ class _CategoryList extends StatelessWidget {
                     children: [
                       Image.asset('assets/init/about.gif', width: 35, height: 35),
                       SizedBox(width: 8),
-                      Text('アプリについて',
-                          style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                      Text(
+                        'アプリについて',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -485,7 +491,7 @@ class _CategoryList extends StatelessWidget {
               child: Container(
                 height: 60,
                 decoration: BoxDecoration(
-                  color:  Color(0xFF4AD64C).withOpacity(0.9), // 明るい茶色
+                  color: Color(0xFFC3734F).withOpacity(0.95), // 淡い茶色
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
                 ),
@@ -494,8 +500,14 @@ class _CategoryList extends StatelessWidget {
                   children: [
                     Image.asset(cat.gifUrl, width: 35, height: 35),
                     SizedBox(width: 8),
-                    Text(cat.name,
-                        style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text(
+                      cat.name,
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white, // テキストは白
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -504,6 +516,7 @@ class _CategoryList extends StatelessWidget {
         },
       );
 }
+
 
 
 class _Footer extends StatelessWidget {
@@ -611,6 +624,7 @@ class _VideoListViewState extends State<VideoListView> {
     );
   }
 }
+
 class _VideoCategoryList extends StatelessWidget {
   final List<Subcategory> subcategories;
   _VideoCategoryList({required this.subcategories});
@@ -624,17 +638,11 @@ class _VideoCategoryList extends StatelessWidget {
             // ── サブカテゴリ見出し帯 ──
             Container(
               width: double.infinity,
-              color: Colors.grey[200], // 薄いグレー
-              padding: EdgeInsets.symmetric(
-                vertical: 8,
-                horizontal: 16,
-              ),
+              color: Colors.grey[300], // 薄いグレー
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(
                 sub.name,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             // ▼ サブカテゴリに属する動画リスト（線入り）
@@ -681,14 +689,13 @@ class _VideoCategoryList extends StatelessWidget {
       );
 }
 
-
 class _FormulaList extends StatelessWidget {
   final Map<String, List<FormulaEntry>> groupedFormulas;
   _FormulaList({required this.groupedFormulas});
 
   @override
   Widget build(BuildContext context) => ListView(
-        padding: EdgeInsets.all(8),
+        // padding: EdgeInsets.all(8),
         children: groupedFormulas.entries.expand((entry) {
           final formulas = entry.value;
 
@@ -696,51 +703,63 @@ class _FormulaList extends StatelessWidget {
             // サブカテゴリヘッダー
             Container(
               width: double.infinity,
-              color: Colors.grey[200],
+              color: Colors.grey[300],
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(
                 entry.key,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
-            // 公式リスト（タイトル＋数式＋区切り線）
+            // 各公式
             ...List.generate(formulas.length, (index) {
               final f = formulas[index];
               final isLast = index == formulas.length - 1;
 
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ListTile(
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          f.title,
-                          style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => VideoDetailView(video: f.relatedVideo),
                         ),
-                        SizedBox(height: 4),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Math.tex(
-                            f.latex,
-                            textStyle: TextStyle(fontSize: 18),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // 本文部
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  f.title,
+                                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 4),
+                                Math.tex(
+                                  f.latex,
+                                  textStyle: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    trailing: Text(
-                      f.relatedVideo.costRating,
-                      style: TextStyle(
-                        fontFamily: 'Keifont',
-                        color: HexColor.fromHex('#FF9900'),
-                        fontSize: 19,
-                      ),
-                    ),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => VideoDetailView(video: f.relatedVideo),
+                          Padding(
+                            padding: EdgeInsets.only(right: 10),  // ここで右余白を追加
+                            child: Text(
+                              f.relatedVideo.costRating,
+                              style: TextStyle(
+                                fontFamily: 'Keifont',
+                                color: HexColor.fromHex('#FF9900'),
+                                fontSize: 19,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -802,7 +821,7 @@ class CostLegendSection extends StatelessWidget {
   Widget build(BuildContext context) {
     const starColor = Color.fromRGBO(255, 153, 0, 1.0);
 
-    const legendTextStyle = TextStyle(fontSize: 16);  // ← ここでフォントサイズ指定
+    const legendTextStyle = TextStyle(fontSize: 18);  // ← ここでフォントサイズ指定
 
     return Container(
       width: double.infinity,
@@ -825,21 +844,21 @@ class CostLegendSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("★☆☆", style: TextStyle(color: starColor, fontSize: 16)),
+              Text("★☆☆", style: TextStyle(color: starColor, fontSize: 18)),
               Text(" = 500円未満", style: legendTextStyle),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("★★☆", style: TextStyle(color: starColor, fontSize: 16)),
+              Text("★★☆", style: TextStyle(color: starColor, fontSize: 18)),
               Text(" = 1500円未満", style: legendTextStyle),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Text("★★★", style: TextStyle(color: starColor, fontSize: 16)),
+              Text("★★★", style: TextStyle(color: starColor, fontSize: 18)),
               Text(" = 1500円以上", style: legendTextStyle),
             ],
           ),

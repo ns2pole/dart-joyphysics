@@ -1,4 +1,4 @@
-package com.example.joyphysics
+package com.joyphysics
 
 import io.flutter.embedding.android.FlutterActivity
 
