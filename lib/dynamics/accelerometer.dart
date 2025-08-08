@@ -7,7 +7,7 @@ final accelerometer = Video(
   title: "重力加速度の観測",
   videoURL: "",
   equipment: ["スマホ"],  // 加速度センサー搭載スマホ
-  costRating: "★☆☆",
+  costRating: "0",
   latex: """
 <div class="common-box">加速度センサーとは？</div>
 <p>スマートフォンには加速度センサーが搭載されており、x, y, z 軸の加速度（単位：m/s²）をリアルタイムで取得できます。</p>

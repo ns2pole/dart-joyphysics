@@ -2,6 +2,8 @@ import './BarometerExperimentWidget.dart';
 import '../model.dart'; // Videoクラスが定義されている場合
 
 final barometer = Video(
+  isSmartPhoneOnly: true,
+  isNew: true,
   category: 'dynamics',
   iconName: "barometer",
   title: "大気圧の測定",

@@ -27,13 +27,11 @@ extension HexColor on Color {
 enum VideoViewMode { byCategory, byFormula }
 
 class FormulaEntry {
-  final String title; // 日本語部分（keifontで表示）
   final String latex; // 数式部分（Math.texで表示）
   final Video relatedVideo;
   final String categoryName;
 
   FormulaEntry({
-    required this.title,
     required this.latex,
     required this.relatedVideo,
     required this.categoryName,
@@ -211,216 +209,182 @@ final categories = <Category>[
 
 final List<FormulaEntry> formulaList = [
   FormulaEntry(
-    title: "浮力の大きさ（アルキメデスの原理）",
     latex: "f = \\rho g V",
     relatedVideo: buoyancyAndActionReaction,
     categoryName: "浮力・圧力",
   ),
   FormulaEntry(
-    title: "作用・反作用の法則",
     latex: "\\overrightarrow{F}_{1 \\leftarrow 2} + \\overrightarrow{F}_{2 \\leftarrow 1} = \\overrightarrow{0}",
     relatedVideo: buoyancyAndActionReaction,
     categoryName: "運動の第3法則",
   ),
   FormulaEntry(
-    title: "圧力の式",
-    latex: "\\p = \\p_{0} + \\rho g h",
+    latex: "p = p_{0} + \\rho g h",
     relatedVideo: barometer,
     categoryName: "浮力・圧力",
   ),
   FormulaEntry(
-    title: "自由落下の変位",
     latex: "x(t) = \\frac12 g t^2",
     relatedVideo: freeFall,
     categoryName: "等加速度運動",
   ),
   FormulaEntry(
-    title: "自由落下の時間",
     latex: "t(x) = \\sqrt{\\frac{2x}{g}}",
     relatedVideo: freeFall,
     categoryName: "等加速度運動",
   ),
   FormulaEntry(
-    title: "バネの弾性力",
     latex: "F(x) = -k x",
     relatedVideo: verticalSpringOscillation,
     categoryName: "バネ・単振動",
   ),
   FormulaEntry(
-    title: "鉛直バネ振り子の周期",
     latex: "T = 2\\pi \\sqrt{\\frac{m}{k}}",
     relatedVideo: verticalSpringOscillation,
     categoryName: "バネ・単振動",
   ),
   FormulaEntry(
-    title: "静止摩擦力",
     latex: "F_{s} = \\mu_{s} N",
     relatedVideo: staticFriction,
     categoryName: "摩擦力",
   ),
   FormulaEntry(
-    title: "動摩擦力",
     latex: "F_{k} = \\mu_{k} N",
     relatedVideo: kineticFriction,
     categoryName: "摩擦力",
   ),
   FormulaEntry(
-    title: "単振り子の周期",
     latex: "T = 2\\pi \\sqrt{\\frac{l}{g}}",
     relatedVideo: pendulumPeriodMeasurement,
     categoryName: "バネ・単振動",
   ),
   FormulaEntry(
-    title: "1次元の運動量保存",
     latex: "m_{1} v_{1} + m_{2} v_{2} = m_{1} v_{1}' + m_{2} v_{2}'",
     relatedVideo: elasticCollision1D,
     categoryName: "運動量保存則",
   ),
   FormulaEntry(
-    title: "2次元の運動量保存",
     latex: "m_{1} \\vec{v}_{1} + m_{2} \\vec{v}_{2} = m_{1} \\vec{v}_{1}' + m_{2} \\vec{v}_{2}'",
     relatedVideo: elasticCollision2D,
     categoryName: "運動量保存則",
   ),
   FormulaEntry(
-    title: "2次元弾性衝突（エネルギー保存）",
     latex: "\\tfrac12 m_{1} v_{1}^{2} + \\tfrac12 m_{2} v_{2}^{2} = \\tfrac12 m_{1} v_{1}'^{2} + \\tfrac12 m_{2} v_{2}'^{2}",
     relatedVideo: elasticCollision2D,
     categoryName: "力学的エネルギー保存",
   ),
   FormulaEntry(
-    title: "ケプラーの第3法則",
     latex: "\\frac{T^{2}}{a^{3}} = \\frac{4\\pi^{2}}{GM}",
     relatedVideo: planets,
     categoryName: "ケプラーの第3法則",
   ),
   FormulaEntry(
-    title: "ローレンツ力の大きさ",
     latex: "F = q v B \\sin\\theta",
     relatedVideo: lorentzForce,
     categoryName: "電磁力・ローレンツ力",
   ),
   FormulaEntry(
-    title: "磁場が電流に及ぼす力",
     latex: "F = I \\ell B \\sin\\theta",
     relatedVideo: lorentzForce,
     categoryName: "電磁力・ローレンツ力",
   ),
   FormulaEntry(
-    title: "アンペールの法則",
     latex: "B = \\dfrac{\\mu_{0} I}{2\\pi r}",
     relatedVideo: ampereLawTorque,
     categoryName: "磁場",
   ),
   FormulaEntry(
-    title: "円形電流の中心における磁場",
     latex: "B = \\dfrac{\\mu_{0} I}{2a}",
     relatedVideo: magneticFieldCircularLoop,
     categoryName: "磁場",
   ),
   FormulaEntry(
-    title: "ソレノイドコイルの作る磁場",
     latex: "B = \\mu n I",
     relatedVideo: solenoidMagneticField,
     categoryName: "磁場",
   ),
   FormulaEntry(
-    title: "平行電流間の力",
     latex: "F = \\dfrac{\\mu_{0} I_{1} I_{2} \\ell}{2\\pi r}",
     relatedVideo: forceBetweenParallelCurrents,
     categoryName: "電磁力・ローレンツ力",
   ),
   FormulaEntry(
-    title: "ソレノイドコイルの自己インダクタンス",
     latex: "L = \\mu_{0} \\mu_{r} \\dfrac{N^{2} A}{\\ell}",
     relatedVideo: solenoidSelfInductance,
     categoryName: "電磁誘導・インダクタンス",
   ),
   FormulaEntry(
-    title: "導線抵抗",
     latex: "R = \\rho \\dfrac{\\ell}{A}",
     relatedVideo: resistanceVsLength,
     categoryName: "電流",
   ),
   FormulaEntry(
-    title: "オームの法則",
     latex: "V = RI",
     relatedVideo: ohmsLaw,
     categoryName: "電流",
   ),
   FormulaEntry(
-    title: "合成抵抗（直列）",
     latex: "R = \\sum_{i=1}^{n} R_{i}",
     relatedVideo: seriesResistance,
     categoryName: "電流",
   ),
   FormulaEntry(
-    title: "合成抵抗（並列）",
     latex: "\\dfrac{1}{R} = \\sum_{i=1}^{n} \\dfrac{1}{R_{i}}",
     relatedVideo: parallelResistance,
     categoryName: "電流",
   ),
   FormulaEntry(
-    title: "温度と抵抗",
     latex: "R = R_{0} \\bigl(1 + \\alpha (T - T_{0})\\bigr)",
     relatedVideo: resistivityTemperatureDependence,
     categoryName: "電流",
   ),
   FormulaEntry(
-    title: "平行板コンデンサの電気容量",
     latex: "C = \\varepsilon_{0} \\dfrac{S}{d}",
     relatedVideo: parallelPlateCapacitanceMeasurement,
     categoryName: "コンデンサ・静電気",
   ),
   FormulaEntry(
-    title: "合成容量（直列）",
     latex: "\\dfrac{1}{C} = \\sum_{i=1}^{n} \\dfrac{1}{C_{i}}",
     relatedVideo: capacitanceSeriesCombination,
     categoryName: "コンデンサ・静電気",
   ),
   FormulaEntry(
-    title: "合成容量（並列）",
     latex: "C = \\sum_{i=1}^{n} C_{i}",
     relatedVideo: capacitanceParallelCombination,
     categoryName: "コンデンサ・静電気",
   ),
   FormulaEntry(
-    title: "コンデンサに蓄えられる電気量",
     latex: "Q = CV",
     relatedVideo: capacitorChargeStorage,
     categoryName: "コンデンサ・静電気",
   ),
   FormulaEntry(
-    title: "閉管のn倍振動の波長",
     latex: "L = \\frac{(2n-1)\\lambda}{4} （n=1,3,5,\\cdots）",
     relatedVideo: closedPipeResonance,
     categoryName: "音・共鳴",
   ),
   FormulaEntry(
-    title: "開管のn倍振動の波長",
     latex: "L = \\frac{n\\lambda}{2} （n=1,2,3,\\cdots）",
     relatedVideo: openPipeResonance,
     categoryName: "音・共鳴",
   ),
   FormulaEntry(
-    title: "うなり",
     latex: "f = \\bigl| f_1 - f_2 \\bigr| ",
     relatedVideo: beat,
     categoryName: "うなり",
   ),
   FormulaEntry(
-    title: "回折格子の干渉条件",
     latex: "d \\sin\\theta = n\\lambda",
     relatedVideo: diffractionGrating,
     categoryName: "光の干渉・回折",
   ),
   FormulaEntry(
-    title: "ボイルの法則",
     latex: "PV = \\text{一定}",
     relatedVideo: boyleLaw,
     categoryName: "気体の法則・熱力学",
   ),
 ];
+
 
 
 
@@ -688,7 +652,37 @@ class _VideoCategoryList extends StatelessWidget {
                       width: 48,
                       height: 27,
                     ),
-                    title: Text(v.title),
+                    title: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            v.title,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        if (v.isSmartPhoneOnly == true) ...[
+                          SizedBox(width: 10), // タイトルと画像の隙間
+                          Image.asset(
+                            'assets/others/smartPhoneOnly.gif',
+                            width: 68,
+                            height: 45,
+                            fit: BoxFit.contain,
+                          ),
+                        ],
+                        if (v.isNew == true) ...[
+                          SizedBox(width: 10), // タイトルと画像の隙間
+                          Image.asset(
+                            'assets/others/new.gif',
+                            width: 60,
+                            height: 40,
+                            fit: BoxFit.contain,
+                          ),
+                        ],
+                      ],
+                    ),
                     trailing: Text(
                       v.costRating,
                       style: TextStyle(
@@ -718,14 +712,12 @@ class _VideoCategoryList extends StatelessWidget {
         }).toList(),
       );
 }
-
 class _FormulaList extends StatelessWidget {
   final Map<String, List<FormulaEntry>> groupedFormulas;
   _FormulaList({required this.groupedFormulas});
 
   @override
   Widget build(BuildContext context) => ListView(
-        // padding: EdgeInsets.all(8),
         children: groupedFormulas.entries.expand((entry) {
           final formulas = entry.value;
 
@@ -766,9 +758,39 @@ class _FormulaList extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  f.title,
-                                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                                // タイトル＋isNewマーク表示部分
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        f.relatedVideo.title,
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    if (f.relatedVideo.isSmartPhoneOnly == true) ...[
+                                      SizedBox(width: 10), // タイトルと画像の隙間
+                                      Image.asset(
+                                        'assets/others/smartPhoneOnly.gif',
+                                        width: 68,
+                                        height: 45,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ],
+                                    if (f.relatedVideo.isNew == true) ...[
+                                      SizedBox(width: 10),
+                                      Image.asset(
+                                        'assets/others/new.gif',
+                                        width: 60,
+                                        height: 40,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ],
+                                  ],
                                 ),
                                 SizedBox(height: 4),
                                 Math.tex(
@@ -779,7 +801,7 @@ class _FormulaList extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 10),  // ここで右余白を追加
+                            padding: EdgeInsets.only(right: 10),
                             child: Text(
                               f.relatedVideo.costRating,
                               style: TextStyle(
@@ -808,6 +830,7 @@ class _FormulaList extends StatelessWidget {
         }).toList(),
       );
 }
+
 
 class VideoDetailView extends StatelessWidget {
   final Video video;
@@ -901,6 +924,14 @@ class CostLegendSection extends StatelessWidget {
             children: const [
               Text("★★★", style: TextStyle(color: starColor, fontSize: 18)),
               Text(" = 1500円以上", style: legendTextStyle),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/others/smartPhoneOnly.png', width: 60, height: 40),
+              const SizedBox(width: 8),
+              const Text("・・・スマホのみで実験可能", style: legendTextStyle),
             ],
           ),
         ],

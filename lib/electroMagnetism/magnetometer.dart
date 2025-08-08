@@ -2,7 +2,9 @@ import './MagnetometerExperimentWidget.dart';
 import '../model.dart';
 
 final magnetometer = Video(
-  category: 'waves',  // または 'earth' など分類に応じて変更
+  isSmartPhoneOnly: true,
+  isNew: true,
+  category: 'electroMagnetism',  // または 'earth' など分類に応じて変更
   iconName: "magnet",
   title: "磁場の測定",
   videoURL: "",

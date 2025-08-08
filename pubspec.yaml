@@ -35,7 +35,6 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_sound: ^9.2.13  # ←バージョン番号は最新を確認
   sensors_plus: ^6.1.1
-  flutter_barometer: ^0.1.0
   # ここまで
 
   # 他のパッケージ…
@@ -96,6 +95,7 @@ flutter:
     - assets/electroMagnetismDetail/
     - assets/icon/
     - assets/fonts/
+    - assets/others/
     # - images/a_dot_burr.jpeg
     # - images/a_dot_ham.jpeg
 
