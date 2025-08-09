@@ -904,9 +904,9 @@ class VideoDetailView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: SizedBox(
-                  height: 450,  // 実験ウィジェットの高さ調整
+                  height: 450,
                   width: double.infinity,
-                  child: video.experimentWidget,
+                  child: video.experimentWidget!,
                 ),
               ),
 
@@ -914,7 +914,7 @@ class VideoDetailView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: SizedBox(
-                  height: 200,  // YouTube埋め込みの高さ調整
+                  height: 200,
                   width: double.infinity,
                   child: YouTubeWebView(videoURL: video.videoURL),
                 ),
@@ -929,17 +929,21 @@ class VideoDetailView extends StatelessWidget {
             if (video.latex != null)
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: SizedBox(
-                  height: 300,  // Latex表示の高さ調整
-                  width: double.infinity,
-                  child: LatexWebView(latexHtml: video.latex!),
-                ),
+                child: LatexWebView(latexHtml: video.latex!),
               ),
           ],
         ),
       ),
     );
   }
+}
+
+class YouTubeWebView extends StatefulWidget {
+  final String videoURL;
+  const YouTubeWebView({super.key, required this.videoURL});
+
+  @override
+  State<YouTubeWebView> createState() => _YouTubeWebViewState();
 }
 
 
@@ -1047,13 +1051,6 @@ class EquipmentListView extends StatelessWidget {
       );
 }
 
-class YouTubeWebView extends StatefulWidget {
-  final String videoURL;
-  const YouTubeWebView({super.key, required this.videoURL});
-
-  @override
-  State<YouTubeWebView> createState() => _YouTubeWebViewState();
-}
 
 class _YouTubeWebViewState extends State<YouTubeWebView> {
   late final WebViewController _controller;
@@ -1068,10 +1065,8 @@ class _YouTubeWebViewState extends State<YouTubeWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 550,
-      child: WebViewWidget(controller: _controller),
-    );
+    // SizedBoxは外側で管理するので不要
+    return WebViewWidget(controller: _controller);
   }
 }
 
