@@ -25,7 +25,7 @@ import AVFoundation
     barometerChannel.setStreamHandler(self)
 
     // 周波数メソッドチャネル
-    let frequencyChannel = FlutterMethodChannel(name: "com.example.frequency/mic", binaryMessenger: controller.binaryMessenger)
+    let frequencyChannel = FlutterMethodChannel(name: "com.joyphysics.frequency/mic", binaryMessenger: controller.binaryMessenger)
     frequencyChannel.setMethodCallHandler(handleFrequencyMethodCall)
 
     GeneratedPluginRegistrant.register(with: self)
