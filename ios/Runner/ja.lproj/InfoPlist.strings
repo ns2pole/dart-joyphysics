@@ -1,0 +1,2 @@
+NSMotionUsageDescription = "加速度や気圧センサーを使用します。";
+NSMicrophoneUsageDescription = "音声解析のためマイクを使用します。";

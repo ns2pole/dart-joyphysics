@@ -420,6 +420,7 @@ class JoyPhysicsApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false, // ← ここで設定
         title: '実験で学ぶ高校物理',
         theme: ThemeData(
           // フォントファミリーを指定
