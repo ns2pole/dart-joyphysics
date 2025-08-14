@@ -431,27 +431,6 @@ class JoyPhysicsApp extends StatelessWidget {
       );
 }
 
-class ContentView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(child: Image.asset('assets/init/init.png', fit: BoxFit.cover)),
-          Positioned.fill(child: Container(color: Colors.white.withOpacity(0.7))),
-          SafeArea(
-            child: Column(
-              children: [
-                SizedBox(height: 20),
-                _Header(),
-                Expanded(child: _CategoryList()),
-                _Footer(),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-}
 
 class _Header extends StatelessWidget {
   @override
@@ -465,113 +444,225 @@ class _Header extends StatelessWidget {
       );
 }
 
-class _CategoryList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => ListView.builder(
-        padding: EdgeInsets.zero,
-        itemCount: categories.length + 2, // +2に変更（既存 + アプリについて + センサーを使う）
-        itemBuilder: (context, index) {
-          if (index == categories.length) {
-            // 「センサーを使う」ボタン（追加）
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
-              child: GestureDetector(
-                onTap: () => Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => SensorListView())),
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.blue.withOpacity(0.9), // 適宜色を変えてください
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.sensors, color: Colors.white, size: 35),
-                      SizedBox(width: 8),
-                      Text(
-                        'センサーを使う！',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }
-          if (index == categories.length + 1) {
-            // 「アプリについて」のボタン（そのまま）
-            return Padding(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
-              child: GestureDetector(
-                onTap: () => Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => AboutView())),
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.9),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset('assets/init/about.gif', width: 35, height: 35),
-                      SizedBox(width: 8),
-                      Text(
-                        'アプリについて',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }
 
-          final cat = categories[index];
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => VideoListView(category: cat))),
-              child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Color(0xFFC3734F).withOpacity(0.95), // 淡い茶色
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(cat.gifUrl, width: 35, height: 35),
-                    SizedBox(width: 8),
-                    Text(
-                      cat.name,
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      );
+// // ------------------- サンプルデータ -------------------
+// final theoryCategories = <TheoryCategory>[
+//   TheoryCategory(
+//     name: '力学理論',
+//     gifUrl: 'assets/init/dynamics_theory.gif',
+//     subcategories: [
+//       TheorySubCategory(
+//         name: 'ニュートンの法則',
+//         videos: [
+//           TheoryVideo(title: '運動方程式の基礎', videoURL: 'https://example.com/newton1'),
+//           TheoryVideo(title: '力と運動量', videoURL: 'https://example.com/newton2'),
+//         ],
+//       ),
+//       TheorySubCategory(
+//         name: '運動量保存則',
+//         videos: [
+//           TheoryVideo(title: '1次元衝突', videoURL: 'https://example.com/momentum1'),
+//           TheoryVideo(title: '2次元衝突', videoURL: 'https://example.com/momentum2'),
+//         ],
+//       ),
+//       TheorySubCategory(
+//         name: 'エネルギー保存則',
+//         videos: [
+//           TheoryVideo(title: '運動エネルギーと位置エネルギー', videoURL: 'https://example.com/energy1'),
+//         ],
+//       ),
+//     ],
+//   ),
+//   TheoryCategory(
+//     name: '電磁気理論',
+//     gifUrl: 'assets/init/electromagnetism.gif',
+//     subcategories: [
+//       TheorySubCategory(
+//         name: '静電気',
+//         videos: [
+//           TheoryVideo(title: 'クーロンの法則', videoURL: 'https://example.com/coulomb'),
+//         ],
+//       ),
+//       TheorySubCategory(
+//         name: '電場と電位',
+//         videos: [
+//           TheoryVideo(title: '電場の計算例', videoURL: 'https://example.com/electricfield'),
+//         ],
+//       ),
+//       TheorySubCategory(
+//         name: '磁場と電磁誘導',
+//         videos: [
+//           TheoryVideo(title: 'ローレンツ力', videoURL: 'https://example.com/lorentz'),
+//         ],
+//       ),
+//     ],
+//   ),
+// ];
+
+// サンプルデータ用のモデル
+class TheoryTopic {
+  final String title;
+  final String latexContent;
+
+  TheoryTopic({required this.title, required this.latexContent});
 }
 
+class TheorySubcategory {
+  final String name;
+  final List<TheoryTopic> topics;
+
+  TheorySubcategory({required this.name, required this.topics});
+}
+
+// 理論ページ
+class TheoryListView extends StatelessWidget {
+  final String categoryName;
+// サンプルデータ（後で実際のデータに置き換え可）
+final Map<String, List<TheorySubcategory>> sampleData = {
+  '力学理論': [
+    TheorySubcategory(
+      name: '運動方程式',
+      topics: [
+        TheoryTopic(title: 'ニュートンの運動法則', latexContent: r'$$F = ma$$'),
+        TheoryTopic(title: '運動量保存則', latexContent: r'$$\mathbf{p} = m\mathbf{v}$$'),
+        TheoryTopic(title: '仕事とエネルギー', latexContent: r'$$W = \Delta E$$'),
+      ],
+    ),
+    TheorySubcategory(
+      name: '回転運動',
+      topics: [
+        TheoryTopic(title: '角運動量', latexContent: r'$$\mathbf{L} = \mathbf{r} \times \mathbf{p}$$'),
+        TheoryTopic(title: '回転エネルギー', latexContent: r'$$E_{\mathrm{rot}} = \frac12 I\omega^2$$'),
+        TheoryTopic(title: 'トルク', latexContent: r'$$\tau = I\alpha$$'),
+      ],
+    ),
+    TheorySubcategory(
+      name: '振動運動',
+      topics: [
+        TheoryTopic(title: '単振動', latexContent: r'$$x(t) = A\cos(\omega t + \phi)$$'),
+        TheoryTopic(title: '減衰振動', latexContent: r'$$x(t) = Ae^{-\gamma t} \cos(\omega t)$$'),
+        TheoryTopic(title: '強制振動', latexContent: r'$$m\ddot{x} + c\dot{x} + kx = F_0 \cos(\omega t)$$'),
+      ],
+    ),
+    TheorySubcategory(
+      name: '剛体運動',
+      topics: [
+        TheoryTopic(title: '重心運動', latexContent: r'$$\mathbf{R}_{\text{cm}} = \frac{\sum m_i \mathbf{r}_i}{\sum m_i}$$'),
+        TheoryTopic(title: '慣性モーメント', latexContent: r'$$I = \sum m_i r_i^2$$'),
+        TheoryTopic(title: '平面運動', latexContent: r'$$v = r\omega$$'),
+      ],
+    ),
+    TheorySubcategory(
+      name: '相対性理論入門',
+      topics: [
+        TheoryTopic(title: '特殊相対論', latexContent: r'$$E = mc^2$$'),
+        TheoryTopic(title: '時間の遅れ', latexContent: r'$$t = \frac{t}{\sqrt{1 - v^2/c^2}}$$'),
+        TheoryTopic(title: 'ローレンツ変換', latexContent: r'$$x = \gamma(x - vt)$$'),
+      ],
+    ),
+  ],
+  '電磁気理論': [
+    TheorySubcategory(
+      name: '電場と電位',
+      topics: [
+        TheoryTopic(title: 'クーロンの法則', latexContent: r'$$F = k\frac{q_1 q_2}{r^2}$$'),
+        TheoryTopic(title: 'ガウスの法則', latexContent: r'$$\nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}$$'),
+        TheoryTopic(title: '電位差', latexContent: r'$$V = -\int \mathbf{E} \cdot d\mathbf{l}$$'),
+      ],
+    ),
+    TheorySubcategory(
+      name: '磁場と電流',
+      topics: [
+        TheoryTopic(title: 'ビオ・サバールの法則', latexContent: r'$$d\mathbf{B} = \frac{\mu_0}{4\pi} \frac{I\,d\mathbf{l} \times \mathbf{\hat{r}}}{r^2}$$'),
+        TheoryTopic(title: 'アンペールの法則', latexContent: r'$$\nabla \times \mathbf{B} = \mu_0 \mathbf{J}$$'),
+        TheoryTopic(title: '磁束', latexContent: r'$$\Phi_B = \int \mathbf{B} \cdot d\mathbf{S}$$'),
+      ],
+    ),
+    TheorySubcategory(
+      name: '電磁誘導',
+      topics: [
+        TheoryTopic(title: 'ファラデーの法則', latexContent: r'$$\mathcal{E} = -\frac{d\Phi_B}{dt}$$'),
+        TheoryTopic(title: 'レンツの法則', latexContent: r'$$\mathcal{E} \propto -\frac{d\Phi_B}{dt}$$'),
+        TheoryTopic(title: '自己インダクタンス', latexContent: r'$$\Phi_B = LI$$'),
+      ],
+    ),
+    TheorySubcategory(
+      name: 'マクスウェル方程式',
+      topics: [
+        TheoryTopic(title: '微分形', latexContent: r'''
+          \begin{cases}
+          \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0} \\
+          \nabla \cdot \mathbf{B} = 0 \\
+          \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} \\
+          \nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}
+          \end{cases}
+          '''),
+        TheoryTopic(title: '積分形', latexContent: r'''
+          \begin{cases}
+          \oint \mathbf{E} \cdot d\mathbf{l} = -\frac{d}{dt} \int \mathbf{B} \cdot d\mathbf{S} \\
+          \oint \mathbf{B} \cdot d\mathbf{l} = \mu_0 I_{\text{enc}} + \mu_0\varepsilon_0 \frac{d}{dt} \int \mathbf{E} \cdot d\mathbf{S}
+          \end{cases}
+          '''),
+        TheoryTopic(title: '電磁波の波動方程式', latexContent: r'$$\nabla^2 \mathbf{E} - \mu_0\varepsilon_0 \frac{\partial^2 \mathbf{E}}{\partial t^2} = 0$$'),
+      ],
+    ),
+    TheorySubcategory(
+      name: '電磁波',
+      topics: [
+        TheoryTopic(title: '平面波解', latexContent: r'$$\mathbf{E}(z,t) = E_0 \cos(kz - \omega t)$$'),
+        TheoryTopic(title: '波の偏光', latexContent: r'$$\mathbf{E}(t) = E_x \cos(\omega t) \hat{\mathbf{x}} + E_y \cos(\omega t + \delta) \hat{\mathbf{y}}$$'),
+        TheoryTopic(title: 'エネルギー密度', latexContent: r'$$u = \frac12 (\varepsilon_0 E^2 + \frac{B^2}{\mu_0})$$'),
+      ],
+    ),
+  ],
+};
+
+  TheoryListView({Key? key, required this.categoryName}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final subcategories = sampleData[categoryName] ?? [];
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(categoryName),
+        backgroundColor: Colors.teal,
+      ),
+      body: ListView.builder(
+        itemCount: subcategories.length,
+        itemBuilder: (context, index) {
+          final sub = subcategories[index];
+          return ExpansionTile(
+            title: Text(
+              sub.name,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            children: sub.topics.map((topic) {
+              return ListTile(
+                title: Text(topic.title),
+                trailing: Icon(Icons.chevron_right),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Scaffold(
+                        appBar: AppBar(title: Text(topic.title)),
+                        body: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: LatexWebView(latexHtml: topic.latexContent),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            }).toList(),
+          );
+        },
+      ),
+    );
+  }
+}
 
 
 
@@ -579,7 +670,7 @@ class _Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.only(bottom: 12),
-        child: Text('Updated 2025/08/08', style: TextStyle(fontSize: 20, color: Colors.black)),
+        child: Text('Updated 2025/08/14', style: TextStyle(fontSize: 20, color: Colors.black)),
       );
 }
 
@@ -893,6 +984,7 @@ class _FormulaList extends StatelessWidget {
         }).toList(),
       );
 }
+
 class VideoDetailView extends StatelessWidget {
   final Video video;
   const VideoDetailView({required this.video, Key? key}) : super(key: key);
@@ -1109,7 +1201,7 @@ class _LatexWebViewState extends State<LatexWebView> {
       )
       ..setNavigationDelegate(
         NavigationDelegate(
-          onPageFinished: (url) async {
+          onPageFinished: (videoURL) async {
             await _controller.runJavaScript('''
               MathJax.typesetPromise().then(() => {
                 setTimeout(() => {
@@ -1167,7 +1259,7 @@ class _LatexWebViewState extends State<LatexWebView> {
   <style>
     @font-face {
       font-family: 'KeiFont';
-      src: url(data:font/ttf;base64,$fontBase64) format('truetype');
+      src: videoURL(data:font/ttf;base64,$fontBase64) format('truetype');
     }
     html, body {
       margin: 0;
@@ -1290,3 +1382,207 @@ class SensorListView extends StatelessWidget {
     );
   }
 }
+
+
+
+
+class CategoryList extends StatelessWidget {
+  final List<Category> categories;
+
+  const CategoryList({Key? key, required this.categories}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // ホームに追加したい理論ボタン
+    final theoryButtons = [
+      {
+        'name': '力学理論',
+        'gif': 'assets/init/dynamics_theory.gif',
+        'page': TheoryListView(categoryName: '力学理論'),
+      },
+      {
+        'name': '電磁気理論',
+        'gif': 'assets/init/electromagnetism_theory.gif',
+        'page': TheoryListView(categoryName: '電磁気理論'),
+      },
+    ];
+
+    final totalCount = categories.length + theoryButtons.length + 2;
+
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      itemCount: totalCount,
+      itemBuilder: (context, index) {
+        if (index >= categories.length && index < categories.length + theoryButtons.length) {
+          // 理論ボタン
+          final tb = theoryButtons[index - categories.length];
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => tb['page'] as Widget),
+              ),
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.green.withOpacity(0.95),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(tb['gif'] as String, width: 35, height: 35),
+                    SizedBox(width: 8),
+                    Text(
+                      tb['name'] as String,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+
+        if (index == totalCount - 2) {
+          // 「センサーを使う」ボタン
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => SensorListView()),
+              ),
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.sensors, color: Colors.white, size: 35),
+                    SizedBox(width: 8),
+                    Text(
+                      'センサーを使う！',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+
+        if (index == totalCount - 1) {
+          // 「アプリについて」ボタン
+          return Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => AboutView()),
+              ),
+              child: Container(
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/init/about.gif', width: 35, height: 35),
+                    SizedBox(width: 8),
+                    Text(
+                      'アプリについて',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+
+        // 実験系カテゴリー
+        final cat = categories[index];
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
+          child: GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => VideoListView(category: cat)),
+            ),
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                color: Color(0xFFC3734F).withOpacity(0.95),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(cat.gifUrl, width: 35, height: 35),
+                  SizedBox(width: 8),
+                  Text(
+                    cat.name,
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+
+
+class ContentView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      body: Stack(
+        children: [
+          Positioned.fill(child: Image.asset('assets/init/init.png', fit: BoxFit.cover)),
+          Positioned.fill(child: Container(color: Colors.white.withOpacity(0.7))),
+          SafeArea(
+            child: Column(
+              children: [
+                SizedBox(height: 20),
+                _Header(),
+                Expanded(
+                  child: CategoryList(categories: categories),
+                ),
+                _Footer(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+}
+
+

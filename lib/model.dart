@@ -30,3 +30,5 @@ class Video {
 
   Image getImage() => Image.asset(assetPath);
 }
+
+
