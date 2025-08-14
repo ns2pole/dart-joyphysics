@@ -32,3 +32,45 @@ class Video {
 }
 
 
+
+// サンプルデータ用のモデル
+class TheoryTopic {
+  final String title;
+  final String latexContent;
+
+  TheoryTopic({required this.title, required this.latexContent});
+}
+
+class TheorySubcategory {
+  final String name;
+  final List<TheoryTopic> topics;
+
+  TheorySubcategory({required this.name, required this.topics});
+}
+
+
+class FormulaEntry {
+  final String latex; // 数式部分（Math.texで表示）
+  final Video relatedVideo;
+  final String categoryName;
+
+  FormulaEntry({
+    required this.latex,
+    required this.relatedVideo,
+    required this.categoryName,
+  });
+}
+class Subcategory {
+  final String name;
+  final List<Video> videos;
+  Subcategory({required this.name, required this.videos});
+}
+
+class Category {
+  final String name;
+  final String gifUrl;
+  final List<Subcategory> subcategories;
+  Category({required this.name, required this.gifUrl, required this.subcategories});
+}
+
+
