@@ -2,11 +2,11 @@
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:joyphysics/theoryData.dart';
-import 'package:joyphysics/TheoryView.dart';
-import 'package:joyphysics/ExperimentView.dart';
-import 'package:joyphysics/categoriesData.dart';
-import 'package:joyphysics/sensorListView.dart';
+import 'package:joyphysics/theory/theoryData.dart';
+import 'package:joyphysics/theory/TheoryView.dart';
+import 'package:joyphysics/experiment/ExperimentView.dart';
+import 'package:joyphysics/experiment/categoriesData.dart';
+import 'package:joyphysics/experiment/sensorListView.dart';
 import 'package:joyphysics/aboutView.dart';
 import 'package:joyphysics/model.dart';
 
@@ -87,7 +87,7 @@ class CategoryList extends StatelessWidget {
               child: Container(
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.95),
+                  color: Colors.green[300]?.withOpacity(0.9), // ← 少し明るめ・透明度も少し下げる
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
                 ),
