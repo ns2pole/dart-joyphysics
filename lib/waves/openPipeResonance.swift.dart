@@ -84,5 +84,4 @@ final openPipeResonance = Video(
     <p>理論値と測定値は、開口端補正を加えることでより正確に予測できる。</p>
 <br>
 """,
-  experimentWidget: FrequencyMeasureWidget(),
 );

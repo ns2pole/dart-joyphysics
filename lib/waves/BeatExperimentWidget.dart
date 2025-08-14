@@ -126,8 +126,8 @@ class _BeatExperimentWidgetState extends State<BeatExperimentWidget> {
               Slider(
                 value: freq1,
                 min: 100,
-                max: 1000,
-                divisions: 900,
+                max: 3000,
+                divisions: 2900,
                 label: freq1.toStringAsFixed(1),
                 onChanged: (v) => setState(() => freq1 = v),
               ),
@@ -153,8 +153,8 @@ class _BeatExperimentWidgetState extends State<BeatExperimentWidget> {
               Slider(
                 value: freq2,
                 min: 100,
-                max: 1000,
-                divisions: 900,
+                max: 3000,
+                divisions: 2900,
                 label: freq2.toStringAsFixed(1),
                 onChanged: (v) => setState(() => freq2 = v),
               ),
