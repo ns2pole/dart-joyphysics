@@ -16,15 +16,14 @@ final Map<String, List<TheorySubcategory>> theoryData = {
     //   ],
     // ),
   ],
-  // '力学理論': [
-  //   TheorySubcategory(
-  //     name: '力学の三法則',
-  //     topics: [
-  //       // lawOfActionAndReaction,
-  //       eqOfMotion,
-  //     ],
-  //   ),
-  // ],
+  '力学理論': [
+    TheorySubcategory(
+      name: '等加速度直線運動',
+      topics: [
+        uniformAcceleration,
+      ],
+    ),
+  ],
   '電磁気学理論': [
   //   // TheorySubcategory(
   //   //   name: '電場と電位',

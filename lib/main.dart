@@ -61,11 +61,11 @@ class CategoryList extends StatelessWidget {
         'gif': 'assets/init/number.gif',
         'page': TheoryListView(categoryName: '物理のための数学'),
       },
-      // {
-      //   'name': '力学理論',
-      //   'gif': 'assets/init/dynamics.gif',
-      //   'page': TheoryListView(categoryName: '力学理論'),
-      // },
+      {
+        'name': '力学理論',
+        'gif': 'assets/init/dynamics.gif',
+        'page': TheoryListView(categoryName: '力学理論'),
+      },
       {
         'name': '電磁気学理論',
         'gif': 'assets/init/electromag.gif',

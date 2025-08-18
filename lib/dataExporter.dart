@@ -61,7 +61,6 @@ export './experiment/waves/doppler.dart';
 export './experiment/waves/dopplerObserverMoving.dart';
 export './experiment/waves/luxMeasurement.dart';
 export './experiment/waves/LuxMeasurementWidget.dart';
-export './experiment/waves/frequencyMeasurement.dart';
 export './experiment/waves/FrequencyMeasureWidget.dart';
 export './experiment/waves/ToneGeneratorWidget.dart';
 export './experiment/waves/frequencyAndDoReMi.dart';
@@ -73,6 +72,7 @@ export './theory/mathematics/vectorComponent.dart';
 
 // theory/dynamics
 export './theory/dynamics/lawOfActionAndReaction.dart';
+export './theory/dynamics/uniformAcceleration.dart';
 export './theory/dynamics/eqOfMotion.dart';
 
 // theory/electroMagnetism
