@@ -104,8 +104,20 @@ class _LatexWebViewState extends State<LatexWebView> {
       background-color: transparent;
       line-height: 1.75;  /* ← 行間を少し広く */
     }
+    .condition-box {
+      background: rgba(255, 165, 244, 1);
+      padding: 8px 16px;
+      margin: 0px 0;
+      border-radius: 4px;
+    }
     .common-box {
       background: #cfc;
+      padding: 8px 16px;
+      margin: 0px 0;
+      border-radius: 4px;
+    }
+    .theorem-box {
+      background: rgba(251, 223, 162, 1);
       padding: 8px 16px;
       margin: 0px 0;
       border-radius: 4px;
