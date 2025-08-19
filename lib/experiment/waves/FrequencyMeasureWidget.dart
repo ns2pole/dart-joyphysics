@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class FrequencyMeasureWidget extends StatefulWidget {
-  final double height; // 追加
+  final double height;
 
   const FrequencyMeasureWidget({Key? key, this.height = 400}) : super(key: key);
 
@@ -114,8 +114,9 @@ class _FrequencyMeasureWidgetState extends State<FrequencyMeasureWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.height, // 高さ調整
+    return Container(
+      color: Colors.white, // ←背景を白に設定
+      height: widget.height,
       child: Center(
         child: Card(
           margin: const EdgeInsets.all(24),
@@ -135,29 +136,29 @@ class _FrequencyMeasureWidgetState extends State<FrequencyMeasureWidget> {
                     ],
                   )
                 : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      "現在の周波数",
-                      style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                    const SizedBox(height: 24),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16), // ←左右に16px余白
-                      child: Text(
-                        "${_frequency!.toStringAsFixed(1)} Hz",
-                        style: const TextStyle(
-                            fontSize: 36,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                        "現在の周波数",
+                        style: TextStyle(
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
-                        textAlign: TextAlign.center, // 中央寄せ
                       ),
-                    ),
-                  ],
-                ),
+                      const SizedBox(height: 24),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          "${_frequency!.toStringAsFixed(1)} Hz",
+                          style: const TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
           ),
         ),
       ),

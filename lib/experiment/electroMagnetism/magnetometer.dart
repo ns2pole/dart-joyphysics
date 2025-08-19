@@ -1,5 +1,7 @@
 import './MagnetometerExperimentWidget.dart';
 import '../../model.dart'; // Videoクラスが定義されている場合
+import 'package:flutter/material.dart';
+import 'dart:math';
 
 final magnetometer = Video(
   isSmartPhoneOnly: true,
@@ -49,5 +51,5 @@ final magnetometer = Video(
   <li>スマホの向きに応じて地磁気ベクトルが変化する様子を体験できる</li>
 </ol>
 """,
-  experimentWidgets: [MagnetometerExperimentWidget()],
+  experimentWidgets: [MagnetometerExperimentWidget(height: 380)],
 );

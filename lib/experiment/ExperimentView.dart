@@ -1,5 +1,4 @@
-
-
+import 'package:joyphysics/experiment/HasHeight.dart';
 import 'package:flutter/material.dart';
 import 'package:joyphysics/LatexView.dart';
 import 'package:joyphysics/model.dart';
@@ -198,12 +197,11 @@ class VideoDetailView extends StatelessWidget {
               ...video.experimentWidgets!.map((w) => Padding(
                     padding: const EdgeInsets.only(top: 16),
                     child: SizedBox(
-                      height: 220,
+                      height: (w is HasHeight) ? w.widgetHeight : 220, // デフォルト高さ
                       width: double.infinity,
                       child: w,
                     ),
                   )),
-
             if (video.videoURL.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 16),

@@ -133,13 +133,29 @@ final categoriesData = <Category>[
     gifUrl: 'assets/init/wave.gif',
     subcategories: [
       Subcategory(
-        name: '音波',
+        name: '周波数センサー',
+        videos: [
+          frequencyAndDoReMi,
+        ],
+      ),
+      Subcategory(
+        name: '音の干渉',
+        videos: [
+          beat,
+        ],
+      ),
+
+      Subcategory(
+        name: '音の共鳴',
         videos: [
           closedPipeResonance,
           openPipeResonance,
-          beat,
+        ],
+      ),
+      Subcategory(
+        name: '音波のドップラー効果',
+        videos: [
           doppler,
-          frequencyAndDoReMi,
           dopplerObserverMoving
         ],
       ),

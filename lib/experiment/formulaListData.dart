@@ -157,12 +157,12 @@ final List<FormulaEntry> formulaListData = [
   FormulaEntry(
     latex: "L = \\frac{(2n-1)\\lambda}{4} （n=1,3,5,\\cdots）",
     relatedVideo: closedPipeResonance,
-    categoryName: "音・共鳴",
+    categoryName: "音の共鳴",
   ),
   FormulaEntry(
     latex: "L = \\frac{n\\lambda}{2} （n=1,2,3,\\cdots）",
     relatedVideo: openPipeResonance,
-    categoryName: "音・共鳴",
+    categoryName: "音の共鳴",
   ),
   FormulaEntry(
     latex: "f = \\bigl| f_1 - f_2 \\bigr| ",
@@ -170,14 +170,14 @@ final List<FormulaEntry> formulaListData = [
     categoryName: "うなり",
   ),
   FormulaEntry(
-    latex: "f' = f \cdot \frac{v \pm v_{\text{観測者}}}{v}",
+    latex: "f' = f  \\frac{v \\pm v_{\\text{観測者}}}{v}",
       relatedVideo: dopplerObserverMoving,
-      categoryName: "ドップラー効果（音源が動く場合）",
+      categoryName: "ドップラー効果",
   ),
   FormulaEntry(
-    latex: "f' = f \cdot \frac{v}{v \mp v_{\text{音源}}} \quad (v: 音速, \quad v_{\text{音源}}: 音源の速度)",
+    latex: "f' = f  \\frac{v \\mp v_{\\text{音源}}}{v} ",
       relatedVideo: doppler,
-      categoryName: "ドップラー効果（観測者が動く場合）",
+      categoryName: "ドップラー効果",
   ),
   FormulaEntry(
     latex: "d \\sin\\theta = n\\lambda",

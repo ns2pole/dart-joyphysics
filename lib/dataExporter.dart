@@ -1,3 +1,5 @@
+export './experiment/HasHeight.dart';
+
 // dynamics
 export './experiment/dynamics/buildingBlocksStability.dart';
 export './experiment/dynamics/buoyancyAndActionReaction.dart';

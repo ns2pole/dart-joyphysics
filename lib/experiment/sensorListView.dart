@@ -22,7 +22,7 @@ class SensorListView extends StatelessWidget {
     {
       'name': '磁気センサー',
       'icon': Icons.sensors,
-      'widget': MagnetometerExperimentWidget(),
+      'widget': MagnetometerExperimentWidget(height: 380),
     },
     {
       'name': '周波数センサー(音波)',
