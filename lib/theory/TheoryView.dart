@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:joyphysics/LatexView.dart';
 import 'package:joyphysics/theory/theoryData.dart';
@@ -7,7 +5,7 @@ import 'package:joyphysics/theory/theoryData.dart';
 // 理論ページ
 class TheoryListView extends StatelessWidget {
   final String categoryName;
-// サンプルデータ（後で実際のデータに置き換え可）
+
   TheoryListView({Key? key, required this.categoryName}) : super(key: key);
 
   @override
@@ -24,20 +22,25 @@ class TheoryListView extends StatelessWidget {
         itemBuilder: (context, index) {
           final sub = subcategories[index];
           return ExpansionTile(
+            // サブカテゴリ名は普通のテキスト
             title: Text(
               sub.name,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            // 中のトピックは LaTeX を含めて描画
             children: sub.topics.map((topic) {
               return ListTile(
-                title: Text(topic.title),
+                title: LatexWebView(latexHtml: topic.title),
                 trailing: Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => Scaffold(
-                        appBar: AppBar(title: Text(topic.title)),
+                        appBar: AppBar(
+                          // AppBarも数式を出したいなら Text ではなく LatexWebView に
+                          title: LatexWebView(latexHtml: topic.title),
+                        ),
                         body: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: LatexWebView(latexHtml: topic.latexContent),

@@ -4,7 +4,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
   title: '一様磁場中の荷電粒子の運動',
   latexContent: """
   <div style="text-align:center; margin:1em 0;">
-      <img src="assets/dynamicsTheory/lorentz.png"
+      <img src="assets/electroMagnetismTheory/lorentz.png"
            alt="データ一覧"
            style="max-width:70%; height:auto;" />
     </div>
@@ -51,28 +51,29 @@ final lorentzForceAndCircleMove = TheoryTopic(
 
   <div class="common-box">命題 2：運動方程式（成分）</div>
     \$m\\vec{a}=m\\vec{v}'=\\vec{F}\$ （運動方程式）と命題1より
-  \$
+  \$\$
     \\begin{cases}
       m v_x' = qB v_y, \\\\
       m v_y' = -qB v_x, \\\\
       m v_z' = 0
     \\end{cases}
-  \$
-  <div class="common-box">命題 3：速さ \$v=|\\vec{v}|\$ は時間一定である</div>
+  \$\$
+  <div class="common-box">命題 3：速さ \$v=|\\vec{v}|\$ は時間一定</div>
   <div class="proof-box">証明</div>
     仕事率 \$P=\\vec{F}\\cdot\\vec{v}=0\$（直交のため）。  
     したがって
-    \$
-      \\left(\\tfrac{1}{2} m v^2\\right)'  = m v v' = 0
-    \$
-となる。\$m>0\$ より \$v v' = 0\$。  
+    \\begin{aligned}
+      \\displaystyle \\left(\\tfrac{1}{2} m v^2\\right)'  &= 0 \\\\[6pt]
+      \\Leftrightarrow v v' &= 0 \\\\[6pt]
+      \\Leftrightarrow v = 0 &\\text{または} v' = 0
+    \\end{aligned}
 もし \$v=0\$ なら自明に一定、\$v\\neq 0\$ なら \$v'=0\$ であり速さは一定である。
 （磁場は仕事をしない）  \$\\square\$
 
   <div class="common-box">命題 4：速度成分\$v_x,v_y\$は、
     \$
     \\begin{cases}
-      v_x(t)=v_{x0}\\cos(\\omega_c t)+v_{y0}\\sin(\\omega_c t)\\\\
+      v_x(t)=v_{x0}\\cos(\\omega_c t)+v_{y0}\\sin(\\omega_c t)\\\\[6pt]
       v_y(t)=-v_{x0}\\sin(\\omega_c t)+v_{y0}\\cos(\\omega_c t)
     \\end{cases}
     \$
@@ -99,11 +100,11 @@ final lorentzForceAndCircleMove = TheoryTopic(
       \\end{cases}
     \$
     が得られる。  \$\\square\$
-  <div class="common-box">命題 5：直交成分の速さ \$v_\\perp = \\sqrt{v_x^2 + v_y^2}\$ は一定である</div>
+  <div class="common-box">命題 5：直交成分の速さ \$v_\\perp = \\sqrt{v_x^2 + v_y^2}\$ は時間によらず一定</div>
   <div class="proof-box">証明</div>
   \$v_\\perp^2\$ を時間で微分すると
   \$
-    (v_x^2 + v_y^2)' = 2(v_x v_x' + v_y v_y').
+    (v_x^2 + v_y^2)' = 2(v_x v_x' + v_y v_y') \\cdots (1)
   \$<br>
   命題2の運動方程式より
   \$
@@ -112,16 +113,16 @@ final lorentzForceAndCircleMove = TheoryTopic(
   これを代入すると
   \$
     v_x v_x' + v_y v_y' = v_x \\frac{qB}{m} v_y + v_y (-\\frac{qB}{m} v_x) = 0.
-  \$
-  よって
+  \$<br>
+  よって\$(1)\$より、
   \$
     (v_x^2 + v_y^2)' = 0
   \$
-  となり、直交成分の速さ \$v_\\perp = \\sqrt{v_x^2 + v_y^2}\$ は時間一定である。  
+  となり、直交成分の速さ \$v_\\perp = \\sqrt{v_x^2 + v_y^2}\$ は時間によらず一定である。  
   \$\\square\$
 </div>
 
-  <div class="common-box">命題 6：平行成分\$v_z\$は等速である</div>
+  <div class="common-box">命題 6：平行成分\$v_z\$は等速</div>
   <div class="proof-box">証明</div>
   \$m v_z'=0\$ より \$v_z=v_{z0}\$。積分すると
     \$
@@ -192,10 +193,10 @@ final lorentzForceAndCircleMove = TheoryTopic(
     \$
   が成り立つ。<br>
   したがって直交成分は\$\\frac{v_\\perp}{|\\omega_c|} \$半径の円運動をしていることがわかる。<br>
-  角速度の大きさは \$|\\omega_c|\$、周期は \$T=2\\pi/|\\omega_c|\$。
+  角速度の大きさは \$|\\omega_c|\$、周期は \$\\displaystyle T = \\frac {2\\pi/}{|omega_c|}\$。
   \$\\square\$
 
-  <div class="common-box">命題 9：物体の運動は螺旋運動である</div>
+  <div class="common-box">命題 9：物体は螺旋運動をする</div>
   <div class="proof-box">証明</div>
     命題8で磁場垂直方向については等速円運動、命題6で磁場平行方向には等速直線運動が示されたので、その合成は螺旋運動である。  \$\\square\$
   <div class="common-box">命題 10：螺旋運動のピッチ（螺旋における1回転での\$z\$方向進み量）は
@@ -204,6 +205,6 @@ final lorentzForceAndCircleMove = TheoryTopic(
     \$
     である</div>
   <div class="proof-box">証明</div>
-    1回転の周期は \$T=2\\pi/|\\omega_c|\$。その間に進む距離は \$v_{z0}T\$ なので上式が得られる。  \$\\square\$
+    1回転の周期は \$\\displaystyle T = \\frac {2\\pi/}{|omega_c|}\$。その間に進む距離は \$v_{z0}T\$ なので上式が得られる。  \$\\square\$
 """,
 );

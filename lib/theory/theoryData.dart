@@ -36,7 +36,7 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       topics: [
         // ampereLaw,
         lorentzForceAndCircleMove,
-        infiniteStraightCurrentHFieldNoFlux,
+        infiniteStraightCurrent,
         // sorenoidMagneticField
       ],
     ),

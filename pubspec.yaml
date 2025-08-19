@@ -100,6 +100,7 @@ flutter:
     - assets/waves/
     - assets/dynamicsDetail/
     - assets/dynamicsTheory/
+    - assets/electroMagnetismTheory/
     - assets/electroMagnetismDetail/
     - assets/icon/
     - assets/fonts/
