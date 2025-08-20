@@ -106,18 +106,20 @@ final infiniteStraightCurrent = TheoryTopic(
 \\displaystyle
   H_\\phi(r) \\times 2\\pi r = I \\Leftrightarrow H_\\phi(r) = \\displaystyle \\frac{I}{2\\pi r}\\ \\ \\square
 \$\$
+ <div class="common-box">命題6：外部磁場は定数</div>
+  <div class="proof-box">証明</div>
+  外部領域（\\(r > a\\)）で大きな長方形ループ（\\(rz\\) 平面）を取り、ソレノイド表面を跨がないように選ぶと、囲む電流は 0。<br>
+  よってアンペールの法則より
+  \\[
+    \\oint_C \\overrightarrow H \\cdot d\\overrightarrow l = 0 \\Rightarrow H_z^{(\\mathrm{out})} = \\text{const} \\quad \\square
+  \\]
 
-<div class="common-box">命題6：磁場は  \$\\overrightarrow H = \\displaystyle \\frac{I}{2\\pi r} \\, \\hat{\\boldsymbol\\phi} + H_{z0} \\, \\hat{\\mathbf z}\$
-と表すことができる。（ただし、\$H_{z0}\$は位置によらない定数）</div>
-<div class="proof-box">証明</div>
-命題3より \$H_r=0\$、命題4より \$H_z=H_{z0}\$（定数）、命題5より \$H_{\\phi}=\\displaystyle \\frac{I}{2\\pi r}\$<br>
-命題1の形を用いてまとめると
-\\begin{aligned}
-\\displaystyle
-  \\overrightarrow H &= H_r(r)\\,\\hat{\\mathbf r}+H_\\phi(r)\\,\\hat{\\boldsymbol\\phi}+H_z(r)\\,\\hat{\\mathbf z} \\\\[5pt]
-  &= \\displaystyle \\frac{I}{2\\pi r} \\, \\hat{\\boldsymbol\\phi} + H_{z0} \\, \\hat{\\mathbf z}
-\\end{aligned}
-\$\\square \$
+  <div class="common-box">命題7：無限遠境界条件から外部磁場は 0</div>
+  <div class="proof-box">証明</div>
+  \\(\\lim_{r \\to \\infty} |\\overrightarrow H| = 0\\) という境界条件を課すと、外部定数は 0 となる。すなわち
+  \\[
+    H_z^{(\\mathrm{out})} = 0 \\quad \\square
+  \\]
 
 <div class="theorem-box">定理：\$\\overrightarrow H = \\displaystyle \\frac{I}{2\\pi r} \\, \\hat{\\boldsymbol\\phi}\$が成り立つ</div>
 <div class="proof-box">証明</div>

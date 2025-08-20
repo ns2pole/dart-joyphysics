@@ -1,12 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:joyphysics/LatexView.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:joyphysics/theory/theoryData.dart';
+import 'package:joyphysics/LatexView.dart';
 
-// 理論ページ
+/// 日本語と数式を混ぜた文字列を解析して RichText に変換
+Widget parseTextWithMath(String input) {
+  final regex = RegExp(r'\$(.+?)\$'); // $...$ を検出
+  final spans = <InlineSpan>[];
+
+  int lastIndex = 0;
+  for (final match in regex.allMatches(input)) {
+    // 数式の前のテキスト
+    if (match.start > lastIndex) {
+      spans.add(TextSpan(text: input.substring(lastIndex, match.start)));
+    }
+
+    // 数式部分
+    spans.add(WidgetSpan(
+      alignment: PlaceholderAlignment.middle,
+      child: Math.tex(
+        match.group(1)!,
+        mathStyle: MathStyle.text,
+        textStyle: const TextStyle(fontSize: 16),
+      ),
+    ));
+
+    lastIndex = match.end;
+  }
+
+  // 最後のテキスト
+  if (lastIndex < input.length) {
+    spans.add(TextSpan(text: input.substring(lastIndex)));
+  }
+
+  return RichText(
+    text: TextSpan(
+      style: const TextStyle(color: Colors.black),
+      children: spans,
+    ),
+  );
+}
+
 class TheoryListView extends StatelessWidget {
   final String categoryName;
 
-  TheoryListView({Key? key, required this.categoryName}) : super(key: key);
+  const TheoryListView({Key? key, required this.categoryName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,28 +60,29 @@ class TheoryListView extends StatelessWidget {
         itemBuilder: (context, index) {
           final sub = subcategories[index];
           return ExpansionTile(
-            // サブカテゴリ名は普通のテキスト
             title: Text(
-              sub.name,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              sub.name, // サブカテゴリは普通のテキスト
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            // 中のトピックは LaTeX を含めて描画
-            children: sub.topics.map((topic) {
+            children: sub.topics.map<Widget>((topic) {
               return ListTile(
-                title: LatexWebView(latexHtml: topic.title),
-                trailing: Icon(Icons.chevron_right),
+                title: parseTextWithMath(topic.title), // タイトルは RichText で数式混在OK
+                trailing: const Icon(Icons.chevron_right),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => Scaffold(
                         appBar: AppBar(
-                          // AppBarも数式を出したいなら Text ではなく LatexWebView に
-                          title: LatexWebView(latexHtml: topic.title),
+                          title: Text(
+                            topic.title.replaceAll(RegExp(r'\$.*?\$'), ""), // AppBar は文字だけ
+                          ),
                         ),
                         body: Padding(
                           padding: const EdgeInsets.all(16.0),
-                          child: LatexWebView(latexHtml: topic.latexContent),
+                          child: LatexWebView(
+                            latexHtml: topic.latexContent, // 本文だけ LatexWebView
+                          ),
                         ),
                       ),
                     ),

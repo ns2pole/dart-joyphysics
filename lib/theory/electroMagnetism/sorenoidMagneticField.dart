@@ -1,28 +1,109 @@
 import '../../model.dart';
-
+import '../../model.dart';
 final sorenoidMagneticField = TheoryTopic(
-  title: 'アンペールの法則（真空中、Hで表記）',
+  title: '無限に長い理想ソレノイドの磁場(真空中)  内部:  \\( H = n I \\;\\hat{\\mathbf z} \\), 外部: \\( H = 0 \\)',
   latexContent: """
-<div class="common-box">ポイント</div>
-<p>アンペールの法則は、自由電流が磁場を生じることを表す法則です。真空中では、磁場強度 \\(\\overrightarrow{H}\\) を用いて簡潔に表せます。</p>
+  <div style="text-align:center; margin:1em 0;">
+    <img src="assets/electroMagnetismTheory/infiniteStraightCurrent.png"
+      alt="理想ソレノイド"
+      style="max-width:60%; height:auto;" />
+  </div>
 
-<div class="common-box">記号の定義</div>
-<ul>
-<li>\\(\\overrightarrow{H}\\) ：磁場強度（磁荷に対して仕事をする場）</li>
-<li>\\(\\overrightarrow{B}\\) ：磁束密度（磁場の物理的強さ）</li>
-<li>\\(I_{\\mathrm{free, enclosed}}\\) ：閉曲線が貫く面を流れる自由電流の総和</li>
-<li>\\(C\\) ：線積分を行う閉曲線</li>
-<li>\\(d\\overrightarrow{l}\\) ：線素ベクトル</li>
-<li>\\(\\mu_0\\) ：真空の透磁率 \\(4\\pi \\times 10^{-7} \\ \\mathrm{T \\cdot m / A}\\)</li>
-<li>1 Wb ：磁荷の単位（磁場による仕事を測る基準）</li>
-</ul>
+  <div class="condition-box">条件と記号</div>
+  <ul>
+    <li>空間は真空</li>
+    <li>半径 \$a\$、巻数密度 \$n\\,[\\text{turns/m}]\$、電流 \$I\\,[\\text{A}]\$ の無限に長い理想ソレノイド（巻線は円周方向に連続した表面電流 \$\\mathbf K = nI\\,\\hat{\\boldsymbol\\phi}\$ とみなす）</li>
+    <li>系は \$z\$ 軸まわりの回転対称かつ \$z\$ 方向に並進対称</li>
+    <li>変位電流は無視</li>
+    <li>単位ベクトル \$\\hat{\\mathbf r},\\ \\hat{\\boldsymbol\\phi},\\ \\hat{\\mathbf z}\$ を用いる</li>
+    <li>磁場を \$\\overrightarrow H=H_r(r,\\phi,z)\\,\\hat{\\mathbf r}+H_\\phi(r,\\phi,z)\\,\\hat{\\boldsymbol\\phi}+H_z(r,\\phi,z)\\,\\hat{\\mathbf z}\$ とする</li>
+  </ul>
 
-<div class="common-box">理論（積分形式）</div>
-<p>閉曲線 \\(C\\) に沿った磁場の線積分は、曲線が貫く面を流れる自由電流量に等しい：</p>
-<p>\$\$\\oint_C \\overrightarrow{H} \\cdot d\\overrightarrow{l} = I_{\\mathrm{free, enclosed}} \$\$</p>
+  <div class="theorem-box">
+  定理（理想ソレノイドの磁場）：
+  \\begin{aligned}
+  \\overrightarrow H(r)=
+    \\begin{cases}
+      nI \\hat{\\mathbf z} : r < a \\\\
+      \\vec {0}  : r > a
+    \\end{cases}
+  \\end{aligned}
+  </div>
+  この定理を、命題1〜命題6を示し用いることで証明する。
+  <br><br>
 
-<div class="common-box">磁束密度との関係</div>
-<p>真空中では、磁束密度 \\(\\overrightarrow{B}\\) と磁場強度 \\(\\overrightarrow{H}\\) は比例関係にあります：</p>
-<p>\$\$\\overrightarrow{B} = \\mu_0 \\overrightarrow{H}\$\$</p>
-"""
+  <div class="common-box">命題1：磁場成分は半径 \$r\$ のみの関数で、\$\\displaystyle
+    \\overrightarrow H=H_r(r)\\,\\hat{\\mathbf r}+H_\\phi(r)\\,\\hat{\\boldsymbol\\phi}+H_z(r)\\,\\hat{\\mathbf z}
+  \$ と書ける</div>
+  <div class="proof-box">証明</div>
+  系は回転対称かつ \$z\$ 方向に並進対称。よって任意の点での場は \$\\phi, z\$ に依らず、各成分は \$r\$ のみの関数となる。\\(\\square\\)
+
+  <div class="common-box">命題2：同心円柱（半径 \$r\$, 高さ \$L\$）を閉曲面とすると、\$\\displaystyle \\oint_A \\overrightarrow H\\cdot d\\overrightarrow A = 2\\pi r L\\, H_r(r)\$</div>
+  <div style="text-align:center; margin:1em 0;">
+    <img src="assets/electroMagnetismTheory/idealSolenoid_cylinder.png"
+      alt="円柱ガウス面"
+      style="max-width:90%; height:auto;" />
+  </div>
+  <div class="proof-box">証明</div>
+  上下面は \$z\$ 成分のみ、側面は \$r\$ 成分のみが効く。上下面の寄与は互いに打ち消し合い、側面は側面積と \$H_r(r)\$ の積となるので式の通り。\\(\\square\\)
+
+  <div class="common-box">命題3：任意の \$r\$ で \$H_r(r)=0\$</div>
+  <div class="proof-box">証明</div>
+  磁場のガウスの法則より \$\\displaystyle \\oint_A \\overrightarrow H\\cdot d\\overrightarrow A = 0\$。命題2を用いて
+  \$2\\pi r L\\,H_r(r)=0 \\Rightarrow H_r(r)=0\$。\\(\\square\\)
+
+  <div class="common-box">命題4：任意の \$r\$ で \$H_\\phi(r)=0\$</div>
+  <div class="proof-box">証明</div>
+  半径 \$r\$ の同心円周を積分経路とする。境界面が張る任意の開曲面を取ると、内部には円周方向の電流（表面電流 \$\\mathbf K\\parallel\\hat{\\boldsymbol\\phi}\$）しかなく、法線方向の電流は貫かないため、
+  \$\\displaystyle \\oint_C \\overrightarrow H\\cdot d\\overrightarrow l = H_\\phi(r)\\,2\\pi r = 0\\Rightarrow H_\\phi(r)=0\$。\\(\\square\\)
+
+  <div class="common-box">命題5：\$H_z\$ は内部・外部でそれぞれ一定で、境界 \$r=a\$ を跨ぐと
+  \$\\displaystyle H_z^{\\text{(in)}} - H_z^{\\text{(out)}} = nI\$ が成り立つ</div>
+  <div style="text-align:center; margin:1em 0;">
+    <img src="assets/electroMagnetismTheory/idealSolenoid_strip.png"
+      alt="境界を跨ぐ微小長方形ループ"
+      style="max-width:70%; height:auto;" />
+  </div>
+  <div class="proof-box">証明</div>
+  (i) ループが完全に内部（または外部）にあるとき、囲む電流は 0。よって \$\\oint \\overrightarrow H\\cdot d\\overrightarrow l=0\$ からその領域内で \$H_z\$ は一定。<br>
+  (ii) 半径 \$a\$ の円筒面を跨ぐ微小長方形ループ（法線は円筒の外向き）を考える。横辺（法線方向）の寄与は命題3より 0、円周方向の寄与は命題4より 0。上下辺のみ残り、
+  \$\\oint \\overrightarrow H\\cdot d\\overrightarrow l = (H_z^{\\text{(in)}}-H_z^{\\text{(out)}})\\,\\ell\$。
+  一方、ループが貫く電流は表面電流密度 \$K=nI\$ によって \$K\\,\\ell\$。アンペールの法則
+  \$\\oint \\overrightarrow H\\cdot d\\overrightarrow l = I_{\\text{enc}}\$ から
+  \$H_z^{\\text{(in)}}-H_z^{\\text{(out)}}=nI\$。\\(\\square\\)
+
+  <div class="common-box">命題6：外部磁場は定数</div>
+  <div class="proof-box">証明</div>
+  外部領域（\\(r > a\\)）で大きな長方形ループ（\\(rz\\) 平面）を取り、ソレノイド表面を跨がないように選ぶと、囲む電流は 0。<br>
+  よってアンペールの法則より
+  \\[
+    \\oint_C \\overrightarrow H \\cdot d\\overrightarrow l = 0 \\Rightarrow H_z^{(\\mathrm{out})} = \\text{const} \\quad \\square
+  \\]
+
+  <div class="common-box">命題7：無限遠境界条件から外部磁場は 0</div>
+  <div class="proof-box">証明</div>
+  \\( \\displaystyle \\lim_{r \\to \\infty} |\\overrightarrow H| = 0\\) という境界条件を課すと、外部定数は 0 となる。すなわち
+  \\[
+    H_z^{(\\mathrm{out})} = 0 \\quad \\square
+  \\]
+
+  <div class="theorem-box">定理：理想ソレノイドの磁場</div>
+  <div class="proof-box">証明</div>
+  命題3・命題4より \$H_r=H_\\phi=0\$。命題5と命題6より \$H_z^{\\text{(in)}}-0=nI\\Rightarrow H_z^{\\text{(in)}}=nI\$。
+  以上より
+\\begin{aligned}
+  \\overrightarrow H(r)=
+    \\begin{cases}
+      nI \\hat{\\mathbf z} : r < a \\\\
+      \\vec {0}  : r > a
+    \\end{cases}
+  \\end{aligned}
+  \\(\\square\\)
+
+  <div class="remark-box">補足</div>
+  <ul>
+    <li>有限長ソレノイドでは端面効果により外部磁場は厳密には 0 ではないが、長さ \\(\\gg a\\) で中心付近では本結果が高精度で成り立つ。</li>
+    <li>磁束密度は \$\\mathbf B=\\mu_0\\mathbf H\$（真空）なので、内部は \$\\mathbf B=\\mu_0 n I\\,\\hat{\\mathbf z}\$。</li>
+  </ul>
+  """
 );
