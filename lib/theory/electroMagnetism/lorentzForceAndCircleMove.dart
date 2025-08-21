@@ -8,7 +8,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
            alt="データ一覧"
            style="max-width:70%; height:auto;" />
     </div>
-  <div class="common-box">記号の定義</div>
+  <div class="theory-common-box">記号の定義</div>
   <ul>
     <li>\$m\$：質量，\$q\$：電荷</li>
     <li>\$\\vec{B}=(0,0,B)\$：一様磁場</li>
@@ -22,7 +22,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
     <li>\$\\omega_c=\\dfrac{qB}{m}\$：角周波数</li>
   </ul>
 
-  <div class="common-box">命題1(ローレンツ力の成分)：電荷 \$q\$ に働く力の成分は
+  <div class="theory-common-box">命題1(ローレンツ力の成分)：電荷 \$q\$ に働く力の成分は
     \$
       \\vec{F}=(F_x,F_y,F_z)=(qBv_y,\,-qBv_x,\,0)
     \$
@@ -49,7 +49,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
     \$\\square\$
   </div>
 
-  <div class="common-box">命題 2：運動方程式（成分）</div>
+  <div class="theory-common-box">命題 2：運動方程式（成分）</div>
     \$m\\vec{a}=m\\vec{v}'=\\vec{F}\$ （運動方程式）と命題1より
   \$\$
     \\begin{cases}
@@ -58,7 +58,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
       m v_z' = 0
     \\end{cases}
   \$\$
-  <div class="common-box">命題 3：速さ \$v=|\\vec{v}|\$ は時間一定</div>
+  <div class="theory-common-box">命題 3：速さ \$v=|\\vec{v}|\$ は時間一定</div>
   <div class="proof-box">証明</div>
     仕事率 \$P=\\vec{F}\\cdot\\vec{v}=0\$（直交のため）。  
     したがって
@@ -70,7 +70,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
 もし \$v=0\$ なら自明に一定、\$v\\neq 0\$ なら \$v'=0\$ であり速さは一定である。
 （磁場は仕事をしない）  \$\\square\$
 
-  <div class="common-box">命題 4：速度成分\$v_x,v_y\$は、
+  <div class="theory-common-box">命題 4：速度成分\$v_x,v_y\$は、
     \$
     \\begin{cases}
       v_x(t)=v_{x0}\\cos(\\omega_c t)+v_{y0}\\sin(\\omega_c t)\\\\[6pt]
@@ -100,7 +100,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
       \\end{cases}
     \$
     が得られる。  \$\\square\$
-  <div class="common-box">命題 5：直交成分の速さ \$v_\\perp = \\sqrt{v_x^2 + v_y^2}\$ は時間によらず一定</div>
+  <div class="theory-common-box">命題 5：直交成分の速さ \$v_\\perp = \\sqrt{v_x^2 + v_y^2}\$ は時間によらず一定</div>
   <div class="proof-box">証明</div>
   \$v_\\perp^2\$ を時間で微分すると
   \$
@@ -122,7 +122,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
   \$\\square\$
 </div>
 
-  <div class="common-box">命題 6：平行成分\$v_z\$は等速</div>
+  <div class="theory-common-box">命題 6：平行成分\$v_z\$は等速</div>
   <div class="proof-box">証明</div>
   \$m v_z'=0\$ より \$v_z=v_{z0}\$。積分すると
     \$
@@ -130,7 +130,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
     \$
     である。よって示された。  \$\\square\$
 
-  <div class="common-box">命題 7：物体の時刻\$t\$における\$x,y\$座標は\$\ \ \ \$
+  <div class="theory-common-box">命題 7：物体の時刻\$t\$における\$x,y\$座標は\$\ \ \ \$
     \$
       \\begin{cases}
        \\displaystyle x(t)=x_0+\\tfrac{v_{x0}}{\\omega_c}\\sin(\\omega_c t)+\\tfrac{v_{y0}}{\\omega_c}(1-\\cos(\\omega_c t))\\\\
@@ -161,7 +161,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
       y(t) = y_0 + \\frac{v_{y0}}{\\omega_c} \\sin(\\omega_c t)
                    - \\frac{v_{x0}}{\\omega_c}(1-\\cos(\\omega_c t)).
     \$    <br>（注）\$\\omega_c=0\$（磁場 \$B=0\$）の場合は極限を取り、等速直線運動に一致する。 \$\\square\$
-  <div class="common-box">命題 8：物体のxyについての運動は、
+  <div class="theory-common-box">命題 8：物体のxyについての運動は、
   \\begin{aligned}
   &半径：R = \\dfrac{v_\\perp}{|\\omega_c|} \\\\
   &中心：(X_c,Y_c) = \\bigl(x_0 + \\tfrac{v_{y0}}{\\omega_c},\, y_0 - \\tfrac{v_{x0}}{\\omega_c}\\bigr) \\\\
@@ -196,10 +196,10 @@ final lorentzForceAndCircleMove = TheoryTopic(
   角速度の大きさは \$|\\omega_c|\$、周期は \$\\displaystyle T = \\frac {2\\pi/}{|omega_c|}\$。
   \$\\square\$
 
-  <div class="common-box">命題 9：物体は螺旋運動をする</div>
+  <div class="theory-common-box">命題 9：物体は螺旋運動をする</div>
   <div class="proof-box">証明</div>
     命題8で磁場垂直方向については等速円運動、命題6で磁場平行方向には等速直線運動が示されたので、その合成は螺旋運動である。  \$\\square\$
-  <div class="common-box">命題 10：螺旋運動のピッチ（螺旋における1回転での\$z\$方向進み量）は
+  <div class="theory-common-box">命題 10：螺旋運動のピッチ（螺旋における1回転での\$z\$方向進み量）は
     \$ \\displaystyle
       \\frac{2\\pi v_{z0}}{|\\omega_c|}
     \$

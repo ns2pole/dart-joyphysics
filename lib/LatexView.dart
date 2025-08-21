@@ -109,7 +109,7 @@ class _LatexWebViewState extends State<LatexWebView> {
       padding: 8px 16px;
       margin: 0px 0;
       border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 1); /* 薄い枠線をつける */
+      border: 0.7px solid rgba(0, 0, 0, 1); /* 薄い枠線をつける */
     }
 
     li {
@@ -120,14 +120,20 @@ class _LatexWebViewState extends State<LatexWebView> {
       padding: 8px 16px;
       margin: 0px 0;
       border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 1); /* 薄い枠線をつける */
+    }
+    .theory-common-box {
+      background: #cfc;
+      padding: 8px 16px;
+      margin: 0px 0;
+      border-radius: 12px;
+      border: 0.7px solid rgba(0, 0, 0, 1); /* 薄い枠線をつける */
     }
     .theorem-box {
       background: rgba(251, 223, 162, 1);
       padding: 8px 16px;
       margin: 0px 0;
       border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 1); /* 薄い枠線をつける */
+      border: 0.7px solid rgba(0, 0, 0, 1); /* 薄い枠線をつける */
     }
     .proof-box {
       padding: 2px 2px;   /* 少し広めに */

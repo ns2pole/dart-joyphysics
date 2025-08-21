@@ -41,7 +41,8 @@ class _Header extends StatelessWidget {
 class _Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
-        'Updated: 2025/08/19  Version 2.1.1',
+        'Updated: 2025/08/21',
+        // 'Updated: 2025/08/21  Version 2.1.3',
         style: TextStyle(fontSize: 18, color: Colors.black),
       );
 }

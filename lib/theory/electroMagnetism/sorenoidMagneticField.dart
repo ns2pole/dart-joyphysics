@@ -32,13 +32,13 @@ final sorenoidMagneticField = TheoryTopic(
   この定理を、命題1〜命題6を示し用いることで証明する。
   <br><br>
 
-  <div class="common-box">命題1：磁場成分は半径 \$r\$ のみの関数で、\$\\displaystyle
+  <div class="theory-common-box">命題1：磁場成分は半径 \$r\$ のみの関数で、\$\\displaystyle
     \\overrightarrow H=H_r(r)\\,\\hat{\\mathbf r}+H_\\phi(r)\\,\\hat{\\boldsymbol\\phi}+H_z(r)\\,\\hat{\\mathbf z}
   \$ と書ける</div>
   <div class="proof-box">証明</div>
   系は回転対称かつ \$z\$ 方向に並進対称。よって任意の点での場は \$\\phi, z\$ に依らず、各成分は \$r\$ のみの関数となる。\\(\\square\\)
 
-  <div class="common-box">命題2：同心円柱（半径 \$r\$, 高さ \$L\$）を閉曲面とすると、\$\\displaystyle \\oint_A \\overrightarrow H\\cdot d\\overrightarrow A = 2\\pi r L\\, H_r(r)\$</div>
+  <div class="theory-common-box">命題2：同心円柱（半径 \$r\$, 高さ \$L\$）を閉曲面とすると、\$\\displaystyle \\oint_A \\overrightarrow H\\cdot d\\overrightarrow A = 2\\pi r L\\, H_r(r)\$</div>
   <div style="text-align:center; margin:1em 0;">
     <img src="assets/electroMagnetismTheory/idealSolenoid_cylinder.png"
       alt="円柱ガウス面"
@@ -47,17 +47,17 @@ final sorenoidMagneticField = TheoryTopic(
   <div class="proof-box">証明</div>
   上下面は \$z\$ 成分のみ、側面は \$r\$ 成分のみが効く。上下面の寄与は互いに打ち消し合い、側面は側面積と \$H_r(r)\$ の積となるので式の通り。\\(\\square\\)
 
-  <div class="common-box">命題3：任意の \$r\$ で \$H_r(r)=0\$</div>
+  <div class="theory-common-box">命題3：任意の \$r\$ で \$H_r(r)=0\$</div>
   <div class="proof-box">証明</div>
   磁場のガウスの法則より \$\\displaystyle \\oint_A \\overrightarrow H\\cdot d\\overrightarrow A = 0\$。命題2を用いて
   \$2\\pi r L\\,H_r(r)=0 \\Rightarrow H_r(r)=0\$。\\(\\square\\)
 
-  <div class="common-box">命題4：任意の \$r\$ で \$H_\\phi(r)=0\$</div>
+  <div class="theory-common-box">命題4：任意の \$r\$ で \$H_\\phi(r)=0\$</div>
   <div class="proof-box">証明</div>
   半径 \$r\$ の同心円周を積分経路とする。境界面が張る任意の開曲面を取ると、内部には円周方向の電流（表面電流 \$\\mathbf K\\parallel\\hat{\\boldsymbol\\phi}\$）しかなく、法線方向の電流は貫かないため、
   \$\\displaystyle \\oint_C \\overrightarrow H\\cdot d\\overrightarrow l = H_\\phi(r)\\,2\\pi r = 0\\Rightarrow H_\\phi(r)=0\$。\\(\\square\\)
 
-  <div class="common-box">命題5：\$H_z\$ は内部・外部でそれぞれ一定で、境界 \$r=a\$ を跨ぐと
+  <div class="theory-common-box">命題5：\$H_z\$ は内部・外部でそれぞれ一定で、境界 \$r=a\$ を跨ぐと
   \$\\displaystyle H_z^{\\text{(in)}} - H_z^{\\text{(out)}} = nI\$ が成り立つ</div>
   <div style="text-align:center; margin:1em 0;">
     <img src="assets/electroMagnetismTheory/idealSolenoid_strip.png"
@@ -72,7 +72,7 @@ final sorenoidMagneticField = TheoryTopic(
   \$\\oint \\overrightarrow H\\cdot d\\overrightarrow l = I_{\\text{enc}}\$ から
   \$H_z^{\\text{(in)}}-H_z^{\\text{(out)}}=nI\$。\\(\\square\\)
 
-  <div class="common-box">命題6：外部磁場は定数</div>
+  <div class="theory-common-box">命題6：外部磁場は定数</div>
   <div class="proof-box">証明</div>
   外部領域（\\(r > a\\)）で大きな長方形ループ（\\(rz\\) 平面）を取り、ソレノイド表面を跨がないように選ぶと、囲む電流は 0。<br>
   よってアンペールの法則より
@@ -80,7 +80,7 @@ final sorenoidMagneticField = TheoryTopic(
     \\oint_C \\overrightarrow H \\cdot d\\overrightarrow l = 0 \\Rightarrow H_z^{(\\mathrm{out})} = \\text{const} \\quad \\square
   \\]
 
-  <div class="common-box">命題7：無限遠境界条件から外部磁場は 0</div>
+  <div class="theory-common-box">命題7：無限遠境界条件から外部磁場は 0</div>
   <div class="proof-box">証明</div>
   \\( \\displaystyle \\lim_{r \\to \\infty} |\\overrightarrow H| = 0\\) という境界条件を課すと、外部定数は 0 となる。すなわち
   \\[

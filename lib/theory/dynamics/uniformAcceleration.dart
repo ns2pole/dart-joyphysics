@@ -3,7 +3,7 @@ import '../../model.dart';
 final uniformAcceleration = TheoryTopic(
   title: '等加速度直線運動',
   latexContent: """
-<div class="common-box">命題1（1次元運動の運動方程式）：質量 \\(m\\) の質点に一定の力 \\(F\\) が、直線上に働くとする。このとき運動方程式は
+<div class="theory-common-box">命題1（1次元運動の運動方程式）：質量 \\(m\\) の質点に一定の力 \\(F\\) が、直線上に働くとする。このとき運動方程式は
 \$
 F = m a
 \$である。</div>
@@ -11,12 +11,12 @@ F = m a
 <p>ベクトル方程式 \\(\\vec{F} = m\\vec{a}\\) を1次元上で軸を取れば、ベクトルの成分比較により \\(F = ma\\) を得る。\\(\\square\\)</p>
 
 
-<div class="common-box">命題2（等加速度運動）質量 \\(m\\) の質点に一定の力 \\(F\\) が働くならば、質点の加速度は一定である。</div>
+<div class="theory-common-box">命題2（等加速度運動）質量 \\(m\\) の質点に一定の力 \\(F\\) が働くならば、質点の加速度は一定である。</div>
 <div class="proof-box">証明</div>
 <p>命題1より、\$\\displaystyle a= \\frac{F}{m} \$となり、\$m,F\$が一定ならば\$a\$も一定である。</p>
 (注)この一定値\$a\$は軸の向きに依存する。<br>
 (注)初期速度が力の向きと一致している場合、等加速度直線運動となる。<br><br>
-<div class="common-box">命題3（速度の式）：質量 \\(m\\) の質点の加速度が一定値 \\(a\\) である時、速度は
+<div class="theory-common-box">命題3（速度の式）：質量 \\(m\\) の質点の加速度が一定値 \\(a\\) である時、速度は
 \$
 v(t) = v_0 + a t
 \$
@@ -32,7 +32,7 @@ v' &= a \\quad \\quad \\\\[5pt]
 \\(\\square\\)
 
 
-<div class="common-box">命題4（位置の式）：質量 \\(m\\) の質点が初期位置 \\(x_0\\)、初速度 \\(v_0\\) で運動を始め、一定の加速度 \\(a\\) を受けるとき、位置は\$ \\displaystyle
+<div class="theory-common-box">命題4（位置の式）：質量 \\(m\\) の質点が初期位置 \\(x_0\\)、初速度 \\(v_0\\) で運動を始め、一定の加速度 \\(a\\) を受けるとき、位置は\$ \\displaystyle
 x(t) = x_0 + v_0 t + \\frac{1}{2} a t^2\$である。</div>
 
 
@@ -46,7 +46,7 @@ x' &= v \\quad  \\quad \\\\[5pt]
 \\end{aligned}
 \\(\\square\\)
 
-<div class="common-box">命題5（速度と変位の関係）：質点の速度と変位には次の関係が成り立つ：
+<div class="theory-common-box">命題5（速度と変位の関係）：質点の速度と変位には次の関係が成り立つ：
 \\[
 v^2 - v_0^2 = 2 a (x - x_0)
 \\]</div>
@@ -70,7 +70,7 @@ x - x_0 &= v_0\\frac{v-v_0}{a} + \\frac{1}{2}a \\left(\\frac{v-v_0}{a}\\right)^2
 \\end{aligned}
 \\(\\square\\)
 
-<div class="common-box">命題6（仕事とエネルギー）：質点に一定の力 \\(F\\) が働くとき、運動エネルギーの変化と力の仕事は一致する：
+<div class="theory-common-box">命題6（仕事とエネルギー）：質点に一定の力 \\(F\\) が働くとき、運動エネルギーの変化と力の仕事は一致する：
 \\[
 \\frac12 m v^2 - \\frac12 m v_0^2 = F (x - x_0)
 \\]</div>

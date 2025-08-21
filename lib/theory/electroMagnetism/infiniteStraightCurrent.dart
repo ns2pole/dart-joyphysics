@@ -29,7 +29,7 @@ final infiniteStraightCurrent = TheoryTopic(
 </div>
 この定理を命題1〜命題6を示し、用いる事で証明する。
 <br><br>
-<div class="common-box">命題1：磁場の成分はrのみの関数で、\$\\displaystyle
+<div class="theory-common-box">命題1：磁場の成分はrのみの関数で、\$\\displaystyle
   \\overrightarrow H=H_r(r)\\,\\hat{\\mathbf r}+H_\\phi(r)\\,\\hat{\\boldsymbol\\phi}+H_z(r)\\,\\hat{\\mathbf z}
 \$と表される</div>
 <div class="proof-box">証明</div>
@@ -43,7 +43,7 @@ final infiniteStraightCurrent = TheoryTopic(
 \$
 が成り立つ。 \$\\square\$
 
-<div class="common-box">命題2：半径\$r\$,高さ\$L\$の同心円柱を閉曲面とすると、\$\\displaystyle \\oint_A \\overrightarrow H \\cdot d\\overrightarrow A = 2\\pi r L \\times H_r(r)\$ が成り立つ</div>
+<div class="theory-common-box">命題2：半径\$r\$,高さ\$L\$の同心円柱を閉曲面とすると、\$\\displaystyle \\oint_A \\overrightarrow H \\cdot d\\overrightarrow A = 2\\pi r L \\times H_r(r)\$ が成り立つ</div>
 <div style="text-align:center; margin:1em 0;">
   <img src="assets/electroMagnetismTheory/infiniteStraightCurrent2.png"
     alt="データ一覧"
@@ -62,7 +62,7 @@ final infiniteStraightCurrent = TheoryTopic(
 \\end{aligned}
  \$\\square\$
 
-<div class="common-box">命題3：任意の\$r\$について、磁場の動径方向成分について\$H_r(r)=0が成り立つ\$</div>
+<div class="theory-common-box">命題3：任意の\$r\$について、磁場の動径方向成分について\$H_r(r)=0が成り立つ\$</div>
 <div class="proof-box">証明</div>
 磁場のガウスの法則より \$\\displaystyle \\oint_A \\overrightarrow H \\cdot d\\overrightarrow A = 0\$。<br>
 命題2より
@@ -71,7 +71,7 @@ final infiniteStraightCurrent = TheoryTopic(
 \$ \$\\square\$
 
 
-<div class="common-box">命題4：磁場の\$z\$方向成分\$H_z(r)\$は場所によらず一定</div>
+<div class="theory-common-box">命題4：磁場の\$z\$方向成分\$H_z(r)\$は場所によらず一定</div>
 <div style="text-align:center; margin:1em 0;">
   <img src="assets/electroMagnetismTheory/infiniteStraightCurrent1.png"
     alt="データ一覧"
@@ -90,7 +90,7 @@ final infiniteStraightCurrent = TheoryTopic(
 \\end{aligned}
 \$r_1,r_2\$は任意なので\$ H_z(r)\$ は定数。 \$\\square\$
 
-<div class="common-box">命題5：磁場の角度方向成分について、\$ \\displaystyle H_\\phi(r) = \\frac{I} {2\\pi r} \$が成り立つ</div>
+<div class="theory-common-box">命題5：磁場の角度方向成分について、\$ \\displaystyle H_\\phi(r) = \\frac{I} {2\\pi r} \$が成り立つ</div>
 <div style="text-align:center; margin:1em 0;">
   <img src="assets/electroMagnetismTheory/infiniteStraightCurrent3.png"
     alt="データ一覧"
@@ -106,7 +106,7 @@ final infiniteStraightCurrent = TheoryTopic(
 \\displaystyle
   H_\\phi(r) \\times 2\\pi r = I \\Leftrightarrow H_\\phi(r) = \\displaystyle \\frac{I}{2\\pi r}\\ \\ \\square
 \$\$
- <div class="common-box">命題6：外部磁場は定数</div>
+ <div class="theory-common-box">命題6：外部磁場は定数</div>
   <div class="proof-box">証明</div>
   外部領域（\\(r > a\\)）で大きな長方形ループ（\\(rz\\) 平面）を取り、ソレノイド表面を跨がないように選ぶと、囲む電流は 0。<br>
   よってアンペールの法則より
@@ -114,7 +114,7 @@ final infiniteStraightCurrent = TheoryTopic(
     \\oint_C \\overrightarrow H \\cdot d\\overrightarrow l = 0 \\Rightarrow H_z^{(\\mathrm{out})} = \\text{const} \\quad \\square
   \\]
 
-  <div class="common-box">命題7：無限遠境界条件から外部磁場は 0</div>
+  <div class="theory-common-box">命題7：無限遠境界条件から外部磁場は 0</div>
   <div class="proof-box">証明</div>
   \\(\\lim_{r \\to \\infty} |\\overrightarrow H| = 0\\) という境界条件を課すと、外部定数は 0 となる。すなわち
   \\[
