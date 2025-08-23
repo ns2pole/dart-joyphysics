@@ -6,7 +6,7 @@ final doppler = Video(
   isNew: true,
   category: 'waves',
   iconName: "doppler1",  // assets に追加
-  title: "音源が動く時",
+  title: "ドップラー効果(音源が動く時)",
   videoURL: "", // 実験動画のURLがある場合はここに
   equipment: ["スマホ2台"],
   costRating: "★☆☆",

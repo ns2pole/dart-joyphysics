@@ -9,12 +9,12 @@ final categoriesData = <Category>[
     name: '力学実験',
     gifUrl: 'assets/init/dynamics.gif',
     subcategories: [
-      Subcategory(        
-        name: '加速度センサー',
-        videos: [
-          accelerometer
-        ],
-      ),
+      // Subcategory(        
+      //   name: '加速度センサー',
+      //   videos: [
+      //     accelerometer
+      //   ],
+      // ),
       Subcategory(
         name: '色々な力',
         videos: [
@@ -23,7 +23,7 @@ final categoriesData = <Category>[
           kineticFriction,
           buoyancyAndActionReaction,
           buoyancyComparison,
-          barometer
+          // barometer
         ],
       ),
       Subcategory(
@@ -101,7 +101,7 @@ final categoriesData = <Category>[
       Subcategory(
         name: '磁場',
         videos: [
-          magnetometer,
+          // magnetometer,
           neodymiumMagnetFieldMeasurement,
           ampereLawTorque,
           magneticFieldCircularLoop,
@@ -132,18 +132,18 @@ final categoriesData = <Category>[
     name: '波動実験',
     gifUrl: 'assets/init/wave.gif',
     subcategories: [
-      Subcategory(
-        name: '周波数センサー',
-        videos: [
-          frequencyAndDoReMi,
-        ],
-      ),
-      Subcategory(
-        name: '音の干渉',
-        videos: [
-          beat,
-        ],
-      ),
+      // Subcategory(
+      //   name: '周波数センサー',
+      //   videos: [
+      //     frequencyAndDoReMi,
+      //   ],
+      // ),
+      // Subcategory(
+      //   name: '音の干渉',
+      //   videos: [
+      //     beat,
+      //   ],
+      // ),
 
       Subcategory(
         name: '音の共鳴',
@@ -152,19 +152,19 @@ final categoriesData = <Category>[
           openPipeResonance,
         ],
       ),
-      Subcategory(
-        name: '音波のドップラー効果',
-        videos: [
-          doppler,
-          dopplerObserverMoving
-        ],
-      ),
+      // Subcategory(
+      //   name: '音波のドップラー効果',
+      //   videos: [
+      //     doppler,
+      //     dopplerObserverMoving
+      //   ],
+      // ),
       Subcategory(
         name: '光波',
         videos: [
           diffractionGrating,
           spectroscopy,
-          if (!(kIsWeb || Platform.isIOS)) luxMeasurement,
+          // if (!(kIsWeb || Platform.isIOS)) luxMeasurement,
         ],
       )
     ],

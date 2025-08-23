@@ -6,7 +6,7 @@ final dopplerObserverMoving = Video(
   isNew: true,
   category: 'waves',
   iconName: "doppler2",  // assets に追加済みを想定
-  title: "観測者が動く時",
+  title: "ドップラー効果(観測者が動く時)",
   videoURL: "", // 実験動画のURLがあれば挿入
   equipment: ["スマホ2台"],
   costRating: "★☆☆",

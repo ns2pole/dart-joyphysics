@@ -38,12 +38,17 @@ class _Header extends StatelessWidget {
       );
 }
 
+/// フッター（更新日情報）
 class _Footer extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Text(
-        'Updated: 2025/08/21',
-        // 'Updated: 2025/08/21  Version 2.1.3',
-        style: TextStyle(fontSize: 18, color: Colors.black),
+  Widget build(BuildContext context) => Padding(
+        padding: EdgeInsets.symmetric(vertical: 12),
+        child: Center(
+          child: Text(
+            'Updated: 2025/08/21  Version 2.1.3',
+            style: TextStyle(fontSize: 14, color: Colors.black54),
+          ),
+        ),
       );
 }
 
@@ -53,7 +58,6 @@ class CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 理論ボタン
     final theoryButtons = [
       {
         'name': '物理のための数学',
@@ -72,159 +76,202 @@ class CategoryList extends StatelessWidget {
       },
     ];
 
-    final totalCount = categories.length + theoryButtons.length + 2;
+    // +3 = (スマホセンサー記事のテキスト, 解説記事のテキスト, 理論記事のテキスト)
+    final totalCount = categories.length + theoryButtons.length + 3 + 2; 
+    // +1 は「アプリについて」ボタン
+    // +1 さらにフッター
 
     return ListView.builder(
       padding: EdgeInsets.zero,
-      itemCount: totalCount,
+      itemCount: totalCount + 1, // フッター分を追加
       itemBuilder: (context, index) {
         if (index == 0) {
-          // 「センサーを使う！」を先頭に
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => SensorListView()),
-              ),
-              child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Colors.blue.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.sensors, color: Colors.white, size: 35),
-                    SizedBox(width: 8),
-                    Text(
-                      'センサーを使う！',
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+          return _buildInfoText('スマホセンサーだけでできる\n実験記事8本掲載中！');
+        }
+        if (index == 1) {
+          return _buildSensorButton(context);
+        }
+        if (index == 2) {
+          return _buildInfoText('実験&解説記事 43本掲載中！');
         }
 
-        final adjustedIndex = index - 1;
+        final adjustedIndex = index - 3;
 
         if (adjustedIndex < categories.length) {
-          // 実験系カテゴリー
           final cat = categories[adjustedIndex];
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => VideoListView(category: cat)),
-              ),
-              child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Color(0xFFC3734F).withOpacity(0.95),
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(cat.gifUrl, width: 35, height: 35),
-                    SizedBox(width: 8),
-                    Text(
-                      cat.name,
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+          return _buildCategoryButton(context, cat);
         }
 
-        // 理論ボタン
+        // 理論記事案内
         final theoryIndex = adjustedIndex - categories.length;
-        if (theoryIndex < theoryButtons.length) {
-          final tb = theoryButtons[theoryIndex];
-          return Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => tb['page'] as Widget),
-              ),
-              child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Colors.green[300]?.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(tb['gif'] as String, width: 35, height: 35),
-                    SizedBox(width: 8),
-                    Text(
-                      tb['name'] as String,
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+        if (theoryIndex == 0) {
+          return _buildInfoText('理論記事 4本掲載中！');
         }
 
-        // 「アプリについて」ボタン
-        return Padding(
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
-          child: GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => AboutView()),
-            ),
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.9),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/init/about.gif', width: 35, height: 35),
-                  SizedBox(width: 8),
-                  Text(
-                    'アプリについて',
-                    style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
+        if (theoryIndex >= 1 && theoryIndex <= theoryButtons.length) {
+          final tb = theoryButtons[theoryIndex - 1];
+          return _buildTheoryButton(context, tb);
+        }
+
+        // 最後から2つ目は「アプリについて」
+        if (index == totalCount - 1) {
+          return _buildAboutButton(context);
+        }
+
+        // 最後はフッター
+        return _Footer();
       },
     );
   }
+
+  Widget _buildInfoText(String text) => Padding(
+        padding: EdgeInsets.symmetric(vertical: 6, horizontal: 40),
+        child: Container(
+          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.8),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18, color: Colors.black87),
+            ),
+          ),
+        ),
+      );
+
+  Widget _buildSensorButton(BuildContext context) => Padding(
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
+        child: GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => SensorListView()),
+          ),
+          child: Container(
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.blue.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.sensors, color: Colors.white, size: 35),
+                SizedBox(width: 8),
+                Text(
+                  'センサーを使う！',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+  Widget _buildCategoryButton(BuildContext context, Category cat) => Padding(
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
+        child: GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => VideoListView(category: cat)),
+          ),
+          child: Container(
+            height: 60,
+            decoration: BoxDecoration(
+              color: Color(0xFFC3734F).withOpacity(0.95),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(cat.gifUrl, width: 35, height: 35),
+                SizedBox(width: 8),
+                Text(
+                  cat.name,
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+  Widget _buildTheoryButton(BuildContext context, Map<String, Object> tb) =>
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
+        child: GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => tb['page'] as Widget),
+          ),
+          child: Container(
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.green[300]?.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(tb['gif'] as String, width: 35, height: 35),
+                SizedBox(width: 8),
+                Text(
+                  tb['name'] as String,
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+  Widget _buildAboutButton(BuildContext context) => Padding(
+        padding: EdgeInsets.symmetric(vertical: 48, horizontal: 75),
+        child: GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => AboutView()),
+          ),
+          child: Container(
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset('assets/init/about.gif', width: 35, height: 35),
+                SizedBox(width: 8),
+                Text(
+                  'アプリについて',
+                  style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
 }
 
 class ContentView extends StatelessWidget {
@@ -244,7 +291,7 @@ class ContentView extends StatelessWidget {
                   Expanded(
                     child: CategoryList(categories: categoriesData),
                   ),
-                  _Footer(),
+                  // ← Footer は削除
                 ],
               ),
             ),

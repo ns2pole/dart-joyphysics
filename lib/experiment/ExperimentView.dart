@@ -133,13 +133,13 @@ class _VideoCategoryList extends StatelessWidget {
                             style: TextStyle(fontSize: 16),
                           ),
                         ),
-                        if (v.isSmartPhoneOnly == true)
-                          Image.asset(
-                            'assets/others/smartPhoneOnly.gif',
-                            width: 68,
-                            height: 45,
-                            fit: BoxFit.contain,
-                          ),
+                        // if (v.isSmartPhoneOnly == true)
+                        //   Image.asset(
+                        //     'assets/others/smartPhoneOnly.gif',
+                        //     width: 68,
+                        //     height: 45,
+                        //     fit: BoxFit.contain,
+                        //   ),
                         if (v.isNew == true)
                           Image.asset(
                             'assets/others/new.gif',
@@ -407,14 +407,14 @@ class CostLegendSection extends StatelessWidget {
               Text(" = 1500円以上", style: legendTextStyle),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/others/smartPhoneOnly.png', width: 60, height: 40),
-              const SizedBox(width: 8),
-              const Text("・・・スマホのみで実験可能", style: legendTextStyle),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     Image.asset('assets/others/smartPhoneOnly.png', width: 60, height: 40),
+          //     const SizedBox(width: 8),
+          //     const Text("・・・スマホのみで実験可能", style: legendTextStyle),
+          //   ],
+          // ),
         ],
       ),
     );
