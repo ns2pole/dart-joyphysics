@@ -22,7 +22,10 @@ Widget parseTextWithMath(String input) {
       child: Math.tex(
         formula!,
         mathStyle: MathStyle.text,
-        textStyle: const TextStyle(fontsize: 20),
+        textStyle: const TextStyle(
+          fontFamily: 'Keifont',
+          fontSize: 20
+        ),
       ),
     ));
 
@@ -35,7 +38,10 @@ Widget parseTextWithMath(String input) {
 
   return RichText(
     text: TextSpan(
-      style: const TextStyle(color: Colors.black),
+      style: const TextStyle(
+        fontSize: 16, 
+        fontWeight: FontWeight.bold, 
+        color: Colors.black),
       children: spans,
     ),
   );
@@ -68,7 +74,7 @@ class TheoryListView extends StatelessWidget {
                 child: Text(
                   sub.name,
                   style: const TextStyle(
-                    fontsize: 20, 
+                    fontSize: 20, 
                     fontWeight: FontWeight.bold, 
                     color: Colors.black87,
                   ),

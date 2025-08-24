@@ -65,19 +65,20 @@ final solenoidMagneticFieldProp = TheoryTopic(
       alt="境界を跨ぐ長方形ループ"
       style="max-width:70%; height:auto;" />
   </div>
-  <div class="theory-common-box">命題5：\$H_z\$ は内部・外部でそれぞれ一定で、境界 \$r=a\$ を跨ぐと
-  \$\\displaystyle H_z^{\\text{(in)}} - H_z^{\\text{(out)}} = nI\$ が成り立つ</div>
+  <div class="theory-common-box">命題5：\$H_z\$ は内部磁場で一定</div>
   <div class="proof-box">証明</div>
-  (i) ループが完全に内部（または外部）にあるとき、囲む電流は 0。よって \$\\oint \\overrightarrow H\\cdot d\\overrightarrow l=0\$ からその領域内で \$H_z\$ は一定。<br>
-  (ii) 半径 \$a\$ の円筒面を跨ぐ微小長方形ループ（法線は円筒の外向き）を考える。横辺（法線方向）の寄与は命題3より 0、円周方向の寄与は命題4より 0。上下辺のみ残り、
+  (i) ループが完全に内部にあるとき、囲む電流は 0。
+  よって \$\\oint \\overrightarrow H\\cdot d\\overrightarrow l=0\$ からその領域内で \$H_z\$ は一定。<br>
+  (ii) 半径 \$a\$ の円筒面を跨ぐ長方形ループ（法線は円筒の外向き）を考える。横辺の寄与は命題3より 0、左右辺のみ残り、
   \$\\oint \\overrightarrow H\\cdot d\\overrightarrow l = (H_z^{\\text{(in)}}-H_z^{\\text{(out)}})\\,\\ell\$。
   一方、ループが貫く電流は表面電流密度 \$K=nI\$ によって \$K\\,\\ell\$。アンペールの法則
   \$\\oint \\overrightarrow H\\cdot d\\overrightarrow l = I_{\\text{enc}}\$ から
   \$H_z^{\\text{(in)}}-H_z^{\\text{(out)}}=nI\$。\\(\\square\\)
     <img src="assets/electroMagnetismTheory/idealSolenoidLoop5.png"
-      alt="境界を跨ぐ長方形ループ"
+      alt="長方形ループ"
       style="max-width:70%; height:auto;" />
   </div>
+
   <div class="theory-common-box">命題6：外部磁場は定数</div>
   <div class="proof-box">証明</div>
   外部領域（\\(r > a\\)）で長方形ループ（\\(rz\\) 平面）を取り、ソレノイド表面を跨がないように選ぶと、囲む電流は 0。<br>
@@ -85,6 +86,21 @@ final solenoidMagneticFieldProp = TheoryTopic(
   \\[
     \\oint_C \\overrightarrow H \\cdot d\\overrightarrow l = 0 \\Leftrightarrow H_z^{(\\mathrm{out})} = \\text{const} \\quad \\square
   \\]
+  ここで \$r=r_1>a\$ と \$r=r_2>a\$ にある二本の直線を垂直辺とする長方形ループ（\$rz\$ 平面内）を考えると，
+  \[
+  \oint_C \overrightarrow H \cdot d\overrightarrow l 
+    = H_z(r_1)\,L - H_z(r_2)\,L.
+  \]
+  ループは電流を囲まないのでアンペールの法則の積分形より，
+  \begin{aligned}
+  \oint_C \overrightarrow H \cdot d\overrightarrow l &= 0 \\\\[5pt]
+  \Leftrightarrow \; H_z(r_1) - H_z(r_2) &= 0 \\\\[5pt]
+  \Leftrightarrow \; H_z(r_1) &= H_z(r_2).
+  \end{aligned}
+  \$r_1, r_2\$ は任意だから，結局
+  \[
+  H_z^{(\mathrm{out})}(r) = \text{const}. \quad \square
+  \]
   <div style="text-align:center; margin:1em 0;">
     <img src="assets/electroMagnetismTheory/idealSolenoidLoop6.png"
       alt="長方形ループ"
@@ -110,7 +126,7 @@ final solenoidMagneticFieldProp = TheoryTopic(
     \\end{cases}
   \\end{aligned}
   \\(\\square\\)
-
+ <br> 
   <div class="remark-box">補足</div>
   <ul>
     <li>有限長ソレノイドでは端面効果により外部磁場は厳密には 0 ではないが、長さ \\(\\gg a\\) で中心付近では本結果が高精度で成り立つ。</li>

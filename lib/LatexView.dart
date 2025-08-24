@@ -152,6 +152,15 @@ class _LatexWebViewState extends State<LatexWebView> {
     overflow-x: visible;
     -webkit-overflow-scrolling: touch;
   }
+  .remark-box {
+    display: inline-block;   /* 横幅を文字に合わせる */
+    padding: 4px 12px;       /* 内側余白 */
+    margin: 4px 0;           /* 上下の余白 */
+    border: 0.7px solid #333;  /* 枠線の色と太さ */
+    border-radius: 12px;     /* 丸枠 */
+    font-weight: bold;       /* 強調表示（必要なければ削除） */
+    background: none;        /* 背景なし */
+  }
 
   /* 画像・表は従来どおり最大幅に抑える */
   .math-box img,
