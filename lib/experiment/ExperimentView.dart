@@ -186,7 +186,7 @@ class VideoDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(video.videoURL.isEmpty ? '' : video.title)),
+      appBar: AppBar(title: Text(video.title)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(6),
         child: Column(
