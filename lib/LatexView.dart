@@ -94,16 +94,20 @@ class _LatexWebViewState extends State<LatexWebView> {
   <style>
     @font-face {
       font-family: 'KeiFont';
-      src: videoURL(data:font/ttf;base64,$fontBase64) format('truetype');
+      src: url(data:font/ttf;base64,$fontBase64) format('truetype');
+      font-weight: normal;
+      font-style: normal;
     }
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'KeiFont', sans-serif;
-      font-size: 17px;
+      overflow: hidden;   /* ← スクロール禁止に戻す */
       background-color: transparent;
-      line-height: 1.75;  /* ← 行間を少し広く */
+      font-family: 'KeiFont', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
     }
+    
     .condition-box {
       background: rgba(255, 165, 244, 1);
       padding: 8px 16px;
@@ -118,9 +122,12 @@ class _LatexWebViewState extends State<LatexWebView> {
     .common-box {
       background: #cfc;
       padding: 8px 16px;
-      margin: 0px 0;
+      margin: 0;
+      font-size: 17px;
       border-radius: 12px;
+      font-family: 'KeiFont', sans-serif;
     }
+    
     .theory-common-box {
       background: #cfc;
       padding: 8px 16px;
@@ -141,17 +148,16 @@ class _LatexWebViewState extends State<LatexWebView> {
       font-size: 1.1em;     /* フォントを少し大きめに */
       font-weight: bold;    /* 太字 */
     }
-    ..math-box {
-    width: 100%;
-    padding: 0;
-    box-sizing: border-box;
-    white-space: normal;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    /* 親で隠さない。子要素（表示式）をスクロールさせる */
-    overflow-x: visible;
-    -webkit-overflow-scrolling: touch;
-  }
+    .math-box {
+      width: 100%;
+      padding: 0;
+      box-sizing: border-box;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      overflow-x: visible;
+      -webkit-overflow-scrolling: touch;
+    }
   .remark-box {
     display: inline-block;   /* 横幅を文字に合わせる */
     padding: 4px 12px;       /* 内側余白 */
@@ -229,6 +235,7 @@ class _LatexWebViewState extends State<LatexWebView> {
       options: {localStorage: false},
       tex: {inlineMath: [['\$','\$'], ['\\\\(','\\\\)']]},
       svg: {fontCache: 'global'}
+      
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

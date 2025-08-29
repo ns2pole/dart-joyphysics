@@ -7,7 +7,10 @@ final diffractionGrating = Video(
     equipment: ["レーザーポインター", "回折格子", "メジャー"],
     costRating: "★★★", latex: """
     <div class="common-box">ポイント</div>
-    <p>格子定数\$d\$、回折角\$\\theta\$、波長\$\\lambda\$、回折次数\$m\$の関係式：\$d\\sin\\theta = m\\lambda\$</p>
+    <p>格子定数\$d\$、回折角\$\\theta\$、波長\$\\lambda\$、回折次数\$m\$の関係式：</p>
+     <p>\$\$
+      d\\sin\\theta = m\\lambda
+    \$\$</p>
     <div class="common-box">問題設定</div>
     <p>波長\$\\lambda = 532\\,\\mathrm{nm}\$の単色光を、格子定数:\$d = 1.0\\,\\mu\\mathrm{m}\$の回折格子に垂直に入射させる。</p>
     <p>スクリーンまでの距離は\$L = 0.20\\,\\mathrm{m}\$とする。回折格子を通った緑のレーザー光はスクリーン上のどの位置に現れるか求めて下さい。</p>

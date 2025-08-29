@@ -350,13 +350,6 @@ class FormulaList extends StatelessWidget {
       );
 }
 
-class YouTubeWebView extends StatefulWidget {
-  final String videoURL;
-  const YouTubeWebView({super.key, required this.videoURL});
-
-  @override
-  State<YouTubeWebView> createState() => _YouTubeWebViewState();
-}
 
 
 class CostLegendSection extends StatelessWidget {
@@ -462,6 +455,14 @@ class EquipmentListView extends StatelessWidget {
 }
 
 
+class YouTubeWebView extends StatefulWidget {
+  final String videoURL;
+  const YouTubeWebView({super.key, required this.videoURL});
+
+  @override
+  State<YouTubeWebView> createState() => _YouTubeWebViewState();
+}
+
 class _YouTubeWebViewState extends State<YouTubeWebView> {
   late final WebViewController _controller;
 
@@ -470,7 +471,9 @@ class _YouTubeWebViewState extends State<YouTubeWebView> {
     super.initState();
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse('https://www.youtube.com/embed/${widget.videoURL}'));
+      ..loadRequest(
+        Uri.parse('https://www.youtube-nocookie.com/embed/${widget.videoURL}?autoplay=0'),
+      );
   }
 
   @override

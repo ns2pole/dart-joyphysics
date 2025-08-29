@@ -1,0 +1,102 @@
+require 'yaml'
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Flutter Android のリリースを自動化（iOS はコメントアウト）"
+  lane :release_all do |options|
+    release_note = options[:notes] || "バグ修正と改善を行いました"
+
+    # --- pubspec.yaml からバージョン取得 ---
+    pubspec = YAML.load_file("../pubspec.yaml")
+    pub_version = pubspec["version"]       # 例: "2.2.5+31"
+    version_number, build_number = pub_version.split("+")
+
+    UI.message("versionName: #{version_number}, versionCode: #{build_number}")
+        #####################
+    # Flutter ビルド（iOS/Android 共通）
+    #####################
+    sh("flutter clean")
+    sh("flutter pub get")
+
+    # Android AAB
+    sh("flutter build appbundle --release")
+
+    # iOS IPA
+    # sh("flutter build ipa --release")
+
+    #####################
+    # iOS ビルド（コメントアウト）
+    #####################
+    # increment_version_number(
+    #   version_number: version_number,
+    #   xcodeproj: "ios/Runner.xcodeproj"
+    # )
+    #
+    # increment_build_number(
+    #   build_number: build_number,
+    #   xcodeproj: "ios/Runner.xcodeproj"
+    # )
+    #
+    # build_app(
+    #   workspace: "ios/Runner.xcworkspace",
+    #   scheme: "Runner",
+    #   export_method: "app-store"
+    # )
+    #
+    # uses_non_exempt = get_info_plist_value(
+    #   path: "ios/Runner/Info.plist",
+    #   key: "ITSAppUsesNonExemptEncryption"
+    # )
+    #
+    # deliver(
+    #   username: "syunsukerunrun0306@yahoo.co.jp",
+    #   submit_for_review: true,
+    #   force: true,
+    #   languages: ["ja"],
+    #   release_notes: { "ja" => release_note },
+    #   skip_metadata: true,
+    #   skip_screenshots: true,
+    #   submission_information: {
+    #     export_compliance_uses_encryption: uses_non_exempt || false,
+    #     export_compliance_uses_non_exempt_encryption: uses_non_exempt || false,
+    #     export_compliance_is_exempt: !uses_non_exempt,
+    #     export_compliance_encryption_updated: false,
+    #     add_id_info_uses_idfa: false
+    #   }
+    # )
+
+    #####################
+    # Android changelog 自動生成
+    #####################
+    changelog_path = "./metadata/android/ja-JP/changelogs/#{build_number}.txt"
+    sh("mkdir -p #{File.dirname(changelog_path)}")
+    File.write(changelog_path, release_note)
+    UI.message("Android changelog generated at #{changelog_path}")
+
+    #####################
+    # Android ビルド
+    #####################
+    gradle(
+      task: "assembleRelease",
+      project_dir: "./android",
+      properties: {
+        "versionName" => version_number,
+        "versionCode" => build_number
+      }
+    )
+
+    #####################
+    # Android アップロード
+    #####################
+    upload_to_play_store(
+      package_name: "com.joyphysics",
+      json_key: "./fastlane/joy-physics-fastlane-49212c4fb3b6.json",
+      track: "production",
+      aab: "build/app/outputs/bundle/release/app-release.aab",
+      metadata_path: "./fastlane/metadata/android"
+    )
+
+    UI.success("✅ Android release complete (iOS upload is currently commented out)")
+  end
+end

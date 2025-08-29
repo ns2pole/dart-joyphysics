@@ -44,3 +44,31 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /android/key.properties
+
+
+# Flutter / Dart
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+pubspec.lock
+
+# iOS
+ios/Pods/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/build/
+*.xcarchive
+*.ipa
+
+# Android
+android/.gradle/
+android/build/
+android/app/build/
+
+# Fastlane secrets
+fastlane/*.json
+fastlane/fastlane_session
+fastlane/Appfile.lock
+fastlane/Matchfile.lock
