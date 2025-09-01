@@ -11,11 +11,11 @@ final keplerFirstLaw = TheoryTopic(
 角運動量保存により運動は固定平面に制限されるので，その平面を \$(x,y)\$ 平面と取り，
 三次元ベクトルは縦ベクトルで表す：
 
-\\[
-\\vec{r}(t)=\\begin{pmatrix}x(t)\\\\[4pt] y(t)\\\\[4pt] 0\\end{pmatrix},\\qquad
-\\vec{v}(t)=\\vec{r}'(t)=\\begin{pmatrix}x'(t)\\\\[4pt] y'(t)\\\\[4pt] 0\\end{pmatrix},\\qquad
+\\begin{aligned}
+\\vec{r}(t)=\\begin{pmatrix}x(t)\\\\[4pt] y(t)\\\\[4pt] 0\\end{pmatrix}\\\\[6pt]
+\\vec{v}(t)=\\vec{r}'(t)=\\begin{pmatrix}x'(t)\\\\[4pt] y'(t)\\\\[4pt] 0\\end{pmatrix} \\\\[6pt]
 r(t)=\\sqrt{x(t)^2+y(t)^2}.
-\\]
+\\end{aligned}
 
 時間微分はプライム('\\'')表記。
 角運動量ベクトルは
@@ -24,8 +24,7 @@ r(t)=\\sqrt{x(t)^2+y(t)^2}.
 \\vec L:=\\begin{pmatrix}0\\\\[4pt] 0\\\\[4pt] m\\bigl(xy'-yx'\\bigr) \\end{pmatrix}
 \\]
 
-である。\\\\
-
+である。<br>
 万有引力の法則より、運動方程式は中心星を原点に取ると
 
 \\[
@@ -68,10 +67,12 @@ m\\vec{r}''(t)=-\\frac{GMm}{r(t)^3}\\,\\vec{r}(t),
 
 \\(\\vec{e}\\) の成分は
 
-\\[
-e_x=\\frac{A_x}{GMm^2}=\\frac{L\\,y'}{GMm}-\\frac{x}{r},\\qquad
+\\begin{aligned}
+\\begin{cases}
+e_x=\\frac{A_x}{GMm^2}=\\frac{L\\,y'}{GMm}-\\frac{x}{r},\\\\[6pt]
 e_y=\\frac{A_y}{GMm^2}=-\\frac{L\\,x'}{GMm}-\\frac{y}{r}.
-\\]
+\\end{cases}
+\\end{aligned}
 
 \\(e_x'\\) を計算する（\\(L\\) は角運動量保存により定数）：
 
@@ -128,10 +129,10 @@ e_x'&=\\Bigl(-\\frac{x y y'}{r^3}+\\frac{y^2 x'}{r^3}\\Bigr)-\\frac{x'}{r}+\\fra
 <div class="proof-box">証明</div>
 成分で \\(\\vec{e}\\cdot\\vec{r}=e_x x+e_y y\\) を計算すると
 
-\\[
-\\vec{e}\\cdot\\vec{r}=\\frac{L}{GMm}(x y'-y x')-\\frac{x^2+y^2}{r}
-=\\frac{L^{2}}{GM m^2}-r\\quad\\cdots(1)
-\\]
+\\begin{align*}
+\\vec{e}\\cdot\\vec{r}&=\\frac{L}{GMm}(x y'-y x')-\\frac{x^2+y^2}{r}\\\\[6pt]
+&=\\frac{L^{2}}{GM m^2}-r\\quad\\cdots(1)
+\\end{align*}
 
 一方、離心ベクトルを\\(\\vec{e}=e(\\cos \\alpha, \\sin \\alpha)\\)のように\\(x\\)軸からの角度を用いて表すと
 
@@ -162,15 +163,14 @@ e_x'&=\\Bigl(-\\frac{x y y'}{r^3}+\\frac{y^2 x'}{r^3}\\Bigr)-\\frac{x'}{r}+\\fra
 \\begin{align*}
 e^2 &= e_x^2 + e_y^2
 = \\left(\\frac{L\\, y'}{GM m} - \\frac{x}{r}\\right)^2 + \\left(-\\frac{L\\, x'}{GM m} - \\frac{y}{r}\\right)^2 \\\\[6pt]
-&= \\frac{L^2}{G^2 M^2 m^2} (x'^2 + y'^2) + \\frac{x^2 + y^2}{r^2} -\\frac{2L}{GM mr} ( xy'- x' y ) \\quad\\cdots(1) 
+&= \\frac{L^2}{G^2 M^2 m^2} (x'^2 + y'^2) + \\frac{x^2 + y^2}{r^2} -\\frac{2L}{GM mr} ( xy'- x' y )
 \\end{align*}
 
 全エネルギーより
 \\(\\displaystyle E = \\frac12 m v^2 - \\frac{GM m}{r} \\Leftrightarrow v^2 = \\frac{2E}{m} + \\frac{2 GM}{r}\\)
-
+<br>
 また、\\(\\displaystyle xy'- x' y  = \\frac L m \\)が成り立つ。
-これを(1)に代入して
-
+これ\$e^2\$の計算途中の式にを代入して、引き続き計算すると、
 \\begin{align*}
 e^2 &= \\frac{L^2}{G^2 M^2 m^2} \\Bigl(  \\frac{2E}{m} + \\frac{2 GM}{r} \\Bigr) + 1- \\frac{2L^2}{GM m^2r}\\\\[6pt]
 &= \\frac{2EL^2}{G^2 M^2 m^3} + \\frac{2L^2}{GM m^2r} + 1 - \\frac{2L^2}{GM m^2r}\\\\[6pt]
@@ -313,7 +313,7 @@ r=e\\Bigl|x\\cos\\alpha+y\\sin\\alpha-\\frac{L^2}{GM\\,m^2e}\\Bigr| \\\\[5pt]
 r=e\\Bigl|r \\cos(\\theta-\\alpha)-\\frac{L^2}{GM\\,m^2e}\\Bigr| \\cdots(1)
 \\end{align*}
 
-ここで、補題より絶対値の中身は負。したがって(1)式より、符号に注意して整理すると
+ここで、下の補題より絶対値の中身は負。したがって(1)式より、符号に注意して整理すると
 
 \$\$
 r\\bigl(1+e\\cos(\\theta-\\alpha)\\bigr)=\\frac{L^2}{GM\\,m^2}
@@ -324,7 +324,7 @@ r\\bigl(1+e\\cos(\\theta-\\alpha)\\bigr)=\\frac{L^2}{GM\\,m^2}
 </div>
 
 <div class="theory-common-box">
-[補題] \\ \\ \\ \$r\\cos(\\theta-\\alpha)-\\frac{L^2}{GM\\,m^2e}\$は負の数である。\\\\[6pt]
+[補題]\$r\\cos(\\theta-\\alpha)-\\frac{L^2}{GM\\,m^2e}\$は負の数である。
 </div>
 <div class="proof-box">証明</div>
 \\[

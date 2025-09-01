@@ -101,7 +101,8 @@ class _LatexWebViewState extends State<LatexWebView> {
     html, body {
       margin: 0;
       padding: 0;
-      overflow: hidden;   /* ← スクロール禁止に戻す */
+      overflow: auto;               /* ← スクロール許可 */
+      -webkit-overflow-scrolling: touch; /* iOSでの慣性スクロール */
       background-color: transparent;
       font-family: 'KeiFont', sans-serif;
       font-size: 15px;
@@ -120,6 +121,14 @@ class _LatexWebViewState extends State<LatexWebView> {
       margin-bottom: 0.5em; /* 好みで調整 */
     }
     . {
+      border: 2px solid #333;   /* 枠線 */
+      border-radius: 6px;       /* 角を丸くする */
+      padding: 8px 12px;        /* 内側の余白 */
+      margin: 8px 0;            /* 上下の間隔 */
+      display: inline-block;    /* 横幅を中身に合わせる */
+      background-color: #f9f9f9; /* 薄い背景色 */
+    }
+    .paragraph-box {
       border: 2px solid #333;   /* 枠線 */
       border-radius: 6px;       /* 角を丸くする */
       padding: 8px 12px;        /* 内側の余白 */

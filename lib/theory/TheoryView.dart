@@ -111,10 +111,9 @@ class TopicDetailPage extends StatelessWidget {
         title: Text(topic.title.replaceAll(RegExp(r'\$.*?\$'), "")),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
+        child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: LatexWebView(
-            // ← ここには「body の中身」だけを渡す（LatexWebView が完全な HTML にラップする）
             latexHtml: bodyFragment,
           ),
         ),
