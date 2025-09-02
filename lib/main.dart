@@ -45,7 +45,7 @@ class _Footer extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 12),
         child: Center(
           child: Text(
-            'Updated: 2025/08/31  Version 2.2.11',
+            'Updated: 2025/09/01  Version 2.2.12',
             style: TextStyle(fontSize: 16, color: Colors.black54),
           ),
         ),
@@ -92,7 +92,7 @@ class CategoryList extends StatelessWidget {
           return _buildSensorButton(context);
         }
         if (index == 2) {
-          return _buildInfoText('実験&解説記事 43本掲載中！');
+          return _buildInfoText('実験&解説記事 46本掲載中！');
         }
 
         final adjustedIndex = index - 3;
@@ -105,7 +105,7 @@ class CategoryList extends StatelessWidget {
         // 理論記事案内
         final theoryIndex = adjustedIndex - categories.length;
         if (theoryIndex == 0) {
-          return _buildInfoText('理論記事 5本掲載中！');
+          return _buildInfoText('理論記事 6本掲載中！');
         }
 
         if (theoryIndex >= 1 && theoryIndex <= theoryButtons.length) {
