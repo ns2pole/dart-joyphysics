@@ -3,7 +3,6 @@ import '../../model.dart';
 
 final dopplerObserverMoving = Video(
   isSmartPhoneOnly: true,
-  isNew: true,
   category: 'waves',
   iconName: "doppler2",  // assets に追加済みを想定
   title: "ドップラー効果(観測者が動く時)",

@@ -121,7 +121,7 @@ class SensorListView extends StatelessWidget {
               leading: Image.asset(
                 'assets/others/smartPhoneOnly.gif',
                 width: 60,
-                height: 42,
+                height: 40,
                 fit: BoxFit.contain,
               ),
               title: Text(video.title, style: TextStyle(fontSize: 15, color: Colors.black87)),

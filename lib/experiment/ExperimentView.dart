@@ -178,8 +178,8 @@ class _VideoCategoryList extends StatelessWidget {
                         if (v.isNew == true)
                           Image.asset(
                             'assets/others/new.gif',
-                            width: 60,
-                            height: 40,
+                            width: 45,
+                            height: 30,
                             fit: BoxFit.contain,
                           ),
                       ],
@@ -340,8 +340,8 @@ class FormulaList extends StatelessWidget {
                                       SizedBox(width: 10),
                                       Image.asset(
                                         'assets/others/new.gif',
-                                        width: 60,
-                                        height: 40,
+                                        width: 45,
+                                        height: 30,
                                         fit: BoxFit.contain,
                                       ),
                                     ],

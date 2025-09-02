@@ -49,7 +49,6 @@ class TheoryListView extends StatelessWidget {
                     title: parseTextWithMath(
                       topic.title,
                       isNew: topic.isNew,
-                      context: context,
                     ),
                     tileColor: Colors.blue[50]?.withOpacity(0.1),
                     shape: RoundedRectangleBorder(
@@ -122,66 +121,96 @@ class TopicDetailPage extends StatelessWidget {
   }
 }
 
-
-// ─────────────────────────────
-// 数式と "new.gif" を表示するウィジェット
-// ─────────────────────────────
-Widget parseTextWithMath(String input, {bool isNew = false, BuildContext? context}) {
-  final regex = RegExp(r'(\$(.+?)\$|\\\((.+?)\\\))');
+Widget parseTextWithMath(String input, {bool isNew = false}) {
+  final regex = RegExp(r'(\$\$(.+?)\$\$|\$(.+?)\$|\\\((.+?)\\\)|\\\[(.+?)\\\])', dotAll: true);
   final spans = <InlineSpan>[];
 
   int lastIndex = 0;
-  for (final match in regex.allMatches(input)) {
+  bool insertedNewAfterFormula = false;
+  final matches = regex.allMatches(input).toList();
+
+  for (final match in matches) {
     if (match.start > lastIndex) {
       spans.add(TextSpan(text: input.substring(lastIndex, match.start)));
     }
 
-    final formula = match.group(2) ?? match.group(3);
+    String? formula;
+    for (int gi = 2; gi <= 5; gi++) {
+      if (match.group(gi) != null) {
+        formula = match.group(gi);
+        break;
+      }
+    }
+    formula ??= match.group(0);
 
-    // 数式本体
-    spans.add(WidgetSpan(
-      alignment: PlaceholderAlignment.middle,
-      child: Math.tex(
-        formula!,
-        mathStyle: MathStyle.text,
-        textStyle: const TextStyle(
-          fontFamily: 'Keifont',
-          fontSize: 20,
-        ),
-      ),
-    ));
-
-    // isNew のときだけ new.gif を数式横に表示
-    if (isNew && context != null) {
+    // --- 数式を「中央揃え」で挿入 ---
+    try {
       spans.add(WidgetSpan(
         alignment: PlaceholderAlignment.middle,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 6),
-          child: Image.asset(
-            'assets/others/new.gif',
-            width: 40,
-            height: 24,
-            fit: BoxFit.contain,
+        child: Math.tex(
+          formula!,
+          mathStyle: MathStyle.text,
+          textStyle: const TextStyle(
+            fontFamily: 'Keifont',
+            fontSize: 20,
           ),
         ),
       ));
+    } catch (e) {
+      spans.add(TextSpan(text: formula));
+    }
+
+    // 数式直後に new.gif を一度だけ追加（中央揃え）
+    if (isNew && !insertedNewAfterFormula) {
+      // 少し横スペース
+      spans.add(WidgetSpan(
+        alignment: PlaceholderAlignment.middle,
+        child: const SizedBox(width: 6, height: 1),
+      ));
+
+      // 画像（中央揃え）。高さをテキストサイズに近づけると見た目自然。
+      spans.add(WidgetSpan(
+        alignment: PlaceholderAlignment.middle,
+        child: SizedBox(
+          width: 45,
+          height: 30, // ← フォントサイズ20に合わせてみる（必要に応じ調整）
+          child: Image.asset('assets/others/new.gif', fit: BoxFit.contain),
+        ),
+      ));
+
+      // もしまだ上寄りなら微調整（コメントアウトを外して試す）
+      /*
+      spans.add(WidgetSpan(
+        alignment: PlaceholderAlignment.middle,
+        child: Transform.translate(
+          offset: const Offset(0, 2), // 下に2pxずらす（適宜変更）
+          child: SizedBox(width: 40, height: 20, child: Image.asset('assets/others/new.gif', fit: BoxFit.contain)),
+        ),
+      ));
+      */
+
+      insertedNewAfterFormula = true;
     }
 
     lastIndex = match.end;
   }
 
-  if (lastIndex < input.length) {
-    spans.add(TextSpan(text: input.substring(lastIndex)));
+  if (lastIndex < input.length) spans.add(TextSpan(text: input.substring(lastIndex)));
+
+  // 数式が無いタイトルの場合は末尾に追加する挙動は省略せず残す（必要ならここで同様に middle 揃えで追加）
+  if (isNew && !insertedNewAfterFormula) {
+    spans.add(WidgetSpan(alignment: PlaceholderAlignment.middle, child: const SizedBox(width: 6, height: 1)));
+    spans.add(WidgetSpan(
+      alignment: PlaceholderAlignment.middle,
+      child: SizedBox(width: 45, height: 30, child: Image.asset('assets/others/new.gif', fit: BoxFit.contain)),
+    ));
   }
 
   return RichText(
     text: TextSpan(
-      style: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        color: Colors.black,
-      ),
+      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
       children: spans,
     ),
+    maxLines: null,
   );
 }

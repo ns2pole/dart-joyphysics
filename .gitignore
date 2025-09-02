@@ -66,6 +66,7 @@ ios/build/
 *.xcarchive
 *.ipa
 
+
 # Android
 android/.gradle/
 android/build/
@@ -76,3 +77,9 @@ fastlane/*.json
 fastlane/fastlane_session
 fastlane/Appfile.lock
 fastlane/Matchfile.lock
+
+
+ios/Podfile
+ios/project.pbxproj
+ios/Podfile.lock
+Runner.app.dSYM.zip

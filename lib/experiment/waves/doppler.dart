@@ -3,7 +3,6 @@ import '../../model.dart';
 
 final doppler = Video(
   isSmartPhoneOnly: true,
-  isNew: true,
   category: 'waves',
   iconName: "doppler1",  // assets に追加
   title: "ドップラー効果(音源が動く時)",

@@ -1,7 +1,6 @@
 import '../../model.dart'; // Videoクラス定義が別ならインポート
 
 final solenoidMagneticField = Video(
-  isNew: true,
   category: 'electroMagnetism', // ← 追加
   iconName: "solenoidMagneticField",
   title: "ソレノイドコイルの作る磁場",
