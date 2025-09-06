@@ -89,6 +89,11 @@ export './theory/dynamics/conservativeForce.dart';
 export './theory/dynamics/simplePendulum.dart';
 export './theory/dynamics/inertialForceParallel.dart';
 export './theory/dynamics/inertialForceRotation.dart';
+export './theory/dynamics/doubleMassPoint.dart';
+export './theory/dynamics/collisionConservation.dart';
+export './theory/dynamics/doubleMassPointEnergy.dart';
+export './theory/dynamics/angularMomentumAndTorque.dart';
+export './theory/dynamics/systemsOfParticles.dart';
 
 // theory/electroMagnetism
 export './theory/electroMagnetism/gaussLaw.dart';

@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane ios release_all
 ```
 
-Flutter Android のリリースを自動化（iOS はコメントアウト）
+Flutter Android と iOS のリリースを自動化
 
 ----
 

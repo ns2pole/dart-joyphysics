@@ -24,6 +24,12 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       ],
     ),
     TheorySubcategory(
+      name: '等加速度直線運動',
+      topics: [
+        uniformAcceleration,
+      ],
+    ),
+    TheorySubcategory(
       name: '運動量',
       topics: [
         momentum,
@@ -37,9 +43,9 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       ],
     ),
     TheorySubcategory(
-      name: '等加速度直線運動',
+      name: '角運動量',
       topics: [
-        uniformAcceleration,
+        angularMomentumAndTorque,
       ],
     ),
     TheorySubcategory(
@@ -53,6 +59,21 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       topics: [
         inertialForceParallel,
         inertialForceRotation
+      ],
+    ),
+    TheorySubcategory(
+      name: '二体問題',
+      topics: [
+        doubleMassPoint,
+        collisionConservation,
+        doubleMassPointEnergy
+      ],
+    ),
+
+    TheorySubcategory(
+      name: '質点系の力学',
+      topics: [
+        systemsOfParticles,
       ],
     ),
     TheorySubcategory(
