@@ -105,7 +105,7 @@ class _LatexWebViewState extends State<LatexWebView> {
       -webkit-overflow-scrolling: touch; /* iOSでの慣性スクロール */
       background-color: transparent;
       font-family: 'KeiFont', sans-serif;
-      font-size: 15px;
+      font-size: 18px;
       line-height: 1.75;
     }
     

@@ -8,49 +8,57 @@ final permeability = TheoryTopic(
 <p>
 真空の透磁率は磁気に関する基準定数で、慣用的な値は
 \[
-\displaystyle \mu_0 \approx 4\pi\times 10^{-7}\ \mathrm{H/m}
+\displaystyle \mu_0 \fallingdotseq 4\pi\times 10^{-7}\ \mathrm{H/m}
 \]
 である（SIでの標準的な定数として扱われる）。真空中では \(\vec B=\mu_0\vec H\) が成り立つ。
 </p>
 
-<div class="theory-common-box">定義（磁化率：\(\chi_m\)）</div>
+<div class="theory-common-box">定義（磁気双極子）</div>
 <p>
-磁化率は媒質の磁化 \(\vec M\) が磁場強度 \(\vec H\) に対してどれだけ比例するかを表す無次元係数で、線形媒質では
-\[
-\displaystyle \vec M = \chi_m\,\vec H
-\]
-と表される。\(\chi_m\) は磁気応答（磁気双極子あるいは配向応答）の強さを示し、磁気感受率とも呼ばれる。
+電流ループや局所的な回転電流が作る磁気的な双極子を <b>磁気双極子</b> と呼ぶ。
 </p>
 
+<div class="paragraph-box">性質</div>
+<ul>
+  <li>単一の磁気双極子は外部磁場 \(\vec B\) に対してトルクを受ける：
+    \(\displaystyle \boldsymbol{\tau}=\vec m\times\vec B\)。</li>
+</ul>
+
+
+<div class="theory-common-box">定義（磁化ベクトル：\(M\)）</div>
+<p>磁場を物質に加えると、構成分子の回転電流の向きが揃い、これは磁気双極子として振る舞う。そこで、
+単位体積あたりの磁気双極子モーメントを磁化ベクトルといい、\(\vec M\)で表すこととする。
+</p>
+
+<div class="theory-common-box">定義（磁気感受率：\(\chi_m\)）</div>
+<p>
+線形等方媒質
+\vec M = \chi_m \mu_0 \vec H
+</p>
+
+<div class="theory-common-box">定義（磁場：\(\vec H \)）</div>
+磁場\(\vec H\)を磁束密度 \(\vec B\) と電場と磁化ベクトル \(\vec M\) を用いて下記で定義する。
+\[
+\vec H = \frac {\vec B - \vec M}{\mu_0}
+\]
 
 <div class="theory-common-box">定理（線形等方媒質における関係式）</div>
-媒質を考慮する場合、磁束密度$\vec B$は磁化 \(\vec M\) と磁場$\vec H$を用いて
-\(\vec B=\mu_0(\vec H+\vec M)\) となる。
+線形等方媒質では、磁束密度$\vec B$は磁化 \( \vec {P_m}\) と磁場$\vec H$を用いて
+\(\vec B=\mu_0( 1 + \chi_m\,)\vec H\) となる。
+<p>
+<div class="proof-box">証明</div>
+線形等方媒質では、磁束密度の式\( \vec B = \mu_0 \vec H + \vec {P_m} \)と磁化率の式$\displaystyle \vec {P_m} = \chi_m\,\mu_0\,\vec H$をを合わせると、
+\begin{aligned}
+\vec B &= \mu_0 \vec H+\vec {P_m} \\[5pt]
+&= \mu_0( 1 + \chi_m\,) \vec H \\[5pt]
+\end{aligned}
+が得られる。
 </p>
+
 
 <div class="theory-common-box">定義（透磁率：\(\mu\)）</div>
-<p>
-線形等方媒質では、磁束密度の式\( \vec B = \mu_0( \vec H+\vec M \)と磁化率の式$\displaystyle \vec M = \chi_m\,\vec H$をを合わせると、
-\begin{aligned}
-\vec B &= \mu_0( \vec H+\vec M) \\[5pt]
-&= \mu_0( \vec H+ \chi_m\,\vec H) \\[5pt]
-&= \mu\vec H \quad ;\ \mu=\mu_0(1+\chi_m)
-\end{aligned}が得られる。
-この、\(\mu=\mu_0(1+\chi_m)\)を線形等方媒質の透磁率という。単位はヘンリー毎メートル（\(\mathrm{H/m}\)）
-</p>
-
-
-
-<div class="theory-common-box">定理（真空における関係式）：
-真空では磁束密度 \(\vec B\) と磁場の強さ \(\vec H\) との関係は下記の通り。
-\[
-\vec B = \mu_0 \vec H
-\]
-</div>
-
-<p><div class="proof-box">証明</div>
-真空中では、磁化は起きないので、$\vec M= \vec 0\ $となり直ちに命題の式を得る。
-Q.E.D
+上式の$\vec H$の係数
+$\mu_0(1+\chi_m)$を(この線形等方媒質の)透磁率といい単に$\mu$で表す。単位はヘンリー毎メートル（\(\mathrm{H/m}\)）
 </p>
 
 <div class="theory-common-box">定義（比透磁率：\(\mu_r\)）</div>
@@ -60,5 +68,40 @@ Q.E.D
 \]
 を比透磁率と定義する。真空では \(\mu_r=1\) である。
 </p>
+
+
+<div class="theory-common-box">命題（線形媒質中の磁場$\vec H$）：線形媒質の時、上の透磁率、比透磁率の定義を用いると磁束密度$\vec B$は、磁場の強さ$\vec H$を用いて下記のように表すことが出来る。
+\[
+\displaystyle \vec B = \mu \vec H = \mu_r \mu_0 \vec H
+\]
+</div>
+<p><div class="proof-box">証明</div>
+線形媒質の場合、$\vec B = \mu \vec H$であるが、比透磁率の定義より、$\mu = \mu_r \mu_0 $なので、
+$\displaystyle \vec B = \mu \vec H = \mu_r \mu_0 \vec H$となる。　Q.E.D
+</p>
+
+
+
+<div class="theory-common-box">命題（真空における関係式）：
+真空では磁束密度 \(\vec B\) と磁場の強さ \(\vec H\) との関係は下記の通り。
+\[
+\vec B = \mu_0 \vec H
+\]
+</div>
+<div class="proof-box">証明</div><p>
+真空中では、磁化は起きないので、$\vec {P_m}= \vec 0\ $となり直ちに命題の式を得る。
+Q.E.D
+</p>
 """,
 );
+// iv class="theory-common-box">定義（磁気双極子）</div>
+// <p>
+// 電流ループや局所的な回転電流が作る磁気的な双極子を <b>磁気双極子</b> と呼ぶ。
+// 小さなループ電流 \(I\) と面積ベクトル \(\vec A\)（右ねじの向きに沿う単位法線ベクトルを向きとする）を持つループの磁気双極子モーメント \(\vec m\) は次で与えられる：
+// \[
+// \vec m = I\,\vec A
+// \]
+// （単位は A·m\(^2\)。慣習的に向きは電流の進行方向に右ねじを巻いたときの軸の向き。）
+// また連続分布の場合の一般式として
+// と書ける。
+// </p>

@@ -27,9 +27,9 @@ final solenoidMagneticField = Video(
 <p>\$\$
 \\begin{align*}
 B &= 4\\pi \\times 10^{-7} \\cdot \\frac{210}{0.39} \\cdot 1.05 \\\\
-  &\\approx 4\\pi \\times 10^{-7} \\cdot 538.46 \\cdot 1.05 \\\\
-  &\\approx 4\\pi \\times 10^{-7} \\cdot 565.38 \\\\
-  &\\approx 7.1 \\times 10^{-4}\\,\\text{T} \\\\
+  &\\fallingdotseq 4\\pi \\times 10^{-7} \\cdot 538.46 \\cdot 1.05 \\\\
+  &\\fallingdotseq 4\\pi \\times 10^{-7} \\cdot 565.38 \\\\
+  &\\fallingdotseq 7.1 \\times 10^{-4}\\,\\text{T} \\\\
   &= 0.71\\,\\text{mT}
 \\end{align*}
 \$\$</p>

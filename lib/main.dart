@@ -86,7 +86,7 @@ class CategoryList extends StatelessWidget {
       itemCount: totalCount + 1, // フッター分を追加
       itemBuilder: (context, index) {
         if (index == 0) {
-          return _buildInfoText('スマホセンサーだけでできる\n実験記事8本掲載中！');
+          return _buildInfoText('スマホでできる実験記事\n8本掲載中！');
         }
         if (index == 1) {
           return _buildSensorButton(context);
@@ -105,7 +105,7 @@ class CategoryList extends StatelessWidget {
         // 理論記事案内
         final theoryIndex = adjustedIndex - categories.length;
         if (theoryIndex == 0) {
-          return _buildInfoText('理論記事38本掲載中！');
+          return _buildInfoText('理論記事45本 掲載中！');
         }
 
         if (theoryIndex >= 1 && theoryIndex <= theoryButtons.length) {

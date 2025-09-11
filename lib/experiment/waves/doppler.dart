@@ -34,12 +34,12 @@ final doppler = Video(
 
 <p>近づく場合の周波数は：</p>
 \\[
-f' = f \\times \\frac{v}{v - v_{\\text{音源}}} = 3000 \\times \\frac{340}{340 - 1.5} \\approx 3013 \\text{ Hz}
+f' = f \\times \\frac{v}{v - v_{\\text{音源}}} = 3000 \\times \\frac{340}{340 - 1.5} \\fallingdotseq 3013 \\text{ Hz}
 \\]
 
 <p>遠ざかる場合の周波数は：</p>
 \\[
-f' = f \\times \\frac{v}{v + v_{\\text{音源}}} = 3000 \\times \\frac{340}{340 + 1.5} \\approx 2987 \\text{ Hz}
+f' = f \\times \\frac{v}{v + v_{\\text{音源}}} = 3000 \\times \\frac{340}{340 + 1.5} \\fallingdotseq 2987 \\text{ Hz}
 \\]
 
 <div class="common-box">注意点</div>

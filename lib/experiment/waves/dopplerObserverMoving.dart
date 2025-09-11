@@ -34,12 +34,12 @@ final dopplerObserverMoving = Video(
 
 <p>近づく場合の周波数は：</p>
 \\[
-f' = f \\times \\frac{v + v_{\\text{観測者}}}{v} = 3000 \\times \\frac{340 + 1.5}{340} \\approx 3013 \\text{ Hz}
+f' = f \\times \\frac{v + v_{\\text{観測者}}}{v} = 3000 \\times \\frac{340 + 1.5}{340} \\fallingdotseq 3013 \\text{ Hz}
 \\]
 
 <p>遠ざかる場合の周波数は：</p>
 \\[
-f' = f \\times \\frac{v - v_{\\text{観測者}}}{v} = 3000 \\times \\frac{340 - 1.5}{340} \\approx 2987 \\text{ Hz}
+f' = f \\times \\frac{v - v_{\\text{観測者}}}{v} = 3000 \\times \\frac{340 - 1.5}{340} \\fallingdotseq 2987 \\text{ Hz}
 \\]
 
 <div class="common-box">注意点</div>

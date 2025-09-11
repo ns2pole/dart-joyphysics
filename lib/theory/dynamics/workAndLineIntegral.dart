@@ -23,7 +23,7 @@ W = |\vec F| | \Delta \vec x| \cos\theta  = \vec F \cdot  \vec x
 \sum_{i=1}^{N(P)} |\vec F_i|\cos\theta_i\,\Delta s_i\Bigr)
 \end{aligned}
 
-<div class="paragraph-box">記号</div>
+<div class="paragraph-box">記号</div><br>
 <ul>
   <li> $ P = \{t_0 < t_1 < \cdots < t_N \}$ : 分割
 <li> $N(P)$ : 分割の個数</li>

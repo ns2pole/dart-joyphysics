@@ -188,8 +188,7 @@ a=\\frac{1}{2}\\,(r_{\\min}+r_{\\max})=\\frac{L^{2}}{GM\\,m^{2}(1-e^{2})},
 である。<br>
 ・近点・遠点はそれぞれ \\(a(1-e)\\)、\\(a(1+e)\\) と表される。<br>
 ・\\(\\theta=\\alpha\\) が近点方向で \\(r_{\\min}=\\dfrac{L^{2}}{GM\\,m^{2}(1+e)}\\) を与え、\\(\\theta=\\alpha+\\pi\\) が遠点方向で \\(r_{\\max}=\\dfrac{L^{2}}{GM\\,m^{2}(1-e)}\\) を与える。<br>
-・特殊例：\\(e=0\\) のとき円軌道。
-
+・特殊例：\\(e=0\\) のとき円軌道。<br>
 <div class="paragraph-box">
 (2) \\(e=1\\)（放物線：臨界軌道）
 </div><br>
@@ -198,9 +197,9 @@ a=\\frac{1}{2}\\,(r_{\\min}+r_{\\max})=\\frac{L^{2}}{GM\\,m^{2}(1-e^{2})},
 r(\\theta)=\\frac{L^{2}}{GM\\,m^{2}(1+\\cos(\\theta-\\alpha))}.
 \\]
 分母が \\(1+\\cos(\\theta-\\alpha)=0\\) となる角、すなわち \\(\\theta=\\alpha+\\pi\\) に向かって \\(r\\to\\infty\\)。
-したがって放物線は唯一つの発散方向 \\(\\theta=\\alpha+\\pi\\) を持つ。
-
-<div class="paragraph-box">(3) \\(e>1\\)（双曲線：非束縛軌道）
+したがって放物線は唯一つの発散方向 \\(\\theta=\\alpha+\\pi\\) を持つ。<br>
+<div class="paragraph-box">
+(3) \\(e>1\\)（双曲線：非束縛軌道）
 </div><br>
 ・近点は \\(\\cos(\\theta-\\alpha)=1\\)（すなわち \\(\\theta=\\alpha\\)）で達成され、値は
 \\[

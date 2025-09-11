@@ -37,8 +37,8 @@ $\displaystyle \overrightarrow{R_G}(t)=\frac{m_1\overrightarrow{r}_1(t)+m_2\over
 
 すなわち重心の加速度は零である．
 これを積分すると重心速度は一定であり，
-\[ \overrightarrow{R_G}'(t)=\mathbf{V}=\text{一定} \]
-さらに一度積分して \[ \overrightarrow{R_G}(t)=\mathbf{V}t+\overrightarrow{R_G}(0) \] が得られる．
+\[ \overrightarrow{R_G}'(t)=\overrightarrow{V}=\text{一定} \]
+さらに一度積分して \[ \overrightarrow{R_G}(t)=\overrightarrow{V}t+\overrightarrow{R_G}(0) \] が得られる．
 よって重心は等速直線運動をする． Q.E.D</p>
 
 <div class="theory-common-box">命題2：質点$1,2$の質量を$m_1$,$m_2$とし、$1$から$2$に及ぼす力を$\overrightarrow{F}_{2 \leftarrow 1}(t)$と書く。質点1,2の換算質量を$\mu$と表すと、二体問題において質点1に対する質点2の相対運動方程式は下記で与えられる。
@@ -135,7 +135,7 @@ m_1\overrightarrow{r}_1''(t) = m_1\overrightarrow{R_G}''(t) - \dfrac{m_1m_2}{m_1
 m_2\overrightarrow{r}_2''(t) = m_2\overrightarrow{R_G}''(t) + \dfrac{m_1m_2}{m_1+m_2}\,\overrightarrow{R}_{2\leftarrow1}''(t).
 \end{cases}
 \end{aligned}
-命題1より $\overrightarrow{R_G}''(t)=\mathbf{0}$，換算質量の定義より $\dfrac{m_1m_2}{m_1+m_2}=\mu$ を代入し，さらに相対方程式 $\mu\,\overrightarrow{R}_{2\leftarrow1}''(t)=\overrightarrow{F}_{2\leftarrow1}(t)$ を用いると
+命題1より $\overrightarrow{R_G}''(t)=\overrightarrow{0}$，換算質量の定義より $\dfrac{m_1m_2}{m_1+m_2}=\mu$ を代入し，さらに相対方程式 $\mu\,\overrightarrow{R}_{2\leftarrow1}''(t)=\overrightarrow{F}_{2\leftarrow1}(t)$ を用いると
 \begin{aligned}
 \begin{cases}
 m_1\overrightarrow{r}_1''(t) = -\overrightarrow{F}_{2\leftarrow1}(t),\\[6pt]

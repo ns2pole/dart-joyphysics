@@ -62,7 +62,7 @@ mL\left( \dfrac{d^2\theta}{dt^2} \cos\theta(t) - \left( \dfrac{d\theta}{dt} \rig
 & \Leftrightarrow \dfrac{d^2\theta}{dt^2} = -\dfrac{g}{L} \sin\theta(t)
 \end{aligned}
 
-ここで $\theta(t)$ が十分小さいと仮定し、$\displaystyle \sin\theta(t) \approx \theta(t)$と近似すれば、
+ここで $\theta(t)$ が十分小さいと仮定し、$\displaystyle \sin\theta(t) \fallingdotseq \theta(t)$と近似すれば、
 \begin{aligned}
 \dfrac{d^2\theta}{dt^2} = -\dfrac{g}{L} \theta(t)
 \end{aligned}

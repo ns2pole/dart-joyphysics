@@ -113,20 +113,32 @@ final Map<String, List<TheorySubcategory>> theoryData = {
   ],
   '電磁気学理論': [
     TheorySubcategory(
+      name: '電荷と電流',
+      topics: [
+        definitionOfElectricChargeAndCurrent,
+      ],
+    ),
+    TheorySubcategory(
+      name: '電磁気力',
+      topics: [
+        electromagneticForce,
+      ],
+    ),
+    TheorySubcategory(
+      name: '電磁場の定義',
+      topics: [
+        definitionOfElectricField,
+        definitionOfMagneticField,
+      ],
+    ),     
+    TheorySubcategory(
       name: '流束と面積分',
       topics: [
         fluxAndAreaIntegral,
       ],
     ),
     TheorySubcategory(
-      name: '媒質中の電磁波',
-      topics: [
-        permittivity,
-        permeability,
-      ],
-    ),
-    TheorySubcategory(
-      name: 'マックスウェル方程式',
+      name: '真空中のマクスウェル方程式',
       topics: [
         electoricGaussLaw,
         magneticGaussLaw,
@@ -135,12 +147,50 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       ],
     ),
     TheorySubcategory(
-      name: '磁場と電流',
+      name: '双極子',
       topics: [
-        // ampereLaw,
-        lorentzForceAndCircleMove,
+        magneticDipole,
+      ],
+    ),
+    TheorySubcategory(
+      name: '物質中の電場と磁場',
+      topics: [
+        permittivity,
+        permeability,
+        permittivityAndPermeabilityTable
+      ],
+    ),
+    TheorySubcategory(
+      name: '物質中のマクスウェル方程式',
+      topics: [
+        electoricGaussLawInMatter,
+        ampereMaxwellLawInMatter
+      ],
+    ),
+    TheorySubcategory(
+      name: '電荷が作る電場',
+      topics: [
+        electricDipole,
+      ],
+    ),
+    TheorySubcategory(
+      name: '定常電流が作る磁場',
+      topics: [
         infiniteStraightCurrent,
-        solenoidMagneticFieldProp
+        solenoidMagneticFieldProp,
+        electricDipole
+      ],
+    ),
+    TheorySubcategory(
+      name: '電磁気力を受ける質点の運動',
+      topics: [
+        lorentzForceAndCircleMove,
+      ],
+    ),
+    TheorySubcategory(
+      name: 'その他',
+      topics: [
+        rightHandRule,
       ],
     ),
   ],

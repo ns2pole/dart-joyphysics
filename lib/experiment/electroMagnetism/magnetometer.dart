@@ -27,7 +27,7 @@ final magnetometer = Video(
 \\begin{aligned}
 H &= \\sqrt{B_x^2 + B_y^2} = \\sqrt{25^2 + 15^2} \\\\[6pt]
 & = \\sqrt{625 + 225} = \\sqrt{850} \\\\[6pt]
-& \\approx 29.15 \\mathrm{μT}
+& \\fallingdotseq 29.15 \\mathrm{μT}
 \\end{aligned}
 <p>この値は地磁気の水平分力の大きさを示しており、方位の検出に使われます。</p>
 
