@@ -33,8 +33,8 @@ class TheoryListView extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (_) => FullscreenImagePage(
                         imageAsset: categoryName == '力学理論'
-                            ? 'assets/dynamicsTheory/dynamicsLandScope.jpeg'
-                            : 'assets/electroMagnetismTheory/emTheoryLandScope.jpeg',
+                            ? 'assets/mindMap/dynamicsLandScope.jpeg'
+                            : 'assets/mindMap/emTheoryLandScope.jpeg',
                       ),
                     ),
                   );
@@ -50,8 +50,8 @@ class TheoryListView extends StatelessWidget {
                           aspectRatio: 16 / 9,
                           child: Image.asset(
                             categoryName == '力学理論'
-                                ? 'assets/dynamicsTheory/dynamicsLandScope.jpeg'
-                                : 'assets/electroMagnetismTheory/emTheoryLandScope.jpeg',
+                                ? 'assets/mindMap/dynamicsLandScope.jpeg'
+                                : 'assets/mindMap/emTheoryLandScope.jpeg',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -126,36 +126,7 @@ class TheoryListView extends StatelessWidget {
   }
 }
 
-class FullscreenImagePage extends StatelessWidget {
-  final String imageAsset;
 
-  const FullscreenImagePage({Key? key, required this.imageAsset}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: GestureDetector(
-        onTap: () => Navigator.pop(context), // タップで戻る
-        child: Center(
-          child: InteractiveViewer(
-            panEnabled: true, // 移動
-            scaleEnabled: true, // 拡大縮小
-            child: Image.asset(
-              imageAsset,
-              fit: BoxFit.contain, // 画面に収まるよう比率維持
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
-
-
-// --- TopicDetailPage の簡潔版（_ensureScrollableHtml を使わない） ---
 class TopicDetailPage extends StatelessWidget {
   final TheoryTopic topic;
 
@@ -167,17 +138,14 @@ class TopicDetailPage extends StatelessWidget {
     final s = rawHtml.trim();
     final lower = s.toLowerCase();
     if (lower.startsWith('<!doctype') || lower.startsWith('<html')) {
-      final bodyMatch = RegExp(r'<body[^>]*>([\\s\\S]*?)<\\/body>', caseSensitive: false)
+      final bodyMatch = RegExp(r'<body[^>]*>([\s\S]*?)<\/body>', caseSensitive: false)
           .firstMatch(s);
       if (bodyMatch != null) return bodyMatch.group(1) ?? '';
-      // body が見つからないが html タグはあるなら html の中身を抽出
-      final htmlMatch = RegExp(r'<html[^>]*>([\\s\\S]*?)<\\/html>', caseSensitive: false)
+      final htmlMatch = RegExp(r'<html[^>]*>([\s\S]*?)<\/html>', caseSensitive: false)
           .firstMatch(s);
       if (htmlMatch != null) return htmlMatch.group(1) ?? '';
-      // fallback: 全文を返す（安全策）
       return s;
     } else {
-      // 既に断片（期待される形式）ならそのまま
       return s;
     }
   }
@@ -192,10 +160,71 @@ class TopicDetailPage extends StatelessWidget {
         title: Text(topic.title.replaceAll(RegExp(r'\$.*?\$'), "")),
       ),
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
-          child: LatexWebView(
-            latexHtml: bodyFragment,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // --- 画像表示（タップで全画面） ---
+              if (topic.imageAsset != null && topic.imageAsset!.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => FullscreenImagePage(imageAsset: topic.imageAsset!),
+                        ),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: FractionallySizedBox(
+                        widthFactor: 0.58, // 画面幅の58%
+                        child: AspectRatio(
+                          aspectRatio: 16 / 9,
+                          child: Image.asset(
+                            topic.imageAsset!,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              // --- MathJax 表示 ---
+              LatexWebView(
+                latexHtml: bodyFragment,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// --- 全画面表示ページ ---
+class FullscreenImagePage extends StatelessWidget {
+  final String imageAsset;
+
+  const FullscreenImagePage({Key? key, required this.imageAsset}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: GestureDetector(
+        onTap: () => Navigator.pop(context),
+        child: Center(
+          child: InteractiveViewer(
+            panEnabled: true,
+            scaleEnabled: true,
+            child: Image.asset(
+              imageAsset,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
       ),

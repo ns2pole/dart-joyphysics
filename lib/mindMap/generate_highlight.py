@@ -37,12 +37,18 @@ for idx, node in enumerate(nodes):
         print(f"スキップ: index {idx+1}")
         continue
 
+   # 保存ディレクトリを作成
+    asset_dir = os.path.join(os.path.dirname(__file__), "../../assets/mindMap/forTopics")
+    os.makedirs(asset_dir, exist_ok=True)
+
     # 保存ファイル名を決定
     if label:
         filename = f"{label}.png"
     else:
         filename = f"highlighted_node_{idx+1}.png"
-    output_path = os.path.join(os.path.dirname(__file__), filename)
+
+    output_path = os.path.join(asset_dir, filename)
+
 
     # ハイライト用レイヤー作成
     highlight = Image.new("RGBA", img.size, (0, 0, 0, 0))

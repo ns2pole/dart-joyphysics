@@ -104,6 +104,8 @@ flutter:
     - assets/dynamicsTheory/
     - assets/electroMagnetismTheory/
     - assets/electroMagnetismDetail/
+    - assets/mindMap/
+    - assets/mindMap/forTopics/
     - assets/icon/
     - assets/fonts/
     - assets/others/

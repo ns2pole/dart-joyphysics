@@ -31,16 +31,17 @@ class Video {
   Image getImage() => Image.asset(assetPath);
 }
 
-
 class TheoryTopic {
   final String title;
   final String latexContent;
   final bool isNew;
+  final String? imageAsset; // ここを追加
 
   TheoryTopic({
     required this.title,
     required this.latexContent,
     this.isNew = false,
+    this.imageAsset, // コンストラクタにも追加
   });
 }
 

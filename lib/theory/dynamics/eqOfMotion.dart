@@ -3,6 +3,7 @@ import '../../model.dart';
 final eqOfMotion = TheoryTopic(
   title: '質点の運動について',
   isNew: false,
+  imageAsset: 'assets/mindMap/forTopics/eqOfMotion.png', // 実際の画像パス
   latexContent: r"""
 
 <div class="theory-common-box">用語の定義（簡潔）</div>
