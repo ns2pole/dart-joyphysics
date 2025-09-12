@@ -1,7 +1,7 @@
 import '../../model.dart';
 
 final permeability = TheoryTopic(
-  title: '磁化, 磁化率(磁気感受率), 透磁率, 比透磁率',
+  title: '磁化, 磁化率, 透磁率, 比透磁率',
   latexContent: r"""
 
 <div class="theory-common-box">定義（真空の透磁率：\(\mu_0\)）</div>
@@ -30,26 +30,47 @@ final permeability = TheoryTopic(
 単位体積あたりの磁気双極子モーメントを磁化ベクトルといい、\(\vec M\)で表すこととする。
 </p>
 
-<div class="theory-common-box">定義（磁気感受率：\(\chi_m\)）</div>
-<p>
-線形等方媒質
-\vec M = \chi_m \mu_0 \vec H
-</p>
-
 <div class="theory-common-box">定義（磁場：\(\vec H \)）</div>
 磁場\(\vec H\)を磁束密度 \(\vec B\) と電場と磁化ベクトル \(\vec M\) を用いて下記で定義する。
 \[
 \vec H = \frac {\vec B - \vec M}{\mu_0}
 \]
 
+
+
+<div class="theory-common-box">命題（真空における関係式）：
+真空では磁束密度 \(\vec B\) と磁場の強さ \(\vec H\) との関係は下記の通り。
+\[
+\vec B = \mu_0 \vec H
+\]
+</div>
+<div class="proof-box">証明</div><p>
+真空中では、磁化は起きないので、$\vec {M}= \vec 0\ $となる。よって、
+\begin{aligned}
+&\vec H = \frac {\vec B}{\mu_0} \\[5pt]
+\Leftrightarrow &  \vec B =  \mu_0 \vec H
+\end{aligned}
+　Q.E.D
+
+<div class="theory-common-box">定義（磁化率：\(\chi_m\)）</div>
+<p>
+磁場をかけたときに線形に磁化ベクトルが生じる場合、磁化ベクトルは下記のように表すことができる。
+\[
+\vec M = \chi_m\,\mu_0\,\vec H
+\]
+ここで \(\chi_m\) は磁化率(または磁気感受率)といい、媒質中の電子や原子の磁気応答の強さを表す。
+</p>
+
+
+
 <div class="theory-common-box">定理（線形等方媒質における関係式）</div>
-線形等方媒質では、磁束密度$\vec B$は磁化 \( \vec {P_m}\) と磁場$\vec H$を用いて
+線形等方媒質では、磁束密度$\vec B$は磁化 \( \vec {M}\) と磁場$\vec H$を用いて
 \(\vec B=\mu_0( 1 + \chi_m\,)\vec H\) となる。
 <p>
 <div class="proof-box">証明</div>
-線形等方媒質では、磁束密度の式\( \vec B = \mu_0 \vec H + \vec {P_m} \)と磁化率の式$\displaystyle \vec {P_m} = \chi_m\,\mu_0\,\vec H$をを合わせると、
+線形等方媒質では、磁束密度の式\( \vec B = \mu_0 \vec H + \vec {M} \)と磁化率の式$\displaystyle \vec {M} = \chi_m\,\mu_0\,\vec H$をを合わせると、
 \begin{aligned}
-\vec B &= \mu_0 \vec H+\vec {P_m} \\[5pt]
+\vec B &= \mu_0 \vec H+\vec {M} \\[5pt]
 &= \mu_0( 1 + \chi_m\,) \vec H \\[5pt]
 \end{aligned}
 が得られる。
@@ -72,25 +93,16 @@ $\mu_0(1+\chi_m)$を(この線形等方媒質の)透磁率といい単に$\mu$�
 
 <div class="theory-common-box">命題（線形媒質中の磁場$\vec H$）：線形媒質の時、上の透磁率、比透磁率の定義を用いると磁束密度$\vec B$は、磁場の強さ$\vec H$を用いて下記のように表すことが出来る。
 \[
-\displaystyle \vec B = \mu \vec H = \mu_r \mu_0 \vec H
+\displaystyle \vec B = \mu_r \mu_0 \vec H
 \]
 </div>
 <p><div class="proof-box">証明</div>
-線形媒質の場合、$\vec B = \mu \vec H$であるが、比透磁率の定義より、$\mu = \mu_r \mu_0 $なので、
-$\displaystyle \vec B = \mu \vec H = \mu_r \mu_0 \vec H$となる。　Q.E.D
+線形媒質の場合、$\vec B = \mu \vec H\ $であるが、比透磁率の定義より、$\mu = \mu_r \mu_0\  $なので、
+$\displaystyle \vec B = \mu \vec H = \mu_r \mu_0 \vec H\ $となる。　Q.E.D
 </p>
 
 
 
-<div class="theory-common-box">命題（真空における関係式）：
-真空では磁束密度 \(\vec B\) と磁場の強さ \(\vec H\) との関係は下記の通り。
-\[
-\vec B = \mu_0 \vec H
-\]
-</div>
-<div class="proof-box">証明</div><p>
-真空中では、磁化は起きないので、$\vec {P_m}= \vec 0\ $となり直ちに命題の式を得る。
-Q.E.D
 </p>
 """,
 );

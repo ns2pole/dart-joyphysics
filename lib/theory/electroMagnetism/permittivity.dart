@@ -81,5 +81,17 @@ final permittivity = TheoryTopic(
 \]
 を比誘電率という。真空では \(\varepsilon_r=1\) である。
 </p>
+
+
+<div class="theory-common-box">命題（線形媒質中の電場$\vec E$）：線形媒質の時、上の透磁率、比透磁率の定義を用いると磁束密度$\vec B$は、磁場の強さ$\vec H$を用いて下記のように表すことが出来る。
+\[
+\displaystyle \vec D = \varepsilon_r \varepsilon_0 \vec E
+\]
+</div>
+<p><div class="proof-box">証明</div>
+線形媒質の場合、$\vec D = \varepsilon \vec E\ $であるが、比透磁率の定義より、$\varepsilon = \varepsilon_r \varepsilon_0\  $なので、
+$\displaystyle \vec D = \varepsilon \vec E = \varepsilon_r \varepsilon_0 \vec E\ $となる。　Q.E.D
+</p>
+
 """,
 );

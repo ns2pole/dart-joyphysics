@@ -146,39 +146,39 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         ampereMaxwellLaw
       ],
     ),
-    TheorySubcategory(
-      name: '双極子',
-      topics: [
-        magneticDipole,
-      ],
-    ),
+    // TheorySubcategory(
+    //   name: '双極子',
+    //   topics: [
+    //     magneticDipole,
+    //   ],
+    // ),
     TheorySubcategory(
       name: '物質中の電場と磁場',
       topics: [
         permittivity,
         permeability,
-        permittivityAndPermeabilityTable
+        // permittivityAndPermeabilityTable
       ],
     ),
-    TheorySubcategory(
-      name: '物質中のマクスウェル方程式',
-      topics: [
-        electoricGaussLawInMatter,
-        ampereMaxwellLawInMatter
-      ],
-    ),
-    TheorySubcategory(
-      name: '電荷が作る電場',
-      topics: [
-        electricDipole,
-      ],
-    ),
+    // TheorySubcategory(
+    //   name: '物質中のマクスウェル方程式',
+    //   topics: [
+    //     electoricGaussLawInMatter,
+    //     ampereMaxwellLawInMatter
+    //   ],
+    // ),
+    // TheorySubcategory(
+    //   name: '電荷が作る電場',
+    //   topics: [
+    //     electricDipole,
+    //   ],
+    // ),
     TheorySubcategory(
       name: '定常電流が作る磁場',
       topics: [
         infiniteStraightCurrent,
         solenoidMagneticFieldProp,
-        electricDipole
+        // electricDipole
       ],
     ),
     TheorySubcategory(
@@ -187,11 +187,11 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         lorentzForceAndCircleMove,
       ],
     ),
-    TheorySubcategory(
-      name: 'その他',
-      topics: [
-        rightHandRule,
-      ],
-    ),
+    // TheorySubcategory(
+    //   name: 'その他',
+    //   topics: [
+    //     rightHandRule,
+    //   ],
+    // ),
   ],
 };
