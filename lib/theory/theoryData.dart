@@ -157,7 +157,7 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       topics: [
         permittivity,
         permeability,
-        // permittivityAndPermeabilityTable
+        permittivityAndPermeabilityTable
       ],
     ),
     // TheorySubcategory(

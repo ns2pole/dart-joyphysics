@@ -61,13 +61,47 @@ table.material-table th + th {
   margin-bottom: 4px;
 }
 
+
+  .full-row {
+    text-align: center;
+    padding: 6px 0;               /* 行の高さを調整（小さめ） */
+    background: #f2f2f2;          /* 薄いグレーの背景 */
+    color: #555;                  /* 文字色をやや灰色に */
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;               /* 高さを詰める */
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+  }
+  /* 強調の余白を更に小さくしたければ */
+  .full-row strong { display:inline-block; margin:0; padding:0; }
+
 </style>
 
 
 <table class="material-table" cellspacing="0" cellpadding="4">
   <tr>
-    <th>電場側（項目・式）</th>
-    <th>磁場側（項目・式）</th>
+    <th>電場,誘電分極</th>
+    <th>磁場,磁化</th>
+  </tr>
+
+  <tr>
+    <td>
+      <span class="item-title">電束密度 (χ<sub>e</sub>)</span>
+      <span class="formula">\(\displaystyle \vec{D}=\varepsilon_{0}\,\vec{E} + \vec{P}\)</span>
+    </td>
+    <td>
+      <span class="item-title">磁束密度 (χ<sub>m</sub>)</span>
+      <span class="formula">\(\displaystyle \vec{B}=\mu_0\vec{H}+\vec{M}\)</span>
+    </td>
+  </tr>
+  <!-- ←ここに挿入 -->
+  
+
+  <tr class="full-row">
+    <td colspan="2">
+      <strong>線形応答の物質の場合</strong>
+    </td>
   </tr>
 
   <tr>
@@ -108,11 +142,11 @@ table.material-table th + th {
   <tr>
     <td>
       <span class="item-title">真空の誘電率 (ε<sub>0</sub>)</span>
-      <span class="formula">約\(\displaystyle  8.85\times10^{-12}\ \mathrm{F/m}\)</span>
+      <span class="formula">約\(\ \displaystyle  8.85\times10^{-12}\ \mathrm{F/m}\)</span>
     </td>
     <td>
       <span class="item-title">真空の透磁率 (μ<sub>0</sub>)</span>
-      <span class="formula">約\(\displaystyle  1.26\times10^{-6}\ \mathrm{H/m}\)</span>
+      <span class="formula">約\(\ \displaystyle  4 \pi \times10^{-7}\ \mathrm{H/m}\)</span>
     </td>
   </tr>
 
@@ -130,14 +164,15 @@ table.material-table th + th {
 <div class="explain">
   <h4>説明（箇条書き）</h4>
   <ul>
+    <li>電束密度は一般には \(\vec{D}=\varepsilon_0\vec{E} + \vec P\)線形応答の物質の場合 \(\vec{D}=\varepsilon\vec{E}\)</li>
     <li>\(\vec{P}\)：単位体積あたりの電気双極子モーメント密度（分極）。線形媒質では \(\vec{P}=\chi_{e}\varepsilon_{0}\vec{E}\)</li>
     <li>\(\chi_{e}\)：電気感受率（無次元）。\(\varepsilon=\varepsilon_{0}(1+\chi_{e})\) により誘電率と結びつく。</li>
-    <li>\(\varepsilon\)：誘電率（F/m）。電束密度は \(\vec{D}=\varepsilon\vec{E}\)</li>
     <li>\(\varepsilon_{r}=\displaystyle \frac{\varepsilon}{\varepsilon_{0}}\)：比誘電率（無次元）</li>
-    <li>\(\vec{P}_{m}\)：磁気分極。定義は \(\vec{P}_{m}=\vec{B}-\mu_{0}\vec{H}=\mu_{0}\vec{M}\)</li>
+    <br>
     <li>\(\chi_{m}\)：磁化率（無次元）。線形媒質では \(\vec{M}=\chi_{m}\vec{H}\)</li>
     <li>\(\mu\)：透磁率（H/m）。磁束密度は \(\vec{B}=\mu\vec{H}\)</li>
     <li>\(\mu_{r}=でぃs\displaystyle \frac{\mu}{\mu_{0}}\)：比透磁率（無次元）</li>
+    <br>
     <li>光速は真空定数 \(\varepsilon_{0},\mu_{0}\) から決まる：\(c=\displaystyle\displaystyle \frac {1}{\sqrt{\varepsilon_{0}\mu_{0}}}\)</li>
     <li>媒質中の位相速度は \(v=\displaystyle\displaystyle \frac{1}{\sqrt{\varepsilon\mu}}=\displaystyle \frac{c}{\sqrt{\varepsilon_{r}\mu_{r}}}\)（線形・等方媒質の場合）</li>
     <li>注：ここでは線形・等方媒質を仮定している。実際には分散・損失・異方性・非線形性がある。</li>
