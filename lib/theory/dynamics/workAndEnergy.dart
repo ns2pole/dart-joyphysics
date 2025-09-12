@@ -3,6 +3,7 @@ import '../../model.dart';
 final workAndEnergy = TheoryTopic(
   title: '仕事とエネルギー',
   isNew: false,
+  imageAsset: 'assets/mindMap/forTopics/workAndEnergy.png',
   latexContent: r"""
 
 <div class="theory-common-box">運動エネルギーの定義</div>
