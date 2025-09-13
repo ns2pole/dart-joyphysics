@@ -6,9 +6,9 @@ final magneticDipole = TheoryTopic(
 
 <div class="theory-common-box">命題：単一磁荷が作る場（磁荷モデル）</div>
 <p>
-磁荷モデルを仮定するならば、点磁荷 \(q_m\) が位置 \(\vec r_q\) に存在するときに作る磁場は逆二乗則の場として表される：
+磁荷モデルを仮定するならば、点磁荷 \( \displaystyle q_m\) が位置 \( \displaystyle \vec r_q\) に存在するときに作る磁場は逆二乗則の場として表される：
 \[
-\vec B_{q}(\vec r) = \frac{\mu_0}{4\pi}\, q_m\frac{\vec r-\vec r_q}{|\vec r-\vec r_q|^3}.
+\vec B_{q}(\vec r) = \frac{\mu_0}{4\pi}\, q_m\frac{\vec r-\vec r_q}{|\vec r-\vec r_q|^3}
 \]
 ※ 実際には、磁荷は未だ未発見なため、このモデルは便宜的・概念的な扱いであることに注意。
 </p>
@@ -30,60 +30,60 @@ r^{-3} \left( 1 - 3 \frac{\hat r \cdot \vec \epsilon}{r} \right),
 &=\bigl(r^2+2 \vec v \cdot \vec \epsilon+ \epsilon^2 \bigr) ^{-\frac 2 3}\\[6pt]
 &=\Biggl(r^{2}\Bigl(1+2 \frac {\vec v \cdot \vec \epsilon}{r^2}+ \frac {\epsilon^2}{r^2} \Bigr)\Biggr) ^{-\frac 2 3}\\[6pt]
 &=r^{-3} \Bigl(1+2 \frac {\vec v \cdot \vec \epsilon}{r^2}+ \frac {\epsilon^2}{r^2} \Bigr) ^{-\frac 2 3}\\[6pt]
-&=r^{-3} \Bigl(1+x \Bigr) ^{-\frac 2 3}\ \ ;\ \ x:=2\frac{\vec r\cdot\vec\epsilon}{r^2}+\frac{\epsilon^2}{r^2}.
+&=r^{-3} \Bigl(1+x \Bigr) ^{-\frac 2 3}\ \ ;\ \ x:=2\frac{\vec r\cdot\vec\epsilon}{r^2}+\frac{\epsilon^2}{r^2}
 \end{aligned}
 
 二項展開の一次まで取ると
 \[
-(1+x)^{-3/2}\fallingdotseq 1-\frac{3}{2}x.
+(1+x)^{-3/2}\fallingdotseq 1-\frac{3}{2}x
 \]
 
 したがって
 \begin{aligned}
 |\vec r+\vec\epsilon|^{-3}&\fallingdotseq r^{-3}\Bigl(1-\frac{3}{2}\Bigl(2\frac{\vec r\cdot\vec\epsilon}{r^2}+\frac{\epsilon^2}{r^2}\Bigr)\Bigr)\\[6pt]
-&= r^{-3}\Bigl(1-3\frac{\vec r\cdot\vec\epsilon}{r^2}-\frac{3}{2}\frac{\epsilon^2}{r^2}\Bigr).
+&= r^{-3}\Bigl(1-3\frac{\vec r\cdot\vec\epsilon}{r^2}-\frac{3}{2}\frac{\epsilon^2}{r^2}\Bigr)
 \end{aligned}
 さらに、 $\epsilon$ の1次まで残すと
 \[
 |\vec r+\vec\epsilon|^{-3}\fallingdotseq r^{-3}\Bigl(1-3\frac{\vec r\cdot\vec\epsilon}{r^2}\Bigr)
-\Bigr).
+\Bigr)
 \]
 Q.E.D
 </p>
 
 <div class="theory-common-box">命題（磁荷モデルによる磁気双極子の作る磁場）：
-大きさが等しく符号が反対の磁荷 \(\pm q_m\)が、位置$\displaystyle \pm \frac {1}{2} {\vec d}$に存在する時、\(|\vec d|\ll |\vec r|\) の位置における磁場は下記で近似できる。
+大きさが等しく符号が反対の磁荷 \( \displaystyle \pm q_m\)が、位置$\displaystyle \pm \frac {1}{2} {\vec d}$に存在する時、\( \displaystyle |\vec d|\ll |\vec r|\) の位置における磁場は下記で近似できる。
 \[
 \vec B(\vec r)=\frac{\mu_0}{4\pi r^3}\Bigl(-\vec m + 3(\vec m\cdot\hat r)\hat r\Bigr),
 \]
-ただし \(\vec m=q_m\vec d\), \(r=|\vec r|,\ \hat r=\displaystyle \frac{\vec r}{r}\) である。</div>
+ただし \( \displaystyle \vec m=q_m\vec d\), \( \displaystyle r=|\vec r|,\ \hat r=\displaystyle \frac{\vec r}{r}\) である。</div>
 <div class="paragraph-box">証明</div>
 <p>
 2つの磁荷による合成磁場は
 \[
-\vec B(\vec r) = \vec B_+ + \vec B_- = \frac{\mu_0}{4\pi} q_m \left( \frac{\vec r - \frac{1}{2}\vec d}{|\vec r - \frac{1}{2}\vec d|^3} - \frac{\vec r + \frac{1}{2}\vec d}{|\vec r + \frac{1}{2}\vec d|^3} \right).
+\vec B(\vec r) = \vec B_+ + \vec B_- = \frac{\mu_0}{4\pi} q_m \left( \frac{\vec r - \frac{1}{2}\vec d}{|\vec r - \frac{1}{2}\vec d|^3} - \frac{\vec r + \frac{1}{2}\vec d}{|\vec r + \frac{1}{2}\vec d|^3} \right)
 \]
 
-上の近似評価の命題に、\(\vec \epsilon = \pm \vec d / 2\) を代入して計算を行うと、
+上の近似評価の命題に、\( \displaystyle \vec \epsilon = \pm \vec d / 2\) を代入して計算を行うと、
 \[
 \frac{1}{|\vec r \pm \frac{1}{2}\vec d|^3} \fallingdotseq \frac{1}{r^3} \left( 1 \mp 3 \frac{\vec r \cdot \vec d}{2 r^2} \right)
 \]
 となる。
 よって、$\displaystyle \vec r \mp \frac{1}{2}\vec d $を掛け合わせると
-これに分子 \(\vec r\mp\tfrac12\vec d\) を掛けた一次展開をそのまま書くと、
+これに分子 \( \displaystyle \vec r\mp\frac12\vec d\) を掛けた一次展開をそのまま書くと、
 \[
-\frac{\vec r-\tfrac12\vec d}{\bigl|\vec r-\tfrac12\vec d\bigr|^3}=\frac{\vec r}{r^3}-\frac{\vec d}{2r^3}+\frac{3(\vec r\cdot\vec d)\,\vec r}{2r^5}+O\!\Bigl(\frac{|\vec d|^2}{r^4}\Bigr),
+\frac{\vec r-\frac12\vec d}{\bigl|\vec r-\frac12\vec d\bigr|^3}=\frac{\vec r}{r^3}-\frac{\vec d}{2r^3}+\frac{3(\vec r\cdot\vec d)\,\vec r}{2r^5}+O\!\Bigl(\frac{|\vec d|^2}{r^4}\Bigr),
 \]
 \[
-\frac{\vec r+\tfrac12\vec d}{\bigl|\vec r+\tfrac12\vec d\bigr|^3}=\frac{\vec r}{r^3}+\frac{\vec d}{2r^3}-\frac{3(\vec r\cdot\vec d)\,\vec r}{2r^5}+O\!\Bigl(\frac{|\vec d|^2}{r^4}\Bigr).
+\frac{\vec r+\frac12\vec d}{\bigl|\vec r+\frac12\vec d\bigr|^3}=\frac{\vec r}{r^3}+\frac{\vec d}{2r^3}-\frac{3(\vec r\cdot\vec d)\,\vec r}{2r^5}+O\!\Bigl(\frac{|\vec d|^2}{r^4}\Bigr)
 \]
-差を取ると 0 次の項 \(\vec r/r^3\) は打ち消され、一次の項のみが残る：
+差を取ると 0 次の項 \( \displaystyle \vec r/r^3\) は打ち消され、一次の項のみが残る：
 \[
-\frac{\vec r-\tfrac12\vec d}{\bigl|\vec r-\tfrac12\vec d\bigr|^3}-\frac{\vec r+\tfrac12\vec d}{\bigl|\vec r+\tfrac12\vec d\bigr|^3}
-= -\frac{\vec d}{r^3}+\frac{3(\vec r\cdot\vec d)\,\vec r}{r^5}+O\!\Bigl(\frac{|\vec d|^2}{r^4}\Bigr).
+\frac{\vec r-\frac12\vec d}{\bigl|\vec r-\frac12\vec d\bigr|^3}-\frac{\vec r+\frac12\vec d}{\bigl|\vec r+\frac12\vec d\bigr|^3}
+= -\frac{\vec d}{r^3}+\frac{3(\vec r\cdot\vec d)\,\vec r}{r^5}+O\!\Bigl(\frac{|\vec d|^2}{r^4}\Bigr)
 \]
 
-この式の結果に係数 \(\dfrac{\mu_0}{4\pi}q_m\) を掛けたものが磁場であるので、$\displaystyle \vec m=q_m\vec d,\ \hat r=\frac {\vec r}{r}$とすると、結局
+この式の結果に係数 \( \displaystyle \dfrac{\mu_0}{4\pi}q_m\) を掛けたものが磁場であるので、$\displaystyle \vec m=q_m\vec d,\ \hat r=\frac {\vec r}{r}$とすると、結局
 \begin{aligned}
 &\ \ \vec B(\vec r)\\[6pt]
 &\fallingdotseq \frac{\mu_0 }{4\pi r^3} \Biggl( - {q_m \vec d}+\frac{3(\vec r\cdot\vec d)\,\vec r}{r^2}\Biggr)+O\!\Bigl(\frac{|\vec d|^3}{r^5}\Bigr)\\[5pt]
@@ -96,86 +96,389 @@ Q.E.D
 
 <div class="theory-common-box">定義（磁気双極子モーメント）</div>
 <p>
-円形電流ループに対して、磁気双極子モーメント \(\vec m\) を下記で定義する。
+平面のループに対して、磁気双極子モーメント \( \displaystyle \vec m\) を下記で定義する。
 \[
 \vec m = I\,\vec S
 \]
-ここで \(I\) はループ電流、\(\vec S\) はループの面積ベクトル（ベクトルの大きさは面積で、向きは右ねじの法則で定まる向き）である。
+ここで \( \displaystyle I\) はループ電流、\( \displaystyle \vec S\) はループの面積ベクトル（ベクトルの大きさは面積で、向きは右ねじの法則で定まる向き）である。
 </p>
 
 <div class="theory-common-box">例：円形ループの磁気モーメント</div>
 <p>
-半径 \(r\) の円形ループに電流 \(I\) が流れている時、電流ループの磁気モーメントは下記で与えられる。
+半径 \( \displaystyle r\) の円形ループに電流 \( \displaystyle I\) が流れている時、電流ループの磁気モーメントは下記で与えられる。
 \[
 \vec m = I \pi r^2\,\hat n
 \]
 </p>
 
-<div class="theory-common-box">命題：円形ループ電流に働くトルク</div>
-<p>
-閉じた電流ループが外部一様磁場 \(\vec B\) を受けるとき、ループが受けるトルク \(\boldsymbol{\tau}\) は下記となる。
+<!-- 命題：正方形・円形コイルのトルク（完全証明） -->
+<div class="theory-common-box">命題(正方形コイルに流れる電流に働くトルク)：辺長 \( \displaystyle a\) の正方形ループ（原点中心、xy 平面）に電流 \( \displaystyle I\) が流れており、一定磁場 \( \displaystyle \vec{B}=(B_x,B_y,B_z)\) のもとにある時、電流ループに働くトルクは下記で表される。
 \[
-\boldsymbol{\tau}=\vec m\times\vec B
-\]
-である。
-</p>
+\displaystyle \vec{\tau}=\vec{m}\times\vec{B},\ \ ; \ \ \vec{m}=I a^2\,\hat{k}
+\]</div>
 
 <div class="paragraph-box">証明</div>
-<p>
-微小線分に働く力はアンペール力の法則より \(d\vec F=I\,d\vec \ell\times\vec B\) である。トルクは
+
+<p>回路$C$について、トルクの一般式は</p>
 \[
-\boldsymbol{\tau}=\oint_{C}\vec r\times d\vec F=I\oint_{C}\vec r\times(d\vec\ell\times\vec B).
+\displaystyle \vec{\tau}=\oint_{C} \vec{r}\times\bigl(I\,d\vec{l}\times\vec{B}\bigr)
 \]
-ここで恒等式 \(\vec a\times(\vec b\times\vec c)=\vec b(\vec a\cdot\vec c)-\vec c(\vec a\cdot\vec b)\) を用いると
+<p>電流は原点から見て半時計回りに流れるものとし、辺を AB → BC → CD → DA の順に取る。各辺ごとに被積分関数を展開し、積分を取る。</p>
+
+<p><strong>辺 AB</strong>：\( \displaystyle y=-\frac{a}{2},\ x\in[-\frac{a}{2},\frac{a}{2}],\ d\vec{l}=dx\,\hat{i},\ \vec{r}=x\,\hat{i}-\frac{a}{2}\,\hat{j}\)</p>
 \[
-\vec r\times(d\vec\ell\times\vec B)=d\vec\ell\, (\vec r\cdot\vec B)-\vec B\, (\vec r\cdot d\vec\ell).
+\displaystyle d\vec{l}\times\vec{B}=dx\,\hat{i}\times(B_x\hat{i}+B_y\hat{j}+B_z\hat{k})
+=dx\,(B_y\hat{k}-B_z\hat{j})
 \]
-これを積分すると，第二項は閉路上での全微分の積分になり消える：\(\oint \vec r\cdot d\vec\ell=0\)。したがって
+次に
 \[
-\boldsymbol{\tau}=I\oint_{C}d\vec\ell\, (\vec r\cdot\vec B).
+\displaystyle \vec{r}\times(d\vec{l}\times\vec{B})
+=(x\hat{i}-\frac{a}{2}\hat{j})\times(B_y\hat{k}-B_z\hat{j})\,dx
 \]
-ここで補助恒等式（積分による部分積分に相当する操作）を使うと
+成分ごとに展開すると
 \[
-\oint_{C}d\vec\ell\, (\vec r\cdot\vec B)=\tfrac{1}{2}\Bigl(\oint_{C}\vec r\times d\vec r\Bigr)\times\vec B
+\begin{aligned}
+(x\hat{i})\times(B_y\hat{k}-B_z\hat{j})
+&=xB_y(\hat{i}\times\hat{k})-xB_z(\hat{i}\times\hat{j})\\
+&=xB_y(-\hat{j})-xB_z(\hat{k})=-xB_y\hat{j}-xB_z\hat{k},\\[6pt]
+\left(-\frac{a}{2}\hat{j}\right)\times(B_y\hat{k}-B_z\hat{j})
+&=-\frac{a}{2}B_y(\hat{j}\times\hat{k})+0=-\frac{a}{2}B_y\hat{i}
+\end{aligned}
 \]
-が成り立つ（証明：右辺を恒等式 \((\vec r\times d\vec r)\times\vec B=d\vec r\, (\vec r\cdot\vec B)-\vec r\, (d\vec r\cdot\vec B)\) により展開し，閉路上の全微分項が打ち消されることを利用する）。
-これを用いると
+したがって
 \[
-\boldsymbol{\tau}=I\cdot\tfrac{1}{2}\Bigl(\oint_{C}\vec r\times d\vec r\Bigr)\times\vec B.
+\displaystyle \vec{r}\times(d\vec{l}\times\vec{B})
+=dx\bigl(-\frac{a}{2}B_y\hat{i}-xB_y\hat{j}-xB_z\hat{k}\bigr)
 \]
-さらに面積ベクトルの定義 \(\vec S=\tfrac{1}{2}\oint_{C}\vec r\times d\vec r\) と \(\vec m=I\vec S\) を代入すると、最終的に
+これを \( \displaystyle x\) について積分すると（\( \displaystyle  x\) に比例する項は奇関数で消える）
 \[
-\boldsymbol{\tau}=\vec m\times\vec B
+\displaystyle \vec{\tau}_{AB}=I\int_{-a/2}^{a/2}\bigl(-\frac{a}{2}B_y\hat{i}-xB_y\hat{j}-xB_z\hat{k}\bigr)\,dx
+=I\bigl(-\frac{a^2}{2}B_y\hat{i}\bigr)
 \]
-が得られる。
-</p>
+
+<p><strong>辺 BC</strong>：\( \displaystyle  x=\frac{a}{2},\ y\in[-\frac{a}{2},\frac{a}{2}],\ d\vec{l}=dy\,\hat{j},\ \vec{r}=\frac{a}{2}\hat{i}+y\hat{j}\)</p>
+\[
+\displaystyle d\vec{l}\times\vec{B}=dy\,\hat{j}\times(B_x\hat{i}+B_y\hat{j}+B_z\hat{k})
+=dy\,(-B_x\hat{k}+B_z\hat{i})
+\]
+よって
+\[
+\displaystyle \vec{r}\times(d\vec{l}\times\vec{B})
+=(\frac{a}{2}\hat{i}+y\hat{j})\times(-B_x\hat{k}+B_z\hat{i})\,dy
+\]
+各項を計算すると
+\[
+\begin{aligned}
+(\frac{a}{2}\hat{i})\times(-B_x\hat{k})&=\frac{a}{2}B_x\hat{j},\\[4pt]
+(y\hat{j})\times(-B_x\hat{k})&=-yB_x\hat{i},\\[4pt]
+(y\hat{j})\times(B_z\hat{i})&=-yB_z\hat{k}
+\end{aligned}
+\]
+（\( \displaystyle \hat{i}\times\hat{i}=\hat{j}\times\hat{j}=0\) の項は省略）
+従って
+\[
+\displaystyle \vec{r}\times(d\vec{l}\times\vec{B})=dy\bigl(-yB_x\hat{i}+\frac{a}{2}B_x\hat{j}-yB_z\hat{k}\bigr)
+\]
+これを \( \displaystyle y\) で積分すると
+\[
+\displaystyle \vec{\tau}_{BC}=I\int_{-a/2}^{a/2}\bigl(-yB_x\hat{i}+\frac{a}{2}B_x\hat{j}-yB_z\hat{k}\bigr)\,dy
+=I\bigl(\frac{a^2}{2}B_x\hat{j}\bigr)
+\]
+
+<p><strong>辺 CD</strong>（\( \displaystyle y=+\frac{a}{2}\) を逆向きに進む）：AB と同様の計算で向きが反転する箇所を含めると</p>
+\[
+\displaystyle \vec{\tau}_{CD}=I\bigl(-\frac{a^2}{2}B_y\hat{i}\bigr)
+\]
+
+<p><strong>辺 DA</strong>（\( \displaystyle x=-\frac{a}{2}\) を逆向きに進む）：BC と同様に</p>
+\[
+\displaystyle \vec{\tau}_{DA}=I\bigl(\frac{a^2}{2}B_x\hat{j}\bigr)
+\]
+
+<p>以上を合算すると</p>
+\[
+\begin{aligned}
+\displaystyle \vec{\tau}
+&=\vec{\tau}_{AB}+\vec{\tau}_{BC}+\vec{\tau}_{CD}+\vec{\tau}_{DA}\\[6pt]
+&=I\Bigl(-\frac{a^2}{2}B_y\hat{i}+\frac{a^2}{2}B_x\hat{j}-\frac{a^2}{2}B_y\hat{i}+\frac{a^2}{2}B_x\hat{j}\Bigr)\\[6pt]
+&=I\bigl(-a^2B_y\hat{i}+a^2B_x\hat{j}\bigr)\\[6pt]
+&=I a^2\bigl(-B_y\hat{i}+B_x\hat{j}\bigr)
+\end{aligned}
+\]
+
+<p>磁気モーメントを \( \displaystyle  \vec{m}=I a^2\hat{k}\) とすると、右辺は \( \displaystyle \vec{m}\times\vec{B}\) と一致する。従って命題 1 は示された。 Q.E.D</p>
+
+<hr style="margin:1.0em 0;">
+
+<div class="theory-common-box">命題 2（円形コイル）：
+半径 \( \displaystyle R\) の円形ループ（原点中心、xy 平面）に電流 \( \displaystyle I\) が流れており、一定磁場 \( \displaystyle \vec{B}=(B_x,B_y,B_z)\) のもとにあるとする。このときループに働くトルクは
+\[
+\displaystyle \vec{\tau}=\vec{m}\times\vec{B},\qquad \vec{m}=I\pi R^2\,\hat{k}
+\]
+である。</div>
+
+<div class="paragraph-box">証明</div>
+
+<p>位置ベクトルを角度パラメータ \( \displaystyle \theta\) を用いて</p>
+\[
+\displaystyle \vec{r}(\theta)=R\cos\theta\,\hat{i}+R\sin\theta\,\hat{j},\qquad 0\le\theta<2\pi,
+\]
+と取り、微小線分は
+\[
+\displaystyle d\vec{l}=\frac{d\vec{r}}{d\theta}\,d\theta =(-R\sin\theta\,\hat{i}+R\cos\theta\,\hat{j})\,d\theta.
+\]
+
+<p>トルクは</p>
+\[
+\displaystyle \vec{\tau}=I\oint \vec{r}\times\bigl(d\vec{l}\times\vec{B}\bigr)
+=I\int_{0}^{2\pi}\vec{r}(\theta)\times\bigl(d\vec{l}(\theta)\times\vec{B}\bigr)
+\]
+
+<p>まず \( \displaystyle d\vec{l}\times\vec{B}\) を展開する：</p>
+\[
+\begin{aligned}
+\displaystyle d\vec{l}\times\vec{B}
+&=(-R\sin\theta\,\hat{i}+R\cos\theta\,\hat{j})\times(B_x\hat{i}+B_y\hat{j}+B_z\hat{k})\,d\theta\\[4pt]
+&= \Bigl[(-R\sin\theta)(B_x\hat{i}\times\hat{i})+(-R\sin\theta)(B_y\hat{i}\times\hat{j})+(-R\sin\theta)(B_z\hat{i}\times\hat{k})\\
+&\qquad +(R\cos\theta)(B_x\hat{j}\times\hat{i})+(R\cos\theta)(B_y\hat{j}\times\hat{j})+(R\cos\theta)(B_z\hat{j}\times\hat{k})\Bigr]\,d\theta\\[4pt]
+&= \bigl(R\sin\theta\,B_z\,\hat{j} + R\sin\theta\,B_y\,\hat{k} - R\cos\theta\,B_x\,\hat{k} - R\cos\theta\,B_z\,\hat{i}\bigr)\,d\theta,
+\end{aligned}
+\]
+（単位ベクトルの積 \( \displaystyle \hat{i}\times\hat{j}=\hat{k},\ \hat{j}\times\hat{i}=-\hat{k}\) 等を用いて整理した）
+
+<p>次に \( \displaystyle \vec{r}\times(d\vec{l}\times\vec{B})\) を求める。まずスカラー積を確認する：</p>
+\[
+\displaystyle \vec{r}\cdot\vec{B}=R\cos\theta\,B_x+R\sin\theta\,B_y,
+\qquad
+\displaystyle \vec{r}\cdot d\vec{l}=R\cos\theta(-R\sin\theta\,d\theta)+R\sin\theta(R\cos\theta\,d\theta)=0
+\]
+（\( \displaystyle \vec{r}\cdot d\vec{l}=0\) は円周上での接線と半径が直交することの表示）
+
+<p>ここでは三重積恒等式を使わず直接成分展開する。上で得た \( \displaystyle d\vec{l}\times\vec{B}\) を用いて：</p>
+\[
+\begin{aligned}
+\displaystyle \vec{r}\times(d\vec{l}\times\vec{B})
+&=(R\cos\theta\,\hat{i}+R\sin\theta\,\hat{j})\\
+&\qquad\times\bigl( -R\cos\theta\,B_z\,\hat{i} + R\sin\theta\,B_z\,\hat{j} + (R\sin\theta\,B_y - R\cos\theta\,B_x)\,\hat{k} \bigr)\,d\theta
+\end{aligned}
+\]
+（上の括弧内は前式を成分ごとに再整理したもの）
+
+<p>これを各項で計算する：</p>
+\[
+\begin{aligned}
+\displaystyle &(R\cos\theta\,\hat{i})\times\bigl(-R\cos\theta\,B_z\,\hat{i}\bigr)=0,\\[4pt]
+\displaystyle &(R\cos\theta\,\hat{i})\times\bigl(R\sin\theta\,B_z\,\hat{j}\bigr)
+=R^2\cos\theta\sin\theta\,B_z(\hat{i}\times\hat{j})=R^2\cos\theta\sin\theta\,B_z\,\hat{k},\\[4pt]
+\displaystyle &(R\cos\theta\,\hat{i})\times\bigl((R\sin\theta\,B_y - R\cos\theta\,B_x)\hat{k}\bigr)\\
+&\qquad=R^2\cos\theta\bigl(\sin\theta\,B_y - \cos\theta\,B_x\bigr)(\hat{i}\times\hat{k})\\
+&\qquad=R^2\cos\theta\bigl(\sin\theta\,B_y - \cos\theta\,B_x\bigr)(-\,\hat{j})\\
+&\qquad=-R^2\cos\theta\bigl(\sin\theta\,B_y - \cos\theta\,B_x\bigr)\hat{j},
+\end{aligned}
+\]
+および
+\[
+\begin{aligned}
+\displaystyle &(R\sin\theta\,\hat{j})\times\bigl(-R\cos\theta\,B_z\,\hat{i}\bigr)
+= -R^2\sin\theta\cos\theta\,B_z(\hat{j}\times\hat{i})\\
+&\qquad= -R^2\sin\theta\cos\theta\,B_z(-\hat{k})=R^2\sin\theta\cos\theta\,B_z\,\hat{k},\\[4pt]
+\displaystyle &(R\sin\theta\,\hat{j})\times\bigl(R\sin\theta\,B_z\,\hat{j}\bigr)=0,\\[4pt]
+\displaystyle &(R\sin\theta\,\hat{j})\times\bigl((R\sin\theta\,B_y - R\cos\theta\,B_x)\hat{k}\bigr)\\
+&\qquad=R^2\sin\theta\bigl(\sin\theta\,B_y - \cos\theta\,B_x\bigr)(\hat{j}\times\hat{k})\\
+&\qquad=R^2\sin\theta\bigl(\sin\theta\,B_y - \cos\theta\,B_x\bigr)\hat{i}
+\end{aligned}
+\]
+
+<p>以上を合算して、\( \displaystyle \vec{r}\times(d\vec{l}\times\vec{B})\) の空間ベクトル成分を整理すると（\( \displaystyle B_z\) に依存する \( \displaystyle \hat{k}\) 成分は上で打ち消される）：</p>
+\[
+\displaystyle \vec{r}\times(d\vec{l}\times\vec{B})
+= d\theta\,R^2\Bigl( -B_y\cos\theta\sin\theta + B_x\cos^2\theta \Bigr)\,\hat{i}
++ d\theta\,R^2\Bigl( -B_y\sin^2\theta + B_x\sin\theta\cos\theta \Bigr)\,\hat{j}
+\]
+
+<p>これを \( \displaystyle 0\) から \( \displaystyle 2\pi\) まで積分してトルク成分を得る。</p>
+
+<p><strong>(x 成分)</strong></p>
+\[
+\begin{aligned}
+\displaystyle \tau_x
+&=I\int_0^{2\pi} R^2\bigl(-B_y\cos\theta\sin\theta + B_x\cos^2\theta\bigr)\,d\theta\\[6pt]
+&=I R^2\Bigl(-B_y\int_0^{2\pi}\cos\theta\sin\theta\,d\theta + B_x\int_0^{2\pi}\cos^2\theta\,d\theta\Bigr)\\[6pt]
+&=I R^2\Bigl(-B_y\cdot 0 + B_x\cdot \pi\Bigr)\quad\Bigl(\int_0^{2\pi}\cos\theta\sin\theta\,d\theta=0,\ \int_0^{2\pi}\cos^2\theta\,d\theta=\pi\Bigr)\\[6pt]
+&=I\pi R^2 B_x
+\end{aligned}
+\]
+
+<p><strong>(y 成分)</strong></p>
+\[
+\begin{aligned}
+\displaystyle \tau_y
+&=I\int_0^{2\pi} R^2\bigl(-B_y\sin^2\theta + B_x\sin\theta\cos\theta\bigr)\,d\theta\\[6pt]
+&=I R^2\Bigl(-B_y\int_0^{2\pi}\sin^2\theta\,d\theta + B_x\int_0^{2\pi}\sin\theta\cos\theta\,d\theta\Bigr)\\[6pt]
+&=I R^2\Bigl(-B_y\cdot \pi + B_x\cdot 0\Bigr)\quad\Bigl(\int_0^{2\pi}\sin^2\theta\,d\theta=\pi,\ \int_0^{2\pi}\sin\theta\cos\theta\,d\theta=0\Bigr)\\[6pt]
+&=-I\pi R^2 B_y
+\end{aligned}
+\]
+
+<p><strong>(z 成分)</strong>：上の計算より明らかに \( \displaystyle \tau_z=0\)</p>
+
+<p>したがって</p>
+\[
+\displaystyle \vec{\tau}=I\pi R^2\bigl(-B_y\hat{i}+B_x\hat{j}\bigr)
+\]
+磁気モーメント \( \displaystyle \vec{m}=I\pi R^2\hat{k}\) を用いると、右辺は \( \displaystyle \vec{m}\times\vec{B}\) と一致する。よって命題 2 が示された。　Q.E.D</p>
+
+<hr style="margin:1.0em 0;">
+
+
+
 
 <div class="theory-common-box">命題：遠方の磁場は双極子場に一致する</div>
 <p>
-円形電流ループが作る磁場は、観測点がループから十分遠い(（\r\gg\)ループサイズ)ならば、磁気双極子場の形に近似できる。
+円形電流ループが作る磁場は、観測点がループから十分遠い(（\r \gg \)ループサイズ)ならば、磁気双極子場の形に近似できる。
 </p>
 
-<div class="paragraph-box">証明（ベクトルポテンシャルを使わない Biot–Savart 展開のスケッチ）</div>
+<div class="proof-box">証明</div>
 <p>
-ループ電流が作る磁場は Biot–Savart の法則で与えられる：
+Biot–Savart の法則を用いる。円形電流（原点中心、半径 \(a\)、ループ面は \(xy\)-平面、電流 \(I\)）が作る磁場は
 \[
-\vec B(\vec r)=\frac{\mu_0 I}{4\pi}\oint_C \frac{d\vec\ell'\times(\vec r-\vec r')}{|\vec r-\vec r'|^3},
+\begin{aligned}
+\vec{B}(\vec r)
+&= \displaystyle \frac{\mu_0 I}{4\pi}\oint_{\mathcal C}\frac{d\boldsymbol\ell'\times(\vec r-\vec r')}{|\vec r-\vec r'|^3},
+\end{aligned}
 \]
-ここで \(\vec r'\) はループ上の積分変数（ループ内位置）、\(\vec r\) は観測点を表す。遠方 \(r\gg |\vec r'|\) を仮定し、分母の逆三乗を多項展開する：
-\[
-\frac{1}{|\vec r-\vec r'|^3}=\frac{1}{r^3}\Bigl(1-3\frac{\vec r\cdot\vec r'}{r^2}+O\bigl((r'/r)^2\bigr)\Bigr).
-\]
-分子は \(d\vec\ell'\times(\vec r-\vec r')=d\vec\ell'\times\vec r - d\vec\ell'\times\vec r'\) と分けられる。これらを展開して積分し、以下の事実を利用する：
-\begin{itemize}
-  \item 閉曲線上の線素の和は零： \(\displaystyle\oint_C d\vec\ell'=\vec0\)。
-  \item 面積ベクトルはループ積分で表せる： \(\displaystyle\vec S=\tfrac{1}{2}\oint_C \vec r'\times d\vec\ell'\)（したがって \(\displaystyle\oint_C \vec r'\times d\vec\ell' = 2\vec S\)）。
-\end{itemize}
-主要な寄与（一次まで）を残して整理すると、角度依存性を持つ双極子項が現れる。最終的に
-\[
-\vec B(\vec r)=\frac{\mu_0}{4\pi r^3}\Bigl(3(\vec m\cdot\hat r)\hat r-\vec m\Bigr)+O\bigl(r^{-4}\bigr),
-\]
-が得られる。ここで磁気双極子モーメント \(\vec m\) は \(\vec m=I\vec S\) で与えられる。  
-</p>
+で与えられる。ここで観測点 \(\displaystyle \vec r\) はループから十分遠い（\(\displaystyle r:=|\vec r|\gg a\)）とする。
 
+次にカーネル（積分核）を \(\displaystyle \vec r'\) に関して遠方展開と、テイラー展開の命題より、
+積分核
+\(\displaystyle \dfrac{\vec r-\vec r'}{|\vec r-\vec r'|^3}\)
+については\(\displaystyle \hat{\vec r}=\frac{\vec r}{r} \)として、
+\[
+\begin{aligned}
+\frac{\vec r-\vec r'}{|\vec r-\vec r'|^3}
+&= \displaystyle \frac{\hat{\vec r}}{r^2} + \frac{3\hat{\vec r}(\hat{\vec r}\cdot\vec r')-\vec r'}{r^3} + O\!\Bigl(\frac{r'^2}{r^4}\Bigr)
+\end{aligned}
+\]
+Biot–Savartの式は
+\[
+\begin{aligned}
+\vec B(\vec r)
+&= \displaystyle \frac{\mu_0 I}{4\pi}\oint_{\mathcal C}\! d\boldsymbol\ell'\times\left[
+\frac{\hat{\vec r}}{r^2} + \frac{3\hat{\vec r}(\hat{\vec r}\cdot\vec r')-\vec r'}{r^3} + O\!\Bigl(\frac{r'^2}{r^4}\Bigr)
+\right]
+\end{aligned}
+\]
+である。これを展開すると
+\[
+\begin{aligned}
+\vec B(\vec r)
+&= \displaystyle \frac{\mu_0 I}{4\pi}\left[
+\frac{1}{r^2}\oint_{\mathcal C} d\boldsymbol\ell'\times\hat{\vec r}
++\frac{1}{r^3}\oint_{\mathcal C} d\boldsymbol\ell'\times\big(3\hat{\vec r}(\hat{\vec r}\cdot\vec r')-\vec r'\big)
++O\!\Bigl(\frac{a^2}{r^4}\Bigr)
+\right].
+\end{aligned}
+\]
+
+第1項は閉曲線の線素の総和に依るもので、閉曲線上の線素の総和はゼロであるため消える：
+\[
+\begin{aligned}
+\oint_{\mathcal C} d\boldsymbol\ell' &= \displaystyle \vec 0
+\quad\Longrightarrow\quad
+\oint_{\mathcal C} d\boldsymbol\ell'\times\hat{\vec r}=\vec 0.
+\end{aligned}
+\]
+したがって主たる寄与は第2項である。
+
+以降は円形ループの具体的パラメータ表示を使って第2項を評価する。ループを角変数 \(\displaystyle \varphi\in[0,2\pi)\) で
+\[
+\begin{aligned}
+\vec r'(\varphi) &= \displaystyle a(\cos\varphi,\ \sin\varphi,\ 0),\\[4pt]
+d\boldsymbol\ell'(\varphi) &= \displaystyle a(-\sin\varphi,\ \cos\varphi,\ 0)\,d\varphi
+\end{aligned}
+\]
+と表す。観測方向を \(\displaystyle \hat{\vec r}=(n_x,n_y,n_z)\) と書くと（定数ベクトル）、被積分子
+\[
+\begin{aligned}
+\vec J(\varphi)
+&:= \displaystyle d\boldsymbol\ell'(\varphi)\times\big(3\hat{\vec r}(\hat{\vec r}\cdot\vec r'(\varphi))-\vec r'(\varphi)\big)
+\end{aligned}
+\]
+は成分ごとに計算可能である。まず内積
+\[
+\begin{aligned}
+\hat{\vec r}\cdot\vec r'(\varphi)
+&= \displaystyle a\bigl(n_x\cos\varphi+n_y\sin\varphi\bigr).
+\end{aligned}
+\]
+したがって
+\[
+\begin{aligned}
+&\ \ 3\hat{\vec r}(\hat{\vec r}\cdot\vec r'(\varphi))-\vec r'(\varphi)\\[6pt]
+&= \displaystyle a\Bigl(3\hat{\vec r}(n_x\cos\varphi+n_y\sin\varphi)-(\cos\varphi,\sin\varphi,0)\Bigr).
+\end{aligned}
+\]
+これと \(\displaystyle d\boldsymbol\ell'(\varphi)=a(-\sin\varphi,\cos\varphi,0)\,d\varphi\) を外積し、角度 \(\varphi\) で積分すると、各三角関数の既知の積分を用いて
+\[
+\begin{aligned}
+\oint_{\mathcal C}\vec J(\varphi)
+&= \displaystyle a^2\pi\begin{pmatrix}3 n_x n_z\\[4pt] 3 n_y n_z\\[4pt] 3 n_z^2-1\end{pmatrix}.
+\end{aligned}
+\]
+<br>
+この結果はベクトル形式で簡潔に書くと
+\[
+\begin{aligned}
+\oint_{\mathcal C} d\boldsymbol\ell'\times\big(3\hat{\vec r}(\hat{\vec r}\cdot\vec r')-\vec r'\big)
+&= \displaystyle \pi a^2\big(3\hat{\vec r}(\hat{\vec r}\cdot\hat{\vec z})-\hat{\vec z}\big),
+\end{aligned}
+\]
+である（ここで \(\displaystyle \hat{\vec z}\) はループ法線方向）。
+<br>
+一方、円形ループの磁気モーメント$\vec m$ は定義により
+\begin{aligned}
+& \vec m = \displaystyle \pi a^2 I\hat{\vec z}\\[5pt]
+\Leftrightarrow & \hat{\vec z} = \vec m \displaystyle \frac{I}{\pi a^2}
+\end{aligned}
+を用いると、
+\begin{aligned}
+&\ \oint_{\mathcal C} d\boldsymbol\ell'\times\big(3\hat{\vec r}(\hat{\vec r}\cdot\vec r')-\vec r'\big)\\[5pt]
+&= \displaystyle \frac{1}{I}\big(3\hat{\vec r}(\hat{\vec r}\cdot\vec m)-\vec m\big).
+\end{aligned}
+
+これを Biot–Savart の式に戻すと、主項は
+\[
+\begin{aligned}
+\vec B(\vec r)
+&= \displaystyle \frac{\mu_0 I}{4\pi}\cdot\frac{1}{r^3}\cdot\frac{1}{I}\big(3\hat{\vec r}(\hat{\vec r}\cdot\vec m)-\vec m\big) + O\!\Bigl(\frac{a^2}{r^4}\Bigr)\\[6pt]
+&= \displaystyle \frac{\mu_0}{4\pi}\,\frac{3\hat{\vec r}(\hat{\vec r}\cdot\vec m)-\vec m}{r^3}
++O\!\Bigl(\frac{a^2}{r^4}\Bigr).
+\end{aligned}
+\]
+すなわち
+\[
+\begin{aligned}
+\boxed{\displaystyle\,\vec B(\vec r)
+=\frac{\mu_0}{4\pi}\,\frac{3\hat{\vec r}(\hat{\vec r}\cdot\vec m)-\vec m}{r^3}
++O\!\Bigl(\frac{a^2}{r^4}\Bigr)\,}
+\end{aligned}
+\]
+が得られる。これが磁気双極子場の標準形であり、誤差項は四極子以上の高次多極成分に相当し、磁場では \(\displaystyle O(a^2/r^4)\) 程度である。　Q.E.D
+<div class="paragraph-box">補足</div><br>
+最後に軸上（\(\displaystyle \hat{\vec r}\parallel\vec m\)）の特殊例を示すと、\(\displaystyle \hat{\vec r}\cdot\vec m=|\vec m|\) だから
+\[
+\begin{aligned}
+&\ \ \  \vec B_{\text{axis}}(r)\\[5pt]
+&= \displaystyle \frac{\mu_0}{4\pi}\,\frac{2\vec m}{r^3}\\[5pt]
+&= \displaystyle \frac{\mu_0 I a^2}{2}\,\frac{\hat{\vec z}}{r^3}
+\end{aligned}
+\]
+となり、これは軸上の既知の \( \displaystyle r^{-3} \) 減衰を示す結果と一致する。
+</p>
 """,
 );
+// <div class="paragraph-box">一般性について</div>
+// <ul>
+//   <li>正方形・円形の両証明は具体的な形状に対して「三重積の恒等式を用いた一般議論」と同じ結論を直接示したものである。任意の閉ループ（有限の面積を持つ連続な境界）についても、均一な磁場中では同様に \( \displaystyle \displaystyle \vec{\tau}=\vec{m}\times\vec{B}\) が成り立つ（ここで \( \displaystyle \vec{m}=I\vec{A}\) はループの面積ベクトル）。</li>
+//   <li>その一般命題の簡潔な理由：トルクの積分表現に三重積恒等式を適用すると境界で消える項と面積に対応する項が現れ、結果として \( \displaystyle \vec{m}\times\vec{B}\) に帰着するためである（詳細証明は本節では省略）。</li>
+// </ul>

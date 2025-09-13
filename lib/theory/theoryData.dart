@@ -146,12 +146,13 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         ampereMaxwellLaw
       ],
     ),
-    // TheorySubcategory(
-    //   name: '双極子',
-    //   topics: [
-    //     magneticDipole,
-    //   ],
-    // ),
+    TheorySubcategory(
+      name: '双極子',
+      topics: [
+        // electricDipole,
+        magneticDipole
+      ],
+    ),
     TheorySubcategory(
       name: '物質中の電場と磁場',
       topics: [

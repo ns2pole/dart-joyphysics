@@ -126,7 +126,6 @@ class TheoryListView extends StatelessWidget {
   }
 }
 
-
 class TopicDetailPage extends StatelessWidget {
   final TheoryTopic topic;
 
@@ -193,6 +192,18 @@ class TopicDetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
+              if (topic.imageAsset != null && topic.imageAsset!.isNotEmpty) 
+                Text(
+                  '全体像と本内容の位置付け',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black54,
+                  ),
+                ),
+                const SizedBox(height: 10), // 画像と文字の間隔
+              // ↑ 挿入終わり
+
               // --- MathJax 表示 ---
               LatexWebView(
                 latexHtml: bodyFragment,
@@ -204,6 +215,7 @@ class TopicDetailPage extends StatelessWidget {
     );
   }
 }
+
 
 // --- 全画面表示ページ ---
 class FullscreenImagePage extends StatelessWidget {
