@@ -3,6 +3,7 @@ import '../../model.dart';
 final momentum = TheoryTopic(
   title: '質点における運動量と力積',
   isNew: false,
+  imageAsset: 'assets/mindMap/forTopics/momentum.png', // 実際の画像パス
   latexContent: r"""
 
 <div class="theory-common-box">運動量の定義</div>

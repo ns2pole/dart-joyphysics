@@ -1,7 +1,7 @@
 import '../../model.dart';
 
 final magneticDipole = TheoryTopic(
-  title: '磁気双極子 — 定義と命題例',
+  title: '磁気双極子',
   latexContent: r"""
 
 <div class="theory-common-box">命題：単一磁荷が作る場（磁荷モデル）</div>
@@ -94,26 +94,24 @@ Q.E.D
 ここで$|\vec d|$の2次以上を切り捨てると命題の近似式が得られる。
 </p>
 
-
-
 <div class="theory-common-box">定義（磁気双極子モーメント）</div>
 <p>
-平面の電流ループに対して、磁気双極子モーメント \(\vec m\) を下記で定義する。
+円形電流ループに対して、磁気双極子モーメント \(\vec m\) を下記で定義する。
 \[
 \vec m = I\,\vec S
 \]
 ここで \(I\) はループ電流、\(\vec S\) はループの面積ベクトル（ベクトルの大きさは面積で、向きは右ねじの法則で定まる向き）である。
 </p>
 
-<div class="theory-common-box">例：正方形ループの磁気モーメント</div>
+<div class="theory-common-box">例：円形ループの磁気モーメント</div>
 <p>
-一辺の長さ \(a\) の正方形ループに電流 \(I\) が流れている時、電流ループの磁気モーメントは下記で与えられる。
+半径 \(r\) の円形ループに電流 \(I\) が流れている時、電流ループの磁気モーメントは下記で与えられる。
 \[
-\vec m = I a^2\,\hat n
+\vec m = I \pi r^2\,\hat n
 \]
 </p>
 
-<div class="theory-common-box">命題：ループ電流に働くトルク</div>
+<div class="theory-common-box">命題：円形ループ電流に働くトルク</div>
 <p>
 閉じた電流ループが外部一様磁場 \(\vec B\) を受けるとき、ループが受けるトルク \(\boldsymbol{\tau}\) は下記となる。
 \[
@@ -152,10 +150,9 @@ Q.E.D
 が得られる。
 </p>
 
-
 <div class="theory-common-box">命題：遠方の磁場は双極子場に一致する</div>
 <p>
-電流ループが作る磁場は、観測点がループから十分遠い(（\r\gg\)ループサイズ)ならば、磁気双極子場の形に近似できる。
+円形電流ループが作る磁場は、観測点がループから十分遠い(（\r\gg\)ループサイズ)ならば、磁気双極子場の形に近似できる。
 </p>
 
 <div class="paragraph-box">証明（ベクトルポテンシャルを使わない Biot–Savart 展開のスケッチ）</div>

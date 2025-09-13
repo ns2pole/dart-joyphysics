@@ -4,50 +4,69 @@ final permittivityAndPermeabilityTable = TheoryTopic(
   title: '電場磁場の分極対応表',
   latexContent: r"""
 <style>
-  table.material-table {
-  table-layout: fixed;
-  border-collapse: collapse;
-  box-sizing: border-box;
-  margin: 0 auto;        /* 中央寄せ */
+/* テーブル：固定レイアウトを厳格に適用する */
+
+
+/* 列を確実に50:50にするため colgroup を使う（下で定義） */
+/* セルの基本スタイル */
+table.material-table {
+  border-collapse: collapse;   /* 角丸優先なら separate+border-radius */
+  width: 96%;
   max-width: 800px;
-  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid #606060;  /* 中央縦線を太く＆濃く */
+  border-radius: 12px;
+  overflow: hidden;
+
+  table-layout: fixed;         /* 固定レイアウト */
 }
 
-table.material-table th,
-table.material-table td {
-  box-sizing: border-box;
-  width: 50%;               /* 等間隔に固定 */
+table.material-table td,
+table.material-table th {
+  width: 50%;                  /* 均等に2分割 */
   text-align: center;
-  vertical-align: middle;
-  padding: 4px 6px;
-  border: 1px solid #d0d0d0;   /* 通常の線 */
-  font-size: 0.92em;
-  line-height: 1.15;
-  word-wrap: break-word;
-  white-space: pre-wrap;
+  word-wrap: break-word;        /* 長い式を折り返す */
+  overflow-wrap: break-word;
+  border-bottom: 2px solid #606060;  /* 中央縦線を太く＆濃く */
 }
 
+/* 中央の縦線だけ太くする */
+table.material-table td + td,
+table.material-table th + th {
+  border-left: 2px solid #606060;  /* 中央縦線を太く＆濃く */
+}
+/* 最後の行の下線を消す */
+table.material-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* 見出し行 */
 table.material-table th {
   background: #f7f7f7;
   font-weight: 600;
 }
 
-/* 真ん中の縦線だけ太くする */
-table.material-table td + td,
-table.material-table th + th {
-  border-left: 1px solid #606060;  /* ←中央縦線を太く＆濃く */
-}
-
+/* アイテム・式の表示調整 */
 .item-title {
   font-weight: 600;
   display: block;
-  margin-bottom: 0px;
+  margin-bottom: 4px;
   font-size: 0.95em;
 }
 .formula {
   display: block;
   margin-bottom: 0px;
+  /* 長い数式がセル外にはみ出さないようにする */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
 }
+.br {
+  border-bottom: 2px solid #606060;  /* 中央縦線を太く＆濃く */
+}
+
+/* 補助説明部分 */
 .explain {
   margin-top: 10px;
   font-size: 0.92em;
@@ -61,25 +80,57 @@ table.material-table th + th {
   margin-bottom: 4px;
 }
 
+/* フル幅行（colspan=2） */
+.full-row {
+  text-align: center;
+  padding: 6px 0;
+  background: #f2f2f2;
+  color: #555;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+}
+.full-row strong { display:inline-block; margin:0; padding:0; }
 
-  .full-row {
-    text-align: center;
-    padding: 6px 0;               /* 行の高さを調整（小さめ） */
-    background: #f2f2f2;          /* 薄いグレーの背景 */
-    color: #555;                  /* 文字色をやや灰色に */
-    font-weight: 600;
-    font-size: 0.95rem;
-    line-height: 1;               /* 高さを詰める */
-    border-top: 1px solid #e6e6e6;
-    border-bottom: 1px solid #e6e6e6;
-  }
-  /* 強調の余白を更に小さくしたければ */
-  .full-row strong { display:inline-block; margin:0; padding:0; }
+/* MathJax / SVG / IMG 出力をセル幅内に収める（数式による崩れ対策） */
+.MathJax, .MathJax_Display, .MathJax_SVG, .mjx-chtml, .mjx-svg, svg, img {
+  max-width: 100% !important;
+  height: auto !important;
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+  white-space: normal !important;
+  box-sizing: border-box;
+}
 
+/* 特に MathJax のインラインブロック要素への対策（v2/v3 両対応的に） */
+.mjx-chtml > mjx-assistive-mml,
+.mjx-chtml,
+.MathJax .mrow {
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* テーブル内で長い非空白文字列（例えば長いIDやURL）が切れない問題の対処 */
+td, th {
+  word-wrap: break-word;
+}
+
+/* スマホなどの狭い画面での見栄え調整（オプション） */
+@media (max-width: 480px) {
+  table.material-table { font-size: 0.88em; }
+  table.material-table th, table.material-table td { padding: 6px 4px; }
+}
 </style>
 
-
 <table class="material-table" cellspacing="0" cellpadding="4">
+  <!-- colgroup で列幅を厳格指定 -->
+  <colgroup>
+    <col style="width:50%;">
+    <col style="width:50%;">
+  </colgroup>
+
   <tr>
     <th>電場,誘電分極</th>
     <th>磁場,磁化</th>
@@ -88,15 +139,13 @@ table.material-table th + th {
   <tr>
     <td>
       <span class="item-title">電束密度 (χ<sub>e</sub>)</span>
-      <span class="formula">\(\displaystyle \vec{D}=\varepsilon_{0}\,\vec{E} + \vec{P}\)</span>
+      <span class="formula">\(\displaystyle \vec{D}\underset{定義}{:=}\varepsilon_{0}\,\vec{E} + \vec{P}\)</span>
     </td>
     <td>
       <span class="item-title">磁束密度 (χ<sub>m</sub>)</span>
-      <span class="formula">\(\displaystyle \vec{B}=\mu_0\vec{H}+\vec{M}\)</span>
+      <span class="formula">\(\displaystyle \vec{B}\underset{定義}{:=}\mu_0\vec{H}+\vec{M}\)</span>
     </td>
   </tr>
-  <!-- ←ここに挿入 -->
-  
 
   <tr class="full-row">
     <td colspan="2">
@@ -111,7 +160,7 @@ table.material-table th + th {
     </td>
     <td>
       <span class="item-title">磁気分極と磁化率 (χ<sub>m</sub>)</span>
-      <span class="formula">\(\displaystyle \vec{P}_{m}=\vec{B}-\mu_{0}\vec{H}=\mu_{0}\vec{M}\)</span>
+      <span class="formula">\(\displaystyle \vec{M}=\chi_{m}\mu_{0}\vec{H}\)</span>
     </td>
   </tr>
 
@@ -154,30 +203,33 @@ table.material-table th + th {
     <td colspan="2">
       <span class="item-title">真空中の光速 (c)</span>
       <span class="formula">\(\displaystyle c=\dfrac{1}{\sqrt{\varepsilon_{0}\mu_{0}}}\fallingdotseq 2.99\times10^{8}\ \mathrm{m/s}\)</span>
-      <span class="br"></span>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
       <span class="item-title">媒質中の光速（位相速度）</span>
       <span class="formula">\(\displaystyle v=\dfrac{1}{\sqrt{\varepsilon\mu}}=\dfrac{c}{\sqrt{\varepsilon_{r}\mu_{r}}}\)</span>
     </td>
   </tr>
 </table>
 
-<div class="explain">
-  <h4>説明（箇条書き）</h4>
-  <ul>
-    <li>電束密度は一般には \(\vec{D}=\varepsilon_0\vec{E} + \vec P\)線形応答の物質の場合 \(\vec{D}=\varepsilon\vec{E}\)</li>
-    <li>\(\vec{P}\)：単位体積あたりの電気双極子モーメント密度（分極）。線形媒質では \(\vec{P}=\chi_{e}\varepsilon_{0}\vec{E}\)</li>
-    <li>\(\chi_{e}\)：電気感受率（無次元）。\(\varepsilon=\varepsilon_{0}(1+\chi_{e})\) により誘電率と結びつく。</li>
-    <li>\(\varepsilon_{r}=\displaystyle \frac{\varepsilon}{\varepsilon_{0}}\)：比誘電率（無次元）</li>
-    <br>
-    <li>\(\chi_{m}\)：磁化率（無次元）。線形媒質では \(\vec{M}=\chi_{m}\vec{H}\)</li>
-    <li>\(\mu\)：透磁率（H/m）。磁束密度は \(\vec{B}=\mu\vec{H}\)</li>
-    <li>\(\mu_{r}=でぃs\displaystyle \frac{\mu}{\mu_{0}}\)：比透磁率（無次元）</li>
-    <br>
-    <li>光速は真空定数 \(\varepsilon_{0},\mu_{0}\) から決まる：\(c=\displaystyle\displaystyle \frac {1}{\sqrt{\varepsilon_{0}\mu_{0}}}\)</li>
-    <li>媒質中の位相速度は \(v=\displaystyle\displaystyle \frac{1}{\sqrt{\varepsilon\mu}}=\displaystyle \frac{c}{\sqrt{\varepsilon_{r}\mu_{r}}}\)（線形・等方媒質の場合）</li>
-    <li>注：ここでは線形・等方媒質を仮定している。実際には分散・損失・異方性・非線形性がある。</li>
-  </ul>
-</div>
-
 """,
 );
+
+// <div class="explain">
+//   <h4>説明（箇条書き）</h4>
+//   <ul>
+//     <li>電束密度は一般には \(\vec{D}=\varepsilon_0\vec{E} + \vec P\)線形応答の物質の場合 \(\vec{D}=\varepsilon\vec{E}\)</li>
+//     <li>\(\vec{P}\)：単位体積あたりの電気双極子モーメント密度（分極）。線形媒質では \(\vec{P}=\chi_{e}\varepsilon_{0}\vec{E}\)</li>
+//     <li>\(\chi_{e}\)：電気感受率（無次元）。\(\varepsilon=\varepsilon_{0}(1+\chi_{e})\) により誘電率と結びつく。</li>
+//     <li>\(\varepsilon_{r}=\displaystyle \frac{\varepsilon}{\varepsilon_{0}}\)：比誘電率（無次元）</li>
+//     <br>
+//     <li>\(\chi_{m}\)：磁化率（無次元）。線形媒質では \(\vec{M}=\chi_{m}\vec{H}\)</li>
+//     <li>\(\mu\)：透磁率（H/m）。磁束密度は \(\vec{B}=\mu\vec{H}\)</li>
+//     <li>\(\mu_{r}=でぃs\displaystyle \frac{\mu}{\mu_{0}}\)：比透磁率（無次元）</li>
+//     <br>
+//     <li>光速は真空定数 \(\varepsilon_{0},\mu_{0}\) から決まる：\(c=\displaystyle\displaystyle \frac {1}{\sqrt{\varepsilon_{0}\mu_{0}}}\)</li>
+//     <li>媒質中の位相速度は \(v=\displaystyle\displaystyle \frac{1}{\sqrt{\varepsilon\mu}}=\displaystyle \frac{c}{\sqrt{\varepsilon_{r}\mu_{r}}}\)（線形・等方媒質の場合）</li>
+//     <li>注：ここでは線形・等方媒質を仮定している。実際には分散・損失・異方性・非線形性がある。</li>
+//   </ul>
+// </div>

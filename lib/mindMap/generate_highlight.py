@@ -1,8 +1,14 @@
 import subprocess
 import json
-from PIL import Image, ImageDraw
 import os
-import math
+from PIL import Image, ImageDraw
+
+# 2. writer.scpt 実行
+result_writer = subprocess.run(
+    ["osascript", "writer.scpt"],
+    capture_output=True,
+    text=True
+)
 
 # 1. AppleScript 実行してノード情報取得
 result = subprocess.run(
@@ -21,7 +27,30 @@ nodes = json.loads(result.stdout)
 print("取得ノード数:", len(nodes))
 
 # 2. 背景画像読み込み
-img_path = os.path.join(os.path.dirname(__file__), "test.png")
+
+# スクリプトのあるディレクトリ
+base = os.path.dirname(__file__)
+
+# Keynote の出力フォルダ（ここを適宜変更）
+dynamics_folder = os.path.join(base, "dynamics")
+
+
+# dynamics フォルダ
+dynamics_dir = "/Users/nakamurashunsuke/Documents/Youtube/joyphysics/lib/mindMap/dynamics"
+
+# フォルダ内の最初のファイルを探して dynamics.png にリネーム
+for f in os.listdir(dynamics_dir):
+    f_path = os.path.join(dynamics_dir, f)
+    if os.path.isfile(f_path):
+        new_path = os.path.join(dynamics_dir, "dynamics.png")
+        # すでに dynamics.png があれば削除
+        if os.path.exists(new_path):
+            os.remove(new_path)
+        os.rename(f_path, new_path)
+        print(f"Renamed {f} -> dynamics.png")
+        break
+
+img_path = os.path.join(dynamics_folder, "dynamics.png")
 if not os.path.exists(img_path):
     print(f"{img_path} が存在しません")
     exit(1)
