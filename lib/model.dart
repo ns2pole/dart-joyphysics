@@ -34,12 +34,14 @@ class Video {
 class TheoryTopic {
   final String title;
   final String latexContent;
+  final String? videoURL;
   final bool isNew;
   final String? imageAsset; // ここを追加
 
   TheoryTopic({
     required this.title,
     required this.latexContent,
+    this.videoURL,
     this.isNew = false,
     this.imageAsset, // コンストラクタにも追加
   });

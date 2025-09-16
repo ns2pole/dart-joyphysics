@@ -7,7 +7,11 @@ import 'package:joyphysics/experiment/formulaListData.dart';
 import 'package:joyphysics/experiment/HexColor.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:flutter/services.dart'; // rootBundle 用
-
+import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
+import 'package:joyphysics/dataExporter.dart';
+import 'package:joyphysics/theory/TheoryView.dart'; //画面遷移用
 // 表示モード
 enum VideoViewMode { byCategory, byFormula }
 
@@ -215,12 +219,34 @@ class _VideoCategoryList extends StatelessWidget {
       );
 }
 
+
+
 class VideoDetailView extends StatelessWidget {
   final Video video;
   const VideoDetailView({required this.video, Key? key}) : super(key: key);
 
+  // --- ここに _wrapTexWithTags を入れる ---
+  String _wrapTexWithTags(String html) {
+    // 1) $$...$$ を display
+    final displayRe = RegExp(r'\$\$([\s\S]*?)\$\$', multiLine: true);
+    html = html.replaceAllMapped(displayRe, (m) {
+      final inner = m[1]!;
+      return '<tex display="true">${inner}</tex>';
+    });
+
+    // 2) $...$ を inline
+    final inlineRe = RegExp(r'\$([^\$]+?)\$');
+    html = html.replaceAllMapped(inlineRe, (m) {
+      final inner = m[1]!;
+      return '<tex>${inner}</tex>';
+    });
+
+    return html;
+  }
   @override
   Widget build(BuildContext context) {
+    final processedHtml = video.latex != null ? _wrapTexWithTags(video.latex!) : '';
+
     return Scaffold(
       appBar: AppBar(title: Text(video.title)),
       body: SingleChildScrollView(
@@ -228,16 +254,7 @@ class VideoDetailView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 複数ウィジェット対応
-            if (video.experimentWidgets != null && video.experimentWidgets!.isNotEmpty)
-              ...video.experimentWidgets!.map((w) => Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: SizedBox(
-                      height: (w is HasHeight) ? w.widgetHeight : 220, // デフォルト高さ
-                      width: double.infinity,
-                      child: w,
-                    ),
-                  )),
+            // 動画プレイヤー（既存）
             if (video.videoURL.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 16),
@@ -248,23 +265,125 @@ class VideoDetailView extends StatelessWidget {
                 ),
               ),
 
+            // 装置リスト（既存）
             if (video.equipment.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: EquipmentListView(equipment: video.equipment),
               ),
 
-            if (video.latex != null)
+            // HTML + LaTeX（flutter_html v3 の extensions を使う）
+            if (processedHtml.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: LatexWebView(latexHtml: video.latex!),
+                child: Html(
+                  data: processedHtml,
+                  onLinkTap: (url, attributes, element) { // ✅3個
+                    if (url != null) {
+                      _handleVideoLink(context, url);
+                    }
+                  },
+                  // extensions に <tex> を登録して Math.tex で描く
+                  extensions: [
+                    TagExtension(
+                      tagsToExtend: {"tex"},
+                      builder: (extensionContext) {
+                        final texString = extensionContext.innerHtml; // タグ中身
+                        final isDisplay = extensionContext.styledElement?.attributes['display'] == 'true';
+
+                        return Math.tex(
+                          texString,
+                          mathStyle: isDisplay ? MathStyle.display : MathStyle.text,
+                          textStyle: extensionContext.styledElement?.style.generateTextStyle() ??
+                              const TextStyle(fontSize: 16),
+                          // エラー時のフォールバック（任意）
+                          onErrorFallback: (FlutterMathException e) {
+                            return Text('LaTeX parse error: ${e.message}');
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
           ],
         ),
       ),
     );
   }
+
+  // URL を解析して遷移（例: app://topic?video=rcCircuit）
+  void _handleVideoLink(BuildContext context, String url) {
+    final uri = Uri.parse(url);
+    final videoKey = uri.queryParameters['video'];
+
+    TheoryTopic? targetTopic;
+    if (videoKey == 'rcCircuit') targetTopic = rcCircuitTheory;
+    // ここに他の videoKey -> topic の紐付けを追加
+
+    if (targetTopic != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => TopicDetailPage(topic: targetTopic!)),
+      );
+    } else {
+      // デバッグ用にログ出しておくと良い
+      debugPrint('No topic found for videoKey=$videoKey from url=$url');
+    }
+  }
 }
+
+
+// class VideoDetailView extends StatelessWidget {
+//   final Video video;
+//   const VideoDetailView({required this.video, Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text(video.title)),
+//       body: SingleChildScrollView(
+//         padding: const EdgeInsets.all(6),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             // 複数ウィジェット対応
+//             if (video.experimentWidgets != null && video.experimentWidgets!.isNotEmpty)
+//               ...video.experimentWidgets!.map((w) => Padding(
+//                     padding: const EdgeInsets.only(top: 16),
+//                     child: SizedBox(
+//                       height: (w is HasHeight) ? w.widgetHeight : 220, // デフォルト高さ
+//                       width: double.infinity,
+//                       child: w,
+//                     ),
+//                   )),
+//             if (video.videoURL.isNotEmpty)
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 16),
+//                 child: SizedBox(
+//                   height: 200,
+//                   width: double.infinity,
+//                   child: YouTubeWebView(videoURL: video.videoURL),
+//                 ),
+//               ),
+
+//             if (video.equipment.isNotEmpty)
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 16),
+//                 child: EquipmentListView(equipment: video.equipment),
+//               ),
+
+//             if (video.latex != null)
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 16),
+//                 child: LatexWebView(latexHtml: video.latex!),
+//               ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 
 class FormulaList extends StatelessWidget {

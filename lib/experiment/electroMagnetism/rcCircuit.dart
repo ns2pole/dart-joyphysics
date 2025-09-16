@@ -6,21 +6,19 @@ final rcCircuit = Video(
     videoURL: "oVY3-umLN14",
     equipment: ["抵抗", "コンデンサ", "マルチメータ", "導線", "電池"],
     costRating: "★★★", latex: """
-<<div class="common-box">ポイント</div>
+<div class="common-box">記号</div>
+・\$t\$：時刻<br>
+・\$I(t)\$：時刻 \$t\$ における回路に流れる電流<br>
+・\$Q(t)\$：時刻 \$t\$ にコンデンサに蓄えられている電荷<br>
+・\$RI(t)\$：抵抗による電圧降下<br>
+<div class="common-box">ポイント</div>
 <ul style="line-height:1.6;">
   <li>RC回路では、コンデンサの電荷や電流の時間変化を微分方程式で表すことができる。</li>
   <li>キルヒホッフの第2法則（電圧則）により、電源電圧は抵抗とコンデンサの電圧降下の和に等しい：<br>
       \$\$V = RI(t) + \\frac{Q(t)}{C}\$\$</li>
-  <li>電流 \$I(t)\$ は電荷の時間微分である：<br>
+  <li>また、電流 \$I(t)\$ は電荷の時間微分である：<br>
       \$\$I(t) = \\frac{dQ(t)}{dt}\$\$</li>
-<p>以下では、</p>
-<ul>
-  <li>\$t\$：時刻</li>
-  <li>\$I(t)\$：時刻 \$t\$ における回路に流れる電流</li>
-  <li>\$Q(t)\$：時刻 \$t\$ にコンデンサに蓄えられている電荷</li>
-  <li>\$RI(t)\$：抵抗による電圧降下</li>
 </ul>
-<p>とする。</p>
 
 <div class="common-box">問題設定</div>
 <div style="text-align:center; margin:1em 0;">
@@ -33,7 +31,9 @@ final rcCircuit = Video(
 
 <p>（2）電圧 \$V=3\\ [\\mathrm{V}]\$、抵抗 \$R=2000\\ [\\Omega]\$、容量 \$C=3300\\ [\\mu\\mathrm{F}]=3.3\\times 10^{-3}\\ [\\mathrm{F}]\$のとき、\$Q(t)\$,\$I(t)\$,\$RI(t)\$ を具体的に求めて下さい。</p>
 
-<div class="common-box">理論計算</div>
+<div class="common-box">理論計算 
+<a href="app://topic?video=rcCircuit">詳しくはこちら</a>
+</div>
 <p>キルヒホッフの法則より以下の微分方程式を立てる：</p>
 
 <p>\$\$

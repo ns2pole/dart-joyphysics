@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/services.dart';
+import 'package:joyphysics/dataExporter.dart';
+import 'package:joyphysics/theory/TheoryView.dart';
+
 import 'dart:convert';
+import '../../model.dart';
 
 class LatexWebView extends StatefulWidget {
   final String latexHtml;
@@ -36,6 +40,14 @@ class _LatexWebViewState extends State<LatexWebView> {
       )
       ..setNavigationDelegate(
         NavigationDelegate(
+          onNavigationRequest: (NavigationRequest request) {
+            final url = request.url;
+            if (url.startsWith('app://')) {
+              _handleAppLink(context, url); // Flutter 側で処理
+              return NavigationDecision.prevent; // WebView では遷移させない
+            }
+            return NavigationDecision.navigate;
+          },
           onPageFinished: (videoURL) async {
             await _controller.runJavaScript('''
               MathJax.typesetPromise().then(() => {
@@ -49,6 +61,29 @@ class _LatexWebViewState extends State<LatexWebView> {
       );
 
     _prepareAndLoad();
+  }
+
+
+  // ここに追加する
+  void _handleAppLink(BuildContext context, String url) {
+    final uri = Uri.parse(url);
+    final topicKey = uri.queryParameters['topic'];
+
+    TheoryTopic? target;
+    if (topicKey == 'magnetic') {
+      target = magneticDipole;
+    } else if (topicKey == 'electric') {
+      target = electricDipole;
+    }
+
+    if (target != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => TopicDetailPage(topic: target!),
+        ),
+      );
+    }
   }
 
   Future<void> _prepareAndLoad() async {

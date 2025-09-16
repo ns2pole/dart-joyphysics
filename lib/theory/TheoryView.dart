@@ -4,6 +4,8 @@ import 'package:joyphysics/theory/theoryData.dart';
 import 'package:joyphysics/LatexView.dart';
 import 'package:joyphysics/model.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
 // ─────────────────────────────
 // TheoryListView
 // ─────────────────────────────
@@ -151,12 +153,12 @@ class TopicDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final rawHtml = topic.latexContent;
+    final rawHtml = topic!.latexContent;
     final bodyFragment = _extractBodyFragment(rawHtml);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(topic.title.replaceAll(RegExp(r'\$.*?\$'), "")),
+        title: Text(topic!.title.replaceAll(RegExp(r'\$.*?\$'), "")),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -208,6 +210,53 @@ class TopicDetailPage extends StatelessWidget {
               LatexWebView(
                 latexHtml: bodyFragment,
               ),
+               if (topic.videoURL != null && topic.videoURL!.isNotEmpty) ...[
+                // 見出し（中央揃え、丸角の枠で囲む）
+                Padding(
+                  padding: const EdgeInsets.only(top: 16, bottom: 12),
+                  child: Semantics(
+                    header: true,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey.shade800, // 濃いめグレー
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0), // 角丸
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.03),
+                              blurRadius: 6,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          '本内容の対応実験',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // 動画（既存のコード）
+                Padding(
+                  padding: const EdgeInsets.only(top: 0),
+                  child: SizedBox(
+                    height: 200,
+                    width: double.infinity,
+                    child: TheoryYouTubeWebView(videoURL: topic.videoURL),
+                  ),
+                ),
+              ],
             ],
           ),
         ),
@@ -337,3 +386,35 @@ Widget parseTextWithMath(String input, {bool isNew = false}) {
     maxLines: null,
   );
 }
+
+
+
+
+class TheoryYouTubeWebView extends StatefulWidget {
+  final String? videoURL;
+  const TheoryYouTubeWebView({super.key, required this.videoURL});
+
+  @override
+  State<TheoryYouTubeWebView> createState() => _TheoryYouTubeWebViewState();
+}
+
+class _TheoryYouTubeWebViewState extends State<TheoryYouTubeWebView> {
+  late final WebViewController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(
+        Uri.parse('https://www.youtube-nocookie.com/embed/${widget.videoURL}?autoplay=0'),
+      );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // SizedBoxは外側で管理するので不要
+    return WebViewWidget(controller: _controller);
+  }
+}
+

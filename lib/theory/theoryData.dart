@@ -149,8 +149,9 @@ final Map<String, List<TheorySubcategory>> theoryData = {
     TheorySubcategory(
       name: '双極子',
       topics: [
-        // electricDipole,
-        magneticDipole
+        electricDipole,
+        magneticDipole,
+        dipoleComparison
       ],
     ),
     TheorySubcategory(
@@ -180,6 +181,12 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         infiniteStraightCurrent,
         solenoidMagneticFieldProp,
         // electricDipole
+      ],
+    ),
+    TheorySubcategory(
+      name: '電気回路',
+      topics: [
+        rcCircuitTheory,
       ],
     ),
     TheorySubcategory(

@@ -3,8 +3,8 @@
 -- 必要なら slides:{1} のようにして特定スライドだけ出力できます。
 
 -- === 設定（環境に合わせて書き換えてください） ===
-set keynotePOSIXPath to "/Users/nakamurashunsuke/Documents/Youtube/joyphysics/lib/mindMap/electroMagnetism.key"
-set outputFolderPOSIX to "/Users/nakamurashunsuke/Documents/Youtube/joyphysics/lib/mindMap/electroMagnetism/"
+set keynotePOSIXPath to "/Users/nakamurashunsuke/Documents/Youtube/joyphysics/lib/mindMap/dynamics.key"
+set outputFolderPOSIX to "/Users/nakamurashunsuke/Documents/Youtube/joyphysics/lib/mindMap/dynamics/"
 
 -- === 実行 ===
 try

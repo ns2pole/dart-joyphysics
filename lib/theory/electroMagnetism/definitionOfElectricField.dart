@@ -11,7 +11,7 @@ final definitionOfElectricField = TheoryTopic(
 ※ この定義は 電荷 $q$ が既知としている。
 
 <div class="theory-common-box">定義（電場の向き）</div>
-・電場の向きは、正の電荷に働く力の向きと同じとする。
+・電場の向きは、正の電荷に働く力の向きと同じとする。<br>
 ・負の電荷の場合、力の向きは電場の向きと逆になる。
 """,
 );

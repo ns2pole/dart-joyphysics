@@ -127,3 +127,5 @@ export './theory/electroMagnetism/rightHandRule.dart';
 export './theory/electroMagnetism/definitionOfElectricChargeAndCurrent.dart';
 export './theory/electroMagnetism/magneticDipole.dart';
 export './theory/electroMagnetism/electricDipole.dart';
+export './theory/electroMagnetism/dipoleComparison.dart';
+export './theory/electroMagnetism/rcCircuit.dart';

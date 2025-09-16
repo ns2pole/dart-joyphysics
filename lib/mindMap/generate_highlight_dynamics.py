@@ -5,14 +5,14 @@ from PIL import Image, ImageDraw
 
 # 2. writer.scpt 実行
 result_writer = subprocess.run(
-    ["osascript", "writer.scpt"],
+    ["osascript", "writer_dynamics.scpt"],
     capture_output=True,
     text=True
 )
 
 # 1. AppleScript 実行してノード情報取得
 result = subprocess.run(
-    ["osascript", "get_keynote_nodes.scpt"],
+    ["osascript", "get_keynote_nodes_dynamics.scpt"],
     capture_output=True,
     text=True
 )
