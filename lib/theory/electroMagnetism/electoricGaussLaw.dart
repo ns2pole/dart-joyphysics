@@ -4,9 +4,9 @@ final electoricGaussLaw = TheoryTopic(
   title: '電場のガウスの法則',
   latexContent: r"""
 <div class="theory-common-box">法則（電荷と電場とガウスの法則）：任意の閉曲面$S$に対し、下記が成り立つ。この法則を電場のガウスの法則という。
-\[
+$$
 \oint_{S} \vec{E}\cdot d\vec{S} = \frac{1}{\varepsilon_0} \displaystyle \sum_{S内部} Q
-\]
+$$
 ※$\varepsilon_0 = \fallingdotseq 8.854 \times 10^{-12}\ \mathrm{F/m}$ : 真空の誘電率(定数)
 
 </div>

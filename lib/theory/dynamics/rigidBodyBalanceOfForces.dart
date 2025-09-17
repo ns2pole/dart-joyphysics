@@ -15,14 +15,14 @@ final rigidBodyBalanceOfForces = TheoryTopic(
 剛体を質点系と見做す。ある地点を原点$O$として、$i$番目の質点の位置ベクトルを$\overrightarrow{r_i}(t)$,$i$番目の質点に働く外力を$\overrightarrow{f_i}(t)$とすると、質点系に働く力のモーメントの総和は$\overrightarrow{M_O} (t) = \displaystyle \sum_{i=1}^{n} \overrightarrow {r_i}(t) \times \overrightarrow {F_i}(t)$であるが、
 ここで、別の地点$P$を原点に取り替えると質点系に働く力のモーメントの総和は$\overrightarrow{M_P} (t) = \displaystyle \sum_{i=1}^{n} \Bigr(\overrightarrow{OP}+\overrightarrow {r_i}(t)\Bigr) \times \overrightarrow {F_i}(t)$となる。
 これを変形すると、
-\begin{aligned}
+$$\begin{aligned}
 \displaystyle \overrightarrow{M_P} (t) &= \sum_{i=1}^{n} \Bigr(\overrightarrow{OP}+\overrightarrow {r_i}(t)\Bigr) \times \overrightarrow {F_i}(t)\\[6pt] 
 &= \sum_{i=1}^{n} \Bigr(\overrightarrow{OP}+ \times \overrightarrow {F_i}(t) + \overrightarrow {r_i}(t) \times \overrightarrow {F_i}(t)\Bigr) \\[6pt] 
 &=  \sum_{i=1}^{n} \overrightarrow{OP} \times  \overrightarrow {F_i}(t) +  \sum_{i=1}^{n}  \overrightarrow {r_i}(t) \times \overrightarrow {F_i}(t)  \\[6pt]
 &=  \overrightarrow{OP} \times \Bigr( \sum_{i=1}^{n}  \overrightarrow {F_i}(t)\Bigr) +  \sum_{i=1}^{n} \Bigr( \overrightarrow {r_i}(t) \times \overrightarrow {F_i}(t) \Bigr) \\[6pt]
 &=  \sum_{i=1}^{n} \Bigr( \overrightarrow {r_i}(t) \times \overrightarrow {F_i}(t) \Bigr)\\[6pt]
 &= \overrightarrow{M_O} (t)
-\end{aligned}
+\end{aligned}$$
 　Q.E.D
 </p>
 <div class="theory-common-box">命題2：剛体が静止し続けているならば、任意の点周りの剛体に働く外力のモーメントの総和は$\overrightarrow 0$である。</div>

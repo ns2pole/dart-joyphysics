@@ -5,14 +5,14 @@ final capacitorIntroduction = Video(
     title: "コンデンサーとはどういうものか？",
     videoURL: "Zo6fNi6aCKU",
     equipment: ["コンデンサ", "電源","LED"],
-    costRating: "★★☆", latex: """
+    costRating: "★★☆", latex: r"""
 <div class="common-box">ポイント</div>
 <p>コンデンサの電気容量とは、単位電圧あたりに蓄えられる電荷量を表す量であり、次の式で定義される：</p>
-<p>\$\$\\displaystyle Q = CV\$\$</p>
+<p>$$\displaystyle Q = CV$$</p>
 <ul>
-  <li>\$Q\$: 電荷量 [C]</li>
-  <li>\$C\$: 容量 [F]</li>
-  <li>\$V\$: 電圧 [V]</li>
+  <li>$Q$: 電荷量 [C]</li>
+  <li>$C$: 容量 [F]</li>
+  <li>$V$: 電圧 [V]</li>
 </ul>
 
 """

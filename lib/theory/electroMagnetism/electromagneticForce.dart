@@ -9,9 +9,9 @@ final electromagneticForce = TheoryTopic(
 この電磁場から受ける力は次式で与えられる。
 </p>
 
-\[
+$$
 \vec{F} = q \bigl( \vec{E} + \vec{v} \times \vec{B} \bigr)
-\]
+$$
 
 <div class="paragraph-box">説明</div>
 <ul>

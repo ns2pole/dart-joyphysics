@@ -5,7 +5,7 @@ final bismuthDiamagnetism = Video(
     title: "ビスマスの反磁性",
     videoURL: "vi5uhB2IOBI",
     equipment: ["ネオジム磁石", "発泡スチロール", "水容器", "ビスマス"],
-    costRating: "★★☆", latex: """
+    costRating: "★★☆", latex: r"""
 <div class="common-box">ポイント1</div>
 <p>反磁性とは、磁場に反発する性質である。</p>
 <p>ビスマスは外部磁場に反発する反磁性を強く示す物質である。</p>
@@ -25,32 +25,32 @@ final bismuthDiamagnetism = Video(
   <tbody>
     <tr>
       <td>ビスマス (Bi)</td>
-      <td>\$\\displaystyle -1.66\\times10^{-4}\$</td>
+      <td>$\displaystyle -1.66\times10^{-4}$</td>
       <td>非常に強い反磁性</td>
     </tr>
     <tr>
       <td>水銀 (Hg（液体）)</td>
-      <td>\$\\displaystyle -2.0\\times10^{-4}\$</td>
+      <td>$\displaystyle -2.0\times10^{-4}$</td>
       <td>強い反磁性</td>
     </tr>
     <tr>
       <td>金 (Au)</td>
-      <td>\$\\displaystyle -3.4\\times10^{-5}\$</td>
+      <td>$\displaystyle -3.4\times10^{-5}$</td>
       <td>弱い反磁性</td>
     </tr>
     <tr>
       <td>銀 (Ag)</td>
-      <td>\$\\displaystyle -2.7\\times10^{-5}\$</td>
+      <td>$\displaystyle -2.7\times10^{-5}$</td>
       <td>弱い反磁性</td>
     </tr>
     <tr>
       <td>タリウム (Tl)</td>
-      <td>\$\\displaystyle -2.5\\times10^{-5}\$</td>
+      <td>$\displaystyle -2.5\times10^{-5}$</td>
       <td>弱い反磁性</td>
     </tr>
     <tr>
       <td>銅 (Cu)</td>
-      <td>\$\\displaystyle -1.0\\times10^{-5}\$</td>
+      <td>$\displaystyle -1.0\times10^{-5}$</td>
       <td>非常に弱い反磁性</td>
     </tr>
   </tbody>

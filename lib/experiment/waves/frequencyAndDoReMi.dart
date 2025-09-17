@@ -11,7 +11,7 @@ final frequencyAndDoReMi = Video(
   videoURL: "",
   equipment: ["スマホ"],  // スマホだけで実験
   costRating: "★☆☆",
-  latex: """
+  latex: r"""
 <div class="common-box">周波数とドレミとは？</div>
 <p>音の高さは周波数で決まります。周波数が高いほど音は高く、低いほど音は低く聞こえます。  
 ドレミは音階の名前で、それぞれ対応する周波数があります。</p>

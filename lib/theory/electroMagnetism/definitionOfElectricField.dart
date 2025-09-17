@@ -5,9 +5,9 @@ final definitionOfElectricField = TheoryTopic(
   latexContent: r"""
 <div class="theory-common-box">定義（電場の大きさ）</div>
 ・磁場 $\vec{B}$ が存在しない場合、点電荷 $q$ に働く力 $\vec{F}$ から電場 $\vec{E}$ の大きさを下記の通り定義する。
-\[
+$$
 \vec{E} = \frac{\vec{F}}{q}
-\]
+$$
 ※ この定義は 電荷 $q$ が既知としている。
 
 <div class="theory-common-box">定義（電場の向き）</div>

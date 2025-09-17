@@ -3,23 +3,23 @@ import '../../model.dart';
 final fluxAndAreaIntegral = TheoryTopic(
   title :  '定義および命題',
   latexContent :  r"""
-<div class="theory-common-box">一様なベクトル場の平面に対する流束の定義</div>
-一様なベクトル場 $ \vec F $が面積$A$の平面$S$を貫く流速を下記で定義する。<br>
-\[
+<div class="theory-common-box">一様なベクトル場の平面に対する流束の定義
+一様なベクトル場 <tex> \vec F </tex>が面積$A$の平面$S$を貫く流速を下記で定義する。<br>
+$$
 \Phi = |\vec F | A \cos\theta = ( \vec F \cdot \vec n )A 
-\]
+$$
 ※ここで、$\theta$は平面に対する単位法線ベクトル $ \vec n $ とベクトル場$\vec F$のなす角。
-
+</div>
 <div class="theory-common-box">一般の流束計算(面積分)の定義</div>
 一般に、向き,大きさが変化するベクトル場$\vec F$が，曲面$S$を貫く流速を下記で定義する。
 
-\begin{aligned}
+$$\begin{aligned}
 \iint_S \vec F\cdot d\vec S
 & : = \lim_{| P | \to 0}
 \sum_{i=1}^{N(P)} (\vec F_i\cdot\vec n_i)\,\Delta S_i\\[4pt]
 &\;\Bigl(= \lim_{| P | \to 0}
 \sum_{i=1}^{N(P)} |\vec F_i|\cos\theta_i\,\Delta S_i\Bigr)
-\end{aligned}
+\end{aligned}$$
 
 <div class="paragraph-box">記号の定義</div>
 <ul>
@@ -35,27 +35,27 @@ final fluxAndAreaIntegral = TheoryTopic(
 </ul>
 
 <div class="theory-common-box">命題：曲面 $\Sigma $ 上で $ |\vec F|$ が一定値$F$を取り、かつ単位法線とのなす角が面上で一定 $ \theta $ のとき，曲面$S$の面積をAとすると、流束は下記となる。
-\[
+$$
 \iint_S \vec F\cdot d\vec S = F\cos\theta\cdot A
-\]
+$$
 </div>
 
 <p><div class="proof-box">証明</div>
 定義より
-\[
+$$
 \iint_S \vec F\cdot d\vec S
 = \lim_{| P | \to 0}\sum_{i=1}^{N(P)} (\vec F_i\cdot\vec n_i)\,\Delta S_i
-\]
+$$
 各代表点で $ |\vec F_i|=F$, $ \vec F_i\cdot\vec n_i=F\cos\theta$ なので
-\[
+$$
 \sum_{i=1}^{N(P)} (\vec F_i\cdot\vec n_i)\,\Delta S_i
 = F\cos\theta\sum_{i=1}^{N(P)}\Delta S_i
-\]
+$$
 ここで、$\sum_{i=1}^{N(P)}\Delta S_i$は全領域に渡って分割領域の面積を足すということなので$ A $となる。よって、
-\[
+$$
 \iint_S \vec F\cdot d\vec S
 = \lim_{| P | \to 0}\Bigl(F\cos\theta\cdot A  \Bigr)= F\cos\theta\cdot A
-\]　Q.E.D
+$$　Q.E.D
 </p>
 """
 );

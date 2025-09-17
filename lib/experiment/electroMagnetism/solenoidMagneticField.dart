@@ -7,32 +7,32 @@ final solenoidMagneticField = Video(
   videoURL: "AzeN5ZFkuXE",
   equipment: ["導線", "細長いパイプ","カッターナイフ", "乾電池", "マルチメータ", "磁場測定器"],
   costRating: "★★★",
-  latex: """
+  latex: r"""
 <div class="common-box">ポイント</div>
-<p>長さ \$L = 39\\,\\text{cm} = 0.39\\,\\text{m}\$、巻き数 \$N = 210\$ の一様なソレノイドに電流 \$I = 1.05\\,\\text{A}\$ を流すと、内部の磁場の強さ \$B\$ は次の式で近似できます：</p>
+<p>長さ $L = 39\,\text{cm} = 0.39\,\text{m}$、巻き数 $N = 210$ の一様なソレノイドに電流 $I = 1.05\,\text{A}$ を流すと、内部の磁場の強さ $B$ は次の式で近似できます：</p>
 
-<p>\$\$ B = \\mu_0 n I = \\mu_0 \\frac{N}{L} I \$\$</p>
+<p>$$ B = \mu_0 n I = \mu_0 \frac{N}{L} I $$</p>
 
 <p>※記号の定義：</p>
 <ul style="line-height:1.6;">
-  <li>\$B\$：ソレノイド内部の磁場の大きさ（T）</li>
-  <li>\$\\mu_0\$：真空の透磁率（\$4\\pi \\times 10^{-7}\\,\\text{T·m/A}\$）</li>
-  <li>\$N\$：巻き数</li>
-  <li>\$L\$：コイルの長さ（m）</li>
-  <li>\$n\$：巻き数密度（\$m^{-1} \$）</li>
-  <li>\$I\$：流れる電流（A）</li>
+  <li>$B$：ソレノイド内部の磁場の大きさ（T）</li>
+  <li>$\mu_0$：真空の透磁率（$4\pi \times 10^{-7}\,\text{T·m/A}$）</li>
+  <li>$N$：巻き数</li>
+  <li>$L$：コイルの長さ（m）</li>
+  <li>$n$：巻き数密度（$m^{-1} $）</li>
+  <li>$I$：流れる電流（A）</li>
 </ul>
 
 <p>この値を代入すると：</p>
-<p>\$\$
-\\begin{align*}
-B &= 4\\pi \\times 10^{-7} \\cdot \\frac{210}{0.39} \\cdot 1.05 \\\\
-  &\\fallingdotseq 4\\pi \\times 10^{-7} \\cdot 538.46 \\cdot 1.05 \\\\
-  &\\fallingdotseq 4\\pi \\times 10^{-7} \\cdot 565.38 \\\\
-  &\\fallingdotseq 7.1 \\times 10^{-4}\\,\\text{T} \\\\
-  &= 0.71\\,\\text{mT}
-\\end{align*}
-\$\$</p>
+<p>$$
+\begin{aligned}
+B &= 4\pi \times 10^{-7} \cdot \frac{210}{0.39} \cdot 1.05 \\
+  &\fallingdotseq 4\pi \times 10^{-7} \cdot 538.46 \cdot 1.05 \\
+  &\fallingdotseq 4\pi \times 10^{-7} \cdot 565.38 \\
+  &\fallingdotseq 7.1 \times 10^{-4}\,\text{T} \\
+  &= 0.71\,\text{mT}
+\end{aligned}
+$$</p>
 
 <div style="text-align:center; margin:1em 0;">
   <img src="assets/electroMagnetismDetail/solenoidMag.png"

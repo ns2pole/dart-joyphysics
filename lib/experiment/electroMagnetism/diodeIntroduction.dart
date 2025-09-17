@@ -5,7 +5,7 @@ final diodeIntroduction = Video(
     title: "ダイオードとはどういうものか",
     videoURL: "rnO5LfjFpp4",
     equipment: ["ダイオード", "電源", "導線"],
-    costRating: "★★☆", latex: """
+    costRating: "★★☆", latex: r"""
 <div class="common-box">ポイント</div>
 <div style="text-align:center; margin:1em 0;">
   <img src="assets/electroMagnetismDetail/diodeIntroduction.png"

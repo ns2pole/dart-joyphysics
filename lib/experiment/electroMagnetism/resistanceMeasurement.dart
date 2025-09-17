@@ -5,6 +5,6 @@ final resistanceMeasurement = Video(
     title: "抵抗の測定",
     videoURL: "Cjf2dvf7ltY",
     equipment: ["抵抗", "マルチメータ"],
-    costRating: "★★☆", latex: """
+    costRating: "★★☆", latex: r"""
 """
 );

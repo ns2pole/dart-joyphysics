@@ -26,14 +26,14 @@ $\displaystyle K_{\mathrm{cm}} := \frac{1}{2} M V_{\mathrm{cm}}^2$で定義す�
 質量$m_1,m_2$の2質点について、相対速度を $\overrightarrow{v}_{\mathrm{rel}}$,換算質量を$\mu$として、相対運動エネルギーを$\displaystyle K_{\mathrm{rel}} := \frac{1}{2} \mu v_{\mathrm{rel}}^2$で定義する。
 </p>
 <div class="theory-common-box">命題：2物体系の運動エネルギーの全体は、重心運動エネルギーと相対運動エネルギーの和に分解できる：</div>
-\begin{aligned}
+$$\begin{aligned}
 \frac{1}{2} m_1 v_1^2 + \frac{1}{2} m_2 v_2^2
 =
 \frac{1}{2} M V_{\mathrm{cm}}^2 + \frac{1}{2} \mu v_{\mathrm{rel}}^2
-\end{aligned}
+\end{aligned}$$
 
 <p><div class="proof-box">証明</div>
-\begin{aligned}
+$$\begin{aligned}
 &\ \ \ \ \frac12\,M\,{V}_{\mathrm{cm}}^2
 + \frac12\,\mu\,{v}_{\mathrm{rel}}^2 \\[6pt]
 &=\frac12\,M\,|\overrightarrow{V}_{\mathrm{cm}}|^2
@@ -51,7 +51,7 @@ $\displaystyle K_{\mathrm{cm}} := \frac{1}{2} M V_{\mathrm{cm}}^2$で定義す�
 &= \frac12\frac{m_1(m_1 + m_2)|\overrightarrow{v}_1|^2 + m_2(m_1 + m_2)|\overrightarrow{v}_2|^2}{m_1 + m_2}\\[6pt]
 &= \frac12\,m_1\,|\overrightarrow{v}_1|^2+ \frac12\,m_2\,|\overrightarrow{v}_2|^2\\[6pt]
 &= \frac12\,m_1\,{v}_1^2+ \frac12\,m_2\,{v}_2^2
-\end{aligned}
+\end{aligned}$$
 　　Q.E.D</p>
 """
 );

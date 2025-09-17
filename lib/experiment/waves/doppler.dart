@@ -9,7 +9,7 @@ final doppler = Video(
   videoURL: "", // 実験動画のURLがある場合はここに
   equipment: ["スマホ2台"],
   costRating: "★☆☆",
-  latex: """
+  latex: r"""
 <div class="common-box">ドップラー効果とは？</div>
 <p>音源や観測者が動くと、聞こえる音の <b>周波数</b> が変化します。これを <b>ドップラー効果</b> といいます。</p>
 <p>例えば、走って近づいてくる救急車のサイレンは高く、遠ざかると低く聞こえる現象です。</p>
@@ -30,18 +30,16 @@ final doppler = Video(
 </ul>
 
 <div class="common-box">理論：周波数の変化の計算例</div>
-<p>音速を約 \$v = 340 \\text{ m/s}\$、歩行速度を \$v_{\\text{音源}} = 1.5 \\text{ m/s}\$、音源の周波数を \$f = 3000 \\text{ Hz}\$ とすると、</p>
+<p>音速を約 $v = 340 \text{ m/s}$、歩行速度を $v_{\text{音源}} = 1.5 \text{ m/s}$、音源の周波数を $f = 3000 \text{ Hz}$ とすると、</p>
 
 <p>近づく場合の周波数は：</p>
-\\[
-f' = f \\times \\frac{v}{v - v_{\\text{音源}}} = 3000 \\times \\frac{340}{340 - 1.5} \\fallingdotseq 3013 \\text{ Hz}
-\\]
-
+$$
+f' = f \times \frac{v}{v - v_{\text{音源}}} = 3000 \times \frac{340}{340 - 1.5} \fallingdotseq 3013 \text{ Hz}
+$$
 <p>遠ざかる場合の周波数は：</p>
-\\[
-f' = f \\times \\frac{v}{v + v_{\\text{音源}}} = 3000 \\times \\frac{340}{340 + 1.5} \\fallingdotseq 2987 \\text{ Hz}
-\\]
-
+$$
+f' = f \times \frac{v}{v + v_{\text{音源}}} = 3000 \times \frac{340}{340 + 1.5} \fallingdotseq 2987 \text{ Hz}
+$$
 <div class="common-box">注意点</div>
 <ul>
   <li>静かな環境で行うと正確な周波数変化が観測しやすい</li>

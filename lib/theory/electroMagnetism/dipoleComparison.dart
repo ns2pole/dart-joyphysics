@@ -181,56 +181,56 @@ final dipoleComparison = TheoryTopic(
 
   <tr>
     <td>
-      <span class="item-title">点電荷 \(q\) による電場 \(\vec E\)</span>
-      <span class="formula">\(\displaystyle \vec E(\vec r)=\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}\,\hat r\)</span>
+      <span class="item-title">点電荷 $q$ による電場 $\vec E$</span>
+      <span class="formula">$\displaystyle \vec E(\vec r)=\frac{1}{4\pi\varepsilon_0}\frac{q}{r^2}\,\hat r$</span>
     </td>
     <td>
-      <span class="item-title">点磁荷 \(Q\) による磁場 \(\vec H\)</span>
-      <span class="formula">\(\displaystyle \vec H(\vec r)=\frac{1}{4\pi\mu_0}\frac{Q}{r^2}\,\hat r\)</span>
+      <span class="item-title">点磁荷 $Q$ による磁場 $\vec H$</span>
+      <span class="formula">$\displaystyle \vec H(\vec r)=\frac{1}{4\pi\mu_0}\frac{Q}{r^2}\,\hat r$</span>
     </td>
   </tr>
 
   <tr>
     <td>
-      <span class="item-title">点電荷 \(q\) への電場 \(\vec E\)の力</span>
-      <span class="formula">\(\displaystyle \vec F =q \vec E\)</span>
+      <span class="item-title">点電荷 $q$ への電場 $\vec E$の力</span>
+      <span class="formula">$\displaystyle \vec F =q \vec E$</span>
     </td>
     <td>
-      <span class="item-title">点磁荷 \(Q\) への磁場 \(\vec H\)の力</span>
-      <span class="formula">\(\displaystyle \vec F =Q \vec H \)</span>
+      <span class="item-title">点磁荷 $Q$ への磁場 $\vec H$の力</span>
+      <span class="formula">$\displaystyle \vec F =Q \vec H $</span>
     </td>
   </tr>
 
   <tr>
     <td>
       <span class="item-title">電気双極子モーメント</span>
-      <span class="formula">\(\displaystyle \vec p_e = q\,\vec d\)</span>
+      <span class="formula">$\displaystyle \vec p_e = q\,\vec d$</span>
     </td>
     <td>
       <span class="item-title">磁気双極子モーメント(磁荷モデル)</span>
-      <span class="formula">\(\displaystyle \vec p_m = Q\,\vec d\)</span>
+      <span class="formula">$\displaystyle \vec p_m = Q\,\vec d$</span>
     </td>
   </tr>
 
   <tr>
     <td>
-      <span class="item-title">遠方場 \(\vec E\)（電気対 双極子）</span>
-      <span class="formula">\(\displaystyle \vec E = \frac{3(\vec p_e\cdot\hat r)\hat r-\vec p_e}{4\pi\varepsilon_0 r^3}\)</span>
+      <span class="item-title">遠方場 $\vec E$（電気対 双極子）</span>
+      <span class="formula">$\displaystyle \vec E = \frac{3(\vec p_e\cdot\hat r)\hat r-\vec p_e}{4\pi\varepsilon_0 r^3}$</span>
     </td>
     <td>
-      <span class="item-title">遠方場 \(\vec H\)（磁荷対 双極子）</span>
-      <span class="formula">\(\displaystyle \vec H = \frac{3(\vec p_m\cdot\hat r)\hat r-\vec p_m}{4\pi\mu_0 r^3}\)</span>
+      <span class="item-title">遠方場 $\vec H$（磁荷対 双極子）</span>
+      <span class="formula">$\displaystyle \vec H = \frac{3(\vec p_m\cdot\hat r)\hat r-\vec p_m}{4\pi\mu_0 r^3}$</span>
     </td>
   </tr>
 
   <tr>
     <td>
       <span class="item-title">外場によるトルク（電気）</span>
-      <span class="formula">\(\displaystyle \vec N_e = \vec p_e \times \vec E\)</span>
+      <span class="formula">$\displaystyle \vec N_e = \vec p_e \times \vec E$</span>
     </td>
     <td>
       <span class="item-title">外場によるトルク（磁気）</span>
-      <span class="formula">\(\displaystyle \vec N_m = \vec p_m \times \vec H\)</span>
+      <span class="formula">$\displaystyle \vec N_m = \vec p_m \times \vec H$</span>
     </td>
   </tr>
 
@@ -253,7 +253,7 @@ final dipoleComparison = TheoryTopic(
       <span class="formula">
         $Q=\displaystyle \mu_0 \pi a I$
       </span>
-      <div class="small">ここで \(a\) は磁荷対の距離,円形電流半径。</div>
+      <div class="small">ここで $a$ は磁荷対の距離,円形電流半径。</div>
     </td>
   </tr>
 
@@ -265,16 +265,16 @@ final dipoleComparison = TheoryTopic(
 
   <tr>
     <td>
-      <span class="formula">\(\displaystyle \nabla\cdot\vec E=\frac{\rho_e}{\varepsilon_0}\)</span>
-      <span class="formula">\(\displaystyle \nabla\times\vec E=-\frac{\partial\vec B}{\partial t}-\vec J_m\)</span>
+      <span class="formula">$\displaystyle \nabla\cdot\vec E=\frac{\rho_e}{\varepsilon_0}$</span>
+      <span class="formula">$\displaystyle \nabla\times\vec E=-\frac{\partial\vec B}{\partial t}-\vec J_m$</span>
     </td>
     <td>
-      <span class="formula">\(\displaystyle \nabla\cdot\vec H=\frac{\rho_m}{\mu_0}\)</span>
-      <span class="formula">\(\displaystyle \nabla\times\vec H=\vec J_e+\frac{\partial\vec D}{\partial t}\)</span>
+      <span class="formula">$\displaystyle \nabla\cdot\vec H=\frac{\rho_m}{\mu_0}$</span>
+      <span class="formula">$\displaystyle \nabla\times\vec H=\vec J_e+\frac{\partial\vec D}{\partial t}$</span>
     </td>
   </tr>
 
 </table>
 """,
 );
-      // <div class="small">真空では \(\vec D=\varepsilon_0\vec E\), \(\vec B=\mu_0\vec H\)。</div>
+      // <div class="small">真空では $\vec D=\varepsilon_0\vec E$, $\vec B=\mu_0\vec H$。</div>

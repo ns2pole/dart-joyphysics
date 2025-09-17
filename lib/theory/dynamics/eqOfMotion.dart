@@ -31,13 +31,13 @@ $$
 
 <div class="theory-common-box">ニュートンの第二法則（運動方程式）</div>
 <p>
-質量$m$の質点に力 \(\vec{F_i}\ (i=1\cdots n)\) が作用するとき、その質点の加速度 \(\vec{a}\) は
+質量$m$の質点に力 $\vec{F_i}\ (i=1\cdots n)$ が作用するとき、その質点の加速度 $\vec{a}$ は
 $\displaystyle m \vec{a} = \sum_{i=1}^{n} \vec{F}_i$で与えられる。
 </p>
 <div class="theory-common-box">ニュートンの第三法則（作用反作用の法則）</div>
 <p>
 二つの質点 1, 2 の間に相互に力が働くとき、質点 2 が質点 1 に及ぼす力 
-\(\vec{F}_{{1} \leftarrow {2}} \) と、質点 1 が質点 2 に及ぼす力 \(\vec{F}_{{2} \leftarrow {1}}\) は大きさが等しく逆向きである：
+$\vec{F}_{{1} \leftarrow {2}} $ と、質点 1 が質点 2 に及ぼす力 $\vec{F}_{{2} \leftarrow {1}}$ は大きさが等しく逆向きである：
 $\displaystyle \vec{F}_{{2} \leftarrow {1}} = -\vec{F}_{{1} \leftarrow {2}} $
 </p>
 """

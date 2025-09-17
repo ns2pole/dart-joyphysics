@@ -12,8 +12,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:joyphysics/dataExporter.dart';
 import 'package:joyphysics/theory/TheoryView.dart'; //画面遷移用
-import 'package:html/dom.dart' as dom; // ← これが重要
 
+import 'package:html/dom.dart' as dom; // ← これが重要
 // 表示モード
 enum VideoViewMode { byCategory, byFormula }
 
@@ -113,6 +113,87 @@ Future<String> resolveAssetPath(String category, String iconName) async {
     _assetPathCache[key] = gifPath;
     return gifPath;
   }
+}
+
+
+
+class VideoDetailView extends StatelessWidget {
+  final Video video;
+  const VideoDetailView({required this.video, Key? key}) : super(key: key);
+
+  // -----------------------------
+  // LaTeX を <tex> タグに変換
+  // -----------------------------
+  // String _wrapTexWithTags(String html) {
+  //   // display math
+  //   final displayRe = RegExp(r'\$\$(.*?)\$\$', dotAll: true);
+  //   html = html.replaceAllMapped(displayRe, (m) {
+  //     String inner = m[1]!;
+  //     inner = inner.replaceAll('&', '%%AMP%%'); // プレースホルダー
+  //     return '<tex display="true">$inner</tex>';
+  //   });
+
+  //   // inline math
+  //   final inlineRe = RegExp(r'\$([^\$]+?)\$');
+  //   html = html.replaceAllMapped(inlineRe, (m) {
+  //     String inner = m[1]!;
+  //     inner = inner.replaceAll('&', '%%AMP%%'); // プレースホルダー
+  //     return '<tex>$inner</tex>';
+  //   });
+
+  //   return html;
+  // }
+@override
+Widget build(BuildContext context) {
+  final htmlData = video.latex ?? '';
+
+  return Scaffold(
+    appBar: AppBar(title: Text(video.title)),
+    body: SingleChildScrollView(
+      padding: const EdgeInsets.all(6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+
+          // 複数ウィジェット対応
+          if (video.experimentWidgets != null && video.experimentWidgets!.isNotEmpty)
+            ...video.experimentWidgets!.map((w) => Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: SizedBox(
+                    height: (w is HasHeight) ? w.widgetHeight : 220,
+                    width: double.infinity,
+                    child: w,
+                  ),
+                )),
+
+          if (video.videoURL.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: YouTubeWebView(videoURL: video.videoURL),
+              ),
+            ),
+
+          if (video.equipment.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: EquipmentListView(equipment: video.equipment),
+            ),
+
+          // HTML + LaTeX
+          if (htmlData.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(top: 16),
+              child: KeiHtml(data: htmlData),
+            ),
+        ],
+      ),
+    ),
+  );
+}
+
 }
 
 // ---- あなたのウィジェット ----
@@ -221,6 +302,65 @@ class _VideoCategoryList extends StatelessWidget {
       );
 }
 
+
+
+
+
+// class VideoDetailView extends StatelessWidget {
+//   final Video video;
+//   const VideoDetailView({required this.video, Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text(video.title)),
+//       body: SingleChildScrollView(
+//         padding: const EdgeInsets.all(6),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             // 複数ウィジェット対応
+//             if (video.experimentWidgets != null && video.experimentWidgets!.isNotEmpty)
+//               ...video.experimentWidgets!.map((w) => Padding(
+//                     padding: const EdgeInsets.only(top: 16),
+//                     child: SizedBox(
+//                       height: (w is HasHeight) ? w.widgetHeight : 220, // デフォルト高さ
+//                       width: double.infinity,
+//                       child: w,
+//                     ),
+//                   )),
+//             if (video.videoURL.isNotEmpty)
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 16),
+//                 child: SizedBox(
+//                   height: 200,
+//                   width: double.infinity,
+//                   child: YouTubeWebView(videoURL: video.videoURL),
+//                 ),
+//               ),
+
+//             if (video.equipment.isNotEmpty)
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 16),
+//                 child: EquipmentListView(equipment: video.equipment),
+//               ),
+
+//             if (video.latex != null)
+//               Padding(
+//                 padding: const EdgeInsets.only(top: 16),
+//                 child: LatexWebView(latexHtml: video.latex!),
+//               ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+
 // 共通の TextStyle（ファイル上部に置く）
 const TextStyle keiFontStyle = TextStyle(
   fontFamily: 'KeiFont',
@@ -231,6 +371,116 @@ const TextStyle keiFontStyle = TextStyle(
 List<TagExtension> buildKeiTagExtensions() {
   return [
 
+    
+TagExtension(
+  tagsToExtend: {"div"},
+  builder: (extCtx) {
+    final className = extCtx.element?.classes.join(' ') ?? '';
+final rawContent = (extCtx.innerHtml ?? '').replaceAll('%%AMP%%', '&');
+
+final children = <Widget>[];
+final regex = RegExp(r'(<tex.*?>.*?</tex>)', dotAll: true);
+int lastEnd = 0;
+
+for (final m in regex.allMatches(rawContent)) {
+  if (m.start > lastEnd) {
+    children.add(Text(
+      rawContent.substring(lastEnd, m.start),
+      style: keiFontStyle.copyWith(fontSize: 17),
+    ));
+  }
+
+  String match = m.group(0)!;
+  final isDisplay = match.contains('display="true"');
+
+  // <tex ...> と </tex> を除去
+  final math = match
+      .replaceFirst(RegExp(r'<tex.*?>'), '')
+      .replaceFirst('</tex>', '');
+
+  final mathWidget = Math.tex(
+    math,
+    mathStyle: isDisplay ? MathStyle.display : MathStyle.text,
+    textStyle: TextStyle(
+        fontFamily: 'RobotoMono', // KeiFont と比べて違和感の少ない英数字フォント
+        fontSize: isDisplay ? 22: 20,
+        color: Colors.black,
+        height: 1.2, // 行間調整で日本語と馴染む
+    ),
+    onErrorFallback: (e) => Text(
+      'LaTeX parse error: ${e.message}',
+      style: const TextStyle(color: Colors.red),
+    ),
+  );
+
+  children.add(
+    isDisplay
+        ? Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            child: Center(child: mathWidget),
+          )
+        : mathWidget,
+  );
+
+  lastEnd = m.end;
+}
+
+if (lastEnd < rawContent.length) {
+  children.add(Text(
+    rawContent.substring(lastEnd),
+    style: keiFontStyle.copyWith(fontSize: 17),
+  ));
+}
+
+final contentWidget = Wrap(
+  crossAxisAlignment: WrapCrossAlignment.center,
+  alignment: WrapAlignment.start,
+  children: children,
+);
+
+    // className に応じた装飾
+    switch (className) {
+      case 'common-box':
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          margin: EdgeInsets.zero,
+          decoration: BoxDecoration(
+            color: const Color(0xffccffcc),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(width: 1.0, color: Colors.black),
+          ),
+          child: contentWidget,
+        );
+      case 'theory-common-box':
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          margin: EdgeInsets.zero,
+          decoration: BoxDecoration(
+            color: const Color(0xffccffcc),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(width: 1.0, color: Colors.black),
+          ),
+          child: contentWidget,
+        );
+
+      case 'theorem-box':
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          margin: EdgeInsets.zero,
+          decoration: BoxDecoration(
+            color: const Color(0xfffbdfa2),
+            border: Border.all(width: 1.0, color: Colors.black),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: contentWidget,
+        );
+
+      default:
+        return contentWidget;
+    }
+  },
+),
+
     // LaTeX 用 <tex>
     TagExtension(
       tagsToExtend: {"tex"},
@@ -240,7 +490,7 @@ List<TagExtension> buildKeiTagExtensions() {
         final mathWidget = Math.tex(
           texString,
           mathStyle: isDisplay ? MathStyle.display : MathStyle.text,
-          textStyle: TextStyle(fontSize: isDisplay ? 18 : 16),
+          textStyle: TextStyle(fontSize: isDisplay ? 18 : 18),
           onErrorFallback: (e) => Text('LaTeX parse error: ${e.message}'),
         );
         return isDisplay
@@ -249,143 +499,6 @@ List<TagExtension> buildKeiTagExtensions() {
                 child: Center(child: mathWidget),
               )
             : mathWidget;
-      },
-    ),
-
-    // CSS互換 <div> タグ（class に応じて Container を返す）
-    TagExtension(
-      tagsToExtend: {"div"},
-      builder: (extCtx) {
-        final className = extCtx.element?.classes.join(' ');
-        final textContent = extCtx.element?.text ?? '';
-
-        final textWidget = Text(
-          textContent,
-          style: const TextStyle(
-            fontSize: 17,
-            fontFamily: 'KeiFont',
-          ),
-        );
-
-        switch (className) {
-          case 'common-box':
-            return Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                color: const Color(0xffccffcc), // #cfc
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(width: 1.0, color: Colors.black),
-              ),
-              child: DefaultTextStyle.merge(
-                style: keiFontStyle,
-                child: textWidget,
-              ),
-            );
-
-          case 'theory-common-box':
-            return Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                color: const Color(0xffccffcc),
-                border: Border.all(width: 1.0, color: Colors.black),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: DefaultTextStyle.merge(
-                style: keiFontStyle,
-                child: textWidget,
-              ),
-            );
-
-          case 'theorem-box':
-            return Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                color: const Color(0xfffbdfa2),
-                border: Border.all(width: 1.0, color: Colors.black),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: DefaultTextStyle.merge(
-                style: keiFontStyle,
-                child: textWidget,
-              ),
-            );
-
-          case 'proof-box':
-            return Container(
-              padding: const EdgeInsets.all(2),
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(width: 1.0, color: Colors.black),
-              ),
-              child: Text(
-                textContent,
-                style: keiFontStyle.copyWith(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-
-          case 'remark-box':
-            return IntrinsicWidth(
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-                margin: const EdgeInsets.symmetric(vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border.all(width: 1.0, color: Colors.black),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  textContent,
-                  style: keiFontStyle.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            );
-
-          case 'condition-box':
-            return Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              margin: EdgeInsets.zero,
-              decoration: BoxDecoration(
-                color: const Color(0xffffa5f4),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(width: 1.0, color: Colors.black),
-              ),
-              child: DefaultTextStyle.merge(
-                style: keiFontStyle,
-                child: textWidget,
-              ),
-            );
-
-          case 'paragraph-box':
-            return Container(
-              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              decoration: BoxDecoration(
-                color: const Color(0xfff9f9f9),
-                border: Border.all(width: 2.0, color: Colors.black),
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: DefaultTextStyle.merge(
-                style: keiFontStyle,
-                child: textWidget,
-              ),
-            );
-
-          default:
-            return DefaultTextStyle.merge(
-              style: keiFontStyle,
-              child: textWidget,
-            );
-        }
       },
     ),
   ];
@@ -408,109 +521,6 @@ class KeiHtml extends StatelessWidget {
     );
   }
 }
-
-class VideoDetailView extends StatelessWidget {
-  final Video video;
-  const VideoDetailView({required this.video, Key? key}) : super(key: key);
-
-  // -----------------------------
-  // LaTeX を <tex> タグに変換
-  // -----------------------------
-  String _wrapTexWithTags(String html) {
-    // display math
-    final displayRe = RegExp(r'\$\$(.*?)\$\$', dotAll: true);
-    html = html.replaceAllMapped(displayRe, (m) {
-      String inner = m[1]!;
-      inner = inner.replaceAll('&', '%%AMP%%'); // プレースホルダー
-      return '<tex display="true">$inner</tex>';
-    });
-
-    // inline math
-    final inlineRe = RegExp(r'\$([^\$]+?)\$');
-    html = html.replaceAllMapped(inlineRe, (m) {
-      String inner = m[1]!;
-      inner = inner.replaceAll('&', '%%AMP%%'); // プレースホルダー
-      return '<tex>$inner</tex>';
-    });
-
-    return html;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final processedHtml = (video.latex ?? '').isNotEmpty ? _wrapTexWithTags(video.latex!) : '';
-
-    return Scaffold(
-      appBar: AppBar(title: Text(video.title)),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(6),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // 動画プレイヤー（既存）
-            if (video.videoURL.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: SizedBox(
-                  height: 200,
-                  width: double.infinity,
-                  // ここは既存の YouTube プレイヤーに差し替えてください
-                  child: Placeholder(),
-                ),
-              ),
-
-            // 装置リスト（既存）
-            if (video.equipment.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Placeholder(),
-              ),
-
-            // HTML + LaTeX（flutter_html + TagExtension）
-            if (processedHtml.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: Html(
-                  data: processedHtml,
-                  // .common-box の中でもブロックとして扱う（表示崩れ対策）
-                  style: {
-                    'div': Style(margin: Margins.zero),               // ← EdgeInsets.zero ではなく Margins.zero
-                    '.common-box': Style(display: Display.block),     // ← Display.BLOCK ではなく Display.block
-                  },
-                  onLinkTap: (url, attributes, element) {
-                    if (url != null) {
-                      debugPrint('Tapped URL: $url');
-                    }
-                  },
-                  extensions: [
-                    TagExtension(
-                      tagsToExtend: {'tex'},
-                      builder: (extensionContext) {
-                        final raw = extensionContext.innerHtml ?? '';
-                        final tex = raw.replaceAll('%%AMP%%', '&');
-                        final isDisplay = (extensionContext.attributes['display'] ?? 'false') == 'true';
-                        final textStyle = extensionContext.styledElement?.style.generateTextStyle();
-
-                        return Math.tex(
-                          tex,
-                          mathStyle: isDisplay ? MathStyle.display : MathStyle.text,
-                          textStyle: textStyle,
-                          onErrorFallback: (FlutterMathException e) {
-                            return Text('TeX error: ${e.message}', style: const TextStyle(color: Colors.red));
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class FormulaList extends StatelessWidget {
   final Map<String, List<FormulaEntry>> groupedFormulas;
   FormulaList({required this.groupedFormulas});
@@ -594,7 +604,11 @@ class FormulaList extends StatelessWidget {
                                 SizedBox(height: 4),
                                 Math.tex(
                                   f.latex,
-                                  textStyle: TextStyle(fontSize: 18),
+                                  textStyle: TextStyle(
+                                    fontFamily: 'RobotoMono', // KeiFont と比べて違和感の少ない英数字フォント
+                                    color: Colors.black,
+                                    height: 1.2, // 行間調整で日本語と馴染む
+                                    fontSize: 22),
                                 ),
                               ],
                             ),

@@ -41,7 +41,7 @@ ${\displaystyle R\,I(t)+V_c(t)=V_0}$
 $${\displaystyle I(t)=C\,V_c'(t)}$$
 これを先の式に代入して整理すると
 \begin{aligned}
-& R\bigl(C\,V_c'(t)\bigr)+V_c(t)=V_0\\[5pt]
+& R\bigl(C\,V_c'(t)\bigr)+V_c(t)=V_0\\[6pt]
 \Leftrightarrow \ \  & RC\,V_c'(t)+V_c(t)=V_0
 \end{aligned}
 が得られる。　Q.E.D
@@ -71,7 +71,7 @@ $$
 $$
 この式を微分方程式から引き算すると、
 \begin{aligned}
-&RC\,(V_c'(t)-V_0')+V_c(t)-V_0=V_0-V_0\\[5pt]
+&RC\,(V_c'(t)-V_0')+V_c(t)-V_0=V_0-V_0\\[6pt]
 \Leftrightarrow \ & RC\,(V_c(t)-V_0)'+V_c(t)-V_0=0
 \end{aligned}
 ここで，${u(t):=V_c(t)-V_0}$ とおくと，
@@ -84,11 +84,11 @@ $${\displaystyle u(t)=u(0)\,e^{-\frac{t}{RC}}}$$</div>
 <div class="proof-box">証明</div><p>
 上の命題の式の両辺$をRC\cdot u(t)$で割って、変数分離すると、下式を得る。
 $${\frac{1}{u(t)}u'(t)=-\frac{1}{RC}}$$
-これを時刻 \(t'\) を変数として \(0\) から \(t\) まで積分すると， $${\int_{0}^{t}\frac{1}{u(t')}\frac{du}{dt'}\,dt'=\int_{0}^{t}-\frac{1}{RC}\,dt'}$$ となる。<br> 
+これを時刻 $t'$ を変数として $0$ から $t$ まで積分すると， $${\int_{0}^{t}\frac{1}{u(t')}\frac{du}{dt'}\,dt'=\int_{0}^{t}-\frac{1}{RC}\,dt'}$$ となる。<br> 
 <div class="paragraph-box">右辺</div><br> 
 定数の定積分により${\displaystyle -\frac{t}{RC}}$ となる。<br> 
 <div class="paragraph-box">左辺</div><br> 
-置換 \(s=u(t')\) により \begin{aligned} \int_{u(0)}^{u(t)}\frac{1}{s}\,ds &=\ln|u(t)|-\ln|u(0)|\\[5pt] &=\ln\!\Biggl(\frac{|u(t)|}{|u(0)|}\Biggr) \end{aligned} となる。<br><br> 
+置換 $s=u(t')$ により \begin{aligned} \int_{u(0)}^{u(t)}\frac{1}{s}\,ds &=\ln|u(t)|-\ln|u(0)|\\[6pt] &=\ln\!\Biggl(\frac{|u(t)|}{|u(0)|}\Biggr) \end{aligned} となる。<br><br> 
 以上より、右辺=左辺なので、$${\ln\!\Biggl(\frac{|u(t)|}{|u(0)|}\Biggr)=-\frac{t}{RC}}$$ 
 ここで両辺の指数を取って下式が得られる。　
 $${u(t)=u(0)\,e^{-\frac {t} {RC}}}$$　Q.E.D

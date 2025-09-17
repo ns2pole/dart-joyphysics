@@ -7,9 +7,9 @@ final ohmsLaw = Video(
   videoURL: "srFoXxEUDIQ",
   equipment: ["乾電池3本", "100Ω抵抗", "200Ω抵抗", "マルチメーター", "導線"],
   costRating: "★★☆",
-  latex: """
+  latex: r"""
 <div class="common-box">ポイント</div>
-<p>オームの法則 \$V = IR\$ を使って、直列回路の中の電流や電位差を求められます。</p>
+<p>オームの法則 $V = IR$ を使って、直列回路の中の電流や電位差を求められます。</p>
 
 <p>ここでは、100Ωと200Ωの抵抗を直列に接続し、4.5Vの電池につなぎました。</p>
 
@@ -20,22 +20,22 @@ final ohmsLaw = Video(
 </div>
 
 <p>このとき、回路全体の抵抗は次の通り：</p>
-<p>\$\$ R_{\\text{total}} = 100\\,\\Omega + 200\\,\\Omega = 300\\,\\Omega \$\$</p>
+<p>$$ R_{\text{total}} = 100\,\Omega + 200\,\Omega = 300\,\Omega $$</p>
 
-<p>電流 \$I\$ は：</p>
-<p>\$\$
-\\begin{align*}
-I &= \\frac{V}{R_{\\text{total}}} = \\frac{4.5}{300} = 0.015\\,\\text{A} \\\\
-  &= 15\\,\\text{mA}
-\\end{align*}
-\$\$</p>
+<p>電流 $I$ は：</p>
+<p>$$
+\begin{aligned}
+I &= \frac{V}{R_{\text{total}}} = \frac{4.5}{300} = 0.015\,\text{A} \\
+  &= 15\,\text{mA}
+\end{aligned}
+$$</p>
 
-<p>100Ωの抵抗にかかる電位差 \$V_{100}\$ は：</p>
-<p>\$\$
-\\begin{align*}
-V_{100} &= IR = 0.015 \\times 100 = 1.5\\,\\text{V}
-\\end{align*}
-\$\$</p>
+<p>100Ωの抵抗にかかる電位差 $V_{100}$ は：</p>
+<p>$$
+\begin{aligned}
+V_{100} &= IR = 0.015 \times 100 = 1.5\,\text{V}
+\end{aligned}
+$$</p>
 
 <ul>
   <li>直列回路では電流はすべての抵抗に等しく流れる</li>

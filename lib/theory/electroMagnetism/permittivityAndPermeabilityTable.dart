@@ -139,11 +139,11 @@ td, th {
   <tr>
     <td>
       <span class="item-title">電束密度 (χ<sub>e</sub>)</span>
-      <span class="formula">\(\displaystyle \vec{D}\underset{定義}{:=}\varepsilon_{0}\,\vec{E} + \vec{P}\)</span>
+      <span class="formula">$\displaystyle \vec{D}\underset{定義}{:=}\varepsilon_{0}\,\vec{E} + \vec{P}$</span>
     </td>
     <td>
       <span class="item-title">磁束密度 (χ<sub>m</sub>)</span>
-      <span class="formula">\(\displaystyle \vec{B}\underset{定義}{:=}\mu_0\vec{H}+\vec{M}\)</span>
+      <span class="formula">$\displaystyle \vec{B}\underset{定義}{:=}\mu_0\vec{H}+\vec{M}$</span>
     </td>
   </tr>
 
@@ -156,59 +156,59 @@ td, th {
   <tr>
     <td>
       <span class="item-title">分極と電気感受率 (χ<sub>e</sub>)</span>
-      <span class="formula">\(\displaystyle \vec{P}=\chi_{e}\,\varepsilon_{0}\,\vec{E}\)</span>
+      <span class="formula">$\displaystyle \vec{P}=\chi_{e}\,\varepsilon_{0}\,\vec{E}$</span>
     </td>
     <td>
       <span class="item-title">磁気分極と磁化率 (χ<sub>m</sub>)</span>
-      <span class="formula">\(\displaystyle \vec{M}=\chi_{m}\mu_{0}\vec{H}\)</span>
+      <span class="formula">$\displaystyle \vec{M}=\chi_{m}\mu_{0}\vec{H}$</span>
     </td>
   </tr>
 
   <tr>
     <td>
       <span class="item-title">誘電率 (ε)</span>
-      <span class="formula">\(\displaystyle \vec{D}=\varepsilon\,\vec{E}\)</span>
-      <span class="formula">\(\displaystyle \varepsilon=\varepsilon_{0}\,(1+\chi_{e})\)</span>
+      <span class="formula">$\displaystyle \vec{D}=\varepsilon\,\vec{E}$</span>
+      <span class="formula">$\displaystyle \varepsilon=\varepsilon_{0}\,(1+\chi_{e})$</span>
     </td>
     <td>
       <span class="item-title">透磁率 (μ)</span>
-      <span class="formula">\(\displaystyle \vec{B}=\mu\,\vec{H}\)</span>
-      <span class="formula">\(\displaystyle \mu=\mu_{0}\,(1+\chi_{m})\)</span>
+      <span class="formula">$\displaystyle \vec{B}=\mu\,\vec{H}$</span>
+      <span class="formula">$\displaystyle \mu=\mu_{0}\,(1+\chi_{m})$</span>
     </td>
   </tr>
 
   <tr>
     <td>
       <span class="item-title">比誘電率 (ε<sub>r</sub>)</span>
-      <span class="formula">\(\displaystyle \varepsilon_{r}=\dfrac{\varepsilon}{\varepsilon_{0}}=1+\chi_{e}\)</span>
+      <span class="formula">$\displaystyle \varepsilon_{r}=\dfrac{\varepsilon}{\varepsilon_{0}}=1+\chi_{e}$</span>
     </td>
     <td>
       <span class="item-title">比透磁率 (μ<sub>r</sub>)</span>
-      <span class="formula">\(\displaystyle \mu_{r}=\dfrac{\mu}{\mu_{0}}=1+\chi_{m}\)</span>
+      <span class="formula">$\displaystyle \mu_{r}=\dfrac{\mu}{\mu_{0}}=1+\chi_{m}$</span>
     </td>
   </tr>
 
   <tr>
     <td>
       <span class="item-title">真空の誘電率 (ε<sub>0</sub>)</span>
-      <span class="formula">約\(\ \displaystyle  8.85\times10^{-12}\ \mathrm{F/m}\)</span>
+      <span class="formula">約$\ \displaystyle  8.85\times10^{-12}\ \mathrm{F/m}$</span>
     </td>
     <td>
       <span class="item-title">真空の透磁率 (μ<sub>0</sub>)</span>
-      <span class="formula">約\(\ \displaystyle  4 \pi \times10^{-7}\ \mathrm{H/m}\)</span>
+      <span class="formula">約$\ \displaystyle  4 \pi \times10^{-7}\ \mathrm{H/m}$</span>
     </td>
   </tr>
 
   <tr>
     <td colspan="2">
       <span class="item-title">真空中の光速 (c)</span>
-      <span class="formula">\(\displaystyle c=\dfrac{1}{\sqrt{\varepsilon_{0}\mu_{0}}}\fallingdotseq 2.99\times10^{8}\ \mathrm{m/s}\)</span>
+      <span class="formula">$\displaystyle c=\dfrac{1}{\sqrt{\varepsilon_{0}\mu_{0}}}\fallingdotseq 2.99\times10^{8}\ \mathrm{m/s}$</span>
     </td>
   </tr>
   <tr>
     <td colspan="2">
       <span class="item-title">媒質中の光速（位相速度）</span>
-      <span class="formula">\(\displaystyle v=\dfrac{1}{\sqrt{\varepsilon\mu}}=\dfrac{c}{\sqrt{\varepsilon_{r}\mu_{r}}}\)</span>
+      <span class="formula">$\displaystyle v=\dfrac{1}{\sqrt{\varepsilon\mu}}=\dfrac{c}{\sqrt{\varepsilon_{r}\mu_{r}}}$</span>
     </td>
   </tr>
 </table>
@@ -219,17 +219,17 @@ td, th {
 // <div class="explain">
 //   <h4>説明（箇条書き）</h4>
 //   <ul>
-//     <li>電束密度は一般には \(\vec{D}=\varepsilon_0\vec{E} + \vec P\)線形応答の物質の場合 \(\vec{D}=\varepsilon\vec{E}\)</li>
-//     <li>\(\vec{P}\)：単位体積あたりの電気双極子モーメント密度（分極）。線形媒質では \(\vec{P}=\chi_{e}\varepsilon_{0}\vec{E}\)</li>
-//     <li>\(\chi_{e}\)：電気感受率（無次元）。\(\varepsilon=\varepsilon_{0}(1+\chi_{e})\) により誘電率と結びつく。</li>
-//     <li>\(\varepsilon_{r}=\displaystyle \frac{\varepsilon}{\varepsilon_{0}}\)：比誘電率（無次元）</li>
+//     <li>電束密度は一般には $\vec{D}=\varepsilon_0\vec{E} + \vec P$線形応答の物質の場合 $\vec{D}=\varepsilon\vec{E}$</li>
+//     <li>$\vec{P}$：単位体積あたりの電気双極子モーメント密度（分極）。線形媒質では $\vec{P}=\chi_{e}\varepsilon_{0}\vec{E}$</li>
+//     <li>$\chi_{e}$：電気感受率（無次元）。$\varepsilon=\varepsilon_{0}(1+\chi_{e})$ により誘電率と結びつく。</li>
+//     <li>$\varepsilon_{r}=\displaystyle \frac{\varepsilon}{\varepsilon_{0}}$：比誘電率（無次元）</li>
 //     <br>
-//     <li>\(\chi_{m}\)：磁化率（無次元）。線形媒質では \(\vec{M}=\chi_{m}\vec{H}\)</li>
-//     <li>\(\mu\)：透磁率（H/m）。磁束密度は \(\vec{B}=\mu\vec{H}\)</li>
-//     <li>\(\mu_{r}=でぃs\displaystyle \frac{\mu}{\mu_{0}}\)：比透磁率（無次元）</li>
+//     <li>$\chi_{m}$：磁化率（無次元）。線形媒質では $\vec{M}=\chi_{m}\vec{H}$</li>
+//     <li>$\mu$：透磁率（H/m）。磁束密度は $\vec{B}=\mu\vec{H}$</li>
+//     <li>$\mu_{r}=でぃs\displaystyle \frac{\mu}{\mu_{0}}$：比透磁率（無次元）</li>
 //     <br>
-//     <li>光速は真空定数 \(\varepsilon_{0},\mu_{0}\) から決まる：\(c=\displaystyle\displaystyle \frac {1}{\sqrt{\varepsilon_{0}\mu_{0}}}\)</li>
-//     <li>媒質中の位相速度は \(v=\displaystyle\displaystyle \frac{1}{\sqrt{\varepsilon\mu}}=\displaystyle \frac{c}{\sqrt{\varepsilon_{r}\mu_{r}}}\)（線形・等方媒質の場合）</li>
+//     <li>光速は真空定数 $\varepsilon_{0},\mu_{0}$ から決まる：$c=\displaystyle\displaystyle \frac {1}{\sqrt{\varepsilon_{0}\mu_{0}}}$</li>
+//     <li>媒質中の位相速度は $v=\displaystyle\displaystyle \frac{1}{\sqrt{\varepsilon\mu}}=\displaystyle \frac{c}{\sqrt{\varepsilon_{r}\mu_{r}}}$（線形・等方媒質の場合）</li>
 //     <li>注：ここでは線形・等方媒質を仮定している。実際には分散・損失・異方性・非線形性がある。</li>
 //   </ul>
 // </div>

@@ -5,10 +5,10 @@ final fook = Video(
     title: "バネの伸びと弾性力の関係",
     videoURL: "x1iNnA55Jcw",
     equipment: ["ばね", "おもり", "巻尺", "スマホ"],
-    costRating: "★★★", latex: """
+    costRating: "★★★", latex: r"""
     <div class="common-box">ポイント</div>
-    <p>\$\\displaystyle F=-kx\$（\$F\$: 弾性力, \$k\$: ばね定数, \$x\$: 変位）</p>
-    <p>ばね定数\$k\$はばねの硬さを表します。</p>
+    <p>$\displaystyle F=-kx$（$F$: 弾性力, $k$: ばね定数, $x$: 変位）</p>
+    <p>ばね定数$k$はばねの硬さを表します。</p>
     <div class="common-box">解説</div>
     <p>今回の実験の結果は下記の通り。</p>
     <div style="text-align:center; margin:1em 0;">

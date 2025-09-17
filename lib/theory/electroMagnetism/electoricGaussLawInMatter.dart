@@ -5,9 +5,9 @@ final electoricGaussLawInMatter = TheoryTopic(
   latexContent: r"""
 <div class="theory-common-box">定理（線形媒質中の電場のガウスの法則）：電荷の種類を自由電荷$Q_{free}$と誘電体の中で束縛されている束縛電荷$Q_{bound}$に分けるとすると、
 線形媒質物質中の電束密度は下記の物質中のマクスウェル方程式を満たす。
-\[
+$$
 \oint_{S}\vec{E}\cdot d\vec{S}=\frac{1}{\varepsilon}\sum_{S内部}Q_{free}
-\]
+$$
 </div>
 <div class="proof-box">証明</div>
 真空中のマクスウェル方程式より、
@@ -16,9 +16,9 @@ final electoricGaussLawInMatter = TheoryTopic(
 
 <div class="theory-common-box">定理（物質中の電場のガウスの法則）：電荷の種類を自由電荷$Q_{free}$と誘電体の中で束縛されている束縛電荷$Q_{bound}$に分けるとすると、
 線形媒質物質中の電束密度は下記の物質中のマクスウェル方程式を満たす。
-\[
+$$
 \oint_{S}\vec{D}\cdot d\vec{S}=Q_{free}
-\]
+$$
 </div>
 <div class="proof-box">証明</div>
 <p>

@@ -3,10 +3,10 @@ import '../../model.dart';
 final magneticGaussLaw = TheoryTopic(
   title: '磁場のガウスの法則',
   latexContent: r"""
-<div class="theory-common-box">法則（電荷と電場とガウスの法則）：任意の閉曲面$S$に対し、下記が成り立つ。この法則を磁場のガウスの法則という。
-\[
+<div class="theory-common-box">法則（磁場のガウスの法則）：任意の閉曲面$S$に対し、下記が成り立つ。この法則を磁場のガウスの法則という。
+$$
 \oint_{S} \vec{B} \cdot d\vec{S} = 0
-\]
+$$
 </div>
 <div class="paragraph-box">説明</div><br>
 
