@@ -116,86 +116,6 @@ Future<String> resolveAssetPath(String category, String iconName) async {
 }
 
 
-
-class VideoDetailView extends StatelessWidget {
-  final Video video;
-  const VideoDetailView({required this.video, Key? key}) : super(key: key);
-
-  // -----------------------------
-  // LaTeX を <tex> タグに変換
-  // -----------------------------
-  // String _wrapTexWithTags(String html) {
-  //   // display math
-  //   final displayRe = RegExp(r'\$\$(.*?)\$\$', dotAll: true);
-  //   html = html.replaceAllMapped(displayRe, (m) {
-  //     String inner = m[1]!;
-  //     inner = inner.replaceAll('&', '%%AMP%%'); // プレースホルダー
-  //     return '<tex display="true">$inner</tex>';
-  //   });
-
-  //   // inline math
-  //   final inlineRe = RegExp(r'\$([^\$]+?)\$');
-  //   html = html.replaceAllMapped(inlineRe, (m) {
-  //     String inner = m[1]!;
-  //     inner = inner.replaceAll('&', '%%AMP%%'); // プレースホルダー
-  //     return '<tex>$inner</tex>';
-  //   });
-
-  //   return html;
-  // }
-@override
-Widget build(BuildContext context) {
-  final htmlData = video.latex ?? '';
-
-  return Scaffold(
-    appBar: AppBar(title: Text(video.title)),
-    body: SingleChildScrollView(
-      padding: const EdgeInsets.all(6),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-
-          // 複数ウィジェット対応
-          if (video.experimentWidgets != null && video.experimentWidgets!.isNotEmpty)
-            ...video.experimentWidgets!.map((w) => Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: SizedBox(
-                    height: (w is HasHeight) ? w.widgetHeight : 220,
-                    width: double.infinity,
-                    child: w,
-                  ),
-                )),
-
-          if (video.videoURL.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: YouTubeWebView(videoURL: video.videoURL),
-              ),
-            ),
-
-          if (video.equipment.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: EquipmentListView(equipment: video.equipment),
-            ),
-
-          // HTML + LaTeX
-          if (htmlData.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.only(top: 16),
-              child: KeiHtml(data: htmlData),
-            ),
-        ],
-      ),
-    ),
-  );
-}
-
-}
-
 // ---- あなたのウィジェット ----
 class _VideoCategoryList extends StatelessWidget {
   final List<Subcategory> subcategories;
@@ -306,57 +226,56 @@ class _VideoCategoryList extends StatelessWidget {
 
 
 
-// class VideoDetailView extends StatelessWidget {
-//   final Video video;
-//   const VideoDetailView({required this.video, Key? key}) : super(key: key);
+class VideoDetailView extends StatelessWidget {
+  final Video video;
+  const VideoDetailView({required this.video, Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text(video.title)),
-//       body: SingleChildScrollView(
-//         padding: const EdgeInsets.all(6),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             // 複数ウィジェット対応
-//             if (video.experimentWidgets != null && video.experimentWidgets!.isNotEmpty)
-//               ...video.experimentWidgets!.map((w) => Padding(
-//                     padding: const EdgeInsets.only(top: 16),
-//                     child: SizedBox(
-//                       height: (w is HasHeight) ? w.widgetHeight : 220, // デフォルト高さ
-//                       width: double.infinity,
-//                       child: w,
-//                     ),
-//                   )),
-//             if (video.videoURL.isNotEmpty)
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 16),
-//                 child: SizedBox(
-//                   height: 200,
-//                   width: double.infinity,
-//                   child: YouTubeWebView(videoURL: video.videoURL),
-//                 ),
-//               ),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(video.title)),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(6),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 複数ウィジェット対応
+            if (video.experimentWidgets != null && video.experimentWidgets!.isNotEmpty)
+              ...video.experimentWidgets!.map((w) => Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: SizedBox(
+                      height: (w is HasHeight) ? w.widgetHeight : 220, // デフォルト高さ
+                      width: double.infinity,
+                      child: w,
+                    ),
+                  )),
+            if (video.videoURL.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: SizedBox(
+                  height: 200,
+                  width: double.infinity,
+                  child: YouTubeWebView(videoURL: video.videoURL),
+                ),
+              ),
 
-//             if (video.equipment.isNotEmpty)
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 16),
-//                 child: EquipmentListView(equipment: video.equipment),
-//               ),
+            if (video.equipment.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: EquipmentListView(equipment: video.equipment),
+              ),
 
-//             if (video.latex != null)
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 16),
-//                 child: LatexWebView(latexHtml: video.latex!),
-//               ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
+            if (video.latex != null)
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: LatexWebView(latexHtml: video.latex!),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 
 
@@ -367,160 +286,7 @@ const TextStyle keiFontStyle = TextStyle(
   fontSize: 18,
 );
 
-// 共通の TagExtension リストを返す関数
-List<TagExtension> buildKeiTagExtensions() {
-  return [
 
-    
-TagExtension(
-  tagsToExtend: {"div"},
-  builder: (extCtx) {
-    final className = extCtx.element?.classes.join(' ') ?? '';
-final rawContent = (extCtx.innerHtml ?? '').replaceAll('%%AMP%%', '&');
-
-final children = <Widget>[];
-final regex = RegExp(r'(<tex.*?>.*?</tex>)', dotAll: true);
-int lastEnd = 0;
-
-for (final m in regex.allMatches(rawContent)) {
-  if (m.start > lastEnd) {
-    children.add(Text(
-      rawContent.substring(lastEnd, m.start),
-      style: keiFontStyle.copyWith(fontSize: 17),
-    ));
-  }
-
-  String match = m.group(0)!;
-  final isDisplay = match.contains('display="true"');
-
-  // <tex ...> と </tex> を除去
-  final math = match
-      .replaceFirst(RegExp(r'<tex.*?>'), '')
-      .replaceFirst('</tex>', '');
-
-  final mathWidget = Math.tex(
-    math,
-    mathStyle: isDisplay ? MathStyle.display : MathStyle.text,
-    textStyle: TextStyle(
-        fontFamily: 'RobotoMono', // KeiFont と比べて違和感の少ない英数字フォント
-        fontSize: isDisplay ? 22: 20,
-        color: Colors.black,
-        height: 1.2, // 行間調整で日本語と馴染む
-    ),
-    onErrorFallback: (e) => Text(
-      'LaTeX parse error: ${e.message}',
-      style: const TextStyle(color: Colors.red),
-    ),
-  );
-
-  children.add(
-    isDisplay
-        ? Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            child: Center(child: mathWidget),
-          )
-        : mathWidget,
-  );
-
-  lastEnd = m.end;
-}
-
-if (lastEnd < rawContent.length) {
-  children.add(Text(
-    rawContent.substring(lastEnd),
-    style: keiFontStyle.copyWith(fontSize: 17),
-  ));
-}
-
-final contentWidget = Wrap(
-  crossAxisAlignment: WrapCrossAlignment.center,
-  alignment: WrapAlignment.start,
-  children: children,
-);
-
-    // className に応じた装飾
-    switch (className) {
-      case 'common-box':
-        return Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          margin: EdgeInsets.zero,
-          decoration: BoxDecoration(
-            color: const Color(0xffccffcc),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(width: 1.0, color: Colors.black),
-          ),
-          child: contentWidget,
-        );
-      case 'theory-common-box':
-        return Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          margin: EdgeInsets.zero,
-          decoration: BoxDecoration(
-            color: const Color(0xffccffcc),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(width: 1.0, color: Colors.black),
-          ),
-          child: contentWidget,
-        );
-
-      case 'theorem-box':
-        return Container(
-          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-          margin: EdgeInsets.zero,
-          decoration: BoxDecoration(
-            color: const Color(0xfffbdfa2),
-            border: Border.all(width: 1.0, color: Colors.black),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: contentWidget,
-        );
-
-      default:
-        return contentWidget;
-    }
-  },
-),
-
-    // LaTeX 用 <tex>
-    TagExtension(
-      tagsToExtend: {"tex"},
-      builder: (extCtx) {
-        String texString = extCtx.innerHtml.replaceAll('%%AMP%%', '&');
-        final isDisplay = extCtx.styledElement?.attributes['display'] == 'true';
-        final mathWidget = Math.tex(
-          texString,
-          mathStyle: isDisplay ? MathStyle.display : MathStyle.text,
-          textStyle: TextStyle(fontSize: isDisplay ? 18 : 18),
-          onErrorFallback: (e) => Text('LaTeX parse error: ${e.message}'),
-        );
-        return isDisplay
-            ? Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                child: Center(child: mathWidget),
-              )
-            : mathWidget;
-      },
-    ),
-  ];
-}
-
-// 使い回し用のラッパー Widget（任意）
-class KeiHtml extends StatelessWidget {
-  final String data;
-  final void Function(String?, Map<String, String>?, dom.Element?)? onLinkTap;
-
-  const KeiHtml({required this.data, this.onLinkTap, Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Html(
-      data: data,
-      onLinkTap: onLinkTap,
-      // 共通拡張をここで渡す
-      extensions: buildKeiTagExtensions(),
-    );
-  }
-}
 class FormulaList extends StatelessWidget {
   final Map<String, List<FormulaEntry>> groupedFormulas;
   FormulaList({required this.groupedFormulas});

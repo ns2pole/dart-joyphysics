@@ -30,19 +30,20 @@ $$
 で与えられる。遠方 $|\vec r| \gg |\vec d|$ ではテイラー展開を行い、第一非自明な寄与のみ残す計算を行うが、これは磁気双極子の項と全く同じ証明なので<a href="app://openTopic?topic=magnetic">こちらの記事の命題2,3</a>を参考されたい。
 </p>
 
-</p>
 
 <div class="theory-common-box">命題(外部電場中でのトルク)：電気双極子 $\vec p$ が一様外部電場 $\vec E$ 中に置かれると、トルク $\vec{\tau}$ 下記となる。
 $$
 \vec{\tau} = \vec p \times \vec E
 $$
-</p>
+</div>
 
 <div class="paragraph-box">証明</div>
 <p>
 正電荷 +q と負電荷 -q に働く力はそれぞれ $\vec F_+ = q\vec E, \vec F_- = -q\vec E$ である。電荷間ベクトルを $\vec d$ とすると、
 $$
-\vec{\tau} = \frac{1}{2}\vec d \times q\vec E + \left(-\frac{1}{2}\vec d\right) \times (-q\vec E) = \vec p \times \vec E
+\begin{aligned}
+\vec{\tau} &= \frac{1}{2}\vec d \times q\vec E + \left(-\frac{1}{2}\vec d\right) \times (-q\vec E) \\[6pt]&= \vec p \times \vec E
+\end{aligned}
 $$
 　Q.E.D
 </p>

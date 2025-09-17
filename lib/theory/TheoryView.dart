@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:joyphysics/theory/theoryData.dart';
 import 'package:joyphysics/LatexView.dart';
-import 'package:joyphysics/experiment/ExperimentView.dart';
 import 'package:joyphysics/model.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:html/dom.dart' as dom;
 
 // ─────────────────────────────
 // TheoryListView
@@ -129,49 +127,38 @@ class TheoryListView extends StatelessWidget {
     );
   }
 }
+
 class TopicDetailPage extends StatelessWidget {
   final TheoryTopic topic;
 
   const TopicDetailPage({Key? key, required this.topic}) : super(key: key);
 
-  // -----------------------------
-  // LaTeX を <tex> タグに変換（VideoDetailView と同じ処理）
-  // -----------------------------
-  String _wrapTexWithTags(String html) {
-    // display math
-    final displayRe = RegExp(r'\$\$(.*?)\$\$', dotAll: true);
-    html = html.replaceAllMapped(displayRe, (m) {
-      String inner = m[1]!;
-      inner = inner.replaceAll('&', '%%AMP%%'); // プレースホルダー
-      return '<tex display="true">$inner</tex>';
-    });
-
-    // inline math
-    final inlineRe = RegExp(r'\$([^\$]+?)\$');
-    html = html.replaceAllMapped(inlineRe, (m) {
-      String inner = m[1]!;
-      inner = inner.replaceAll('&', '%%AMP%%');
-      return '<tex>$inner</tex>';
-    });
-
-    return html;
-  }
-
-  void _handleLink(BuildContext context, String? url) {
-    if (url == null) return;
-    debugPrint('Tapped URL: $url');
-    // launchUrl(Uri.parse(url)); // 必要ならここでブラウザに飛ばす
+  /// rawHtml が full-document なら body の中身を取り出す。
+  /// それ以外（断片 HTML / plain テキスト）はそのまま返す。
+  String _extractBodyFragment(String rawHtml) {
+    final s = rawHtml.trim();
+    final lower = s.toLowerCase();
+    if (lower.startsWith('<!doctype') || lower.startsWith('<html')) {
+      final bodyMatch = RegExp(r'<body[^>]*>([\s\S]*?)<\/body>', caseSensitive: false)
+          .firstMatch(s);
+      if (bodyMatch != null) return bodyMatch.group(1) ?? '';
+      final htmlMatch = RegExp(r'<html[^>]*>([\s\S]*?)<\/html>', caseSensitive: false)
+          .firstMatch(s);
+      if (htmlMatch != null) return htmlMatch.group(1) ?? '';
+      return s;
+    } else {
+      return s;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final rawHtml = topic.latexContent ?? '';
+    final rawHtml = topic!.latexContent;
     final bodyFragment = _extractBodyFragment(rawHtml);
-    final processedHtml = _wrapTexWithTags(bodyFragment);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(topic.title.replaceAll(RegExp(r'\$.*?\$'), "")),
+        title: Text(topic!.title.replaceAll(RegExp(r'\$.*?\$'), "")),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -179,8 +166,8 @@ class TopicDetailPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // --- 画像表示 ---
-              if (topic.imageAsset != null && topic.imageAsset!.isNotEmpty) ...[
+              // --- 画像表示（タップで全画面） ---
+              if (topic.imageAsset != null && topic.imageAsset!.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: GestureDetector(
@@ -188,8 +175,7 @@ class TopicDetailPage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) =>
-                              FullscreenImagePage(imageAsset: topic.imageAsset!),
+                          builder: (_) => FullscreenImagePage(imageAsset: topic.imageAsset!),
                         ),
                       );
                     },
@@ -208,6 +194,7 @@ class TopicDetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
+              if (topic.imageAsset != null && topic.imageAsset!.isNotEmpty) 
                 Text(
                   '全体像と本内容の位置付け',
                   textAlign: TextAlign.center,
@@ -216,44 +203,37 @@ class TopicDetailPage extends StatelessWidget {
                     color: Colors.black54,
                   ),
                 ),
-                const SizedBox(height: 10),
-              ],
+                const SizedBox(height: 10), // 画像と文字の間隔
+              // ↑ 挿入終わり
 
-              // --- HTML + LaTeX ---
-              if (processedHtml.isNotEmpty)
-                KeiHtml(
-                  data: processedHtml,
-                  onLinkTap: (String? url, Map<String, String>? attributes,
-                      dom.Element? element) {
-                    _handleLink(context, url);
-                  },
-                ),
-
-              // --- 動画ブロック ---
-              if (topic.videoURL != null && topic.videoURL!.isNotEmpty) ...[
+              // --- MathJax 表示 ---
+              LatexWebView(
+                latexHtml: bodyFragment,
+              ),
+               if (topic.videoURL != null && topic.videoURL!.isNotEmpty) ...[
+                // 見出し（中央揃え、丸角の枠で囲む）
                 Padding(
                   padding: const EdgeInsets.only(top: 16, bottom: 12),
                   child: Semantics(
                     header: true,
                     child: Center(
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.grey.shade800,
+                            color: Colors.grey.shade800, // 濃いめグレー
                             width: 1.5,
                           ),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(10.0), // 角丸
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.03),
                               blurRadius: 6,
-                              offset: const Offset(0, 2),
+                              offset: Offset(0, 2),
                             ),
                           ],
                         ),
-                        child: const Text(
+                        child: Text(
                           '本内容の対応実験',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -267,6 +247,7 @@ class TopicDetailPage extends StatelessWidget {
                   ),
                 ),
 
+                // 動画（既存のコード）
                 Padding(
                   padding: const EdgeInsets.only(top: 0),
                   child: SizedBox(
@@ -281,25 +262,6 @@ class TopicDetailPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  /// rawHtml が full-document なら body の中身を取り出す。
-  String _extractBodyFragment(String rawHtml) {
-    final s = rawHtml.trim();
-    final lower = s.toLowerCase();
-    if (lower.startsWith('<!doctype') || lower.startsWith('<html')) {
-      final bodyMatch = RegExp(r'<body[^>]*>([\s\S]*?)<\/body>',
-              caseSensitive: false)
-          .firstMatch(s);
-      if (bodyMatch != null) return bodyMatch.group(1) ?? '';
-      final htmlMatch = RegExp(r'<html[^>]*>([\s\S]*?)<\/html>',
-              caseSensitive: false)
-          .firstMatch(s);
-      if (htmlMatch != null) return htmlMatch.group(1) ?? '';
-      return s;
-    } else {
-      return s;
-    }
   }
 }
 
@@ -332,7 +294,7 @@ class FullscreenImagePage extends StatelessWidget {
 }
 
 Widget parseTextWithMath(String input, {bool isNew = false}) {
-  final regex = RegExp(r'($$(.+?)$$|$(.+?)$|\\\((.+?)\\\)|\\\[(.+?)\\\])', dotAll: true);
+  final regex = RegExp(r'(\$\$(.+?)\$\$|\$(.+?)\$|\\\((.+?)\\\)|\\\[(.+?)\\\])', dotAll: true);
   final spans = <InlineSpan>[];
 
   int lastIndex = 0;
