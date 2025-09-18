@@ -89,7 +89,7 @@ $$\begin{aligned}
 H_z(r_2)-H_z(r_1) &=0 \\
 \Leftrightarrow \quad H_z(r_1)&=H_z(r_2).
 \end{aligned}$$
-$r_1,r_2 \< a$ は任意なので，ソレノイド内部では
+$r_1,r_2 < a$ は任意なので，ソレノイド内部では
 $$
 H_z^{(\mathrm{in})}(r)=\text{定数}. \quad\square
 $$
@@ -133,7 +133,7 @@ $rz$ 平面内で、ソレノイド表面を跨ぐように、長方形ループ
 $$
 \oint_C \overrightarrow H \cdot d\overrightarrow l = nI\ell .
 $$
-また、この長方形のループについて，垂直辺の$r$の値をそれぞれ$r_1 \< a ,r_2 \> a$とすると、$H_r=0$であることから、縦辺の赤の部分の線積分のみが寄与して
+また、この長方形のループについて，垂直辺の$r$の値をそれぞれ$r_1 \< a ,r_2 > a$とすると、$H_r=0$であることから、縦辺の赤の部分の線積分のみが寄与して
 
 $$
 \oint_C \overrightarrow H \cdot d\overrightarrow l

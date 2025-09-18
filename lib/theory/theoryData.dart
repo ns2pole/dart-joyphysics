@@ -3,18 +3,138 @@ import 'package:joyphysics/model.dart';
 
 final Map<String, List<TheorySubcategory>> theoryData = {
   '物理のための数学': [
-    TheorySubcategory(
-      name: 'ベクトル',
-      topics: [
-        vectorComponent,
-      ],
-    ),
-    // TheorySubcategory(
-    //   name: '微分方程式',
-    //   topics: [
-    //     harmonic,
-    //   ],
-    // ),
+      TheorySubcategory(
+        name: '数列',
+        topics: [
+          sequencesInfiniteGeometricSeriesCoefficientOfRestitution,
+          sequencesHarmonicSequence,
+          sequencesTrigArithmeticInside,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: '微分',
+        topics: [
+          differentiationProductRule,
+          differentiationPositionVelocityAcceleration,
+          differentiationChainRule,
+          differentiationMaclaurinApproximation,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: '積分',
+        topics: [
+          integrationDisplacementVelocityVariation,
+          integrationFprimeOverF,
+          integrationTrigRmsAverageZero,
+          integrationGraphAverageValue,
+          integrationReciprocalIsothermal,
+          integrationPolynomialAdiabatic,
+          integrationTanSubstitutionCircularCurrentSolenoid,
+          integrationSubstitutionKxSquared,
+          integrationMeanValueTheorem,
+          integrationRiemannSum,
+          integrationFundamentalTheoremCalculus,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: 'ベクトル',
+        topics: [
+          vectorComponent, // 既存ファイルの変数名を残しています
+          vectorsBasic,
+          vectorsAddition,
+          vectorsSubtractionRelativeVelocityPosition,
+          vectorsNorm,
+          vectorsDecomposition,
+          vectorsComponents,
+          vectorsLinearIndependence,
+          vectorsCentroidInternalDivision,
+          vectorsCrossProduct,
+          vectorsDotProduct,
+          vectorsCoordinateTransformation,
+          vectorsVectorFields,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: '三角関数',
+        topics: [
+          trigSumToProduct,
+          trigFunctionsBasic,
+          trigPeriodicity,
+          trigSumToProductSeparation,
+          trigAddition45deg,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: '関数方程式',
+        topics: [
+          funceqRecurrenceInitialValue,
+          funceqFunctionalEquations,
+          funceqFreeFall,
+          funceqBinetEquation,
+          funceqSimpleHarmonicMotion,
+          funceqAirResistance,
+          funceqDampedOscillation,
+          funceqHomogeneousDifferentialEquations,
+          funceqNonhomogeneousDifferentialEquations,
+          funceqSystemsCircuitsLorentz,
+          funceqPoissonEquation,
+          funceqUniquenessOfSolutions,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: '二次曲線',
+        topics: [
+          conic2dWavesHyperbolaEquation,
+          conicQuadraticVertexEllipse,
+          conicEllipseArea,
+          conicEllipseEquation,
+          conicEllipseParametrization,
+          conicCircleParabolaApproximation,
+          conicFoci,
+          conicEccentricity,
+          conicPolarEquations,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: '存在・全称',
+        topics: [
+          existenceForAllTFxTEqualsZeroNode,
+          existenceForAllTFprimeFxTEqualsZeroAntinode,
+          existenceExistsNSinThetaEqualsNa,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: '多変数関数',
+        topics: [
+          multivarTrig1Plus1Vars,
+          multivarTrig2Plus1Vars,
+          multivarTrig3Plus1Vars,
+        ],
+      ),
+
+      TheorySubcategory(
+        name: 'その他',
+        topics: [
+          othersSystemsLinearEquations,
+          othersHarmonicMean,
+          othersLinePointSymmetryTransformations,
+          othersSpiral,
+          othersLineIntegrals,
+          othersSurfaceIntegralsFlux,
+          othersEnvelopeCurves,
+          othersRmsVelocity,
+          othersDimensionalAnalysis,
+          othersEllipticIntegralsCircularCurrentPendulum,
+        ],
+      ),
   ],
   '力学理論': [
     TheorySubcategory(
@@ -178,8 +298,10 @@ final Map<String, List<TheorySubcategory>> theoryData = {
     TheorySubcategory(
       name: '定常電流が作る磁場',
       topics: [
+        biotSavartLaw,
         infiniteStraightCurrent,
         solenoidMagneticFieldProp,
+        bioSarvartLawForCircleCurrent,
         // electricDipole
       ],
     ),
@@ -187,6 +309,7 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       name: '電気回路',
       topics: [
         rcCircuitTheory,
+        rcCircuitDischarge
       ],
     ),
     TheorySubcategory(

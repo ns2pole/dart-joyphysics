@@ -16,7 +16,7 @@ final rigidBodyBalanceOfForces = TheoryTopic(
 ここで、別の地点$P$を原点に取り替えると質点系に働く力のモーメントの総和は$\overrightarrow{M_P} (t) = \displaystyle \sum_{i=1}^{n} \Bigr(\overrightarrow{OP}+\overrightarrow {r_i}(t)\Bigr) \times \overrightarrow {F_i}(t)$となる。
 これを変形すると、
 $$\begin{aligned}
-\displaystyle \overrightarrow{M_P} (t) &= \sum_{i=1}^{n} \Bigr(\overrightarrow{OP}+\overrightarrow {r_i}(t)\Bigr) \times \overrightarrow {F_i}(t)\\[6pt] 
+\displaystyle &\qquad \overrightarrow{M_P} (t) \\[6pt]&= \sum_{i=1}^{n} \Bigr(\overrightarrow{OP}+\overrightarrow {r_i}(t)\Bigr) \times \overrightarrow {F_i}(t)\\[6pt] 
 &= \sum_{i=1}^{n} \Bigr(\overrightarrow{OP}+ \times \overrightarrow {F_i}(t) + \overrightarrow {r_i}(t) \times \overrightarrow {F_i}(t)\Bigr) \\[6pt] 
 &=  \sum_{i=1}^{n} \overrightarrow{OP} \times  \overrightarrow {F_i}(t) +  \sum_{i=1}^{n}  \overrightarrow {r_i}(t) \times \overrightarrow {F_i}(t)  \\[6pt]
 &=  \overrightarrow{OP} \times \Bigr( \sum_{i=1}^{n}  \overrightarrow {F_i}(t)\Bigr) +  \sum_{i=1}^{n} \Bigr( \overrightarrow {r_i}(t) \times \overrightarrow {F_i}(t) \Bigr) \\[6pt]

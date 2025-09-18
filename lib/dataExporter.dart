@@ -71,10 +71,89 @@ export './experiment/waves/frequencyAndDoReMi.dart';
 export './experiment/waves/PianoWidget.dart';
 export './experiment/waves/soundGenerate.dart';
 
+export './theory/mathematics/sequences_infinite_geometric_series_coefficient_of_restitution.dart';
+export './theory/mathematics/sequences_harmonic_sequence.dart';
+export './theory/mathematics/sequences_trig_arithmetic_inside.dart';
 
-// theory/mathematics
-export './theory/mathematics/harmonic.dart';
+export './theory/mathematics/differentiation_product_rule.dart';
+export './theory/mathematics/differentiation_position_velocity_acceleration.dart';
+export './theory/mathematics/differentiation_chain_rule.dart';
+export './theory/mathematics/differentiation_maclaurin_approximation.dart';
+
+export './theory/mathematics/integration_displacement_velocity_variation.dart';
+export './theory/mathematics/integration_fprime_over_f.dart';
+export './theory/mathematics/integration_trig_rms_average_zero.dart';
+export './theory/mathematics/integration_graph_average_value.dart';
+export './theory/mathematics/integration_reciprocal_isothermal.dart';
+export './theory/mathematics/integration_polynomial_adiabatic.dart';
+export './theory/mathematics/integration_tan_substitution_circular_current_solenoid.dart';
+export './theory/mathematics/integration_substitution_kx_squared.dart';
+export './theory/mathematics/integration_mean_value_theorem.dart';
+export './theory/mathematics/integration_riemann_sum.dart';
+export './theory/mathematics/integration_fundamental_theorem_calculus.dart';
+
 export './theory/mathematics/vectorComponent.dart';
+export './theory/mathematics/vectors_basic.dart';
+export './theory/mathematics/vectors_addition.dart';
+export './theory/mathematics/vectors_subtraction_relative_velocity_position.dart';
+export './theory/mathematics/vectors_norm.dart';
+export './theory/mathematics/vectors_decomposition.dart';
+export './theory/mathematics/vectors_components.dart';
+export './theory/mathematics/vectors_linear_independence.dart';
+export './theory/mathematics/vectors_centroid_internal_division.dart';
+export './theory/mathematics/vectors_cross_product.dart';
+export './theory/mathematics/vectors_dot_product.dart';
+export './theory/mathematics/vectors_coordinate_transformation.dart';
+export './theory/mathematics/vectors_vector_fields.dart';
+
+export './theory/mathematics/trig_sum_to_product.dart';
+export './theory/mathematics/trig_functions_basic.dart';
+export './theory/mathematics/trig_periodicity.dart';
+export './theory/mathematics/trig_sum_to_product_separation.dart';
+export './theory/mathematics/trig_addition_45deg.dart';
+
+export './theory/mathematics/funceq_recurrence_initial_value.dart';
+export './theory/mathematics/funceq_functional_equations.dart';
+export './theory/mathematics/funceq_free_fall.dart';
+export './theory/mathematics/funceq_binet_equation.dart';
+export './theory/mathematics/funceq_simple_harmonic_motion.dart';
+export './theory/mathematics/funceq_air_resistance.dart';
+export './theory/mathematics/funceq_damped_oscillation.dart';
+export './theory/mathematics/funceq_homogeneous_differential_equations.dart';
+export './theory/mathematics/funceq_nonhomogeneous_differential_equations.dart';
+export './theory/mathematics/funceq_systems_circuits_lorentz.dart';
+export './theory/mathematics/funceq_poisson_equation.dart';
+export './theory/mathematics/funceq_uniqueness_of_solutions.dart';
+
+export './theory/mathematics/conic_2d_waves_hyperbola_equation.dart';
+export './theory/mathematics/conic_quadratic_vertex_ellipse.dart';
+export './theory/mathematics/conic_ellipse_area.dart';
+export './theory/mathematics/conic_ellipse_equation.dart';
+export './theory/mathematics/conic_ellipse_parametrization.dart';
+export './theory/mathematics/conic_circle_parabola_approximation.dart';
+export './theory/mathematics/conic_foci.dart';
+export './theory/mathematics/conic_eccentricity.dart';
+export './theory/mathematics/conic_polar_equations.dart';
+
+export './theory/mathematics/existence_for_all_t_fx_t_equals_zero_node.dart';
+export './theory/mathematics/existence_for_all_t_fprime_fx_t_equals_zero_antinode.dart';
+export './theory/mathematics/existence_exists_n_sin_theta_equals_na.dart';
+
+export './theory/mathematics/multivar_trig_1_plus_1_vars.dart';
+export './theory/mathematics/multivar_trig_2_plus_1_vars.dart';
+export './theory/mathematics/multivar_trig_3_plus_1_vars.dart';
+
+export './theory/mathematics/others_systems_linear_equations.dart';
+export './theory/mathematics/others_harmonic_mean.dart';
+export './theory/mathematics/others_line_point_symmetry_transformations.dart';
+export './theory/mathematics/others_spiral.dart';
+export './theory/mathematics/others_line_integrals.dart';
+export './theory/mathematics/others_surface_integrals_flux.dart';
+export './theory/mathematics/others_envelope_curves.dart';
+export './theory/mathematics/others_rms_velocity.dart';
+export './theory/mathematics/others_dimensional_analysis.dart';
+export './theory/mathematics/others_elliptic_integrals_circular_current_pendulum.dart';
+
 
 // theory/dynamics
 export './theory/dynamics/uniformAcceleration.dart';
@@ -129,3 +208,6 @@ export './theory/electroMagnetism/magneticDipole.dart';
 export './theory/electroMagnetism/electricDipole.dart';
 export './theory/electroMagnetism/dipoleComparison.dart';
 export './theory/electroMagnetism/rcCircuit.dart';
+export './theory/electroMagnetism/rcCircuitDischarge.dart';
+export './theory/electroMagnetism/bioSarvartLawForCircleCurrent.dart';
+export './theory/electroMagnetism/bioSarvartLaw.dart';

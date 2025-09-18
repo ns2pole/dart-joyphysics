@@ -83,10 +83,14 @@ $$
 
 右辺第二項:
 $$\begin{aligned}
-\Bigl(\frac{x}{r}\Bigr)'&=\frac{x'}{r}-\frac{x}{r^2}r'=\frac{x'}{r}-\frac{x}{r^2}\Bigr(\frac{xx'+yy'}{\sqrt{x^2+y^2}}\Bigl)\\[6pt]
+&\quad \Bigl(\frac{x}{r}\Bigr)'\\[6pt]
+&=\frac{x'}{r}-\frac{x}{r^2}r'\\[6pt]
+&=\frac{x'}{r}-\frac{x}{r^2}\Bigr(\frac{xx'+yy'}{\sqrt{x^2+y^2}}\Bigl)\\[6pt]
 &=\frac{x'}{r}-x\frac{x x'+y y'}{r^3}\\[6pt]
 &=\frac{x'(x^2+y^2)}{r^3}-x\frac{x x'+y y'}{r^3}\\[6pt]
-&=\frac{x'y^2-xy y'}{r^3}=y\frac{x'y-xy'}{r^3}=-y\frac{L}{r^3}
+&=\frac{x'y^2-xy y'}{r^3}\\[6pt]
+&=y\frac{x'y-xy'}{r^3}\\[6pt]
+&=-y\frac{L}{r^3}
 \end{aligned}$$
 よって、
 
@@ -170,12 +174,16 @@ $$ により，離心率 $e$ の値によって軌道は次のように分類さ
 ・このケースがケプラー第一法則にあたる。極方程式の分母は常に正なので $r(\theta)$ は有界（最大値・最小値が存在）である。<br>
 ・近点（pericenter）と遠点（apocenter）はそれぞれ
 $$
-r_{\min}=\frac{L^{2}}{GM\,m^{2}(1+e)},\quad
-r_{\max}=\frac{L^{2}}{GM\,m^{2}(1-e)}.
+\begin{aligned}
+\begin{cases}
+\displaystyle r_{\min}=\frac{L^{2}}{GM\,m^{2}(1+e)}\quad\\[6pt]
+\displaystyle r_{\max}=\frac{L^{2}}{GM\,m^{2}(1-e)}
+\end{cases}
+\end{aligned}
 $$
 長半径は
 $$
-a=\frac{1}{2}\,(r_{\min}+r_{\max})=\frac{L^{2}}{GM\,m^{2}(1-e^{2})},
+a=\frac{1}{2}\,(r_{\min}+r_{\max})=\frac{L^{2}}{GM\,m^{2}(1-e^{2})}
 $$
 である。<br>
 ・近点・遠点はそれぞれ $a(1-e)$、$a(1+e)$ と表される。<br>
@@ -186,7 +194,7 @@ $$
 </div><br>
 極方程式は
 $$
-r(\theta)=\frac{L^{2}}{GM\,m^{2}(1+\cos(\theta-\alpha))}.
+r(\theta)=\frac{L^{2}}{GM\,m^{2}(1+\cos(\theta-\alpha))}
 $$
 分母が $1+\cos(\theta-\alpha)=0$ となる角、すなわち $\theta=\alpha+\pi$ に向かって $r\to\infty$。
 したがって放物線は唯一つの発散方向 $\theta=\alpha+\pi$ を持つ。<br>
@@ -195,11 +203,11 @@ $$
 </div><br>
 ・近点は $\cos(\theta-\alpha)=1$（すなわち $\theta=\alpha$）で達成され、値は
 $$
-r_{\min}=\frac{L^{2}}{GM\,m^{2}(1+e)}>0.
+r_{\min}=\frac{L^{2}}{GM\,m^{2}(1+e)}>0
 $$
 ・無限遠へ向かう角（漸近方向）は分母が零となる角で定まり、
 $$
-1+e\cos(\theta-\alpha)=0 \iff \cos(\theta-\alpha)=-\frac{1}{e},
+1+e\cos(\theta-\alpha)=0 \iff \cos(\theta-\alpha)=-\frac{1}{e}
 $$
 を満たす角が二つ存在する。これらが双曲線の二本の漸近方向に対応し、その方向に向かって $r\to\infty$ となる。
 
@@ -221,7 +229,7 @@ $$
 
 $$
 E=\frac{G^2M^2m^3}{2L^2}(e^2-1)
-   =-\frac{G^2M^2m^3}{2L^2}(1-e^2).
+   =-\frac{G^2M^2m^3}{2L^2}(1-e^2)
 $$
 
 上の式に軌道長半径
@@ -263,7 +271,7 @@ $\displaystyle r=e\Bigl|x\cos\alpha+y\sin\alpha-\frac{L^2}{GM m^2e}\Bigr|$
 となる．極座標 $(r,\theta)$ を用いると $x=r\cos\theta,\ y=r\sin\theta$ より
 
 $$
-\cos(\theta-\alpha)=\frac{x\cos\alpha+y\sin\alpha}{r}.
+\cos(\theta-\alpha)=\frac{x\cos\alpha+y\sin\alpha}{r}
 $$
 
 上の等式に代入すると、

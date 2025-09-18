@@ -35,6 +35,7 @@ class TheoryTopic {
   final String title;
   final String latexContent;
   final String? videoURL;
+  final bool? inPreparation;
   final bool isNew;
   final String? imageAsset; // ここを追加
 
@@ -43,6 +44,7 @@ class TheoryTopic {
     required this.latexContent,
     this.videoURL,
     this.isNew = false,
+    this.inPreparation = false,
     this.imageAsset, // コンストラクタにも追加
   });
 }

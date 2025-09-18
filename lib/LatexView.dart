@@ -43,14 +43,17 @@ class _LatexWebViewState extends State<LatexWebView> {
           onNavigationRequest: (NavigationRequest request) {
             final url = request.url;
             if (url.startsWith('app://')) {
-              _handleAppLink(context, url); // Flutter 側で処理
-              return NavigationDecision.prevent; // WebView では遷移させない
+              final handled = _handleAppLink(context, url);
+              return handled ? NavigationDecision.prevent : NavigationDecision.navigate;
             }
             return NavigationDecision.navigate;
           },
-          onPageFinished: (videoURL) async {
+          onPageFinished: (String videoURL) async {
             await _controller.runJavaScript('''
               MathJax.typesetPromise().then(() => {
+                try {
+                  document.querySelectorAll('a[target="_blank"]').forEach(function(a){ a.target = '_self'; });
+                } catch(e){}
                 setTimeout(() => {
                   SizeChannel.postMessage(document.body.scrollHeight.toString());
                 }, 100);
@@ -64,25 +67,41 @@ class _LatexWebViewState extends State<LatexWebView> {
   }
 
 
-  // ここに追加する
-  void _handleAppLink(BuildContext context, String url) {
-    final uri = Uri.parse(url);
-    final topicKey = uri.queryParameters['topic'];
+  bool _handleAppLink(BuildContext context, String url) {
+    try {
+      final uri = Uri.parse(url);
+      if (uri.scheme != 'app') return false;
+      if (uri.host != 'topic') return false;
 
-    TheoryTopic? target;
-    if (topicKey == 'magnetic') {
-      target = magneticDipole;
-    } else if (topicKey == 'electric') {
-      target = electricDipole;
-    }
+      final key = uri.queryParameters['video'] ?? uri.queryParameters['topic'];
+      if (key == null || key.isEmpty) return false;
 
-    if (target != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => TopicDetailPage(topic: target!),
-        ),
-      );
+      final Map<String, TheoryTopic> topicMap = {
+        'magnetic': magneticDipole,
+        'electric' : electricDipole,
+        'rcCircuit': rcCircuitTheory, // 追加済み
+      };
+
+      final target = topicMap[key];
+      if (target == null) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('指定されたトピックが見つかりません： $key')),
+          );
+        }
+        return true; // 処理済み扱い（Web 側遷移は不要）
+      }
+
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => TopicDetailPage(topic: target)),
+        );
+      }
+      return true;
+    } catch (e) {
+      debugPrint('handleAppLink parse error: $e -- url: $url');
+      return false;
     }
   }
 

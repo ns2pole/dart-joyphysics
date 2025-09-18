@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:joyphysics/theory/theoryData.dart';
@@ -14,6 +15,24 @@ class TheoryListView extends StatelessWidget {
 
   const TheoryListView({Key? key, required this.categoryName}) : super(key: key);
 
+          
+  // 小ヘルパー：サブカテゴリ見出し
+  Widget subHeader(String name, {bool disabled = false}) {
+    return Container(
+      width: double.infinity,
+      color: Colors.grey[300],
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      child: Text(
+        disabled ? '$name（準備中）' : name,
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          color: disabled ? Colors.black45 : Colors.black87,
+        ),
+      ),
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     final subcategories = theoryData[categoryName] ?? [];
@@ -72,56 +91,89 @@ class TheoryListView extends StatelessWidget {
               ),
             ),
 
-          // --- 既存のサブカテゴリ表示 ---
-          ...subcategories.map((sub) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // サブカテゴリ見出し
-                Container(
-                  width: double.infinity,
-                  color: Colors.grey[300],
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                  child: Text(
-                    sub.name,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+// --- ここを差し替える（元の ...subcategories.map(...) をこのブロックで置き換える） ---
+...<Widget>[
+  // フェーズ1：全サブカテゴリについて「アクティブ（inPreparation != true）だけ」を表示
+  for (final sub in subcategories) ...[
+    if (sub.topics.any((t) => t.inPreparation != true)) subHeader(sub.name),
+    for (final topic in sub.topics.where((t) => t.inPreparation != true))
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Material(
+            color: Colors.blue[50]?.withOpacity(0.1),
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+              title: parseTextWithMath(topic.title, isNew: topic.isNew),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => TopicDetailPage(topic: topic)),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    const SizedBox(height: 4),
+  ],
+
+  // フェーズ2：全サブカテゴリについて「準備中（inPreparation == true）だけ」を表示
+  for (final sub in subcategories) ...[
+    if (sub.topics.any((t) => t.inPreparation == true)) subHeader(sub.name, disabled: true),
+    for (final topic in sub.topics.where((t) => t.inPreparation == true))
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 6),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Material(
+                color: Colors.grey[200],
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                  title: Opacity(
+                    opacity: 0.6,
+                    child: parseTextWithMath(topic.title, isNew: topic.isNew),
+                  ),
+                  trailing: null,
+                  onTap: null, // 無効化
+                ),
+              ),
+            ),
+
+            // 「準備中」透かし
+            Positioned.fill(
+              child: IgnorePointer(
+                ignoring: true,
+                child: Center(
+                  child: Transform.rotate(
+                    angle: -math.pi / 12,
+                    child: Opacity(
+                      opacity: 0.18,
+                      child: Text(
+                        '準備中',
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[700],
+                          letterSpacing: 4,
+                        ),
+                      ),
                     ),
                   ),
                 ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    const SizedBox(height: 4),
+  ],
+],
 
-                // トピックリスト
-                ...sub.topics.map((topic) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 2),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 0),
-                      title: parseTextWithMath(
-                        topic.title,
-                        isNew: topic.isNew,
-                      ),
-                      tileColor: Colors.blue[50]?.withOpacity(0.1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => TopicDetailPage(topic: topic),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                }).toList(),
-                const SizedBox(height: 4),
-              ],
-            );
-          }).toList(),
         ],
       ),
     );

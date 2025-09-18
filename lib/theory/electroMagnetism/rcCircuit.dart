@@ -108,7 +108,7 @@ ${\displaystyle V_c(t)=V_0 + \bigl(-V_0\bigr)e^{-\frac{t}{RC}} = V_0\bigl(1-e^{-
 
 </p><div class="theory-common-box">命題 6(電流式と初期電流)：充電過程における回路電流は下記で表される。
 $${\displaystyle I(t)=\frac{V_0}{R}\,e^{-\frac{t}{RC}}}$$
-※特に、初期電流は$${\displaystyle I(0)=\frac{V_0}{R}}$$である。
+※特に、初期電流は${\displaystyle I(0)=\frac{V_0}{R}}$である。
 </div>
 
 <div class="proof-box">証明</div><p>
@@ -117,11 +117,11 @@ ${\displaystyle V_c'(t)=V_0\cdot\frac{1}{RC}e^{-\frac{t}{RC}}}$
 であるから
 ${\displaystyle I(t)=C\cdot V_0\cdot\frac{1}{RC}e^{-\frac{t}{RC}}=\frac{V_0}{R}e^{-\frac{t}{RC}}}$
 となる。<br>
-※特に$t=0$ を代入すれば ${\displaystyle I(0)=V_0/R}$ となる。　Q.E.D
+※特に$t=0$ を代入すれば ${\displaystyle I(0)=\frac{V_0}{R}}$ となる。　Q.E.D
 
 </p><div class="theory-common-box">補足：時定数</div>
 時定数 ${\displaystyle \tau=RC}$ は時間の尺度を与え，充電・放電の指数的変化の速さを決定する。特に ${\displaystyle t=\tau}$ において
-${\displaystyle V_c(\tau)=V_0(1-e^{-1})\approx 0.632\,V_0}$
+${\displaystyle V_c(\tau)=V_0(1-e^{-1})\fallingdotseq 0.632\,V_0}$
 が成立する。
 
 """,
