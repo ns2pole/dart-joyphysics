@@ -183,6 +183,13 @@ export './theory/dynamics/surfaceGravAndFookEnergyConservation.dart';
 export './theory/dynamics/twoDimPolarCoordinatesEqOfMotion.dart';
 export './theory/dynamics/rigidBodyBalanceOfForces.dart';
 export './theory/dynamics/workAndLineIntegral.dart';
+export './theory/dynamics/runge_lenz_vector.dart';
+export './theory/dynamics/1d_elastic_collision_energy_conservation.dart';
+export './theory/dynamics/simple_pendulum_period_elliptic_integrals.dart';
+export './theory/dynamics/moment_of_inertia.dart';
+export './theory/dynamics/physical_pendulum.dart';
+export './theory/dynamics/particle_motion_gravity_with_air_resistance.dart';
+export './theory/dynamics/2d_elastic_collision_equal_mass_on_stationary.dart';
 
 // theory/electroMagnetism
 export './theory/electroMagnetism/electoricGaussLaw.dart';
@@ -211,3 +218,20 @@ export './theory/electroMagnetism/rcCircuit.dart';
 export './theory/electroMagnetism/rcCircuitDischarge.dart';
 export './theory/electroMagnetism/bioSarvartLawForCircleCurrent.dart';
 export './theory/electroMagnetism/bioSarvartLaw.dart';
+export './theory/electroMagnetism/e_field_spherical_charge_distribution.dart';
+export './theory/electroMagnetism/e_field_infinite_uniform_sheet.dart';
+export './theory/electroMagnetism/magnetic_field_circular_loop_on_axis_z0.dart';
+export './theory/electroMagnetism/magnetic_field_circular_loop_on_axis.dart';
+export './theory/electroMagnetism/magnetic_field_circular_loop_general_point.dart';
+export './theory/electroMagnetism/ampere_law_and_magnetic_field_on_axis.dart';
+export './theory/electroMagnetism/magnetic_field_loop_and_solenoid.dart';
+export './theory/electroMagnetism/solenoid_self_inductance.dart';
+export './theory/electroMagnetism/rl_circuit.dart';
+export './theory/electroMagnetism/lc_circuit.dart';
+export './theory/electroMagnetism/rlc_circuit.dart';
+export './theory/electroMagnetism/e_field_point_charge.dart';
+export './theory/electroMagnetism/coulombs_law.dart';
+
+/* ---------- Common / Mappings (力学 ⇄ 電磁気 の対応表) ---------- */
+export './theory/electroMagnetism/mech_em_differential_equations_mapping.dart';
+export './theory/electroMagnetism/mechanics_em_electricfield_gravity_mapping.dart';

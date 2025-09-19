@@ -2,6 +2,7 @@ import '../../model.dart';
 
 final infiniteStraightCurrent = TheoryTopic(
   title: '無限に長い直線電流の作る磁場(真空中)',
+  imageAsscet: 'assets/mindMap/forTopics/infiniteStraightCurrent.png',
   latexContent: r"""
   <div style="text-align:center; margin:1em 0;">
   <img src="assets/electroMagnetismTheory/infiniteStraightCurrent.png"

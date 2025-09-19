@@ -3,6 +3,7 @@ import '../../model.dart';
 final conicalPendulum = TheoryTopic(
   title: '円錐振り子の周期',
   isNew: false,
+  imageAsset: 'assets/mindMap/forTopics/conicalPendulum.png', // 実際の画像パス
   latexContent: r"""
 <div class="theory-common-box">命題：図1の条件設定(円錐振り子,錘は水平に等速円運動)しているとすると、錘の周期$\ T $は下記となる。
 $$

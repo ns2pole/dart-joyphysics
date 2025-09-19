@@ -141,13 +141,21 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       name: '運動方程式',
       topics: [
         eqOfMotion,
-        simpleHarmonicMotionSolution
+        simpleHarmonicMotionSolution,
+        particle_motion_gravity_with_air_resistance,
       ],
     ),
     TheorySubcategory(
-      name: '剛体のつり合い',
+      name: '剛体の静力学',
       topics: [
         rigidBodyBalanceOfForces,
+      ],
+    ),
+    TheorySubcategory(
+      name: '剛体の動力学',
+      topics: [
+        moment_of_inertia,
+        physical_pendulum
       ],
     ),
     TheorySubcategory(
@@ -176,7 +184,9 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         surfaceGravityEnergyConservation,
         fookEnergyConservation,
         surfaceGravAndFookEnergyConservation,
-        universalGravitationEnergyConserv
+        universalGravitationEnergyConserv,
+        t_1d_elastic_collision_energy_conservation,
+        t_2d_elastic_collision_equal_mass_on_stationary
       ],
     ),
     TheorySubcategory(
@@ -189,6 +199,7 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       name: '円運動',
       topics: [
         simplePendulum,
+        simple_pendulum_period_elliptic_integrals,
         conicalPendulum
       ],
     ),
@@ -223,15 +234,23 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       ],
     ),
     TheorySubcategory(
-      name: 'ケプラーの三法則',
+      name: 'ケプラー問題',
       topics: [
         keplerFirstLaw,
         keplerSecondLaw,
         keplerThirdLaw,
+        runge_lenz_vector
       ],
     ),
   ],
   '電磁気学理論': [
+    TheorySubcategory(
+      name: '力学と電磁気学の対応',
+      topics: [
+        mech_em_differential_equations_mapping,
+        mechanics_em_electricfield_gravity_mapping
+      ],
+    ),
     TheorySubcategory(
       name: '電荷と電流',
       topics: [
@@ -242,6 +261,7 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       name: '電磁気力',
       topics: [
         electromagneticForce,
+        coulombs_law
       ],
     ),
     TheorySubcategory(
@@ -267,6 +287,61 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       ],
     ),
     TheorySubcategory(
+      name: '静止電荷分布の作る静電場',
+      topics: [
+        e_field_point_charge,
+        e_field_infinite_uniform_sheet,
+        e_field_spherical_charge_distribution,
+        magneticGaussLaw,
+        electromagneticInductionLaw,
+        ampereMaxwellLaw
+      ],
+    ),
+    // TheorySubcategory(
+    //   name: '物質中のマクスウェル方程式',
+    //   topics: [
+    //     electoricGaussLawInMatter,
+    //     ampereMaxwellLawInMatter
+    //   ],
+    // ),
+    TheorySubcategory(
+      name: '定常電流が作る磁場',
+      topics: [
+        infiniteStraightCurrent,
+        ampere_law_and_magnetic_field_on_axis,
+        solenoidMagneticFieldProp,
+        biotSavartLaw,
+        bioSarvartLawForCircleCurrent,
+        magnetic_field_circular_loop_on_axis_z0,
+        magnetic_field_circular_loop_on_axis,
+        magnetic_field_circular_loop_general_point,
+        magnetic_field_loop_and_solenoid,
+      ],
+    ),
+    TheorySubcategory(
+      name: '電気回路',
+      topics: [
+        rcCircuitTheory,
+        rcCircuitDischarge,
+        rl_circuit,
+        lc_circuit,
+        rlc_circuit
+      ],
+    ),
+    TheorySubcategory(
+      name: 'インダクタンス',
+      topics: [
+        solenoid_self_inductance
+      ],
+    ),
+    TheorySubcategory(
+      name: '電磁気力を受ける質点の運動',
+      topics: [
+        lorentzForceAndCircleMove,
+      ],
+    ),
+
+    TheorySubcategory(
       name: '双極子',
       topics: [
         electricDipole,
@@ -282,47 +357,11 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         permittivityAndPermeabilityTable
       ],
     ),
-    // TheorySubcategory(
-    //   name: '物質中のマクスウェル方程式',
-    //   topics: [
-    //     electoricGaussLawInMatter,
-    //     ampereMaxwellLawInMatter
-    //   ],
-    // ),
-    // TheorySubcategory(
-    //   name: '電荷が作る電場',
-    //   topics: [
-    //     electricDipole,
-    //   ],
-    // ),
     TheorySubcategory(
-      name: '定常電流が作る磁場',
+      name: 'その他',
       topics: [
-        biotSavartLaw,
-        infiniteStraightCurrent,
-        solenoidMagneticFieldProp,
-        bioSarvartLawForCircleCurrent,
-        // electricDipole
+        rightHandRule,
       ],
     ),
-    TheorySubcategory(
-      name: '電気回路',
-      topics: [
-        rcCircuitTheory,
-        rcCircuitDischarge
-      ],
-    ),
-    TheorySubcategory(
-      name: '電磁気力を受ける質点の運動',
-      topics: [
-        lorentzForceAndCircleMove,
-      ],
-    ),
-    // TheorySubcategory(
-    //   name: 'その他',
-    //   topics: [
-    //     rightHandRule,
-    //   ],
-    // ),
   ],
 };

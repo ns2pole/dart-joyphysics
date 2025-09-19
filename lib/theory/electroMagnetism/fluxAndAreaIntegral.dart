@@ -2,6 +2,7 @@ import '../../model.dart';
 
 final fluxAndAreaIntegral = TheoryTopic(
   title :  '定義および命題',
+  imageAsscet: 'assets/mindMap/forTopics/fluxAndAreaIntegral.png',
   latexContent :  r"""
 <div class="theory-common-box">一様なベクトル場の平面に対する流束の定義
 一様なベクトル場 <tex> \vec F </tex>が面積$A$の平面$S$を貫く流速を下記で定義する。<br>

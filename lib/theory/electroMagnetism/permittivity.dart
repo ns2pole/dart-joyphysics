@@ -2,6 +2,8 @@ import '../../model.dart';
 
 final permittivity = TheoryTopic(
   title: '分極, 電気感受率, 誘電率, 比誘電率',
+  imageAsscet: 'assets/mindMap/forTopics/permittivity.png',
+
   latexContent: r"""
 
 <div class="theory-common-box">定義（真空の誘電率：$\varepsilon_0$）</div>

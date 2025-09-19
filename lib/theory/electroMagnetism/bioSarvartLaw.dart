@@ -3,7 +3,7 @@ import '../../model.dart';
 final biotSavartLaw = TheoryTopic(
   title: 'ビオ・サバール則 — 記号定義・リーマン和（有限和）・積分（丁寧版）',
   videoURL: "",
-  imageAsset: 'assets/mindMap/forTopics/biot_savart_friendly.png',
+  imageAsset: 'assets/mindMap/forTopics/biotSavartLaw.png',
   latexContent: r"""
 
 <div class="theorem-box">命題（概要）</div>

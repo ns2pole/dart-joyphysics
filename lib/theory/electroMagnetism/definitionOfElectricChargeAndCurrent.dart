@@ -2,6 +2,8 @@ import '../../model.dart';
 
 final definitionOfElectricChargeAndCurrent = TheoryTopic(
   title: '電荷,電流の定義',
+  imageAsscet: 'assets/mindMap/forTopics/definitionOfElectricChargeAndCurrent.png',
+
   latexContent: r"""
 <div class="theory-common-box">定義（電荷）</div>
 <p>

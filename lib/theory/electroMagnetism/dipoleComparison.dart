@@ -2,6 +2,8 @@ import '../../model.dart';
 
 final dipoleComparison = TheoryTopic(
   title: '電場磁場の双極子の諸概念対応表',
+  imageAsscet: 'assets/mindMap/forTopics/dipoleComparison.png',
+
   latexContent: r"""
 <style>
 /* ===========================

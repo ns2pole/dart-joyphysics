@@ -2,6 +2,7 @@ import '../../model.dart';
 
 final magneticDipole = TheoryTopic(
   title: '磁気双極子',
+  imageAsscet: 'assets/mindMap/forTopics/magneticDipole.png',
   latexContent: r"""
 
 <div class="theory-common-box">命題1：単一仮想仮想磁場が作る場（仮想磁荷モデル）</div>

@@ -1,0 +1,8 @@
+import '../../model.dart';
+
+final t_2d_elastic_collision_equal_mass_on_stationary = TheoryTopic(
+  inPreparation: true,
+  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
+  title: '静止している物体に同じ質量の物体が2次元弾性衝突する時に成り立つ命題',
+  latexContent: r""""""
+);

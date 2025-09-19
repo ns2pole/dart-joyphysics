@@ -2,6 +2,8 @@ import '../../model.dart';
 
 final electoricGaussLawInMatter = TheoryTopic(
   title: '電場のガウスの法則',
+  imageAsscet: 'assets/mindMap/forTopics/electoricGaussLawInMatter.png',
+
   latexContent: r"""
 <div class="theory-common-box">定理（線形媒質中の電場のガウスの法則）：電荷の種類を自由電荷$Q_{free}$と誘電体の中で束縛されている束縛電荷$Q_{bound}$に分けるとすると、
 線形媒質物質中の電束密度は下記の物質中のマクスウェル方程式を満たす。

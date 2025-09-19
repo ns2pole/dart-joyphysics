@@ -2,6 +2,8 @@ import '../../model.dart';
 
 final ampereMaxwellLawInMatter = TheoryTopic(
   title: 'アンペール・マクスウェルの法則',
+  imageAsscet: 'assets/mindMap/forTopics/ampereMaxwellLawInMatter.png',
+
   latexContent: r"""
 
 

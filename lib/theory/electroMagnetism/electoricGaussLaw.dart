@@ -2,6 +2,8 @@ import '../../model.dart';
 
 final electoricGaussLaw = TheoryTopic(
   title: '電場のガウスの法則',
+  imageAsscet: 'assets/mindMap/forTopics/electoricGaussLaw.png',
+
   latexContent: r"""
 <div class="theory-common-box">法則（電荷と電場とガウスの法則）：任意の閉曲面$S$に対し、下記が成り立つ。この法則を電場のガウスの法則という。
 $$

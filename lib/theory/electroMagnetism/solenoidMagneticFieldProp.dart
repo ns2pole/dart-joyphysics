@@ -2,6 +2,7 @@ import '../../model.dart';
 import '../../model.dart';
 final solenoidMagneticFieldProp = TheoryTopic(
   title: '無限に長いソレノイドコイルに流れる電流の作る磁場(真空中)',
+  imageAsset: 'assets/mindMap/forTopics/solenoidMagneticFieldProp.png',
   latexContent: r"""
   <div style="text-align:center; margin:1em 0;">
     <img src="assets/electroMagnetismTheory/initSolenoid.png"

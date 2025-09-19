@@ -2,6 +2,8 @@ import '../../model.dart';
 
 final ampereMaxwellLaw = TheoryTopic(
   title: 'アンペール・マクスウェルの法則',
+  imageAsscet: 'assets/mindMap/forTopics/ampereMaxwellLaw.png',
+
   latexContent: r"""
 
 <div class="theory-common-box">定義（変位電流）</div>

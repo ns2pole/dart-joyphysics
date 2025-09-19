@@ -2,6 +2,7 @@ import '../../model.dart';
 
 final lorentzForceAndCircleMove = TheoryTopic(
   title: '一様磁場中の荷電粒子の運動',
+  imageAsscet: 'assets/mindMap/forTopics/lorentzForceAndCircleMove.png',
   latexContent: r"""
   <div style="text-align:center; margin:1em 0;">
       <img src="assets/electroMagnetismTheory/lorentz.png"

@@ -2,6 +2,8 @@ import '../../model.dart';
 
 final permeability = TheoryTopic(
   title: '磁化, 磁化率, 透磁率, 比透磁率',
+  imageAsscet: 'assets/mindMap/forTopics/permeability.png',
+
   latexContent: r"""
 
 <div class="theory-common-box">定義（真空の透磁率：$$\mu_0$s$）</div>
