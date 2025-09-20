@@ -82,3 +82,65 @@ class Category {
 }
 
 
+
+
+@immutable
+class Product {
+  final String title;
+  final String url;
+  final String? imageUrl; // ネットURL か assets パス
+  final String? price;
+  final int rating; // 0..5
+  final List<Video> videos;
+
+  const Product({
+    required this.title,
+    required this.url,
+    this.imageUrl,
+    this.price,
+    this.rating = 0,
+    this.videos = const [],
+  });
+
+  // Optional: Map から作るヘルパー（既存のデータから移行する際に便利）
+  factory Product.fromMap(Map<String, dynamic> m) {
+    final videosRaw = m['videos'];
+    List<Video> vs = <Video>[];
+    if (videosRaw is List<Video>) {
+      vs = videosRaw;
+    } else if (videosRaw is List) {
+      // defensive: try to cast elements
+      try {
+        vs = videosRaw.cast<Video>();
+      } catch (_) {
+        vs = <Video>[];
+      }
+    }
+    return Product(
+      title: m['title']?.toString() ?? '',
+      url: m['url']?.toString() ?? '',
+      imageUrl: m['imageUrl'] as String?,
+      price: m['price'] as String?,
+      rating: (m['rating'] is int) ? m['rating'] as int : int.tryParse('${m['rating'] ?? 0}') ?? 0,
+      videos: vs,
+    );
+  }
+
+  Product copyWith({
+    String? title,
+    String? url,
+    String? imageUrl,
+    String? price,
+    int? rating,
+    List<Video>? videos,
+  }) {
+    return Product(
+      title: title ?? this.title,
+      url: url ?? this.url,
+      imageUrl: imageUrl ?? this.imageUrl,
+      price: price ?? this.price,
+      rating: rating ?? this.rating,
+      videos: videos ?? this.videos,
+    );
+  }
+}

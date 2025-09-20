@@ -1,185 +1,99 @@
 import '../../model.dart';
 
 final rcCircuitDischargeEnergy = TheoryTopic(
-  title: 'RC回路の放電におけるエネルギー（簡潔命題版）',
+  title: 'RC回路におけるエネルギー(放電)',
   imageAsset: 'assets/mindMap/forTopics/rcCircuitDischarge.png',
   latexContent: r"""
+<div class="theory-common-box">出発点（キルヒホッフ式に \(\displaystyle I(t)\) を掛ける）</div>
 
-<div class="theory-common-box">導入 — 方針</div>
-本稿はまず**一般的な表式（時刻依存を仮定しない）**を簡潔な命題で示し、各命題の直後に証明を置きます。
-続いて放電解 \(V_c(t)=V_0 e^{-t/RC}\) を代入して**具体的時間変化**に関する簡潔な命題と証明を示します。
-記法は前稿に従います（\(V_c(0)=V_0,\;I(t)=C V_c'(t)\) 等）。
+<div class="proof-box">記号,記法の定義</div>
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 1) 一般表式（命題と直後に証明）
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<div class="theory-common-box">命題 A：コンデンサーのエネルギー</div>
+<div class="theory-common-box">命題 1：\(\displaystyle \dfrac{Q(t)}{C}\,I(t) - R I(t)^2 = 0\) が成り立つ。</div>
+
+<div class="proof-box">証明</div>
+上記の符号系の下でキルヒホッフの法則は
 $$\begin{aligned}
-U_C &= \tfrac{1}{2} C V^2.
+\frac{Q(t)}{C} - R I(t) = 0
 \end{aligned}$$
-
-<div class="proof-box">証明（命題A）</div>
-<p>
-微小電荷 \( \mathrm{d}Q\) を移す仕事 \( \mathrm{d}W = V(Q)\,\mathrm{d}Q\) を積分する。
-\(Q=C V\) を用いると
+である（向きの定義により符号はこの形になる）。<br>
+この式の両辺に電流 \(\displaystyle I(t)\) を掛けると
 $$\begin{aligned}
-U_C &= \int_0^{Q} \frac{Q'}{C}\,\mathrm{d}Q'
-    = \tfrac{1}{2}\frac{Q^2}{C}
-    = \tfrac{1}{2} C V^2.
+\frac{Q(t)}{C}\,I(t) - R I(t)^2 = 0
 \end{aligned}$$
+となりこれは所望の式である。
 Q.E.D
-</p>
+<div class="theory-common-box">命題 2：コンデンサーエネルギーの時間微分$\times (-1)$は \(\displaystyle \dfrac{Q}{C}I\) と等しい</div>
 
----
+<div class="proof-box">証明</div>
 
-<div class="theory-common-box">命題 B：瞬時電力の定義と収支</div>
+コンデンサーのエネルギーを
 $$\begin{aligned}
-P_R(t) &= R I(t)^2, \qquad
-P_C(t) = V_c(t)\,I(t), \qquad
-P_R(t)+P_C(t)=0.
+U_C(t) = \frac{Q(t)^2}{2C}
 \end{aligned}$$
-
-<div class="proof-box">証明（命題B）</div>
-<p>
-キルヒホッフ式 \(R I + V_c = 0\) に \(I\) を掛けると
+と定義する。これを時間微分すれば
 $$\begin{aligned}
-R I^2 + V_c I = 0,
+\frac{\mathrm{d}}{\mathrm{d}t}U_C(t) = \frac{Q(t)}{C}\frac{\mathrm{d}Q}{\mathrm{d}t}.
 \end{aligned}$$
-左辺は \(P_R+P_C\) に一致するため \(P_R+P_C=0\) が得られる。Q.E.D
-</p>
-
----
-
-<div class="theory-common-box">命題 C：エネルギー微分と瞬時電力</div>
+符号の定義 \(\displaystyle I(t) = -\dfrac{\mathrm{d}Q}{\mathrm{d}t}\) を用いると
 $$\begin{aligned}
-\frac{\mathrm{d}}{\mathrm{d}t}U_C(t) &= P_C(t),
-\qquad
-P_R(t) = -\frac{\mathrm{d}}{\mathrm{d}t}U_C(t).
+\frac{\mathrm{d}}{\mathrm{d}t}U_C(t) = -\frac{Q(t)}{C} I(t).
 \end{aligned}$$
-
-<div class="proof-box">証明（命題C）</div>
-<p>
-\(U_C(t)=\tfrac12 C V_c(t)^2\) より
+従って（符号に注意すると）恒等式
 $$\begin{aligned}
-\frac{\mathrm{d}}{\mathrm{d}t}U_C(t) &= C V_c V_c' .
+\frac{Q(t)}{C} I(t) = -\frac{\mathrm{d}}{\mathrm{d}t}U_C(t)
 \end{aligned}$$
-一方 \(I= C V_c'\) なので \(P_C=V_c I = C V_c V_c'\)。
-よって \( \dfrac{\mathrm{d}}{\mathrm{d}t}U_C = P_C\) であり、命題Bより \(P_R=-P_C=-\dfrac{\mathrm{d}}{\mathrm{d}t}U_C\) が従う。Q.E.D
-</p>
+が成り立つ。Q.E.D
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 2) 具体的時間変化（放電解を代入）
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<div class="theory-common-box">命題 3：抵抗の消費電力はコンデンサーのエネルギーの変化率の$-1$倍に等しい。</div>
 
-<div class="theory-common-box">節：放電解の代入</div>
-ここから \(V_c(t)=V_0 e^{-t/RC}\) を代入して時間依存を求める。
+<div class="proof-box">証明</div>
 
----
-
-<div class="theory-common-box">命題 D：電流の時間依存（放電）</div>
+命題1と命題2の関係を組み合わせると
 $$\begin{aligned}
-I(t) &= -\frac{V_0}{R}\,e^{-t/RC}.
+- \frac{\mathrm{d}}{\mathrm{d}t}U_C(t) - R I(t)^2 = 0.
 \end{aligned}$$
-
-<div class="proof-box">証明（命題D）</div>
-<p>
-\(I=C V_c'\) に \(V_c(t)=V_0 e^{-t/RC}\) を代入する。
+よって瞬時消費電力 \(\displaystyle P_R(t) = R I(t)^2\) とコンデンサーエネルギーの時間微分は
 $$\begin{aligned}
-V_c'(t) &= -\frac{V_0}{RC} e^{-t/RC}, \\
-I(t) &= C V_c'(t) = -\frac{V_0}{R} e^{-t/RC}.
+P_R(t) = -\frac{\mathrm{d}}{\mathrm{d}t}U_C(t)
 \end{aligned}$$
-符号は定義した正方向に対して逆である。Q.E.D
-</p>
+の関係にある。すなわち抵抗で瞬時に消費される電力はコンデンサーのエネルギー減少率に等しい。Q.E.D
 
----
+<div class="theory-common-box">命題 4：時刻 \(\displaystyle 0\) から \(\displaystyle t\) までに抵抗が消費した累積エネルギーは、コンデンサーの初期エネルギーと時刻 \(\displaystyle t\) におけるエネルギーの差と等しい。</div>
 
-<div class="theory-common-box">命題 E：抵抗の瞬時消費電力（放電）</div>
+<div class="proof-box">証明</div>
+
+命題3の両辺を時刻 \(\displaystyle 0\) から \(\displaystyle t\) まで積分すると
+$$
+\begin{aligned}
+&\ \int_0^{t} P_R(t')\mathrm{d}t' = - \int_0^{t}\frac{\mathrm{d}}{\mathrm{d}t}U_C(t')\mathrm{d}t'\\[6pt]
+\Leftrightarrow &\ \int_0^{t} P_R(t')\mathrm{d}t' = - \Bigl(U_C(t) - U_C(0) \Bigr)\\[6pt]
+\end{aligned}$$
+ここで、$U_C(t) - U_C(0)$はコンデンサーの時刻0から$t$にかけてのエネルギー変化量を意味するのでこれを$\Delta U_C$と書くと、上式は
+\begin{aligned}
+\int_0^{t} P_R(t')\mathrm{d}t' = - \Delta U_C
+\end{aligned}
+左辺は抵抗で消費した電力(ジュール熱)を意味し、コンデンサーのエネルギー変化量が、抵抗で熱として消費された事を表している。Q.E.D
+
+<div class="theory-common-box">命題 5：\(\displaystyle U_C(t)\) と \(\displaystyle P_R(t)\)、および \(\displaystyle E_R(t)\) の時間挙動は解析的に得られる。</div>
+
+<div class="proof-box">証明</div>
+<a href="app://topic?video=rcCircuitDischarge">こちらの記事で求めた</a>微分方程式 \(\displaystyle \dfrac{dQ}{dt} = -\displaystyle \frac{Q}{RC}\) の解
 $$\begin{aligned}
-P_R(t) &= \frac{V_0^2}{R}\,e^{-2t/RC}.
+\begin{cases}
+Q(t)=\displaystyle Q_0 e^{-\frac{t}{RC}}\\[6pt]
+I(t)=\displaystyle -\frac{Q_0}{RC}e^{-\frac{t}{RC}}
+\end{cases}
 \end{aligned}$$
-
-<div class="proof-box">証明（命題E）</div>
-<p>
-命題D を \(P_R=R I^2\) に代入する：
+を用いれば
 $$\begin{aligned}
-P_R(t)
-&= R\left(-\frac{V_0}{R}e^{-t/RC}\right)^2
-= \frac{V_0^2}{R}\,e^{-2t/RC}.
+\displaystyle P_R(t)&=R I(t)^2=\frac{V_0^2}{R}e^{-\frac{2t}{RC}}\\[6pt]
+\displaystyle U_C(t)&=\frac{Q_0^2}{2C}e^{-\frac{2t}{RC}}\\[6pt]
+\displaystyle E_R(t) &= \int_0^t P_R(t') \, dt' \\[6pt]
+&= \frac{1}{2} C V_0^2 \Bigl(1 - e^{-\frac{2t}{RC}}\Bigr)
+
 \end{aligned}$$
-指数項が \(e^{-2t/RC}\) となる点に注意。Q.E.D
-</p>
-
----
-
-<div class="theory-common-box">命題 F：コンデンサー残エネルギー（放電）</div>
-$$\begin{aligned}
-U_C(t) &= U_0\,e^{-2t/RC}, \qquad U_0=\tfrac{1}{2}C V_0^2.
-\end{aligned}$$
-
-<div class="proof-box">証明（命題F）</div>
-<p>
-命題A に \(V=V_c(t)=V_0 e^{-t/RC}\) を代入する：
-$$\begin{aligned}
-U_C(t)
-&= \tfrac{1}{2} C \bigl(V_0 e^{-t/RC}\bigr)^2
-= \tfrac{1}{2} C V_0^2 e^{-2t/RC}
-= U_0 e^{-2t/RC}.
-\end{aligned}$$
-Q.E.D
-</p>
-
----
-
-<div class="theory-common-box">命題 G：放出エネルギーと保存則（放電）</div>
-$$\begin{aligned}
-E_R(t) &= U_0\bigl(1-e^{-2t/RC}\bigr),
-\qquad
-U_C(t)+E_R(t)=U_0.
-\end{aligned}$$
-
-<div class="proof-box">証明（命題G）</div>
-<p>
-方法1：命題E を積分する。
-$$\begin{aligned}
-E_R(t)
-&= \int_0^t \frac{V_0^2}{R} e^{-2t'/RC}\,\mathrm{d}t' \\
-&= \frac{V_0^2}{R}\cdot\frac{RC}{2}\bigl(1-e^{-2t/RC}\bigr)
-= U_0\bigl(1-e^{-2t/RC}\bigr).
-\end{aligned}$$
-
-方法2：命題C の \(P_R=-\dfrac{\mathrm{d}}{\mathrm{d}t}U_C\) を積分する。
-$$\begin{aligned}
-E_R(t)
-&= -\int_0^t \frac{\mathrm{d}}{\mathrm{d}t'}U_C(t')\,\mathrm{d}t'
-= U_0 - U_C(t).
-\end{aligned}$$
-
-両方法は一致し、常に \(U_C(t)+E_R(t)=U_0\) が成り立つ。Q.E.D
-</p>
-
----
-
-<div class="theory-common-box">短い物理的解説</div>
-電圧が \(e^{-t/RC}\) で減衰するため，エネルギーは二乗に比例して \(e^{-2t/RC}\) の時間依存を持つ。
-キルヒホッフ式に電流を掛ける手順は瞬時電力の収支を直接与え、積分でエネルギー保存を示す効率的な方法である。
-
-<div class="theory-common-box">数値例（直感の確認）</div>
-例えば \(C=10\mu\mathrm{F},\;R=1\mathrm{k}\Omega,\;V_0=5\mathrm{V}\) のとき：
-
-$$\begin{aligned}
-U_0 &= \tfrac12 C V_0^2 = 125\ \mu\mathrm{J}, \\[6pt]
-\tau &= RC = 10\ \mathrm{ms}, \\[6pt]
-P_R(0) &= \frac{V_0^2}{R} = 25\ \mathrm{mW}, \\[6pt]
-U_C(\tau) &= U_0 e^{-2} \approx 0.135\ U_0.
-\end{aligned}$$
-
-<div class="theory-common-box">実務的注意</div>
-実回路では寄生インダクタンス、漏れ、放射損失などが存在し、モデルの修正が必要になる場合がある。
-
-<div class="theory-common-box">まとめ</div>
-命題は簡潔に提示し、各命題直後に証明を配置しました。
-一般表式 → 具体的時間変化 の順で議論を行い、すべてキルヒホッフ式に電流を掛ける流れで導出しています。
+を得る。Q.E.D
 
 """,
 );
