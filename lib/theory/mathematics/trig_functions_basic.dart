@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final trigFunctionsBasic = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/trig_functions_basic.png',
   title: '三角関数',
   latexContent: r""""""
 );

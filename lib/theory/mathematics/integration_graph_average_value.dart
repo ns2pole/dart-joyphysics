@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final integrationGraphAverageValue = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/integration_graph_average_value.png',
   title: 'グラフの平均値',
   latexContent: r""""""
 );

@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final integrationReciprocalIsothermal = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/integration_reciprocal_isothermal.png',
   title: '逆数の積分（等温過程）',
   latexContent: r""""""
 );

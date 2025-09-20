@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final othersLineIntegrals = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/others_line_integrals.png',
   title: '線積分',
   latexContent: r""""""
 );

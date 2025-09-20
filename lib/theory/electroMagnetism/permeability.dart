@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final permeability = TheoryTopic(
   title: '磁化, 磁化率, 透磁率, 比透磁率',
-  imageAsscet: 'assets/mindMap/forTopics/permeability.png',
+  imageAsset: 'assets/mindMap/forTopics/permeability.png',
 
   latexContent: r"""
 

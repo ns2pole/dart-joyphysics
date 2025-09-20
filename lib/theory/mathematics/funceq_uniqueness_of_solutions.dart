@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final funceqUniquenessOfSolutions = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/funceq_uniqueness_of_solutions.png',
   title: '解の一意性',
   latexContent: r""""""
 );

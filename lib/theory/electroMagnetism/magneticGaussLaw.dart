@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final magneticGaussLaw = TheoryTopic(
   title: '磁場のガウスの法則',
-  imageAsscet: 'assets/mindMap/forTopics/magneticGaussLaw.png',
+  imageAsset: 'assets/mindMap/forTopics/magneticGaussLaw.png',
   latexContent: r"""
 <div class="theory-common-box">法則（磁場のガウスの法則）：任意の閉曲面$S$に対し、下記が成り立つ。この法則を磁場のガウスの法則という。
 $$

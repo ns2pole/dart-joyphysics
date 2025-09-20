@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final sequencesHarmonicSequence = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/sequences_harmonic_sequence.png',
   title: '調和数列',
   latexContent: r""""""
 );

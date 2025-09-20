@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final othersHarmonicMean = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/others_harmonic_mean.png',
   title: '調和平均',
   latexContent: r""""""
 );

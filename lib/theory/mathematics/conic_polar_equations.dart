@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final conicPolarEquations = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/conic_polar_equations.png',
   title: '極方程式',
   latexContent: r""""""
 );

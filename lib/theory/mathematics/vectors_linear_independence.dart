@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsLinearIndependence = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_linear_independence.png',
   title: 'ベクトルと線形独立',
   latexContent: r""""""
 );

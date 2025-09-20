@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsVectorFields = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_vector_fields.png',
   title: 'ベクトル場',
   latexContent: r""""""
 );

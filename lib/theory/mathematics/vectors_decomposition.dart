@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsDecomposition = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_decomposition.png',
   title: 'ベクトルの分解',
   latexContent: r""""""
 );

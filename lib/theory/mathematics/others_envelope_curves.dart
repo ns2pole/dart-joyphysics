@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final othersEnvelopeCurves = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/others_envelope_curves.png',
   title: '包絡線',
   latexContent: r""""""
 );

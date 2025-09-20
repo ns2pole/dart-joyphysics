@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final rcCircuitDischarge = TheoryTopic(
   title: 'RC回路(放電)',
-  imageAsset: 'assets/mindMap/forTopics/rcCircuit.png',
+  imageAsset: 'assets/mindMap/forTopics/rcCircuitDischarge.png',
   latexContent: r"""
 
 <div class="theory-common-box">定義(RC回路 — 放電)</div>
@@ -85,9 +85,9 @@ $t=0$ を代入すると ${\displaystyle I(0)=-\frac{V_0}{R}}$ となる。　Q.
 
 <div class="theory-common-box">命題 4（常微分方程式の解の一意性）</div>
 一階線形常微分方程式
-\[
+$$
 RC\,V_c'(t) + V_c(t) = 0
-\]
+$$
 は連続係数を持つ線形方程式であり，任意の初期条件 ${\displaystyle V_c(0)=V_0}$ に対して解は一意に存在する。
 
 <div class="proof-box">証明</div><p>

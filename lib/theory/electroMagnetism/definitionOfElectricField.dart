@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final definitionOfElectricField = TheoryTopic(
   title: '電場の定義',
-  imageAsscet: 'assets/mindMap/forTopics/definitionOfElectricField.png',
+  imageAsset: 'assets/mindMap/forTopics/definitionOfElectricField.png',
 
   latexContent: r"""
 <div class="theory-common-box">定義（電場の大きさ）</div>

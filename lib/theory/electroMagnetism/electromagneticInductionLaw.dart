@@ -3,7 +3,7 @@ import '../../model.dart';
 
 final electromagneticInductionLaw = TheoryTopic(
     title: 'ファラデーの電磁誘導の法則',
-    imageAsscet: 'assets/mindMap/forTopics/electromagneticInductionLaw.png',
+    imageAsset: 'assets/mindMap/forTopics/electromagneticInductionLaw.png',
     latexContent: r"""
     <div class="theory-common-box">定義（磁束）</div>
     <p>

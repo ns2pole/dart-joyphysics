@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsBasic = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_basic.png',
   title: 'ベクトル',
   latexContent: r""""""
 );

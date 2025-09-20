@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsCrossProduct = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_cross_product.png',
   title: '外積',
   latexContent: r""""""
 );

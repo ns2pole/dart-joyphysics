@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final conicEllipseEquation = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/conic_ellipse_equation.png',
   title: '楕円の方程式',
   latexContent: r""""""
 );

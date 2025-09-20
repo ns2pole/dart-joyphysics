@@ -3,6 +3,7 @@ import '../../model.dart';
 final bioSarvartLawForCircleCurrent = TheoryTopic(
   title: '円形電流が円心（軸上 z=0）に作る磁場（有限和 → 区分求積）',
   videoURL: "",
+  inPreparation: true,
   imageAsset: 'assets/mindMap/forTopics/bioSarvartLawForCircleCurrent.png',
   latexContent: r"""
 

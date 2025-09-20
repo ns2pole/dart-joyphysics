@@ -77,6 +77,8 @@ class _LatexWebViewState extends State<LatexWebView> {
       if (key == null || key.isEmpty) return false;
 
       final Map<String, TheoryTopic> topicMap = {
+        'runge_lenz_vector': runge_lenz_vector,
+        'keplerSecondLaw': keplerSecondLaw,
         'magnetic': magneticDipole,
         'electric' : electricDipole,
         'rcCircuit': rcCircuitTheory, // 追加済み

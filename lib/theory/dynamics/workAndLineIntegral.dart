@@ -8,7 +8,7 @@ final workAndLineIntegral = TheoryTopic(
 <div class="theory-common-box">一定の力かつ直線的な動きの場合の仕事の定義</div>
 
 一定の力 $ \vec F $ を受けて，物体が直線的に$\Delta \vec x$動く時、力が質点にする仕事$W$ を下記で定義する。
-\[
+$$
 W = |\vec F| | \Delta \vec x| \cos\theta  = \vec F \cdot  \vec x
 $$
 ※ここで、$ \theta $は力と質点の運動方向と力のなす角
@@ -39,13 +39,13 @@ $$\begin{aligned}
 
 
 <div class="theory-common-box">命題：曲線 $C$ 上で $ |\vec F|$ が一定値$F$を取り、かつ接ベクトルとなす角が曲線上で一定 $ \theta $ のとき，曲線の長さを$L$とすると、
-\[
+$$
 \int_C \vec F\cdot d\vec r = F\cos\theta\cdot L
 $$
 </div>
 <p><div class="proof-box">証明</div>
 定義より
-\[
+$$
 \int_C \vec F\cdot d\vec r = \lim_{| P | \to 0}\sum_{i=1}^{N(P)} (\vec F_i\cdot\vec\tau_i)\,\Delta s_i.
 $$
 各代表点で $ |\vec F_i|=F$, $\vec F_i\cdot\vec\tau_i=F\cos\theta$ なので

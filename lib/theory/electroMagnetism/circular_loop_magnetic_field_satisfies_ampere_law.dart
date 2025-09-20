@@ -1,0 +1,8 @@
+import '../../model.dart';
+
+final circular_loop_magnetic_field_satisfies_ampere_law = TheoryTopic(
+  inPreparation: true,
+  imageAsset: 'assets/mindMap/forTopics/circular_loop_magnetic_field_satisfies_ampere_law.png',
+  title: '円形電流軸上磁場がアンペールの法則を満たすこと',
+  latexContent: r""""""
+);

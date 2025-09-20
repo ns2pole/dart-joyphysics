@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsNorm = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_norm.png',
   title: 'ベクトルのノルム',
   latexContent: r""""""
 );

@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final existenceForAllTFprimeFxTEqualsZeroAntinode = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/existence_for_all_t_fprime_fx_t_equals_zero_antinode.png',
   title: '任意の t に対して f\'(x,t)=0（腹）',
   latexContent: r""""""
 );

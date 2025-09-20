@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final integrationTrigRmsAverageZero = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/integration_trig_rms_average_zero.png',
   title: '三角関数の積分・実効値・平均が0',
   latexContent: r""""""
 );

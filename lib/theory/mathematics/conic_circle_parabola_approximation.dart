@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final conicCircleParabolaApproximation = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/conic_circle_parabola_approximation.png',
   title: '円と放物線近似',
   latexContent: r""""""
 );

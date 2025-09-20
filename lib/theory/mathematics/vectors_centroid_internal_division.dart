@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsCentroidInternalDivision = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_centroid_internal_division.png',
   title: '重心と内分',
   latexContent: r""""""
 );

@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final othersSystemsLinearEquations = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/others_systems_linear_equations.png',
   title: '線形連立方程式',
   latexContent: r""""""
 );

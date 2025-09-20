@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsAddition = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_addition.png',
   title: 'ベクトルの和',
   latexContent: r""""""
 );

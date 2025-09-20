@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final conicEllipseParametrization = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/conic_ellipse_parametrization.png',
   title: '楕円のパラメトライズ',
   latexContent: r""""""
 );

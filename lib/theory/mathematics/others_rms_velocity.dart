@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final othersRmsVelocity = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/others_rms_velocity.png',
   title: '二乗平均速度',
   latexContent: r""""""
 );

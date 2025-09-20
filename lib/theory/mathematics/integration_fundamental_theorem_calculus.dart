@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final integrationFundamentalTheoremCalculus = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/integration_fundamental_theorem_calculus.png',
   title: '微積分学の基本定理',
   latexContent: r""""""
 );

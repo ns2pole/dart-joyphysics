@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final permittivity = TheoryTopic(
   title: '分極, 電気感受率, 誘電率, 比誘電率',
-  imageAsscet: 'assets/mindMap/forTopics/permittivity.png',
+  imageAsset: 'assets/mindMap/forTopics/permittivity.png',
 
   latexContent: r"""
 

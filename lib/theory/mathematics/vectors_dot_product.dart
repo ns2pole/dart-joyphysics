@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsDotProduct = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_dot_product.png',
   title: '内積',
   latexContent: r""""""
 );

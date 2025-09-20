@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final multivarTrig1Plus1Vars = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/multivar_trig_1_plus_1_vars.png',
   title: '1+1 変数の三角関数',
   latexContent: r""""""
 );

@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final electromagneticForce = TheoryTopic(
   title: 'クーロン力とローレンツ力',
-  imageAsscet: 'assets/mindMap/forTopics/electromagneticForce.png',
+  imageAsset: 'assets/mindMap/forTopics/electromagneticForce.png',
   latexContent: r"""
 <div class="theory-common-box">法則（荷電粒子が受ける力）</div>
 <p>

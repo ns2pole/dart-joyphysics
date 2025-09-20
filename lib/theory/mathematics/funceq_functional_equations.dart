@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final funceqFunctionalEquations = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/funceq_functional_equations.png',
   title: '関数方程式',
   latexContent: r""""""
 );

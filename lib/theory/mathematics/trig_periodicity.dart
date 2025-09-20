@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final trigPeriodicity = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/trig_periodicity.png',
   title: '三角関数の周期性',
   latexContent: r""""""
 );

@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final conicEccentricity = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/conic_eccentricity.png',
   title: '離心率',
   latexContent: r""""""
 );

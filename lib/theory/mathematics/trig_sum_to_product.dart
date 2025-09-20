@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final trigSumToProduct = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/trig_sum_to_product.png',
   title: '三角関数の和積',
   latexContent: r""""""
 );

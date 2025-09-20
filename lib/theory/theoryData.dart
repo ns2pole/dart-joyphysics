@@ -236,10 +236,10 @@ final Map<String, List<TheorySubcategory>> theoryData = {
     TheorySubcategory(
       name: 'ケプラー問題',
       topics: [
-        keplerFirstLaw,
         keplerSecondLaw,
         keplerThirdLaw,
-        runge_lenz_vector
+        runge_lenz_vector,
+        keplerFirstLaw,
       ],
     ),
   ],
@@ -292,9 +292,6 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         e_field_point_charge,
         e_field_infinite_uniform_sheet,
         e_field_spherical_charge_distribution,
-        magneticGaussLaw,
-        electromagneticInductionLaw,
-        ampereMaxwellLaw
       ],
     ),
     // TheorySubcategory(
@@ -308,14 +305,14 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       name: '定常電流が作る磁場',
       topics: [
         infiniteStraightCurrent,
-        ampere_law_and_magnetic_field_on_axis,
+        circular_loop_magnetic_field_satisfies_ampere_law,
         solenoidMagneticFieldProp,
         biotSavartLaw,
         bioSarvartLawForCircleCurrent,
         magnetic_field_circular_loop_on_axis_z0,
         magnetic_field_circular_loop_on_axis,
         magnetic_field_circular_loop_general_point,
-        magnetic_field_loop_and_solenoid,
+        magnetic_field_solenoid_by_summation_of_circular_loop,
       ],
     ),
     TheorySubcategory(

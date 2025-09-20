@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final conicFoci = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/conic_foci.png',
   title: '焦点',
   latexContent: r""""""
 );

@@ -45,8 +45,8 @@ $$
 加速度 $\vec{a}(t) = \vec{v}'(t)$ を代入すれば
 $$\begin{aligned}
 \ \ \ \ \ &\int_{t_0}^{t_1} m \vec{v}'(t)\, dt = \int_{t_0}^{t_1} \vec{F}(t)\, dt\\[7pt]
-\Leftrightarrow &\Bigl[ m \vec{v}(t) \Bigr]_{t_0}^{t_1} = \int_{t_0}^{t_1} \vec{F}(t)\, dt\\[7pt]
-\ \ \ \ \ &m \vec{v}(t_1) - m \vec{v}(t_0) = \int_{t_0}^{t_1} \vec{F}(t)\, dt
+\Leftrightarrow \  &\Bigl[ m \vec{v}(t) \Bigr]_{t_0}^{t_1} = \int_{t_0}^{t_1} \vec{F}(t)\, dt\\[7pt]
+\Leftrightarrow \  &m \vec{v}(t_1) - m \vec{v}(t_0) = \int_{t_0}^{t_1} \vec{F}(t)\, dt
 \qquad \text{Q.E.D.}
 \end{aligned}$$
 </p>

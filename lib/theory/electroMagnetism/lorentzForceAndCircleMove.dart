@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final lorentzForceAndCircleMove = TheoryTopic(
   title: '一様磁場中の荷電粒子の運動',
-  imageAsscet: 'assets/mindMap/forTopics/lorentzForceAndCircleMove.png',
+  // imageAsset: 'assets/mindMap/forTopics/lorentzForceAndCircleMove.png',
   latexContent: r"""
   <div style="text-align:center; margin:1em 0;">
       <img src="assets/electroMagnetismTheory/lorentz.png"
@@ -206,6 +206,7 @@ final lorentzForceAndCircleMove = TheoryTopic(
     $
     である</div>
   <div class="proof-box">証明</div>
-    1回転の周期は $\displaystyle T = \frac {2\pi/}{|\omega_c|}$。その間に進む距離は $v_{z0}T$ なので上式が得られる。  $\square$
+    1回転の周期は $\displaystyle T = \frac {2\pi}{|\omega_c|}$。<br>
+    その間に進む距離は $v_{z0}T$ なので上式が得られる。  $\square$
 """,
 );

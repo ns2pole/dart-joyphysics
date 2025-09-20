@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final vectorsCoordinateTransformation = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/vectors_coordinate_transformation.png',
   title: '座標変換',
   latexContent: r""""""
 );

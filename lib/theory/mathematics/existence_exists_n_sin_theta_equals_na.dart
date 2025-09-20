@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final existenceExistsNSinThetaEqualsNa = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
-  title: '存在：n があり sinθ = n a となる',
+  imageAsset: 'assets/mindMap/forTopics/existence_exists_n_sin_theta_equals_na.png',
+  title: '存在 n があり sinθ=na となる',
   latexContent: r""""""
 );

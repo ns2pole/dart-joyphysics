@@ -8,12 +8,11 @@ final keplerSecondLaw = TheoryTopic(
 <div class="theory-common-box">
 設定・記法
 </div>
-「:=」は左辺の記号を右辺で定義することを意味する。<br>
 中心質量 $M$ の重力場の下で質量 $m$ の粒子が運動するとする。<br>
 三次元ベクトルは縦ベクトルで表す：
 $$\begin{aligned}
-\vec{r}(t)&=\begin{pmatrix}x(t)\\[6pt] y(t)\\[6pt] z(t)\end{pmatrix}\qquad
-\vec{v}(t)=\vec{r}'(t)=\begin{pmatrix}x'(t)\\[6pt] y'(t)\\[6pt] z'(t)\end{pmatrix}\\[6pt]
+\vec{r}(t)&=\begin{pmatrix}x(t)\\[6pt] y(t)\\[6pt] z(t)\end{pmatrix}\\[6pt]
+\vec{v}(t)&=\vec{r}'(t)=\begin{pmatrix}x'(t)\\[6pt] y'(t)\\[6pt] z'(t)\end{pmatrix}\\[6pt]
 r(t)&=\sqrt{x(t)^2+y(t)^2+z(t)^2}
 \end{aligned}$$
 <div class="paragraph-box">

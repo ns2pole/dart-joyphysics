@@ -22,6 +22,19 @@ def unique_path(path):
         i += 1
     return candidate
 
+# ---------- Config（ここを調整） ----------
+# 固定の線幅（整数）
+DEFAULT_STROKE_WIDTH = 4   # 1〜4 程度が目安
+
+# 塗りの透明度（0: 完全透明, 255: 不透明）
+DEFAULT_FILL_ALPHA = 80    # かなり薄め。必要なら 20〜80 を試してください。
+
+# 角丸半径の比率（元の挙動を参照しつつ上限をクリップ）
+RADIUS_RATIO = 0.12
+
+# ノードレイヤに入れる余白（回転で切れないようにする）
+LAYER_PADDING = 8
+
 # ---------- 0. writer.scpt 実行（元のまま） ----------
 result_writer = subprocess.run(
     ["osascript", "writer_dynamics.scpt"],
@@ -102,7 +115,7 @@ for label, items in groups.items():
     output_path = os.path.join(asset_dir, filename)
     output_path = unique_path(output_path)
 
-    # 全体用ハイライトレイヤ
+    # 全体用ハイライトレイヤ（元画像と同じサイズ）
     highlight = Image.new("RGBA", img.size, (0, 0, 0, 0))
 
     for idx, node in items:
@@ -113,35 +126,52 @@ for label, items in groups.items():
         h = float(node["h"])
         angle = float(node.get("rotation", 0))
 
-        # 個別の shape レイヤを作る（各ノードに独立した枠）
-        shape_layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
+        # 固定線幅と塗りの透明度（config 値を使う）
+        stroke_width = int(DEFAULT_STROKE_WIDTH)
+        fill_alpha = int(DEFAULT_FILL_ALPHA)
+
+        # ローカルレイヤ（ノード周りだけ）を作る — 回転を安定させるため
+        w_i = max(1, int(round(w)))
+        h_i = max(1, int(round(h)))
+        pad = int(LAYER_PADDING + stroke_width * 2)
+        layer_w = w_i + pad * 2
+        layer_h = h_i + pad * 2
+
+        shape_layer = Image.new("RGBA", (layer_w, layer_h), (0, 0, 0, 0))
         shape_draw = ImageDraw.Draw(shape_layer)
-        bbox = [int(cx - w/2), int(cy - h/2), int(cx + w/2), int(cy + h/2)]
 
-        # 見た目を自動調整（元の固定20/5より柔軟）
-        radius = max(6, int(min(w, h) * 0.12))
-        stroke_width = max(2, int(min(w, h) * 0.06))
+        # ローカル座標での矩形（pad を考慮）
+        local_bbox = [pad, pad, pad + w_i, pad + h_i]
 
+        # 角丸半径は元の方式に準拠しつつ、local bbox に合うようにクリップ
+        calculated_radius = max(6, int(min(w, h) * RADIUS_RATIO))
+        max_allowed_radius = min(w_i, h_i) // 2
+        radius = min(calculated_radius, max_allowed_radius)
+
+        # 塗りつぶし（薄い赤）と枠（不透明な赤）を同時に描く
         shape_draw.rounded_rectangle(
-            bbox,
+            local_bbox,
             radius=radius,
+            fill=(255, 180, 180, fill_alpha),
             outline=(255, 0, 0, 255),
             width=stroke_width
         )
 
-        # 回転（Pillow のバージョンによって center= がない場合がある）
+        # 回転（ローカルレイヤを回転：expand=True で回転後のサイズを自動調整）
         try:
-            rotated_layer = shape_layer.rotate(angle, center=(cx, cy), resample=Image.BICUBIC)
-        except TypeError:
-            # center= が使えない古いバージョンの Pillow の場合
-            print("警告: Pillow の rotate に center= が無い可能性があります。Pillow をアップデートしてください。")
-            rotated_layer = shape_layer.rotate(angle, resample=Image.BICUBIC)
+            rotated_layer = shape_layer.rotate(-angle, resample=Image.BICUBIC, expand=True)
+            # 注: Keynote などの角度の符号規約によって +/- を変更してください
         except Exception as e:
             print("回転中にエラー:", e)
             rotated_layer = shape_layer
 
-        # グループ全体のハイライトに合成
-        highlight = Image.alpha_composite(highlight, rotated_layer)
+        # rotated_layer を highlight（フルサイズ）に上書きペースト
+        # ローカルレイヤ中心がノード中心 (cx,cy) に来るように位置を計算
+        top_left_x = int(round(cx - (rotated_layer.width / 2.0)))
+        top_left_y = int(round(cy - (rotated_layer.height / 2.0)))
+
+        # paste の第三引数にマスクを渡すことでアルファを尊重して上書き
+        highlight.paste(rotated_layer, (top_left_x, top_left_y), rotated_layer)
 
     # 元画像と合成して出力
     result_img = Image.alpha_composite(img, highlight)

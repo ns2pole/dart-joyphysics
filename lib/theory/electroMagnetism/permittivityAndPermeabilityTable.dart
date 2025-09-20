@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final permittivityAndPermeabilityTable = TheoryTopic(
   title: '電場磁場の分極対応表',
-  imageAsscet: 'assets/mindMap/forTopics/permittivityAndPermeabilityTable.png',
+  imageAsset: 'assets/mindMap/forTopics/permittivityAndPermeabilityTable.png',
 
   latexContent: r"""
 <style>

@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final ampereLaw = TheoryTopic(
   title: 'アンペールの法則（真空中、Hで表記）',
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
+  imageAsset: 'assets/mindMap/forTopics/ampereLaw.png',
   latexContent: r"""
 <div class="theory-common-box">ポイント</div>
 <p>アンペールの法則は、自由電流が磁場を生じることを表す法則です。真空中では、磁場強度 $\overrightarrow{H}$ を用いて簡潔に表せます。</p>

@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final funceqSimpleHarmonicMotion = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/funceq_simple_harmonic_motion.png',
   title: '微分方程式：単振動',
   latexContent: r""""""
 );

@@ -2,8 +2,7 @@ import '../../model.dart';
 
 final integrationPolynomialAdiabatic = TheoryTopic(
   inPreparation: true,
-  imageAsscet: 'assets/mindMap/forTopics/ampereLaw.png',
-  
+  imageAsset: 'assets/mindMap/forTopics/integration_polynomial_adiabatic.png',
   title: '多項式の積分（断熱過程）',
   latexContent: r""""""
 );

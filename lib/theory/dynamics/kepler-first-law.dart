@@ -5,10 +5,11 @@ final keplerFirstLaw = TheoryTopic(
   isNew: false,
   imageAsset: 'assets/mindMap/forTopics/keplerFirstLaw.png', // 実際の画像パス
   latexContent: r"""
-<div class="theory-common-box">
+
+
+  <div class="theory-common-box">
 設定・記法
 </div>
-「:=」は左辺の記号を右辺で定義することを意味する。<br>
 中心質量 $M$ の重力場の下で質量 $m$ の粒子が運動するとする。<br>
 ケプラー第二法則により運動は固定平面に制限される事が導けるので，その平面を $(x,y)$ 平面と取り，
 三次元ベクトルは縦ベクトルで表す：
@@ -17,94 +18,28 @@ $$\begin{aligned}
 \vec{v}(t)=\vec{r}'(t)=\begin{pmatrix}x'(t)\\[6pt] y'(t)\\[6pt] 0\end{pmatrix} \\[6pt]
 r(t)=\sqrt{x(t)^2+y(t)^2}
 \end{aligned}$$
-角運動量ベクトルは
-$$
-\vec L:=\begin{pmatrix}0\\[6pt] 0\\[6pt] m\bigl(xy'-yx'\bigr) \end{pmatrix}
-$$
-
-である。<br>
 万有引力の法則より、運動方程式は中心星を原点に取ると
-
 $$
 m\vec{r}''(t)=-\frac{GMm}{r(t)^3}\,\vec{r}(t)
 $$
-
 $xy$成分表示では
-
 $\displaystyle x''=-\frac{GM}{r^3}x,\quad y''=-\frac{GM}{r^3}y$
-
-となる。
-</div>
-
-<div class="theory-common-box">
-定義:レンツベクトル,離心ベクトル,離心率
-</div>
-天下りではあるが、
-
+となる。<br>
+また、この運動方程式に従う質点について下記の3つの物理量が時間によらず一定である事は<a href="app://topic?video=keplerSecondLaw">こちらの記事</a>と<a href="app://topic?video=runge_lenz_vector">こちらの記事</a>で証明を行なっている。<br>
+<div class="paragraph-box">角運動量ベクトル</div><br>
+$$
+\vec L:=\begin{pmatrix}0\\[6pt] 0\\[6pt] m\bigl(xy'-yx'\bigr) \end{pmatrix}
+$$
+<div class="paragraph-box">レンツベクトル</div><br>
 $$\displaystyle \vec{A}:=\begin{pmatrix}mL\,y' - \frac{GM\,m^2 x}{r}\\[6pt]
  \displaystyle -mL\,x' - \frac{GM\,m^2 y}{r}\\[6pt] 0\end{pmatrix}
 $$
+<div class="paragraph-box">離心ベクトル(レンツベクトルを${GM\,m^2}$で割り無次元化したベクトル)</div><br>
+$$\vec{e}:=\frac{\vec{A}}{GM\,m^2}$$
 
-という保存量が知られている。これをレンツベクトルと言う。
-またこのベクトルを無次元化したベクトル
-
-$$\vec{e}:=\frac{\vec{A}}{GM\,m^2}
-$$
-
-を離心ベクトルと言い、離心ベクトルの大きさ$ \displaystyle e:=\lvert\vec{e}\lvert $を離心率という。
-</div>
-
+  
 <div class="theory-common-box">
-命題1:レンツベクトル,離心ベクトルは時間に依らない定ベクトルである。
-</div>
-
-<div class="proof-box">証明</div>
-両者は定数倍の関係であるから、離心ベクトルが時間によらないことを示せば十分。
-
-$\vec{e}$ の成分は
-
-$$\begin{aligned}
-\begin{cases}
-\displaystyle e_x=\frac{A_x}{GMm^2}=\frac{L\,y'}{GMm}-\frac{x}{r}\\[6pt]
-\displaystyle e_y=\frac{A_y}{GMm^2}=-\frac{L\,x'}{GMm}-\frac{y}{r}
-\end{cases}
-\end{aligned}$$
-$e_x'$ を計算する（$L$ はケプラー第二法則により定数）：
-
-$$
-e_x'=\frac{Ly''}{GMm}-\Bigl(\frac{x}{r}\Bigr)'
-$$
-
-右辺第一項:<br>
-$ \displaystyle \frac{Ly''}{GMm} $は、運動方程式より$y''=-\dfrac{GM}{r^3}y$ なので
-
-$$
-\displaystyle \frac{Ly''}{GMm}=-\frac{Ly}{m r^3}
-$$
-
-右辺第二項:
-$$\begin{aligned}
-&\quad \Bigl(\frac{x}{r}\Bigr)'\\[6pt]
-&=\frac{x'}{r}-\frac{x}{r^2}r'\\[6pt]
-&=\frac{x'}{r}-\frac{x}{r^2}\Bigr(\frac{xx'+yy'}{\sqrt{x^2+y^2}}\Bigl)\\[6pt]
-&=\frac{x'}{r}-x\frac{x x'+y y'}{r^3}\\[6pt]
-&=\frac{x'(x^2+y^2)}{r^3}-x\frac{x x'+y y'}{r^3}\\[6pt]
-&=\frac{x'y^2-xy y'}{r^3}\\[6pt]
-&=y\frac{x'y-xy'}{r^3}\\[6pt]
-&=-y\frac{L}{r^3}
-\end{aligned}$$
-よって、
-
-$$\begin{aligned}
-e_x' &= \frac{Ly''}{GMm}-\Bigl(\frac{x}{r}\Bigr)' \\[6pt]
-&=-\frac{Ly}{mr^3} -\Bigl(-y\frac{L}{r^3}\Bigr) = 0
-\end{aligned}$$
-同様の計算で $e_y'=0$ となり，$e_z\equiv0$ だから、各成分の時間微分が0となり、$\vec{e}'=\mathbf0$ が示された。
-
-</div>　⬜︎
-
-<div class="theory-common-box">
-命題2（軌道方程式）<br>
+命題1（軌道方程式）<br>
 極座標 $(r,\theta)$ を用いると軌道は$r,\theta$の関係式で、下記のように表される。
 $\displaystyle r(\theta)=\dfrac{L^{2}}{GM\,m^{2}\bigl(1+e\cos(\theta-\alpha)\bigr)}$
 </div>
@@ -136,7 +71,7 @@ $$\begin{aligned}
 </div>　⬜︎
 
 <div class="theory-common-box">
-命題3（離心率と全エネルギー）<br>
+命題2（離心率と全エネルギー）<br>
 離心率$e$とエネルギー $E$ との間には、
 $\displaystyle e^{2}=1+\dfrac{2E L^{2}}{G^{2}M^{2}m^{3}} $
 の関係が成り立つ。</div>
@@ -163,7 +98,7 @@ e^2 &= \frac{L^2}{G^2 M^2 m^2} \Bigl(  \frac{2E}{m} + \frac{2 GM}{r} \Bigr) + 1-
 </div>　⬜︎
 
 <div class="theory-common-box">
-命題4（離心率 $e$ による分類）
+命題3（離心率 $e$ による分類）
 </div>
 極方程式
 $$
@@ -214,13 +149,13 @@ $$
 
 
 <div class="theory-common-box">
-命題5（軌道長半径とエネルギー）<br>
+命題4（軌道長半径とエネルギー）<br>
 楕円軌道の時、全エネルギー$E$と軌道長半径$a$の間に
 $\displaystyle E=-\frac{GM\,m}{2a}\quad(<0)$
 の関係式が成り立つ。すなわち、エネルギーは軌道長半径のみで決まる。
 </div>
 <div class="proof-box">証明</div>
-命題3の式
+命題2の式
 
 $$
 e^2=1+\frac{2EL^2}{G^2M^2m^3}
@@ -248,7 +183,7 @@ $$
 </div>
 　⬜︎
 <div class="theory-common-box">
-命題6（焦点が原点であることと準線の方程式）<br>
+命題5（焦点が原点であることと準線の方程式）<br>
 極方程式
 $\displaystyle r(\theta)=\frac{L^2}{GM\,m^2(1+e\cos(\theta-\alpha))}; \quad L\neq 0 $によって表される曲線は，
 原点が焦点，準線が
@@ -256,7 +191,7 @@ $\displaystyle \mathcal D:\  x\cos\alpha+y\sin\alpha=\frac{L^2}{GM\,m^2e}$、離
 </div>
 <div class="proof-box">証明</div>
 
-焦点$F$、直線 $\mathcal D$，離心率 $e>0$ を与えた時、円錐曲線の方程式が命題2の軌道の式と一致する事を示す。
+焦点$F$、直線 $\mathcal D$，離心率 $e>0$ を与えた時、円錐曲線の方程式が命題1の軌道の式と一致する事を示す。
 
 焦点$F$を原点として、準線は天下りではあるが、$\displaystyle \mathcal D:   x\cos\alpha+y\sin\alpha=\frac{L^2}{GM m^2e}$を取る。
 
@@ -288,7 +223,7 @@ $$
 r\bigl(1+e\cos(\theta-\alpha)\bigr)=\frac{L^2}{GM\,m^2}
 $$
 
-を得る．これは、命題2の軌道の式と同じ。 ⬜︎
+を得る．これは、命題1の軌道の式と同じ。 ⬜︎
 
 </div>
 

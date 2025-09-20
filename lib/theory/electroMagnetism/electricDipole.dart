@@ -2,7 +2,7 @@ import '../../model.dart';
 
 final electricDipole = TheoryTopic(
   title: '電気双極子',
-  imageAsscet: 'assets/mindMap/forTopics/electricDipole.png',
+  // imageAsset: 'assets/mindMap/forTopics/electricDipole.png',
   latexContent: r"""
 <div class="theory-common-box">定義（電気双極子モーメント）</div>
 <p>
