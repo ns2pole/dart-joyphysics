@@ -220,7 +220,6 @@ export './theory/electroMagnetism/bioSarvartLawForCircleCurrent.dart';
 export './theory/electroMagnetism/bioSarvartLaw.dart';
 export './theory/electroMagnetism/e_field_spherical_charge_distribution.dart';
 export './theory/electroMagnetism/e_field_infinite_uniform_sheet.dart';
-export './theory/electroMagnetism/magnetic_field_circular_loop_on_axis_z0.dart';
 export './theory/electroMagnetism/magnetic_field_circular_loop_on_axis.dart';
 export './theory/electroMagnetism/magnetic_field_circular_loop_general_point.dart';
 export './theory/electroMagnetism/circular_loop_magnetic_field_satisfies_ampere_law.dart';

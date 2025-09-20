@@ -82,24 +82,28 @@ class Category {
 }
 
 
-
-
-@immutable
+// Product class の例（既存の定義にフィールドを追加）
 class Product {
   final String title;
   final String url;
-  final String? imageUrl; // ネットURL か assets パス
+  final String? imageUrl;
   final String? price;
-  final int rating; // 0..5
-  final List<Video> videos;
+  final int rating;
+  final List<dynamic> videos;
+  final String? description; // ← 商品説明を追加
+  final String? imageAttribution;
+  final String? imageSourceUrl;
 
-  const Product({
+  Product({
     required this.title,
     required this.url,
     this.imageUrl,
     this.price,
     this.rating = 0,
     this.videos = const [],
+    this.description,
+    this.imageAttribution,
+    this.imageSourceUrl,
   });
 
   // Optional: Map から作るヘルパー（既存のデータから移行する際に便利）

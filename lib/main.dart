@@ -159,43 +159,39 @@ class CategoryList extends StatelessWidget {
       },
     );
   }
-
-  // ---------------- UI ビルダー ----------------
-  Widget _buildShopButton(BuildContext context) => Padding(
-        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
-        child: GestureDetector(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => ProductListPage()),
+    // ---------------- UI ビルダー ----------------
+    Widget _buildShopButton(BuildContext context) => Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 75),
+      child: GestureDetector(
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ProductListPage()),
+        ),
+        child: Container(
+          height: 60,
+          decoration: BoxDecoration(
+            // グラデーションを止めて単色の水色に変更
+            color: Color(0xFF64B5F6), // ← 水色（必要なら別の16進値に変えてください）
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
           ),
-          child: Container(
-            height: 60,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Color(0xFF6DD5FA), Color(0xFF2193B0)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [BoxShadow(blurRadius: 4, color: Colors.black26)],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.shopping_basket_outlined, color: Colors.white, size: 28),
-                SizedBox(width: 10),
-                Text(
-                  '実験グッズ(物販)',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.shopping_basket_outlined, color: Colors.white, size: 28),
+              SizedBox(width: 10),
+              Text(
+                'おすすめ実験グッズ',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      );
+      ),
+    );
 
   Widget _buildInfoText(String text) => Padding(
         padding: EdgeInsets.symmetric(vertical: 6, horizontal: 40),

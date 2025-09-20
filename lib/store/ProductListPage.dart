@@ -10,28 +10,31 @@ class ProductListPage extends StatelessWidget {
 
   final List<Product> products = [
     Product(
-      title: 'オシロスコープ(4000円程度)',
+      title: 'オシロスコープ',
       url: 'https://amzn.to/4gy0h9l',
-      imageUrl: 'https://example.com/oscilloscope.jpg',
+      imageUrl: 'assets/dynamicsDetail/planets.webp',
       price: '約4,000円',
       rating: 2,
-      videos: [],
+      description: '数千円するが波形を観測できる。回路の実験で活躍する。',
+      videos: [rcCircuit],
     ),
     Product(
-      title: 'ネオジム磁石(1000円程度)',
-      url: 'https://amzn.to/4ptwsdX',
-      imageUrl: 'assets/images/magnet.jpg',
-      price: '約1,000円',
-      rating: 3,
-      videos: [neodymiumMagnetFieldMeasurement],
+      title: 'ニュートンメーター',
+      url: 'https://amzn.to/4nwclL7',
+      imageUrl: 'assets/dynamicsDetail/planets.webp',
+      price: '約5,000円',
+      rating: 2,
+      description: '力を測れる。グラム表示も可能。',
+      videos: [fook],
     ),
     Product(
-      title: '磁界測定器(13000円程度)',
+      title: '磁場測定器',
       url: 'https://amzn.to/4mmRVmb',
       imageUrl: null,
       price: '約13,000円',
-      rating: 2,
-      videos: [],
+      rating: 1,
+      description: '磁場(磁束密度B)が測れる。スマホで測ると壊れそうな磁場でもこれで測れる。',
+      videos: [neodymiumMagnetFieldMeasurement, magneticFieldCircularLoop, solenoidMagneticField],
     ),
   ];
 
@@ -73,10 +76,12 @@ class ProductListPage extends StatelessWidget {
     );
   }
 
-  Widget _buildProductImage(String? imageUrl) {
-    const double w = 120, h = 80;
+  // _buildProductImage を Image + 出典を返すウィジェットに変更
+  Widget _buildProductImageWithAttribution(String? imageUrl, String? attribution, String? sourceUrl) {
+    const double w = 120, h = 135;
+    Widget image;
     if (imageUrl == null || imageUrl.trim().isEmpty) {
-      return Container(
+      image = Container(
         width: w,
         height: h,
         alignment: Alignment.center,
@@ -86,46 +91,88 @@ class ProductListPage extends StatelessWidget {
         ),
         child: const Icon(Icons.image_not_supported, size: 36, color: Colors.grey),
       );
+    } else {
+      final trimmed = imageUrl.trim();
+      final lower = trimmed.toLowerCase();
+      if (lower.startsWith('http://') || lower.startsWith('https://')) {
+        image = ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(
+            trimmed,
+            width: w,
+            height: h,
+            fit: BoxFit.cover,
+            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+              return Container(
+                width: w,
+                height: h,
+                color: Colors.grey.shade200,
+                child: const Icon(Icons.broken_image, size: 36, color: Colors.grey),
+              );
+            },
+          ),
+        );
+      } else {
+        image = ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.asset(
+            trimmed,
+            width: w,
+            height: h,
+            fit: BoxFit.cover,
+            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+              return Container(
+                width: w,
+                height: h,
+                color: Colors.grey.shade200,
+                child: const Icon(Icons.broken_image, size: 36, color: Colors.grey),
+              );
+            },
+          ),
+        );
+      }
     }
 
-    final trimmed = imageUrl.trim();
-    final lower = trimmed.toLowerCase();
-    if (lower.startsWith('http://') || lower.startsWith('https://')) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Image.network(
-          trimmed,
-          width: w,
-          height: h,
-          fit: BoxFit.cover,
-          errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-            return Container(
-              width: w,
-              height: h,
-              color: Colors.grey.shade200,
-              child: const Icon(Icons.broken_image, size: 36, color: Colors.grey),
-            );
+    // Attribution テキスト（あまり目立たないように小さく表示）
+    Widget attributionWidget = const SizedBox.shrink();
+    if ((attribution ?? '').isNotEmpty || (sourceUrl ?? '').isNotEmpty) {
+      attributionWidget = Padding(
+        padding: const EdgeInsets.only(top: 6.0),
+        child: GestureDetector(
+          onTap: () {
+            if ((sourceUrl ?? '').isNotEmpty) {
+              launchUrl(Uri.parse(sourceUrl!)); // エラーハンドリングは省略してますが _openExternalUrl を使うのがベター
+            }
           },
+          child: RichText(
+            text: TextSpan(
+              children: [
+                if ((attribution ?? '').isNotEmpty)
+                  TextSpan(
+                    text: attribution,
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                  ),
+                if ((attribution ?? '').isNotEmpty && (sourceUrl ?? '').isNotEmpty)
+                  const TextSpan(text: '  '),
+                if ((sourceUrl ?? '').isNotEmpty)
+                  TextSpan(
+                    text: '(出典)',
+                    style: TextStyle(fontSize: 12, color: Colors.blue.shade700, decoration: TextDecoration.underline),
+                  ),
+              ],
+            ),
+          ),
         ),
       );
     }
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Image.asset(
-        trimmed,
-        width: w,
-        height: h,
-        fit: BoxFit.cover,
-        errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-          return Container(
-            width: w,
-            height: h,
-            color: Colors.grey.shade200,
-            child: const Icon(Icons.broken_image, size: 36, color: Colors.grey),
-          );
-        },
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        image,
+        attributionWidget,
+      ],
     );
   }
 
@@ -175,116 +222,172 @@ class ProductListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('おすすめ実験グッズ')),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          final p = products[index];
-          final videos = (p.videos is List) ? (p.videos as List).cast<dynamic>() : <dynamic>[];
+      body: Column(
+        children: [
+          // --- ページ最初のアフィリエイト注意書き
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                  color: Colors.yellow.shade50, // ←薄め
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.yellow.shade300), // ←柔らかめの枠
+            ),
+            child: const Text(
+              '※このページのリンクはアフィリエイトです。購入されると運営者に報酬が入ります。',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+          ),
+          // --- 残りは既存の ListView.builder
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final p = products[index];
+                final videos = (p.videos is List) ? (p.videos as List).cast<dynamic>() : <dynamic>[];
 
-          return Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              // カード内を Column にして、画像＋情報は Row、動画リストは Row の下（カード全幅を使用）
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // --- 上段: 画像 + タイトル/価格/評価/Amazonボタン（従来どおり）
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildProductImage(p.imageUrl),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
+                // ここから下は既存のコードをそのまま
+                return Card(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // --- 上段: 画像 + タイトル/価格/評価/Amazonボタン
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(p.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                const Text('おすすめ度', style: TextStyle(fontSize: 14)),
-                                const SizedBox(width: 8),
-                                _buildRatingStars(p.rating),
-                              ],
-                            ),
-                            const SizedBox(height: 8),
-                            Row(
-                              children: [
-                                if (p.price != null) Text(p.price!, style: const TextStyle(fontSize: 14)),
-                                const Spacer(),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton.icon(
-                                    icon: const Icon(Icons.shopping_cart_outlined),
-                                    label: const Text('Amazonで見る'),
-                                    onPressed: () {
-                                      if (p.url.isNotEmpty) _openExternalUrl(context, p.url);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(vertical: 12),
-                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                                    ),
+                            _buildProductImageWithAttribution(p.imageUrl, p.imageAttribution, p.imageSourceUrl),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(p.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      const Text('おすすめ度', style: TextStyle(fontSize: 14)),
+                                      const SizedBox(width: 8),
+                                      _buildRatingStars(p.rating),
+                                    ],
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      if (p.price != null) Text(p.price!, style: const TextStyle(fontSize: 18)),
+                                      const Spacer(),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: ElevatedButton.icon(
+                                          icon: const Icon(Icons.shopping_cart_outlined),
+                                          label: const Text('Amazonで見る'),
+                                          onPressed: () {
+                                            if (p.url.isNotEmpty) _openExternalUrl(context, p.url);
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            padding: const EdgeInsets.symmetric(vertical: 12),
+                                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
+                        const SizedBox(height: 12),
 
-                  // --- 下段: 関連実験動画（ここをカード全幅に広げる）
-                  if (videos.isNotEmpty) ...[
-                    const SizedBox(height: 12),
-                    // 右に少し余白を付けるために Padding を追加（label の右側に余白）
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: const Text('関連実験動画', style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                    const SizedBox(height: 8),
-                    // LayoutBuilder で利用可能幅を取得して各ボタン幅を調整
-                    LayoutBuilder(builder: (context, constraints) {
-                      final available = constraints.maxWidth;
-                      // 各ボタンはカード幅の約90%をデフォルト幅とする（好みで調整）
-                      final buttonWidth = available * 0.9;
-                      return Wrap(
-                        spacing: 8,
-                        runSpacing: 6,
-                        children: videos.map((videoItem) {
-                          final label = _videoLabel(videoItem);
-                          return SizedBox(
-                            width: buttonWidth,
-                            child: ElevatedButton.icon(
-                              icon: const Icon(Icons.play_circle_outline),
-                              label: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 2.0),
-                                child: Text(label, overflow: TextOverflow.ellipsis, maxLines: 1),
-                              ),
-                              onPressed: () => _onVideoTap(context, videoItem),
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                                alignment: Alignment.centerLeft,
-                              ),
+                        // --- 商品説明タイトル（角丸枠）
+                        if ((p.description ?? '').isNotEmpty)
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.grey.shade400, width: 1),
                             ),
-                          );
-                        }).toList(),
-                      );
-                    }),
-                  ],
-                ],
-              ),
+                            child: const Text(
+                              '商品説明',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+
+                        // --- 商品説明本文
+                        if ((p.description ?? '').isNotEmpty) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            p.description!,
+                            style: const TextStyle(fontSize: 17, color: Colors.black87, height: 1.4),
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+
+                        // --- 関連実験動画タイトル（角丸枠）
+                        if (videos.isNotEmpty) ...[
+                          const SizedBox(height: 12),
+                          Container(
+                            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: Colors.grey.shade400, width: 1),
+                            ),
+                            child: const Text(
+                              '関連実験動画',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+
+                          // --- 動画ボタン
+                          LayoutBuilder(builder: (context, constraints) {
+                            final available = constraints.maxWidth;
+                            final buttonWidth = available * 0.9;
+                            return Wrap(
+                              spacing: 8,
+                              runSpacing: 6,
+                              children: videos.map((videoItem) {
+                                final label = _videoLabel(videoItem);
+                                return SizedBox(
+                                  width: buttonWidth,
+                                  child: ElevatedButton.icon(
+                                    icon: const Icon(Icons.play_circle_outline),
+                                    label: Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 2.0),
+                                      child: Text(label, overflow: TextOverflow.ellipsis, maxLines: 1, style: const TextStyle(fontSize: 16)),
+                                    ),
+                                    onPressed: () => _onVideoTap(context, videoItem),
+                                    style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          }),
+                        ],
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

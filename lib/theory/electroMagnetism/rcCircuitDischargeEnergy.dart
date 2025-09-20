@@ -2,6 +2,7 @@ import '../../model.dart';
 
 final rcCircuitDischargeEnergy = TheoryTopic(
   title: 'RC回路におけるエネルギー(放電)',
+  inPreparation: true,
   imageAsset: 'assets/mindMap/forTopics/rcCircuitDischarge.png',
   latexContent: r"""
 <div class="theory-common-box">出発点（キルヒホッフ式に \(\displaystyle I(t)\) を掛ける）</div>

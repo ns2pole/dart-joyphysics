@@ -309,7 +309,6 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         solenoidMagneticFieldProp,
         biotSavartLaw,
         bioSarvartLawForCircleCurrent,
-        magnetic_field_circular_loop_on_axis_z0,
         magnetic_field_circular_loop_on_axis,
         magnetic_field_circular_loop_general_point,
         magnetic_field_solenoid_by_summation_of_circular_loop,
