@@ -5,67 +5,67 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.001221">
+      <testcase classname="fastlane.lanes" name="00: default_platform" time="0.000511">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="01: flutter clean" time="43.543607">
+      <testcase classname="fastlane.lanes" name="01: get_info_plist_value" time="0.003799">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="02: flutter pub get" time="9.14532">
+      <testcase classname="fastlane.lanes" name="02: flutter clean" time="16.424799">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="03: cd ../ios &amp;&amp; pod install --repo-update &amp;&amp; cd .." time="5.622721">
+      <testcase classname="fastlane.lanes" name="03: flutter pub get" time="10.440006">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="04: flutter build appbundle --release" time="248.969398">
+      <testcase classname="fastlane.lanes" name="04: cd ../ios &amp;&amp; pod install --repo-update &amp;&amp; cd .." time="4.514269">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="05: increment_version_number" time="0.7117">
+      <testcase classname="fastlane.lanes" name="05: flutter build appbundle --release" time="164.943249">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="06: increment_build_number" time="0.53732">
+      <testcase classname="fastlane.lanes" name="06: increment_version_number" time="0.428177">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="07: build_app" time="187.287744">
+      <testcase classname="fastlane.lanes" name="07: increment_build_number" time="0.387005">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="08: get_info_plist_value" time="0.002219">
+      <testcase classname="fastlane.lanes" name="08: build_app" time="153.435603">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="09: deliver" time="596.201852">
+      <testcase classname="fastlane.lanes" name="09: deliver" time="371.342225">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="10: mkdir -p ./metadata/android/ja-JP/changelogs" time="0.012432">
+      <testcase classname="fastlane.lanes" name="10: mkdir -p ./metadata/android/ja-JP/changelogs" time="0.013656">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="11: assembleRelease" time="212.883917">
+      <testcase classname="fastlane.lanes" name="11: assembleRelease" time="272.746683">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="12: upload_to_play_store" time="63.649909">
+      <testcase classname="fastlane.lanes" name="12: upload_to_play_store" time="82.487878">
         
       </testcase>
     

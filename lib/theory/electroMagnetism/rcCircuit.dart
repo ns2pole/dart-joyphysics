@@ -1,7 +1,7 @@
 import '../../model.dart';
 
 final rcCircuitTheory = TheoryTopic(
-  title: 'RC回路(充電)',
+  title: 'RC回路微分方程式の解(充電)',
   videoURL: "oVY3-umLN14",
   imageAsset: 'assets/mindMap/forTopics/rcCircuit.png', // 実際の画像パス
   latexContent: r"""

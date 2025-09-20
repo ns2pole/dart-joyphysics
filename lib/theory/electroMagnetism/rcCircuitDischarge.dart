@@ -1,7 +1,7 @@
 import '../../model.dart';
 
 final rcCircuitDischarge = TheoryTopic(
-  title: 'RC回路(放電)',
+  title: 'RC回路微分方程式の解(放電)',
   imageAsset: 'assets/mindMap/forTopics/rcCircuitDischarge.png',
   latexContent: r"""
 

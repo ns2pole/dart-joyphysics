@@ -44,6 +44,8 @@ dependencies:
   permission_handler: ^11.3.0
   google_fonts: ^6.2.1
   youtube_player_iframe: ^5.2.1
+  new_version_plus: ^0.1.1
+  shared_preferences: ^2.5.3
   # fl_chart: ^0.69.0
   # flutter_fft: ^1.0.2  # check pub.dev for the latest version
   # ここまで

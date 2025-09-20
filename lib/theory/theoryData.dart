@@ -320,6 +320,7 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       topics: [
         rcCircuitTheory,
         rcCircuitDischarge,
+        rcCircuitDischargeEnergy,
         rl_circuit,
         lc_circuit,
         rlc_circuit

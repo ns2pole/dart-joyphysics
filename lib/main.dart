@@ -3,7 +3,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:joyphysics/theory/theoryData.dart';
 import 'package:joyphysics/theory/TheoryView.dart';
-import 'package:joyphysics/experiment/ExperimentView.dart';
+import 'package:joyphysics/update_checker.dart';
 import 'package:joyphysics/experiment/ExperimentView.dart';
 import 'package:joyphysics/experiment/categoriesData.dart';
 import 'package:joyphysics/experiment/sensorListView.dart';
@@ -12,7 +12,18 @@ import 'package:joyphysics/aboutView.dart';
 import 'package:joyphysics/model.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(JoyPhysicsApp());
+void main() {
+  runApp(JoyPhysicsApp());
+  // runApp の後で非同期にアップデートチェックを開始
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    UpdateChecker(
+      iosId: '6748957698',
+      androidId: 'com.joyphysics',
+      skipDays: 3,
+    ).checkOnAppStart();
+  });
+}
+
 
 class JoyPhysicsApp extends StatelessWidget {
   @override

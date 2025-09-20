@@ -14,7 +14,8 @@
 .swiftpm/
 migrate_working_dir/
 /vendor/
-
+.*.dSYM.zip
+*.dSYM.zip
 # IntelliJ related
 *.iml
 *.ipr
