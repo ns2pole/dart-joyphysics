@@ -11,31 +11,38 @@ import 'package:joyphysics/store/ProductListPage.dart';
 import 'package:joyphysics/aboutView.dart';
 import 'package:joyphysics/model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'update_checker.dart'; // UpdateChecker (navigatorKey を受け取る実装にする)
+
+// 共有の navigatorKey を1つだけ作る
+final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
   runApp(JoyPhysicsApp());
-  // runApp の後で非同期にアップデートチェックを開始
+
+  // runApp の後で非同期にアップデートチェックを開始（postFrame は安全）
   WidgetsBinding.instance.addPostFrameCallback((_) {
     UpdateChecker(
       iosId: '6748957698',
       androidId: 'com.joyphysics',
       skipDays: 3,
+      navigatorKey: appNavigatorKey,      // ← ここを必ず渡す
+      // forceShowForDebug: true, // デバッグ時に強制表示したいなら有効化
     ).checkOnAppStart();
   });
 }
 
-
 class JoyPhysicsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
+        navigatorKey: appNavigatorKey, // ← 同じキーを MaterialApp に渡す
         debugShowCheckedModeBanner: false,
         title: '実験と理論で学ぶ高校物理',
         theme: ThemeData(
-          fontFamily: 'KeiFont', // ここで全体のデフォルトフォントを KeiFont に
+          fontFamily: 'KeiFont',
           primarySwatch: Colors.blue,
           textTheme: const TextTheme(
             bodyMedium: TextStyle(fontSize: 18),
-            // primarySwatch: Colors.blue,
           ),
         ),
         home: ContentView(),
