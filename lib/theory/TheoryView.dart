@@ -44,52 +44,66 @@ class TheoryListView extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          if (categoryName == '力学理論' || categoryName == '電磁気学理論')
+          if (categoryName == '力学理論' || categoryName == '電磁気学理論' || categoryName == '熱力学理論')
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 9.0, horizontal: 16.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => FullscreenImagePage(
-                        imageAsset: categoryName == '力学理論'
-                            ? 'assets/mindMap/dynamicsLandScope.jpeg'
-                            : 'assets/mindMap/emTheoryLandScope.jpeg',
-                      ),
-                    ),
-                  );
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.58,
-                        child: AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: Image.asset(
-                            categoryName == '力学理論'
-                                ? 'assets/mindMap/dynamicsLandScope.jpeg'
-                                : 'assets/mindMap/emTheoryLandScope.jpeg',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 4), // 画像と文字の間隔
-                    Text(
-                      categoryName == '力学理論' ? '力学全体像' : '電磁気学全体像',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ],
-                ),
+  padding: const EdgeInsets.symmetric(vertical: 9.0, horizontal: 16.0),
+  child: GestureDetector(
+    onTap: () {
+      // 画像パスをカテゴリに応じて決定
+      final imageAsset = categoryName == '力学理論'
+          ? 'assets/mindMap/dynamicsLandScope.jpeg'
+          : categoryName == '電磁気学理論'
+              ? 'assets/mindMap/emTheoryLandScope.jpeg'
+              : 'assets/mindMap/thermoDynamicsLandScope.jpeg';
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => FullscreenImagePage(
+            imageAsset: imageAsset,
+          ),
+        ),
+      );
+    },
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.58,
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Image.asset(
+                // 表示画像をカテゴリに応じて切り替え
+                categoryName == '力学理論'
+                    ? 'assets/mindMap/dynamicsLandScope.jpeg'
+                    : categoryName == '電磁気学理論'
+                        ? 'assets/mindMap/emTheoryLandScope.jpeg'
+                        : 'assets/mindMap/thermoDynamicsLandScope.jpeg',
+                fit: BoxFit.cover,
               ),
             ),
+          ),
+        ),
+        const SizedBox(height: 4), // 画像と文字の間隔
+        Text(
+          // ラベルもカテゴリで切り替え
+          categoryName == '力学理論'
+              ? '力学全体像'
+              : categoryName == '電磁気学理論'
+                  ? '電磁気学全体像'
+                  : '熱力学全体像',
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black54,
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
 
 // --- ここを差し替える（元の ...subcategories.map(...) をこのブロックで置き換える） ---
 ...<Widget>[

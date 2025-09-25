@@ -361,4 +361,13 @@ final Map<String, List<TheorySubcategory>> theoryData = {
       ],
     ),
   ],
+
+  '熱力学理論': [
+    TheorySubcategory(
+      name: '断熱変化',
+      topics: [
+        poissonFormula,
+      ],
+    ),
+  ],
 };

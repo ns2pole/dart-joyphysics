@@ -230,6 +230,8 @@ export './theory/electroMagnetism/lc_circuit.dart';
 export './theory/electroMagnetism/rlc_circuit.dart';
 export './theory/electroMagnetism/e_field_point_charge.dart';
 export './theory/electroMagnetism/coulombs_law.dart';
+export './theory/thermoDynamics/poissonFormula.dart';
+
 export './theory/electroMagnetism/rcCircuitDischargeEnergy.dart';
 
 /* ---------- Common / Mappings (力学 ⇄ 電磁気 の対応表) ---------- */

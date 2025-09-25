@@ -102,7 +102,7 @@ class _ProductListPageState extends State<ProductListPage> {
       imageUrl: 'assets/goods/capacitor.png',
       price: '約1,000円',
       rating: 3,
-      description: '誤差が40%あったりするのものあり、雑な作りな気がするが、誤差が10%未満のものもあるので、とりあえずコンデンサーを買うならこれを買っていいものを使うのがコスパ的には○',
+      description: '誤差が40%あったりするのものあり、お世辞にも作りが良いとは思わないが、誤差が10%未満のものもある。コスパは良い気がする。',
       videos: [],
       category: '電磁気',
     ),
@@ -417,7 +417,7 @@ class _ProductListPageState extends State<ProductListPage> {
               Text(
                 p.description!,
                 style: const TextStyle(fontSize: 17, color: Colors.black87, height: 1.4),
-                maxLines: 3,
+                maxLines: 5,
                 overflow: TextOverflow.ellipsis,
               ),
             ],
@@ -634,7 +634,7 @@ class _ProductListPageState extends State<ProductListPage> {
                           Text(
                             p.description!,
                             style: const TextStyle(fontSize: 17, color: Colors.black87, height: 1.4),
-                            maxLines: 3,
+                            maxLines: 5,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],

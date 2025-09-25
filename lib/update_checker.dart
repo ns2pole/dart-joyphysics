@@ -174,17 +174,26 @@ class UpdateChecker {
               debugPrint('[UpdateChecker] user pressed: $updateText');
               Navigator.of(ctx).pop();
 
-              final appId = Platform.isIOS ? iosId : androidId;
-              debugPrint('[UpdateChecker] launching app store with appId=$appId');
+              // ここが重要：launchAppStore は "ストアのリンク（URL）" を期待するので、
+              // status?.appStoreLink を使い、なければフォールバックで URL を組み立てる。
+              final String? statusLink = status?.appStoreLink;
+              final String fallbackLink = Platform.isIOS
+                  // iOS: App Store の id は通常数字（例: 123456789）。`iosId` が numeric でない場合は正しい URL にならない点に注意。
+                  ? 'https://apps.apple.com/app/id$iosId'
+                  // Android: package name を使って Play Store の URL を組み立てる
+                  : 'https://play.google.com/store/apps/details?id=$androidId';
+
+              final String appStoreLink = statusLink ?? fallbackLink;
+              debugPrint('[UpdateChecker] launching app store with appStoreLink=$appStoreLink');
 
               try {
-                // new_version_plus のバージョンにより呼び出しが異なる場合があるので例外処理でキャッチ
-                await newVersion.launchAppStore(appId);
+                await newVersion.launchAppStore(appStoreLink);
               } catch (e, st) {
                 debugPrint('[UpdateChecker] launchAppStore error: $e');
                 debugPrint(st.toString());
-                // フォールバック案: status?.appStoreLink を url_launcher で開く（url_launcher を導入する場合）
-                // if (status?.appStoreLink != null) await launchUrlString(status!.appStoreLink!);
+                // フォールバック：もし url_launcher を直接使う場合はここで開く（必要なら url_launcher を pubspec に追加）
+                // import 'package:url_launcher/url_launcher_string.dart';
+                // if (await canLaunchUrlString(appStoreLink)) await launchUrlString(appStoreLink);
               }
             },
           ),

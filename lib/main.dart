@@ -105,6 +105,11 @@ class CategoryList extends StatelessWidget {
         'gif': 'assets/init/electromag.gif',
         'page': TheoryListView(categoryName: '電磁気学理論'),
       },
+      {
+        'name': '熱力学理論',
+        'gif': 'assets/init/fire.gif',
+        'page': TheoryListView(categoryName: '熱力学理論'),
+      },
     ];
 
     // +3 = (スマホセンサー記事のテキスト, 解説記事のテキスト, 理論記事のテキスト)
