@@ -50,10 +50,21 @@ export './experiment/electroMagnetism/ohmsLaw.dart';
 export './experiment/electroMagnetism/magnetometer.dart';
 export './experiment/electroMagnetism/magnetometer.dart';
 export './experiment/electroMagnetism/MagnetometerExperimentWidget.dart';
+export './experiment/electroMagnetism/ac_power_generation.dart';
+export './experiment/electroMagnetism/inductorReactance.dart';
+export './experiment/electroMagnetism/capacitorReactance.dart';
+export './experiment/electroMagnetism/resistorInAC.dart';
+export './experiment/electroMagnetism/straight_current_and_geomagnetism.dart';
+export './experiment/electroMagnetism/mutual_inductance_coaxial_solenoids.dart';
+export './experiment/electroMagnetism/rlc_circuit_discharge.dart';
+export './experiment/electroMagnetism/coil_self_induction_voltage.dart';
 
 
 // thermoDynamics
 export './experiment/thermoDynamics/boyle_law.dart';
+export './experiment/thermoDynamics/charles_s_law.dart';
+export './experiment/thermoDynamics/ideal_gas_eqation_and_weight_of_air.dart';
+export './experiment/thermoDynamics/ideal_gas_eqation_and_helium_buoyancy.dart';
 
 // waves
 export './experiment/waves/closedPipeResonance.dart';
@@ -227,12 +238,16 @@ export './theory/electroMagnetism/magnetic_field_solenoid_by_summation_of_circul
 export './theory/electroMagnetism/solenoid_self_inductance.dart';
 export './theory/electroMagnetism/rl_circuit.dart';
 export './theory/electroMagnetism/lc_circuit.dart';
-export './theory/electroMagnetism/rlc_circuit.dart';
+export './theory/electroMagnetism/rlc_series_underdamped_osc.dart';
+export './theory/electroMagnetism/rlcSeries_Forced_Underdamped.dart';
 export './theory/electroMagnetism/e_field_point_charge.dart';
+export './theory/electroMagnetism/mutualInductanceDerivation.dart';
 export './theory/electroMagnetism/coulombs_law.dart';
+export './theory/electroMagnetism/mutualInductanceOpenSecondaryRL.dart';
+export './theory/electroMagnetism/rcCircuitDischargeEnergy.dart';
+
 export './theory/thermoDynamics/poissonFormula.dart';
 
-export './theory/electroMagnetism/rcCircuitDischargeEnergy.dart';
 
 /* ---------- Common / Mappings (力学 ⇄ 電磁気 の対応表) ---------- */
 export './theory/electroMagnetism/mech_em_differential_equations_mapping.dart';

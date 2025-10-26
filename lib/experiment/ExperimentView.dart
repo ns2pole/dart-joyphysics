@@ -1,3 +1,4 @@
+import 'dart:math' as math; // 準備中透かしの回転で使用
 import 'package:joyphysics/experiment/HasHeight.dart';
 import 'package:flutter/material.dart';
 import 'package:joyphysics/LatexView.dart';
@@ -7,13 +8,11 @@ import 'package:joyphysics/experiment/formulaListData.dart';
 import 'package:joyphysics/experiment/HexColor.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:flutter/services.dart'; // rootBundle 用
-import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:joyphysics/dataExporter.dart';
 import 'package:joyphysics/theory/TheoryView.dart'; //画面遷移用
-
 import 'package:html/dom.dart' as dom; // ← これが重要
+
 // 表示モード
 enum VideoViewMode { byCategory, byFormula }
 
@@ -55,23 +54,16 @@ class _VideoListViewState extends State<VideoListView> {
                 viewMode == VideoViewMode.byFormula,
               ],
               onPressed: (i) => setState(() {
-                viewMode =
-                    i == 0 ? VideoViewMode.byCategory : VideoViewMode.byFormula;
+                viewMode = i == 0 ? VideoViewMode.byCategory : VideoViewMode.byFormula;
               }),
-              children: [
+              children: const [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    '単元一覧',
-                    style: TextStyle(fontSize: 20), // フォントサイズ大きく
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('単元一覧', style: TextStyle(fontSize: 20)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    '公式一覧',
-                    style: TextStyle(fontSize: 20), // フォントサイズ大きく
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('公式一覧', style: TextStyle(fontSize: 20)),
                 ),
               ],
             ),
@@ -83,8 +75,7 @@ class _VideoListViewState extends State<VideoListView> {
           // ─── コンテンツ本体（一覧 or 公式） ───
           Expanded(
             child: viewMode == VideoViewMode.byCategory
-                ? _VideoCategoryList(
-                    subcategories: widget.category.subcategories)
+                ? _VideoCategoryList(subcategories: widget.category.subcategories)
                 : FormulaList(groupedFormulas: groupMap),
           ),
         ],
@@ -115,116 +106,202 @@ Future<String> resolveAssetPath(String category, String iconName) async {
   }
 }
 
-
-// ---- あなたのウィジェット ----
+// ---- _VideoCategoryList（ご要望対応：余白 + アイコン空欄 + タイトル2行）----
 class _VideoCategoryList extends StatelessWidget {
   final List<Subcategory> subcategories;
-  _VideoCategoryList({required this.subcategories});
+  const _VideoCategoryList({required this.subcategories});
 
-  @override
-  Widget build(BuildContext context) => ListView(
-        children: subcategories.expand((sub) {
-          final videos = sub.videos;
+  // サブカテゴリ見出し帯（TheoryListView と同テイスト + 準備中表示）
+  Widget _subHeader(String name, {bool disabled = false}) {
+    return Container(
+      width: double.infinity,
+      color: disabled ? Colors.grey[200] : Colors.grey[300],
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Text(
+        disabled ? '$name（準備中）' : name,
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: disabled ? Colors.black45 : Colors.black87,
+        ),
+      ),
+    );
+  }
 
-          return [
-            // ── サブカテゴリ見出し帯 ──
-            Container(
-              width: double.infinity,
-              color: Colors.grey[300], // 薄いグレー
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: Text(
-                sub.name,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  // 1件分のタイル（disabled = 準備中）
+  Widget _videoTile(BuildContext context, Video v,
+      {bool disabled = false, bool isLast = false}) {
+    final hasIcon = v.iconName != null && v.iconName!.trim().isNotEmpty;
+
+    final tileCore = ListTile(
+      // ★ iconName 未設定なら空スペースを確保（❌を出さない）
+      leading: hasIcon
+          ? FutureBuilder<String>(
+              future: resolveAssetPath(v.category, v.iconName!),
+              builder: (context, snapshot) {
+                Widget w = const SizedBox(width: 48, height: 27);
+                if (snapshot.hasData) {
+                  w = Image.asset(
+                    snapshot.data!,
+                    width: 48,
+                    height: 27,
+                    fit: BoxFit.contain,
+                  );
+                }
+                return disabled ? Opacity(opacity: 0.6, child: w) : w;
+              },
+            )
+          : const SizedBox(width: 48, height: 27),
+      title: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 10,
+        runSpacing: 5,
+        children: [
+          Container(
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width - 150,
+            ),
+            child: Text(
+              v.title,
+              style: const TextStyle(fontSize: 16),
+              maxLines: 2,           // ← 2行まで表示
+              softWrap: true,        // ← 改行許可
+              overflow: TextOverflow.ellipsis, // 3行目以降は省略
+            ),
+          ),
+          if (v.isSmartPhoneOnly == true)
+            Opacity(
+              opacity: disabled ? 0.6 : 1.0,
+              child: Image.asset(
+                'assets/others/smartPhoneOnly.gif',
+                width: 60,
+                height: 40,
+                fit: BoxFit.contain,
               ),
             ),
-            // ▼ サブカテゴリに属する動画リスト（線入り）
-            ...List.generate(videos.length, (index) {
-              final v = videos[index];
-              final isLast = index == videos.length - 1;
+          if (v.isNew == true)
+            Opacity(
+              opacity: disabled ? 0.6 : 1.0,
+              child: Image.asset(
+                'assets/others/new.gif',
+                width: 45,
+                height: 30,
+                fit: BoxFit.contain,
+              ),
+            ),
+        ],
+      ),
+      trailing: Text(
+        v.costRating,
+        style: TextStyle(
+          fontFamily: 'Keifont',
+          color: HexColor.fromHex('#FF9900'),
+          fontSize: 19,
+        ),
+      ),
+      onTap: disabled
+          ? null
+          : () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => VideoDetailView(video: v)),
+              ),
+    );
 
-              return Column(
-                children: [
-                  ListTile(
-                    leading: FutureBuilder<String>(
-                      future: resolveAssetPath(v.category, v.iconName),
-                      builder: (context, snapshot) {
-                        if (!snapshot.hasData) {
-                          return SizedBox(width: 48, height: 27); // ローディング中
-                        }
-                        return Image.asset(
-                          snapshot.data!,
-                          width: 48,
-                          height: 27,
-                          fit: BoxFit.contain,
-                        );
-                      },
-                    ),
-                    title: Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      spacing: 10,
-                      runSpacing: 5,
-                      children: [
-                        Container(
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width - 150,
-                          ),
-                          child: Text(
-                            v.title,
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
-                        if (v.isSmartPhoneOnly == true) ...[
-                          SizedBox(width: 10), // タイトルと画像の隙間
-                          Image.asset(
-                            'assets/others/smartPhoneOnly.gif',
-                            width: 60,
-                            height: 40,
-                            fit: BoxFit.contain,
-                          ),
-                        ],
-                        if (v.isNew == true)
-                          Image.asset(
-                            'assets/others/new.gif',
-                            width: 45,
-                            height: 30,
-                            fit: BoxFit.contain,
-                          ),
-                      ],
-                    ),
-                    trailing: Text(
-                      v.costRating,
-                      style: TextStyle(
-                        fontFamily: 'Keifont',
-                        color: HexColor.fromHex('#FF9900'),
-                        fontSize: 19,
-                      ),
-                    ),
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => VideoDetailView(video: v)),
+    final row = Column(
+      children: [
+        tileCore,
+        if (!isLast)
+          Divider(
+            thickness: 1.0,
+            height: 0,
+            indent: 16,
+            endIndent: 16,
+            color: Colors.grey[300],
+          ),
+        const SizedBox(height: 0), // 項目末尾は既存同等。見出し直下は build 側で 4 を入れる
+      ],
+    );
+
+    if (!disabled) return row;
+
+    // 準備中は薄グレー背景＋「準備中」透かし
+    return Stack(
+      children: [
+        Container(color: Colors.grey[200], child: row),
+        Positioned.fill(
+          child: IgnorePointer(
+            ignoring: true,
+            child: Center(
+              child: Transform.rotate(
+                angle: -math.pi / 12,
+                child: Opacity(
+                  opacity: 0.18,
+                  child: Text(
+                    '準備中',
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[700],
+                      letterSpacing: 4,
                     ),
                   ),
-                  if (!isLast)
-                    Divider(
-                      thickness: 1.0,
-                      height: 0,
-                      indent: 16,
-                      endIndent: 16,
-                      color: Colors.grey[300],
-                    ),
-                ],
-              );
-            }),
-            SizedBox(height: 8), // 次の帯との間隔
-          ];
-        }).toList(),
-      );
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: subcategories.expand((sub) {
+        final actives = sub.videos.where((v) => v.inPreparation != true).toList();
+        final preps = sub.videos.where((v) => v.inPreparation == true).toList();
+
+        final widgets = <Widget>[];
+
+        // フェーズ1：公開中
+        if (actives.isNotEmpty) {
+          widgets.add(_subHeader(sub.name, disabled: false));
+          widgets.add(const SizedBox(height: 4)); // 見出し直下の白い余白
+
+          for (var i = 0; i < actives.length; i++) {
+            widgets.add(_videoTile(
+              context,
+              actives[i],
+              disabled: false,
+              isLast: i == actives.length - 1 && preps.isEmpty,
+            ));
+          }
+          widgets.add(const SizedBox(height: 8)); // 次の帯との間隔（既存踏襲）
+        }
+
+        // フェーズ2：準備中
+        if (preps.isNotEmpty) {
+          widgets.add(_subHeader(sub.name, disabled: true));
+          widgets.add(const SizedBox(height: 4)); // 見出し直下の白い余白
+
+          for (var i = 0; i < preps.length; i++) {
+            widgets.add(_videoTile(
+              context,
+              preps[i],
+              disabled: true,
+              isLast: i == preps.length - 1,
+            ));
+          }
+          widgets.add(const SizedBox(height: 8)); // 次の帯との間隔（既存踏襲）
+        }
+
+        return widgets; // どちらも空なら何も追加しない
+      }).toList(),
+    );
+  }
 }
 
-
-
-
+// 以降は元のまま（必要箇所のみ微修正）
 
 class VideoDetailView extends StatelessWidget {
   final Video video;
@@ -239,16 +316,17 @@ class VideoDetailView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 複数ウィジェット対応
             if (video.experimentWidgets != null && video.experimentWidgets!.isNotEmpty)
-              ...video.experimentWidgets!.map((w) => Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: SizedBox(
-                      height: (w is HasHeight) ? w.widgetHeight : 220, // デフォルト高さ
-                      width: double.infinity,
-                      child: w,
-                    ),
-                  )),
+              ...video.experimentWidgets!.map(
+                (w) => Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: SizedBox(
+                    height: (w is HasHeight) ? w.widgetHeight : 220,
+                    width: double.infinity,
+                    child: w,
+                  ),
+                ),
+              ),
             if (video.videoURL.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 16),
@@ -258,13 +336,11 @@ class VideoDetailView extends StatelessWidget {
                   child: YouTubeWebView(videoURL: video.videoURL),
                 ),
               ),
-
             if (video.equipment.isNotEmpty)
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: EquipmentListView(equipment: video.equipment),
+                child: EquipmentListView(equipment: video.equipment), // 元仕様どおり
               ),
-
             if (video.latex != null)
               Padding(
                 padding: const EdgeInsets.only(top: 16),
@@ -277,15 +353,11 @@ class VideoDetailView extends StatelessWidget {
   }
 }
 
-
-
-
 // 共通の TextStyle（ファイル上部に置く）
 const TextStyle keiFontStyle = TextStyle(
   fontFamily: 'KeiFont',
   fontSize: 18,
 );
-
 
 class FormulaList extends StatelessWidget {
   final Map<String, List<FormulaEntry>> groupedFormulas;
@@ -297,17 +369,15 @@ class FormulaList extends StatelessWidget {
           final formulas = entry.value;
 
           return [
-            // サブカテゴリヘッダー
             Container(
               width: double.infinity,
               color: Colors.grey[300],
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               child: Text(
                 entry.key,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
-            // 各公式
             ...List.generate(formulas.length, (index) {
               final f = formulas[index];
               final isLast = index == formulas.length - 1;
@@ -324,7 +394,7 @@ class FormulaList extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -340,15 +410,17 @@ class FormulaList extends StatelessWidget {
                                     Flexible(
                                       child: Text(
                                         f.relatedVideo.title,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 17,
                                           fontWeight: FontWeight.w500,
                                         ),
-                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,               // ← 2行まで表示
+                                        softWrap: true,            // ← 改行許可
+                                        overflow: TextOverflow.ellipsis, // 3行目以降は省略
                                       ),
                                     ),
                                     if (f.relatedVideo.isSmartPhoneOnly == true) ...[
-                                      SizedBox(width: 10), // タイトルと画像の隙間
+                                      const SizedBox(width: 10),
                                       Image.asset(
                                         'assets/others/smartPhoneOnly.gif',
                                         width: 68,
@@ -357,7 +429,7 @@ class FormulaList extends StatelessWidget {
                                       ),
                                     ],
                                     if (f.relatedVideo.isNew == true) ...[
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Image.asset(
                                         'assets/others/new.gif',
                                         width: 45,
@@ -367,20 +439,21 @@ class FormulaList extends StatelessWidget {
                                     ],
                                   ],
                                 ),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Math.tex(
                                   f.latex,
-                                  textStyle: TextStyle(
-                                    fontFamily: 'RobotoMono', // KeiFont と比べて違和感の少ない英数字フォント
+                                  textStyle: const TextStyle(
+                                    fontFamily: 'RobotoMono',
                                     color: Colors.black,
-                                    height: 1.2, // 行間調整で日本語と馴染む
-                                    fontSize: 22),
+                                    height: 1.2,
+                                    fontSize: 22,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(right: 10),
+                            padding: const EdgeInsets.only(right: 10),
                             child: Text(
                               f.relatedVideo.costRating,
                               style: TextStyle(
@@ -410,16 +483,13 @@ class FormulaList extends StatelessWidget {
       );
 }
 
-
-
 class CostLegendSection extends StatelessWidget {
   const CostLegendSection({super.key});
 
   @override
   Widget build(BuildContext context) {
     const starColor = Color.fromRGBO(255, 153, 0, 1.0);
-
-    const legendTextStyle = TextStyle(fontSize: 18);  // ← ここでフォントサイズ指定
+    const legendTextStyle = TextStyle(fontSize: 18);
 
     return Container(
       width: double.infinity,
@@ -429,9 +499,9 @@ class CostLegendSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // 上部タイトル
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text("★", style: TextStyle(color: starColor, fontSize: 18)),
               Text("・・・実験コスト", style: TextStyle(fontSize: 18)),
             ],
@@ -439,35 +509,27 @@ class CostLegendSection extends StatelessWidget {
           const SizedBox(height: 4),
 
           // 凡例項目
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text("★☆☆", style: TextStyle(color: starColor, fontSize: 18)),
               Text(" = 500円未満", style: legendTextStyle),
             ],
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text("★★☆", style: TextStyle(color: starColor, fontSize: 18)),
               Text(" = 1500円未満", style: legendTextStyle),
             ],
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text("★★★", style: TextStyle(color: starColor, fontSize: 18)),
               Text(" = 1500円以上", style: legendTextStyle),
             ],
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Image.asset('assets/others/smartPhoneOnly.png', width: 60, height: 40),
-          //     const SizedBox(width: 8),
-          //     const Text("・・・スマホのみで実験可能", style: legendTextStyle),
-          //   ],
-          // ),
         ],
       ),
     );
@@ -476,44 +538,37 @@ class CostLegendSection extends StatelessWidget {
 
 class EquipmentListView extends StatelessWidget {
   final List<String> equipment;
-  EquipmentListView({required this.equipment});
+  const EquipmentListView({required this.equipment, super.key});
 
   @override
   Widget build(BuildContext context) => Container(
-        margin: EdgeInsets.only(top: 16),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        margin: const EdgeInsets.only(top: 16),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
               width: double.infinity,
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               decoration: BoxDecoration(
                 color: HexColor.fromHex('#E5E5E5'),
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: Text(
+              child: const Text(
                 '実験道具',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18, // ← フォントサイズ16に指定
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
             ),
-            ...equipment.map((e) => Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                  child: Text(
-                    '・$e',
-                    style: TextStyle(fontSize: 16), // ← フォントサイズ16に指定
-                  ),
-                )),
+            ...equipment.map(
+              (e) => Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                child: Text('・$e', style: const TextStyle(fontSize: 16)),
+              ),
+            ),
           ],
         ),
       );
 }
-
 
 class YouTubeWebView extends StatefulWidget {
   final String videoURL;
@@ -538,8 +593,6 @@ class _YouTubeWebViewState extends State<YouTubeWebView> {
 
   @override
   Widget build(BuildContext context) {
-    // SizedBoxは外側で管理するので不要
     return WebViewWidget(controller: _controller);
   }
 }
-

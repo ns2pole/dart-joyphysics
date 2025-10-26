@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // データモデル
 class Video {
   final bool? isNew;
+  final bool? inPreparation;
   final String category;
   final String iconName;
   final String title;
@@ -15,6 +16,7 @@ class Video {
 
   Video({
     this.isNew,
+    this.inPreparation = false,
     required this.category,
     required this.iconName,
     required this.title,

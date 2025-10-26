@@ -42,8 +42,8 @@ $$
 $$
 
 $$
-\Delta\mathbf{l}_k \approx \mathbf{r}'(\phi_{k+1})-\mathbf{r}'(\phi_k)
-\approx \frac{d\mathbf{r}'}{d\phi}(\phi_k)\,\Delta\phi,
+\Delta\mathbf{l}_k \fallingdotseq \mathbf{r}'(\phi_{k+1})-\mathbf{r}'(\phi_k)
+\fallingdotseq \frac{d\mathbf{r}'}{d\phi}(\phi_k)\,\Delta\phi,
 \quad \Delta\phi=\frac{2\pi}{N}.
 $$
 
@@ -83,7 +83,7 @@ $$
 **主張.** 各区間でのクロス積は（近似）
 $$
 \Delta\mathbf{l}_k \times (\mathbf{r}-\mathbf{r}'_k)
-\approx \left(\frac{d\mathbf{r}'}{d\phi}(\phi_k)\,\Delta\phi\right)\times(-\mathbf{r}'(\phi_k))
+\fallingdotseq \left(\frac{d\mathbf{r}'}{d\phi}(\phi_k)\,\Delta\phi\right)\times(-\mathbf{r}'(\phi_k))
 =R^2\,\hat{\mathbf{z}}\,\Delta\phi.
 $$
 
@@ -113,7 +113,7 @@ $$
 $$
 \Delta\mathbf{B}_k
 = \frac{\mu_0}{4\pi}\frac{I\,(\Delta\mathbf{l}_k\times(\mathbf{r}-\mathbf{r}'_k))}{|\mathbf{r}-\mathbf{r}'_k|^3}
-\approx \frac{\mu_0 I}{4\pi}\frac{R^2\Delta\phi}{R^3}\,\hat{\mathbf{z}}
+\fallingdotseq \frac{\mu_0 I}{4\pi}\frac{R^2\Delta\phi}{R^3}\,\hat{\mathbf{z}}
 = \frac{\mu_0 I}{4\pi R}\,\Delta\phi\,\hat{\mathbf{z}}.
 $$
 
@@ -129,7 +129,7 @@ $$
 **主張.** 全磁場の有限和（$N$ 分割）は
 $$
 \mathbf{B}_N(0)=\sum_{k=0}^{N-1}\Delta\mathbf{B}_k
-\approx \sum_{k=0}^{N-1}\frac{\mu_0 I}{4\pi R}\,\Delta\phi\,\hat{\mathbf{z}}
+\fallingdotseq \sum_{k=0}^{N-1}\frac{\mu_0 I}{4\pi R}\,\Delta\phi\,\hat{\mathbf{z}}
 = \frac{\mu_0 I}{4\pi R}\left(\sum_{k=0}^{N-1}\Delta\phi\right)\hat{\mathbf{z}}
 = \frac{\mu_0 I}{4\pi R}\cdot N\Delta\phi\,\hat{\mathbf{z}}.
 $$

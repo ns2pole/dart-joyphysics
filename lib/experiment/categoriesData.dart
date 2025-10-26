@@ -110,6 +110,7 @@ final categoriesData = <Category>[
           // magnetometer,
           neodymiumMagnetFieldMeasurement,
           ampereLawTorque,
+          straight_current_and_geomagnetism,
           magneticFieldCircularLoop,
           solenoidMagneticField,
           lorentzForce,
@@ -118,10 +119,27 @@ final categoriesData = <Category>[
         ],
       ),
       Subcategory(
+        name: '電磁誘導',
+        videos: [
+          ac_power_generation,
+        ],
+      ),
+      Subcategory(
+        name: '交流回路',
+        videos: [
+          capacitorReactance,
+          inductorReactance,
+          resistorInAC,
+          rlc_circuit_discharge
+        ],
+      ),
+      Subcategory(
         name: 'コイルの性質',
         videos: [
           coilProperties,
+          coil_self_induction_voltage,
           solenoidSelfInductance,
+          mutual_inductance_coaxial_solenoids,
         ],
       ),
       Subcategory(
@@ -185,6 +203,9 @@ final categoriesData = <Category>[
         name: '気体の法則',
         videos: [
           boyleLaw,
+          charles_s_law,
+          ideal_gas_eqation_and_weight_of_air,
+          ideal_gas_eqation_and_helium_buoyancy
         ],
       ),
     ],

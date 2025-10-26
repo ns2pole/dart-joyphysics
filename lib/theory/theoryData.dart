@@ -322,13 +322,16 @@ final Map<String, List<TheorySubcategory>> theoryData = {
         rcCircuitDischargeEnergy,
         rl_circuit,
         lc_circuit,
-        rlc_circuit
+        rlc_series_underdamped_osc,
+        rlcSeries_Forced_Underdamped
       ],
     ),
     TheorySubcategory(
       name: 'インダクタンス',
       topics: [
-        solenoid_self_inductance
+        solenoid_self_inductance,
+        mutualInductanceDerivation,
+        mutualInductanceOpenSecondaryRL
       ],
     ),
     TheorySubcategory(
