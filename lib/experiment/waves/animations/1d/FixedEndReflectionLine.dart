@@ -12,7 +12,7 @@ final fixedEndReflectionLine = Video(
   iconName: "wave",
   title: "固定端反射 (線モデル)",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">解説</div>

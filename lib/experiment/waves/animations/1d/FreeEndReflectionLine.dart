@@ -12,7 +12,7 @@ final freeEndReflectionLine = Video(
   iconName: "wave",
   title: "自由端反射 (線モデル)",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">解説</div>

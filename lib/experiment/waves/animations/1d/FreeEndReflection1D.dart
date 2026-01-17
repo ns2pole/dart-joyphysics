@@ -12,7 +12,7 @@ final freeEndReflection1D = Video(
   iconName: "wave",
   title: "自由端反射 (1次元)",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">ポイント</div>

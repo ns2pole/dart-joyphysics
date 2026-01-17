@@ -13,7 +13,7 @@ final reflectionLaw2D = Video(
   iconName: "wave",
   title: "反射の法則 (自由端・2次元)",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">ポイント</div>

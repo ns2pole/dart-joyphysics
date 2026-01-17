@@ -13,7 +13,7 @@ final refraction1D = Video(
   iconName: "wave",
   title: "屈折 (1次元)",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">ポイント</div>

@@ -13,7 +13,7 @@ final youngDoubleSlit = Video(
   iconName: "wave",
   title: "ヤングの実験",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">ポイント</div>

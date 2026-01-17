@@ -12,7 +12,7 @@ final circularWave = Video(
   iconName: "wave",
   title: "円形波",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">解説</div>

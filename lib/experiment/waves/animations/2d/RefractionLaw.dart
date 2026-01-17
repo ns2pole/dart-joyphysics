@@ -13,7 +13,7 @@ final refractionLaw = Video(
   iconName: "wave",
   title: "屈折の法則 (2次元)",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">ポイント</div>

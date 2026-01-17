@@ -13,7 +13,7 @@ final circularInterference = Video(
   iconName: "wave",
   title: "円形波干渉",
   videoURL: "",
-  equipment: ["スマホ"],
+  equipment: [],
   costRating: "★",
   latex: r"""
   <div class="common-box">ポイント</div>
