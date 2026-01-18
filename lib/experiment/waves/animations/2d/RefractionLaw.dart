@@ -7,7 +7,7 @@ import '../widgets/wave_slider.dart';
 import 'dart:math' as math;
 
 final refractionLaw = createWaveVideo(
-  title: "屈折の法則 (2次元)",
+  title: "2次元波動(屈折の法則)",
   latex: r"""
   <div class="common-box">ポイント</div>
   <p>スネルの法則: $n_1 \sin \theta_1 = n_2 \sin \theta_2$</p>
@@ -19,7 +19,7 @@ final refractionLaw = createWaveVideo(
 class RefractionLawSimulation extends PhysicsSimulation {
   RefractionLawSimulation()
       : super(
-          title: "屈折の法則 (2次元)",
+          title: "2次元波動 (屈折の法則)",
           is3D: true,
           formula: const FormulaDisplay(r'n_1\sin\theta_1=n_2\sin\theta_2'),
         );

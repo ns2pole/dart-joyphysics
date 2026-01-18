@@ -168,7 +168,14 @@ final categoriesData = <Category>[
       //     beat,
       //   ],
       // ),
-
+      Subcategory(
+        name: '2次元空間における波動',
+        videos: [
+          planeWave,
+          circularWave,
+          circularInterference,
+        ],
+      ),
       Subcategory(
         name: '音波',
         videos: [
@@ -178,27 +185,29 @@ final categoriesData = <Category>[
         ],
       ),
       Subcategory(
-        name: '反射',
+        name: '光波',
         videos: [
-          fixedEndReflection1D,
-          freeEndReflection1D,
-          reflectionLaw2D,
-          fixedReflection2D,
+          diffractionGrating,
+          spectroscopy,
+          thinFilmInterference1D,
+          thinFilmInterference2D,
+          youngDoubleSlit,
         ],
       ),
       Subcategory(
-        name: '屈折',
+        name: '物質中の波動',
         videos: [
           refraction1D,
           refractionLaw,
         ],
       ),
       Subcategory(
-        name: '2次元波(平面円形)',
+        name: '異媒質間における反射',
         videos: [
-          planeWave,
-          circularWave,
-          circularInterference,
+          fixedEndReflection1D,
+          freeEndReflection1D,
+          reflectionLaw2D,
+          fixedReflection2D,
         ],
       ),
       // Subcategory(
@@ -208,16 +217,7 @@ final categoriesData = <Category>[
       //     dopplerObserverMoving
       //   ],
       // ),
-      Subcategory(
-        name: '光波',
-        videos: [
-          diffractionGrating,
-          spectroscopy,
-          thinFilmInterference1D,
-          thinFilmInterference2D,
-          youngDoubleSlit,
-        ],
-      )
+      
     ],
   ),
 

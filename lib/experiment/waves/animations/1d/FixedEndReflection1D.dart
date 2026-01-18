@@ -6,7 +6,7 @@ import '../painters/wave_line_painter.dart';
 import '../widgets/wave_slider.dart';
 
 final fixedEndReflection1D = createWaveVideo(
-  title: "固定端反射 (1次元)",
+  title: "1次元の定在波(固定端反射)",
   latex: r"""
   <div class="common-box">ポイント</div>
   <p>固定端では、反射波は入射波に対して位相が$\pi$（逆位相）ずれます。</p>
@@ -18,7 +18,7 @@ final fixedEndReflection1D = createWaveVideo(
 class FixedEndReflection1DSimulation extends PhysicsSimulation {
   FixedEndReflection1DSimulation()
       : super(
-          title: "固定端反射 (1次元)",
+          title: "1次元の定在波(固定端反射)",
           is3D: false,
           formula: const Column(
             children: [

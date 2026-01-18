@@ -7,7 +7,7 @@ import '../painters/wave_surface_painter.dart';
 import '../widgets/wave_slider.dart';
 
 final refraction1D = createWaveVideo(
-  title: "屈折 (1次元)",
+  title: "1次元波動",
   latex: r"""
   <div class="common-box">ポイント</div>
   <p>異なる媒質の境界で波の速さが変わると、波長も変化します。周波数は変化しません。</p>
@@ -19,7 +19,7 @@ final refraction1D = createWaveVideo(
 class Refraction1DSimulation extends PhysicsSimulation {
   Refraction1DSimulation()
       : super(
-          title: "屈折 (1次元)",
+          title: "1次元波動",
           is3D: false,
           formula: const Column(
             children: [

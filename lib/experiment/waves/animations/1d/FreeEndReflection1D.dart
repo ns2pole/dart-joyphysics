@@ -6,7 +6,7 @@ import '../painters/wave_line_painter.dart';
 import '../widgets/wave_slider.dart';
 
 final freeEndReflection1D = createWaveVideo(
-  title: "自由端反射 (1次元)",
+  title: "1次元の定在波(自由端反射)",
   latex: r"""
   <div class="common-box">ポイント</div>
   <p>自由端では、反射波は入射波と同位相で反射します。</p>
@@ -18,7 +18,7 @@ final freeEndReflection1D = createWaveVideo(
 class FreeEndReflection1DSimulation extends PhysicsSimulation {
   FreeEndReflection1DSimulation()
       : super(
-          title: "自由端反射 (1次元)",
+          title: "1次元の定在波(自由端反射)",
           is3D: false,
           formula: const Column(
             children: [
