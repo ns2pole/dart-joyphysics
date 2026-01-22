@@ -11,7 +11,7 @@ class BarometerExperimentWidget extends StatefulWidget with HasHeight {
 
   const BarometerExperimentWidget({
     Key? key,
-    this.height = 400,
+    this.height = 320,
     this.useScaffold = true,
   }) : super(key: key);
 

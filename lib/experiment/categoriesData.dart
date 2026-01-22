@@ -168,6 +168,7 @@ final categoriesData = <Category>[
         videos: [
           planeWave,
           circularWave,
+          planeWaveInterference,
           circularInterference,
         ],
       ),

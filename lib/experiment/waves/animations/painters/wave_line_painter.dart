@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../fields/wave_fields.dart';
+import '../utils/coordinate_transformer.dart';
 import 'wave_surface_painter.dart';
 
 class WaveLinePainter extends CustomPainter {
@@ -32,13 +33,15 @@ class WaveLinePainter extends CustomPainter {
     // 背景
     canvas.drawRect(Offset.zero & size, Paint()..color = const Color(0xFFF7F7FB));
 
-    final center = Offset(size.width / 2, size.height / 2);
-    // スケール: 1ユニット = 30ピクセル程度 (サイズに合わせて調整)
-    final double unitScale = (size.width / 12) * scale; 
+    final transformer = WaveCoordinateTransformer(
+      size: size,
+      scale: scale,
+      is3D: false,
+    );
+    final center = transformer.center;
+    final double unitScale = transformer.unitScale;
 
-    Offset worldToScreen(double x, double y) {
-      return Offset(center.dx + x * unitScale, center.dy - y * unitScale * 2); // yは強調表示
-    }
+    Offset worldToScreen(double x, double y) => transformer.worldToScreen(x, 0.0, y);
 
     const range = 5.0;
 

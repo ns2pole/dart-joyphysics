@@ -26,31 +26,43 @@ class YoungDoubleSlitSimulation extends WaveSimulation {
         );
 
   @override
-  Map<String, double> get initialParameters => getInitialParamsWithObs(
-        baseParams: {
-          'lambda': 0.8,
-          'periodT': 1.0,
-          'a': 1.0,
-          'phi': 0.0,
-          'showIntersectionLine': 1.0, // 1.0 for true, 0.0 for false
-          'showIntensityLine': 0.0,
-        },
-        obsX: 2.0,
-        obsY: 0.0,
-      );
+  Map<String, double> get initialParameters => {
+        'lambda': 0.8,
+        'periodT': 1.0,
+        'a': 1.0,
+        'phi': 0.0,
+        'showIntersectionLine': 1.0, // 1.0 for true, 0.0 for false
+        'showIntensityLine': 0.0,
+      };
 
   @override
-  Set<String> get initialActiveIds => {'combined', 'showIntersectionLine'};
+  Set<String> get initialActiveIds =>
+      {'combined', 'showIntersectionLine', 'showScreen'};
 
   @override
   List<Widget> buildControls(context, params, updateParam) {
+    final double lambda = params['lambda']!;
+    final double a = params['a']!;
+    final double d = 2 * a;
+    final double L = 8.0; // Distance from x=-4 to x=4
+    final double deltaX = (L * lambda) / d;
+
     return [
       Text(
-        'λ = ${params['lambda']!.toStringAsFixed(2)}  a = ${params['a']!.toStringAsFixed(2)}  φ = ${(params['phi']! / math.pi).toStringAsFixed(2)}π',
+        'λ = ${lambda.toStringAsFixed(2)}  a = ${a.toStringAsFixed(2)}  φ = ${(params['phi']! / math.pi).toStringAsFixed(2)}π',
         style: const TextStyle(fontSize: 12),
       ),
+      const SizedBox(height: 4),
+      SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Math.tex(
+          '\\Delta x = \\frac{L \\lambda}{d} = \\frac{${L.toStringAsFixed(1)} \\times ${lambda.toStringAsFixed(2)}}{${d.toStringAsFixed(2)}} = ${deltaX.toStringAsFixed(2)}',
+          textStyle: const TextStyle(fontSize: 14),
+        ),
+      ),
+      const SizedBox(height: 8),
       LambdaSlider(
-        value: params['lambda']!,
+        value: lambda,
         onChanged: (val) => updateParam('lambda', val),
       ),
       PeriodTSlider(
@@ -59,8 +71,8 @@ class YoungDoubleSlitSimulation extends WaveSimulation {
       ),
       ThicknessLSlider(
         label: 'a (間隔)',
-        value: params['a']!,
-        min: 0.0001,
+        value: a,
+        min: 0.1,
         max: 1.0,
         onChanged: (val) => updateParam('a', val),
       ),
@@ -68,48 +80,67 @@ class YoungDoubleSlitSimulation extends WaveSimulation {
         value: params['phi']!,
         onChanged: (val) => updateParam('phi', val),
       ),
-      ...buildObsSliders(params, updateParam),
     ];
   }
 
   @override
   Widget buildExtraControls(context, activeIds, updateActiveIds) {
-    return Wrap(
-      spacing: 4,
-      runSpacing: 4,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        buildChip('波1', 'wave1', Colors.purpleAccent, activeIds, updateActiveIds,
-            fontSize: 10),
-        buildChip('波2', 'wave2', Colors.greenAccent, activeIds, updateActiveIds,
-            fontSize: 10),
-        buildChip('合成', 'combined', Colors.yellow, activeIds, updateActiveIds,
-            fontSize: 10),
-        const SizedBox(width: 8),
-        _buildIconButton(Icons.show_chart, 'showIntersectionLine', activeIds,
-            updateActiveIds, '交線', Colors.deepPurple),
-        _buildIconButton(Icons.bar_chart, 'showIntensityLine', activeIds,
-            updateActiveIds, '強度', Colors.green),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            buildChip('波1', 'wave1', Colors.purpleAccent, activeIds,
+                updateActiveIds,
+                fontSize: 10),
+            const SizedBox(width: 4),
+            buildChip('波2', 'wave2', Colors.greenAccent, activeIds,
+                updateActiveIds,
+                fontSize: 10),
+            const SizedBox(width: 4),
+            buildChip('合成', 'combined', Colors.yellow, activeIds,
+                updateActiveIds,
+                fontSize: 10),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _buildToggleButton(Icons.screenshot_monitor, 'showScreen', activeIds,
+                updateActiveIds, 'スクリーン', Colors.purple),
+            const SizedBox(width: 8),
+            _buildToggleButton(Icons.bar_chart, 'showIntensityLine', activeIds,
+                updateActiveIds, '強度', Colors.green),
+          ],
+        ),
       ],
     );
   }
 
-  Widget _buildIconButton(
+  Widget _buildToggleButton(
       IconData icon,
       String id,
       Set<String> activeIds,
       void Function(Set<String>) update,
-      String tooltip,
+      String label,
       Color activeColor) {
     final isActive = activeIds.contains(id);
-    return IconButton(
-      icon: Icon(icon, size: 20),
+    return ElevatedButton.icon(
       onPressed: () {
         final next = Set<String>.from(activeIds);
         isActive ? next.remove(id) : next.add(id);
         update(next);
       },
-      tooltip: tooltip,
-      color: isActive ? activeColor : Colors.grey,
+      icon: Icon(icon, size: 18),
+      label: Text(label, style: const TextStyle(fontSize: 12)),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isActive ? activeColor : Colors.grey[300],
+        foregroundColor: isActive ? Colors.white : Colors.black54,
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        minimumSize: const Size(60, 32),
+      ),
     );
   }
 
@@ -132,16 +163,17 @@ class YoungDoubleSlitSimulation extends WaveSimulation {
         activeComponentIds: activeIds,
         scale: scale,
         markers: [
-          WaveMarker(point: math.Point(-4.0, params['a']!), color: Colors.yellow),
+          WaveMarker(
+              point: math.Point(-4.0, params['a']!), color: Colors.yellow),
           WaveMarker(
               point: math.Point(-4.0, -params['a']!), color: Colors.yellow),
-          getObsMarker(params, label: '合成波の観測点'),
         ],
         showYoungDoubleSlitExtras: true,
         slitA: params['a']!,
         screenX: 4.0,
         showIntersectionLine: activeIds.contains('showIntersectionLine'),
         showIntensityLine: activeIds.contains('showIntensityLine'),
+        showScreen: activeIds.contains('showScreen'),
       ),
     );
   }

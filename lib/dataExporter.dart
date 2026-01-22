@@ -102,6 +102,7 @@ export './experiment/waves/animations/2d/ReflectionLaw2D.dart';
 export './experiment/waves/animations/2d/FixedReflection2D.dart';
 export './experiment/waves/animations/2d/ThinFilmInterference2D.dart';
 export './experiment/waves/animations/2d/CircularInterference.dart';
+export './experiment/waves/animations/2d/PlaneWaveInterference.dart';
 export './experiment/waves/animations/2d/YoungDoubleSlit.dart';
 
 export './theory/mathematics/sequences_infinite_geometric_series_coefficient_of_restitution.dart';

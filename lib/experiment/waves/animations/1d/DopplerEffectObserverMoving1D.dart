@@ -36,12 +36,14 @@ class DopplerEffectObserverMoving1DSimulation extends WaveSimulation {
         );
 
   @override
-  Map<String, double> get initialParameters => {
-        'lambda': 2.0,
-        'periodT': 1.0,
-        'vObserver': 0.8,
-        'obsX0': -4.0,
-      };
+  Map<String, double> get initialParameters => getInitialParamsWithObs(
+        baseParams: {
+          'lambda': 2.0,
+          'periodT': 1.0,
+          'vObserver': 0.8,
+        },
+        obsX: -4.0,
+      );
 
   @override
   List<Widget> buildControls(context, params, updateParam) {
@@ -68,6 +70,7 @@ class DopplerEffectObserverMoving1DSimulation extends WaveSimulation {
         max: V * 2,
         onChanged: (v) => updateParam('vObserver', v),
       ),
+      ...buildObsSliders(params, updateParam, is2D: false, labelX: '初期位置 x0'),
     ];
   }
 
@@ -81,7 +84,7 @@ class DopplerEffectObserverMoving1DSimulation extends WaveSimulation {
     );
 
     // 観測者の位置 (x = x0 + u*t)
-    final obsX = params['obsX0']! + params['vObserver']! * time;
+    final obsX = params['obsX']! + params['vObserver']! * time;
 
     return CustomPaint(
       size: Size.infinite,
@@ -92,11 +95,38 @@ class DopplerEffectObserverMoving1DSimulation extends WaveSimulation {
         showTicks: true,
         scale: scale,
         markers: [
-          const WaveMarker(point: math.Point(0.0, 0.0), color: Colors.yellow, label: '音源'),
-          WaveMarker(point: math.Point(obsX, 0.0), color: Colors.red, label: '観測者'),
+          const WaveMarker(
+              point: math.Point(0.0, 0.0), color: Colors.yellow, label: '音源'),
+          WaveMarker(
+              point: math.Point(obsX, 0.0), color: Colors.red, label: '観測者'),
         ],
       ),
     );
+  }
+
+  @override
+  List<WaveMarker> getMarkers(Map<String, double> parameters, double time) {
+    final v = parameters['vObserver']!;
+    final obsX = parameters['obsX']! + v * time;
+    return [
+      const WaveMarker(
+          point: math.Point(0.0, 0.0), color: Colors.yellow, label: '音源'),
+      WaveMarker(point: math.Point(obsX, 0.0), color: Colors.red, label: '観測者'),
+    ];
+  }
+
+  @override
+  void onMarkerDragged(
+    Map<String, double> parameters,
+    void Function(String key, double value) updateParam,
+    int markerIndex,
+    math.Point<double> newPoint,
+    double time,
+  ) {
+    if (markerIndex == 1) {
+      final v = parameters['vObserver']!;
+      updateParam('obsX', (newPoint.x - v * time).clamp(-5.0, 5.0));
+    }
   }
 }
 

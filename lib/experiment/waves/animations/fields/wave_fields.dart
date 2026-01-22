@@ -922,6 +922,101 @@ class CircularWaveField extends WaveField {
   int get hashCode => Object.hash(lambda, periodT, amplitude);
 }
 
+class PlaneWaveInterferenceField extends WaveField {
+  const PlaneWaveInterferenceField({
+    required this.theta1,
+    required this.lambda1,
+    required this.periodT1,
+    required this.theta2,
+    required this.lambda2,
+    required this.periodT2,
+    this.amplitude = 0.3,
+  });
+
+  final double theta1;
+  final double lambda1;
+  final double periodT1;
+  final double theta2;
+  final double lambda2;
+  final double periodT2;
+  final double amplitude;
+
+  @override
+  double phase(double x, double y, double t) {
+    // Phase of the first wave
+    final dir1 = x * math.cos(theta1) + y * math.sin(theta1);
+    return 2 * math.pi * ((dir1 / lambda1) - (t / periodT1));
+  }
+
+  double phase2(double x, double y, double t) {
+    final dir2 = x * math.cos(theta2) + y * math.sin(theta2);
+    return 2 * math.pi * ((dir2 / lambda2) - (t / periodT2));
+  }
+
+  @override
+  double z(double x, double y, double t) {
+    const dOffset = 7.5;
+    final k1 = 2 * math.pi / lambda1;
+    final k2 = 2 * math.pi / lambda2;
+
+    final p1 = -(phase(x, y, t) + k1 * dOffset);
+    final p2 = -(phase2(x, y, t) + k2 * dOffset);
+
+    final z1 = (p1 > 0) ? amplitude * math.sin(p1) : 0.0;
+    final z2 = (p2 > 0) ? amplitude * math.sin(p2) : 0.0;
+
+    return z1 + z2;
+  }
+
+  @override
+  List<WaveComponent> getComponents(
+      double x, double y, double t, Set<String> activeIds) {
+    const dOffset = 7.5;
+    final k1 = 2 * math.pi / lambda1;
+    final k2 = 2 * math.pi / lambda2;
+
+    final p1 = -(phase(x, y, t) + k1 * dOffset);
+    final p2 = -(phase2(x, y, t) + k2 * dOffset);
+
+    final z1 = (p1 > 0) ? amplitude * math.sin(p1) : 0.0;
+    final z2 = (p2 > 0) ? amplitude * math.sin(p2) : 0.0;
+
+    final List<WaveComponent> res = [];
+    if (activeIds.contains('wave1')) {
+      res.add(WaveComponent(
+          id: 'wave1', label: '波1', color: Colors.purpleAccent, value: z1));
+    }
+    if (activeIds.contains('wave2')) {
+      res.add(WaveComponent(
+          id: 'wave2', label: '波2', color: Colors.greenAccent, value: z2));
+    }
+    if (activeIds.contains('combined')) {
+      res.add(WaveComponent(
+          id: 'combined',
+          label: '合成波',
+          color: Colors.blueAccent,
+          value: z1 + z2));
+    }
+    return res;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is PlaneWaveInterferenceField &&
+        other.theta1 == theta1 &&
+        other.lambda1 == lambda1 &&
+        other.periodT1 == periodT1 &&
+        other.theta2 == theta2 &&
+        other.lambda2 == lambda2 &&
+        other.periodT2 == periodT2 &&
+        other.amplitude == amplitude;
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      theta1, lambda1, periodT1, theta2, lambda2, periodT2, amplitude);
+}
+
 enum ThinFilm2DMode { incident, reflected1, reflected2, combinedReflected }
 
 class ThinFilmInterference2DField extends WaveField {

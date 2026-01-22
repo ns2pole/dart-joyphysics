@@ -11,7 +11,7 @@ class MagnetometerExperimentWidget extends StatefulWidget with HasHeight {
 
   const MagnetometerExperimentWidget({
     Key? key,
-    this.height = 400,
+    this.height = 320,
     this.useScaffold = true,
   }) : super(key: key);
 

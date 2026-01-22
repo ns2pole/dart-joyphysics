@@ -6,6 +6,7 @@ import 'package:flutter/material.dart' hide Column, Vertices;
 import 'package:flutter/material.dart' as material;
 
 import '../fields/wave_fields.dart';
+import '../utils/coordinate_transformer.dart';
 
 class MediumSlabOverlay {
   const MediumSlabOverlay({
@@ -53,6 +54,7 @@ class WaveSurfacePainter extends CustomPainter {
     this.screenX = 8.0,
     this.showIntersectionLine = false,
     this.showIntensityLine = false,
+    this.showScreen = true,
     this.scale = 1.0,
   });
 
@@ -74,6 +76,7 @@ class WaveSurfacePainter extends CustomPainter {
   final double screenX;
   final bool showIntersectionLine;
   final bool showIntensityLine;
+  final bool showScreen;
   final double scale;
 
   @override
@@ -83,25 +86,26 @@ class WaveSurfacePainter extends CustomPainter {
       Paint()..color = const Color(0xFFF7F7FB),
     );
 
-    final unitScale = 50.0 * scale;
-    final center = Offset(size.width / 2, size.height / 2);
+    final transformer = WaveCoordinateTransformer(
+      size: size,
+      scale: scale,
+      is3D: true,
+      azimuth: azimuth,
+      tilt: tilt,
+    );
+    final unitScale = transformer.unitScale;
+    final center = transformer.center;
 
-    const cos45 = 0.7071;
     final sTilt = math.sin(tilt);
     final cTilt = math.cos(tilt);
     final cAzimuth = math.cos(azimuth);
     final sAzimuth = math.sin(azimuth);
-    final cos45Scale = cos45 * unitScale;
+    final cos45Scale = WaveCoordinateTransformer.cos45 * unitScale;
     final cos45STiltScale = cos45Scale * sTilt;
     final cTiltScale = cTilt * unitScale;
-    
-    Offset worldToScreen(double x, double y, double z) {
-      final xr = x * cAzimuth - y * sAzimuth;
-      final yr = x * sAzimuth + y * cAzimuth;
-      final px = center.dx + (yr - xr) * cos45Scale;
-      final py = center.dy + (xr + yr) * cos45STiltScale - z * cTiltScale;
-      return Offset(px, py);
-    }
+
+    Offset worldToScreen(double x, double y, double z) =>
+        transformer.worldToScreen(x, y, z);
 
     double getPhase(double x, double y) => field.phase(x, y, time);
     List<WaveComponent> getComponents(double x, double y) {
@@ -302,14 +306,23 @@ class WaveSurfacePainter extends CustomPainter {
       drawBarrierPart(slitA + gapSize, range);
 
       // 2. Screen at x=screenX (4.0)
-      final screenPaint = Paint()
-        ..color = Colors.white.withOpacity(0.4)
-        ..style = PaintingStyle.fill;
-      final s1 = worldToScreen(screenX, -range, -bH);
-      final s2 = worldToScreen(screenX, range, -bH);
-      final s3 = worldToScreen(screenX, range, bH);
-      final s4 = worldToScreen(screenX, -range, bH);
-      canvas.drawPath(Path()..moveTo(s1.dx, s1.dy)..lineTo(s2.dx, s2.dy)..lineTo(s3.dx, s3.dy)..lineTo(s4.dx, s4.dy)..close(), screenPaint);
+      if (showScreen) {
+        final screenPaint = Paint()
+          ..color = Colors.purple.withOpacity(0.3)
+          ..style = PaintingStyle.fill;
+        final s1 = worldToScreen(screenX, -range, -bH);
+        final s2 = worldToScreen(screenX, range, -bH);
+        final s3 = worldToScreen(screenX, range, bH);
+        final s4 = worldToScreen(screenX, -range, bH);
+        canvas.drawPath(
+            Path()
+              ..moveTo(s1.dx, s1.dy)
+              ..lineTo(s2.dx, s2.dy)
+              ..lineTo(s3.dx, s3.dy)
+              ..lineTo(s4.dx, s4.dy)
+              ..close(),
+            screenPaint);
+      }
 
       // 3. Interference pattern on the screen (x=screenX)
       final screenIdx = ((screenX + 5) * div / 10).round();
@@ -333,12 +346,14 @@ class WaveSurfacePainter extends CustomPainter {
         ..strokeWidth = 4.0
         ..style = PaintingStyle.stroke;
 
-      final b1 = worldToScreen(screenX, -range, 0);
-      final b2 = worldToScreen(screenX, range, 0);
-      canvas.drawLine(b1, b2, baseLinePaint);
+      if (showScreen) {
+        final b1 = worldToScreen(screenX, -range, 0);
+        final b2 = worldToScreen(screenX, range, 0);
+        canvas.drawLine(b1, b2, baseLinePaint);
+      }
 
       // Draw intersection line independently if requested
-      if (showIntersectionLine) {
+      if (showIntersectionLine && showScreen) {
         final intersectionPath = Path();
         bool isFirst = true;
         for (int j = 0; j <= div; j++) {
@@ -361,7 +376,7 @@ class WaveSurfacePainter extends CustomPainter {
       }
 
       // Draw intensity line (z^2)
-      if (showIntensityLine) {
+      if (showIntensityLine && showScreen) {
         final intensityPath = Path();
         bool isFirst = true;
         for (int j = 0; j <= div; j++) {
@@ -387,7 +402,7 @@ class WaveSurfacePainter extends CustomPainter {
       final firstComps = gridComps[0];
       final numComps = firstComps.length;
 
-      if (numComps > 0 && (activeComponentIds == null || activeComponentIds!.isNotEmpty)) {
+      if (showScreen && numComps > 0 && (activeComponentIds == null || activeComponentIds!.isNotEmpty)) {
         final patternPaint = Paint()
           ..strokeWidth = 2.0
           ..style = PaintingStyle.stroke;
@@ -650,6 +665,7 @@ class WaveSurfacePainter extends CustomPainter {
         oldDelegate.screenX != screenX ||
         oldDelegate.showIntersectionLine != showIntersectionLine ||
         oldDelegate.showIntensityLine != showIntensityLine ||
+        oldDelegate.showScreen != showScreen ||
         oldDelegate.scale != scale;
   }
 }

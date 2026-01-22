@@ -240,7 +240,6 @@ class SensorDisplayCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: height,
         width: double.infinity,
         child: Card(
           margin: const EdgeInsets.all(24),

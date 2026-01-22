@@ -1,6 +1,8 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:joyphysics/experiment/HasHeight.dart';
+import 'waves/animations/fields/wave_fields.dart';
+import 'waves/animations/utils/coordinate_transformer.dart';
 
 class PhysicsAnimationScaffold extends StatefulWidget with HasHeight {
   final String title;
@@ -12,6 +14,8 @@ class PhysicsAnimationScaffold extends StatefulWidget with HasHeight {
   final double height;
   final bool is3D;
   final Color? backgroundColor;
+  final List<WaveMarker> Function(double time)? getMarkers;
+  final void Function(int index, math.Point<double> newPoint, double time)? onMarkerDragged;
 
   const PhysicsAnimationScaffold({
     super.key,
@@ -24,6 +28,8 @@ class PhysicsAnimationScaffold extends StatefulWidget with HasHeight {
     this.height = 650,
     this.is3D = false,
     this.backgroundColor,
+    this.getMarkers,
+    this.onMarkerDragged,
   });
 
   @override
@@ -48,6 +54,8 @@ class _PhysicsAnimationScaffoldState extends State<PhysicsAnimationScaffold>
   double _tilt = _defaultTilt;
   double _scale = 1.0;
   double _baseScale = 1.0;
+
+  int _draggingMarkerIndex = -1;
 
   @override
   void initState() {
@@ -114,23 +122,65 @@ class _PhysicsAnimationScaffoldState extends State<PhysicsAnimationScaffold>
               children: [
                 LayoutBuilder(
                   builder: (context, constraints) {
+                    final transformer = WaveCoordinateTransformer(
+                      size: Size(constraints.maxWidth, constraints.maxHeight),
+                      scale: _scale,
+                      is3D: widget.is3D,
+                      azimuth: _azimuth,
+                      tilt: _tilt,
+                    );
+
                     return GestureDetector(
                       onScaleStart: (details) {
                         _baseScale = _scale;
+                        _draggingMarkerIndex = -1;
+
+                        if (widget.onMarkerDragged != null &&
+                            widget.getMarkers != null) {
+                          final markers = widget.getMarkers!(_time);
+                          // ヒットテスト: 赤いマーカーのみドラッグ可能にする
+                          for (int i = 0; i < markers.length; i++) {
+                            final m = markers[i];
+                            if (m.color != Colors.red) continue;
+
+                            // 本来は波の高さzを考慮すべきだが、簡略化のためz=0で判定、
+                            // または近傍判定を広めにとる
+                            final screenPos =
+                                transformer.worldToScreen(m.point.x, m.point.y, 0);
+                            final dist =
+                                (screenPos - details.localFocalPoint).distance;
+                            if (dist < 30.0) {
+                              _draggingMarkerIndex = i;
+                              break;
+                            }
+                          }
+                        }
                       },
                       onScaleUpdate: (details) {
+                        if (_draggingMarkerIndex != -1) {
+                          final newWorldPoint = transformer
+                              .screenToWorld(details.localFocalPoint);
+                          widget.onMarkerDragged!(
+                              _draggingMarkerIndex, newWorldPoint, _time);
+                          return;
+                        }
+
                         setState(() {
                           // Handle Scaling (Pinch)
                           _scale = (_baseScale * details.scale).clamp(0.5, 3.0);
 
                           // Handle Rotation (Pan) - only for 3D
                           if (widget.is3D) {
-                            _azimuth = (_azimuth + details.focalPointDelta.dx * 0.01) %
-                                (2 * math.pi);
+                            _azimuth =
+                                (_azimuth + details.focalPointDelta.dx * 0.01) %
+                                    (2 * math.pi);
                             _tilt = (_tilt + details.focalPointDelta.dy * 0.005)
                                 .clamp(0.0, _tiltMax);
                           }
                         });
+                      },
+                      onScaleEnd: (details) {
+                        _draggingMarkerIndex = -1;
                       },
                       child: ClipRect(
                         child: widget.animationBuilder(
@@ -162,32 +212,43 @@ class _PhysicsAnimationScaffoldState extends State<PhysicsAnimationScaffold>
               ],
             ),
           ),
-          // 操作パネル部分は Expanded を使わず、そのまま並べる
+          // 操作パネル部分
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 12,
-              runSpacing: 4,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                if (widget.extraControls != null) widget.extraControls!,
-                ElevatedButton.icon(
-                  onPressed: _togglePlayPause,
-                  icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
-                  label: Text(_isPlaying ? '停止' : '再生'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _isPlaying ? Colors.red[400] : Colors.green[400],
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                if (widget.extraControls != null)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: widget.extraControls!,
                   ),
-                ),
-                ElevatedButton.icon(
-                  onPressed: _reset,
-                  icon: const Icon(Icons.restore),
-                  label: const Text('リセット'),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton.icon(
+                      onPressed: _togglePlayPause,
+                      icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
+                      label: Text(_isPlaying ? '停止' : '再生'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            _isPlaying ? Colors.red[400] : Colors.green[400],
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    ElevatedButton.icon(
+                      onPressed: _reset,
+                      icon: const Icon(Icons.restore),
+                      label: const Text('リセット'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

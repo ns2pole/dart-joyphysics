@@ -52,7 +52,7 @@ class LambdaSlider extends WaveParameterSlider {
     required super.value,
     required super.onChanged,
     String label = 'λ',
-  }) : super(label: label, min: 0.001, max: 3.0);
+  }) : super(label: label, min: 0.1, max: 1.5);
 }
 
 class PeriodTSlider extends WaveParameterSlider {
@@ -61,7 +61,7 @@ class PeriodTSlider extends WaveParameterSlider {
     required super.value,
     required super.onChanged,
     String label = 'T',
-  }) : super(label: label, min: 0.001, max: 2.0);
+  }) : super(label: label, min: 0.1, max: 1.5);
 }
 
 class RefractiveIndexSlider extends WaveParameterSlider {

@@ -1,0 +1,295 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{luatexja}          % ← 必須
+\usepackage{luatexja-fontspec} % ← フォント指定用（安全）
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{tcolorbox} % プリアンブル
+
+\geometry{margin=15mm}
+
+\begin{document}
+
+\section*{\fbox{問題への取り組み方}}
+
+まず，問題が何を言っているのかを理解する必要があります。  
+問題を自分の言葉で語ることができるか，言い換えることができるかを考えてみましょう。
+\\
+\ 
+\\
+さて、問題が何を聞いているのか、おおよそ理解した気持ちになれたとして、その次に，問題解決のために何ができるでしょうか。
+
+\section*{\fbox{いかにして問題を解くか}}
+\subsection*{[1] 迷子の防止}
+\begin{enumerate}[label=1-\arabic*]
+  \item 条件をすべて使ったか？
+  \item 結論を推測できるか？（証明問題ではない場合）
+  \item 結論を示すためには何を示せばよいか？  
+  （結論から遡る，結論と同値な命題を作る）
+  \item 「詳細」と「俯瞰」を意識する。(計算処理と全体の流れ)
+  \item その言葉の定義は何か？\\
+\end{enumerate}
+\subsection*{[2] 問題解決の糸口}
+\begin{enumerate}[label=2-\arabic*]
+  \item 具体例を計算し，リストを作成する。  
+  次に，作成したリストにパターンを見出せるか？
+  \item 似た問題を解いたことはないか？  
+  （もしあれば）その問題に帰着させることはできるか？
+  \item 単純化（難易度をコントロールする）
+  \item 特殊化した問題を解くことはできるか？部分的に問題を解くことはできるか？
+  \item 絵，図，グラフを描くことはできるか？
+  \item 否定，余事象を考える\\
+\end{enumerate}
+
+% \subsection*{[3] 検証・結果の吟味}
+
+% 具体的な数値を代入して検算を行う。  
+% 特に極端な例で検算を行う（$x=0$，$\displaystyle \lim_{x\to \pm\infty}$）
+\newpage
+
+\section*{\fbox{補足}}
+\subsection*{[1-1] 条件の整理}
+条件が多い場合は，既に使った条件にアンダーラインを引くとよい。
+
+\subsection*{[1-3] 結論から遡る例}
+\begin{center}
+\begin{tcolorbox}[
+  width=0.65\textwidth,
+  boxrule=0.8pt,
+  arc=6pt,
+  colframe=black,
+  colback=gray!5,
+  left=8pt,right=8pt,top=6pt,bottom=6pt
+]
+\centering
+$a b c = 1,\quad a+b+c = ab+bc+ca$ のとき，\\
+$a,b,c$ のうち少なくとも1つは $1$ であることを示せ。
+\end{tcolorbox}
+\end{center}
+\[
+\Downarrow \text{結論から遡る}
+\]
+\begin{center}
+\begin{tcolorbox}[
+  width=0.8\textwidth,
+  boxrule=0.6pt,
+  arc=6pt,
+  colframe=black,
+  colback=white,
+  left=8pt,right=8pt,top=8pt,bottom=8pt
+]
+\[
+\begin{aligned}
+\cdots \\
+\iff\;& abc-(ab+bc+ca)+(a+b+c)-1=0\\
+\iff\;& (a-1)(b-1)(c-1)=0 \\
+\iff\;& a,b,c \text{ のうち少なくとも1つは } 1 \\
+\end{aligned}
+\]
+\end{tcolorbox}
+\end{center}
+
+のように，結論から逆向きに辿ると容易くなる。
+
+\subsection*{[2-1] 具体例を計算し，リストを作成する例}
+\begin{center}
+\begin{tcolorbox}[
+  width=0.95\textwidth,
+  boxrule=0.8pt,
+  arc=6pt,
+  colframe=black,     % ← 枠線の色
+  colback=gray!5,     % ← 背景色（薄いグレー）
+  left=8pt,right=8pt,top=6pt,bottom=6pt
+]
+\center
+数列 $\{a_n\}$ は漸化式$\displaystyle a_1 = 7,\quad a_{n+1} = \frac{4a_n - 9}{a_n - 2}$を満たすとする。一般項 $\{a_n\}$ を求めよ。
+\end{tcolorbox}
+\end{center}
+\[
+\Downarrow \text{具体計算とリストの作成}
+\]
+
+\begin{center}
+\begin{tcolorbox}[
+  width=0.5\textwidth,
+  boxrule=0.8pt,
+  arc=6pt,
+  colframe=black,     % ← 枠線の色
+  colback=white,
+  left=8pt,right=8pt,top=6pt,bottom=6pt
+]
+\renewcommand{\arraystretch}{1.8}
+\[
+\begin{array}{c|cccc}
+n
+ & 1 & 2 & 3 & 4 \\[-3pt] \hline
+a_n
+ & 7
+ & \dfrac{19}{5}\rule{0pt}{14pt}
+ & \dfrac{31}{9}\rule{0pt}{14pt}
+ & \dfrac{43}{13}\rule{0pt}{14pt}
+\end{array}
+\]
+\end{tcolorbox}
+\end{center}
+\begin{center}
+\textbf{第1項:\ } $a_1 = 7$,\  \ \textbf{第2項:\ }$\displaystyle a_2= \frac{4\cdot 7 - 9}{7 - 2}= \frac{28 - 9}{5}= \frac{19}{5}$
+\\[10pt]
+\textbf{第3項:\ }$\displaystyle
+a_3
+= \frac{4\cdot \frac{19}{5} - 9}{\frac{19}{5} - 2}
+= \frac{\frac{76}{5} - \frac{45}{5}}{\frac{19}{5} - \frac{10}{5}}
+= \frac{\frac{31}{5}}{\frac{9}{5}}
+= \frac{31}{9}
+$,\ \  
+\textbf{第4項:\ }
+$\displaystyle a_4
+= \frac{4\cdot \frac{31}{9} - 9}{\frac{31}{9} - 2}
+= \frac{\frac{124}{9} - \frac{81}{9}}{\frac{31}{9} - \frac{18}{9}}
+= \frac{\frac{43}{9}}{\frac{13}{9}}
+= \frac{43}{13} $\\[10pt]
+\end{center}
+これより$\displaystyle a_1=\frac{7}{1}$と読み替えれば、$\displaystyle a_n=\frac {12n-5}{4n-3}$と推測できる。(あとは帰納法を使えば良い。)
+\newpage
+\subsection*{[2-3] 単純化の例}
+\begin{center}
+\begin{tcolorbox}[
+  width=0.85\textwidth,
+  boxrule=0.8pt,
+  arc=6pt,
+  colframe=black,
+  colback=gray!5,
+  left=8pt,right=8pt,top=6pt,bottom=6pt
+]
+\centering
+
+生徒9人を次の3つのグループに分ける分け方は何通りあるか。\\[6pt]
+  (1) 4人，3人，2人の3つのグループに分ける。\\[2pt]
+  (2) 3人ずつ，3つのグループ $A,B,C$ に分ける。\\[2pt]
+  (3) 3人ずつ，3つのグループに分ける。
+
+\end{tcolorbox}
+\end{center}
+\[
+\Downarrow\ \text{単純化}
+\]
+\begin{center}
+\begin{tcolorbox}[
+  width=0.75\textwidth,
+  boxrule=0.8pt,
+  arc=6pt,
+  colframe=black,
+  colback=white,
+  left=8pt,right=8pt,top=6pt,bottom=6pt
+]
+\centering
+
+生徒4人を2つのグループに分ける分け方は何通りあるか。\\[6pt]
+(1) 3人，1人の2グループに分ける。\\
+(2) 2人ずつ，区別のある2グループ $X,Y$ に分ける。\\
+(3) 2人ずつ，区別のない2グループに分ける。
+\end{tcolorbox}
+\end{center}
+
+\paragraph{(1) }
+3人のグループを $X$ ，残りの1人を $Y$ とする。
+具体的に書き出すと，
+
+\[
+\begin{aligned}
+X:&\{B,C,D\}\quad Y:\{A\} \\
+X:&\{A,C,D\}\quad Y:\{B\} \\
+X:&\{A,B,D\}\quad Y:\{C\} \\
+X:&\{A,B,C\}\quad Y:\{D\}
+\end{aligned}
+\]
+
+以上より，分け方は $4$ 通りである。
+
+\paragraph{(2) }
+まずグループ $X$ に入る2人を決める。
+残りの2人は自動的にグループ $Y$ に入る。
+
+\[
+\begin{aligned}
+X:&\{A,B\}\quad Y:\{C,D\} \\
+X:&\{A,C\}\quad Y:\{B,D\} \\
+X:&\{A,D\}\quad Y:\{B,C\} \\
+X:&\{B,C\}\quad Y:\{A,D\} \\
+X:&\{B,D\}\quad Y:\{A,C\} \\
+X:&\{C,D\}\quad Y:\{A,B\}
+\end{aligned}
+\]
+
+以上より，分け方は $6$ 通りである。
+
+\paragraph{(3) }(2)で書き出した分け方のうち，
+$X$ と $Y$ を入れ替えても同じとみなされるものをまとめる。
+
+\[
+\begin{aligned}
+&\{A,B\}|\{C,D\} \\
+&\{A,C\}|\{B,D\} \\
+&\{A,D\}|\{B,C\}
+\end{aligned}
+\]
+
+たとえば(2)の
+$
+X:\{A,B\},\,Y:\{C,D\}
+\quad\text{と}\quad
+X:\{C,D\},\,Y:\{A,B\}
+$
+は(3)では同一の分け方とみなす。以上より，分け方は $3$ 通りである。
+
+\paragraph{\fbox{考察}\\[10pt]}
+具体的に単純化を行い、リスト化できる場合の数の問題に難易度を下げることで，グループに名前がある時とない時の区別が分かりやすくなった。そして、\textbf{この考え方を9人の場合にもそのまま適用できる。}
+\newpage
+\subsection*{[2-4] 部分的に問題を解くことはできるか？ の例}
+\begin{center}
+\begin{tcolorbox}[
+  width=0.95\textwidth,
+  boxrule=0.8pt,
+  arc=6pt,
+  colframe=black,
+  colback=gray!5,
+  left=8pt,right=8pt,top=6pt,bottom=6pt
+]
+\centering
+$2 \le x \le 6$ において常に，$x^2 - 4ax + 4a + 8 > 0$
+が成り立つような実数 $a$ の範囲を求めよ。
+\end{tcolorbox}
+\end{center}
+\[
+\Downarrow \text{部分問題}
+\]
+\begin{center}
+\begin{tcolorbox}[
+  width=0.6\textwidth,
+  boxrule=0.6pt,
+  arc=6pt,
+  colframe=black,
+  colback=white,
+  left=8pt,right=8pt,top=6pt,bottom=6pt
+]
+\centering
+$a=0$ は答えの領域に含まれるか？
+\end{tcolorbox}
+\end{center}
+
+定数 \(a\) に具体的な値を代入してみる。ここでは最も単純な候補として \(a=0\) を考えると，
+\[
+x^2-4ax+4a+8 \xrightarrow{\,a=0\,} x^2+8
+\]
+となる。任意の実数 \(x\) に対して \(x^2\ge0\) であるから \(x^2+8>0\) が成り立ち，特に \(2\le x\le 6\) においても常に正である。
+
+\subsubsection*{部分的な結論\\[-15pt]}
+以上より，$a=0$ \text{ のとき } $2\le x\le 6$ \text{ において } $x^2-4ax+4a+8>0$が成立する。したがって，$a=0$は問題の答えの領域に含まれる。(この結果は検算に使うとよい。)
+
+
+% \section*{3}
+
+% （ここに内容を記述）
+
+\end{document}

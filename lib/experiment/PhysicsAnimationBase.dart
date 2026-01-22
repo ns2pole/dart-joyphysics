@@ -78,6 +78,18 @@ abstract class PhysicsSimulation {
     Set<String> activeIds,
   );
 
+  /// ドラッグ可能なマーカーを取得
+  List<WaveMarker> getMarkers(Map<String, double> parameters, double time) => [];
+
+  /// マーカーがドラッグされた時の処理
+  void onMarkerDragged(
+    Map<String, double> parameters,
+    void Function(String key, double value) updateParam,
+    int markerIndex,
+    math.Point<double> newPoint,
+    double time,
+  ) {}
+
   /// FilterChipを生成する共通ヘルパー
   Widget buildChip(
     String label,
@@ -164,6 +176,31 @@ abstract class WaveSimulation extends PhysicsSimulation {
       label: label,
     );
   }
+
+  @override
+  List<WaveMarker> getMarkers(Map<String, double> parameters, double time) {
+    if (parameters.containsKey('obsX')) {
+      return [getObsMarker(parameters)];
+    }
+    return [];
+  }
+
+  @override
+  void onMarkerDragged(
+    Map<String, double> parameters,
+    void Function(String key, double value) updateParam,
+    int markerIndex,
+    math.Point<double> newPoint,
+    double time,
+  ) {
+    // 波動シミュレーションのデフォルトでは最初のマーカーが obsX/obsY
+    if (markerIndex == 0 && parameters.containsKey('obsX')) {
+      updateParam('obsX', newPoint.x.clamp(-5.0, 5.0));
+      if (parameters.containsKey('obsY')) {
+        updateParam('obsY', newPoint.y.clamp(-5.0, 5.0));
+      }
+    }
+  }
 }
 
 /// 共通のシミュレーション表示ウィジェット
@@ -214,8 +251,15 @@ class _PhysicsSimulationViewState extends State<PhysicsSimulationView> {
       formula: widget.simulation.formula,
       is3D: widget.simulation.is3D,
       height: widget.height,
-      sliders: widget.simulation.buildControls(context, _parameters, _updateParam),
-      extraControls: widget.simulation.buildExtraControls(context, _activeIds, _updateActiveIds),
+      sliders:
+          widget.simulation.buildControls(context, _parameters, _updateParam),
+      extraControls: widget.simulation.buildExtraControls(
+          context, _activeIds, _updateActiveIds),
+      getMarkers: (time) => widget.simulation.getMarkers(_parameters, time),
+      onMarkerDragged: (index, newPoint, time) {
+        widget.simulation
+            .onMarkerDragged(_parameters, _updateParam, index, newPoint, time);
+      },
       animationBuilder: (context, time, azimuth, tilt, scale) {
         return widget.simulation.buildAnimation(
           context,
