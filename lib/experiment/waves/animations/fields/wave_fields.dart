@@ -1795,3 +1795,190 @@ class MovingReflectorField extends WaveField {
       Object.hash(lambda, periodT, v, x0, isFixedEnd, amplitude);
 }
 
+class TwoSource1DField extends WaveField {
+  const TwoSource1DField({
+    required this.lambda,
+    required this.periodT,
+    required this.distanceD,
+    required this.phaseShift,
+    this.amplitude = 0.4,
+  });
+
+  final double lambda;
+  final double periodT;
+  final double distanceD;
+  final double phaseShift;
+  final double amplitude;
+
+  @override
+  double phase(double x, double y, double t) {
+    // Return phase of the first source for rough visualization
+    final x1 = -distanceD / 2;
+    return 2 * math.pi * (t / periodT - (x - x1).abs() / lambda);
+  }
+
+  @override
+  double z(double x, double y, double t) {
+    final V = lambda / periodT;
+
+    // Source 1: x1 = -D/2
+    final x1 = -distanceD / 2;
+    final dist1 = (x - x1).abs();
+    final z1 = (t >= dist1 / V)
+        ? amplitude * math.sin(2 * math.pi * (t / periodT - dist1 / lambda))
+        : 0.0;
+
+    // Source 2: x2 = +D/2
+    final x2 = distanceD / 2;
+    final dist2 = (x - x2).abs();
+    final z2 = (t >= dist2 / V)
+        ? amplitude *
+            math.sin(2 * math.pi * (t / periodT - dist2 / lambda) + phaseShift)
+        : 0.0;
+
+    return z1 + z2;
+  }
+
+  @override
+  List<WaveComponent> getComponents(
+      double x, double y, double t, Set<String> activeIds) {
+    final V = lambda / periodT;
+
+    final x1 = -distanceD / 2;
+    final dist1 = (x - x1).abs();
+    final z1 = (t >= dist1 / V)
+        ? amplitude * math.sin(2 * math.pi * (t / periodT - dist1 / lambda))
+        : 0.0;
+
+    final x2 = distanceD / 2;
+    final dist2 = (x - x2).abs();
+    final z2 = (t >= dist2 / V)
+        ? amplitude *
+            math.sin(2 * math.pi * (t / periodT - dist2 / lambda) + phaseShift)
+        : 0.0;
+
+    final List<WaveComponent> res = [];
+    if (activeIds.contains('wave1')) {
+      res.add(WaveComponent(
+          id: 'wave1', label: '音源1', color: Colors.purpleAccent, value: z1));
+    }
+    if (activeIds.contains('wave2')) {
+      res.add(WaveComponent(
+          id: 'wave2', label: '音源2', color: Colors.greenAccent, value: z2));
+    }
+    if (activeIds.contains('combined')) {
+      res.add(WaveComponent(
+          id: 'combined',
+          label: '合成波',
+          color: Colors.blueAccent,
+          value: z1 + z2));
+    }
+    return res;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is TwoSource1DField &&
+        other.lambda == lambda &&
+        other.periodT == periodT &&
+        other.distanceD == distanceD &&
+        other.phaseShift == phaseShift &&
+        other.amplitude == amplitude;
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(lambda, periodT, distanceD, phaseShift, amplitude);
+}
+
+class CircularPlaneInterferenceField extends WaveField {
+  const CircularPlaneInterferenceField({
+    required this.lambdaC,
+    required this.periodTC,
+    required this.thetaP,
+    required this.lambdaP,
+    required this.periodTP,
+    this.amplitude = 0.3,
+  });
+
+  final double lambdaC;
+  final double periodTC;
+  final double thetaP;
+  final double lambdaP;
+  final double periodTP;
+  final double amplitude;
+
+  @override
+  double phase(double x, double y, double t) {
+    // Circular wave from origin
+    final r = math.sqrt(x * x + y * y);
+    return 2 * math.pi * (t / periodTC - r / lambdaC);
+  }
+
+  double phasePlane(double x, double y, double t) {
+    // Plane wave
+    final dir = x * math.cos(thetaP) + y * math.sin(thetaP);
+    return 2 * math.pi * ((dir / lambdaP) - (t / periodTP));
+  }
+
+  @override
+  double z(double x, double y, double t) {
+    final vC = lambdaC / periodTC;
+    final r = math.sqrt(x * x + y * y);
+    final zC = (t >= r / vC) ? amplitude * math.sin(phase(x, y, t)) : 0.0;
+
+    const dOffset = 7.5;
+    final kP = 2 * math.pi / lambdaP;
+    final pP = -(phasePlane(x, y, t) + kP * dOffset);
+    final zP = (pP > 0) ? amplitude * math.sin(pP) : 0.0;
+
+    return zC + zP;
+  }
+
+  @override
+  List<WaveComponent> getComponents(
+      double x, double y, double t, Set<String> activeIds) {
+    final vC = lambdaC / periodTC;
+    final r = math.sqrt(x * x + y * y);
+    final zC = (t >= r / vC) ? amplitude * math.sin(phase(x, y, t)) : 0.0;
+
+    const dOffset = 7.5;
+    final kP = 2 * math.pi / lambdaP;
+    final pP = -(phasePlane(x, y, t) + kP * dOffset);
+    final zP = (pP > 0) ? amplitude * math.sin(pP) : 0.0;
+
+    final List<WaveComponent> res = [];
+    if (activeIds.contains('waveC')) {
+      res.add(WaveComponent(
+          id: 'waveC', label: '円形波', color: Colors.purpleAccent, value: zC));
+    }
+    if (activeIds.contains('waveP')) {
+      res.add(WaveComponent(
+          id: 'waveP', label: '平面波', color: Colors.greenAccent, value: zP));
+    }
+    if (activeIds.contains('combined')) {
+      res.add(WaveComponent(
+          id: 'combined',
+          label: '合成波',
+          color: Colors.blueAccent,
+          value: zC + zP));
+    }
+    return res;
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is CircularPlaneInterferenceField &&
+        other.lambdaC == lambdaC &&
+        other.periodTC == periodTC &&
+        other.thetaP == thetaP &&
+        other.lambdaP == lambdaP &&
+        other.periodTP == periodTP &&
+        other.amplitude == amplitude;
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(lambdaC, periodTC, thetaP, lambdaP, periodTP, amplitude);
+}
+

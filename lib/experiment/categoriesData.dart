@@ -161,6 +161,7 @@ final categoriesData = <Category>[
         videos: [
           waveEquation1D,
           superposition1D,
+          twoSource1D,
         ],
       ),
       Subcategory(
@@ -169,6 +170,7 @@ final categoriesData = <Category>[
           planeWave,
           circularWave,
           planeWaveInterference,
+          circularPlaneInterference,
           circularInterference,
         ],
       ),

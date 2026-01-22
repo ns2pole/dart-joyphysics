@@ -90,6 +90,7 @@ export './experiment/waves/animations/1d/FreeEndReflectionLine.dart';
 export './experiment/waves/animations/1d/Refraction1D.dart';
 export './experiment/waves/animations/1d/ThinFilmInterference1D.dart';
 export './experiment/waves/animations/1d/Superposition1D.dart';
+export './experiment/waves/animations/1d/TwoSource1D.dart';
 export './experiment/waves/animations/1d/WaveEquation1D.dart';
 export './experiment/waves/animations/1d/DopplerEffect1D.dart';
 export './experiment/waves/animations/1d/DopplerEffectObserverMoving1D.dart';
@@ -103,6 +104,7 @@ export './experiment/waves/animations/2d/FixedReflection2D.dart';
 export './experiment/waves/animations/2d/ThinFilmInterference2D.dart';
 export './experiment/waves/animations/2d/CircularInterference.dart';
 export './experiment/waves/animations/2d/PlaneWaveInterference.dart';
+export './experiment/waves/animations/2d/CircularPlaneInterference.dart';
 export './experiment/waves/animations/2d/YoungDoubleSlit.dart';
 
 export './theory/mathematics/sequences_infinite_geometric_series_coefficient_of_restitution.dart';
