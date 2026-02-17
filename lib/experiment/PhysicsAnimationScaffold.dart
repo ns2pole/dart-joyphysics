@@ -110,13 +110,7 @@ class _PhysicsAnimationScaffoldState extends State<PhysicsAnimationScaffold>
   void _reset() {
     setState(() {
       _time = 0.0;
-      _azimuth = _defaultAzimuth;
-      _tilt = _defaultTilt;
-      _scale = 1.0;
-      _baseScale = 1.0;
-      if (widget.onReset != null) {
-        widget.onReset!();
-      }
+      // Reset only the clock; keep camera/zoom and simulation parameters.
     });
   }
 
@@ -197,27 +191,66 @@ class _PhysicsAnimationScaffoldState extends State<PhysicsAnimationScaffold>
             Positioned(
               top: 10,
               right: 10,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Text(
-                  'Time: ${_time.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Courier',
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (kIsWeb)
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.45),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            visualDensity: VisualDensity.compact,
+                            iconSize: 18,
+                            color: Colors.white,
+                            tooltip: 'Zoom out',
+                            onPressed: () => _zoomBy(1 / 1.15),
+                            icon: const Icon(Icons.remove),
+                          ),
+                          Container(
+                            width: 1,
+                            height: 18,
+                            color: Colors.white.withOpacity(0.25),
+                          ),
+                          IconButton(
+                            visualDensity: VisualDensity.compact,
+                            iconSize: 18,
+                            color: Colors.white,
+                            tooltip: 'Zoom in',
+                            onPressed: () => _zoomBy(1.15),
+                            icon: const Icon(Icons.add),
+                          ),
+                        ],
+                      ),
+                    ),
+                  if (kIsWeb) const SizedBox(width: 8),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(
+                      'Time: ${_time.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Courier',
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             if (widget.rangeLabel != null)
               Positioned(
-                top: 10,
+                top: kIsWeb ? 48 : 10,
                 left: 10,
                 child: Container(
                   padding:
@@ -237,55 +270,17 @@ class _PhysicsAnimationScaffoldState extends State<PhysicsAnimationScaffold>
                   ),
                 ),
               ),
-            // Web: Zoom +/- buttons on the canvas
-            if (kIsWeb)
-              Positioned(
-                right: 10,
-                bottom: 10,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.45),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        visualDensity: VisualDensity.compact,
-                        iconSize: 18,
-                        color: Colors.white,
-                        tooltip: 'Zoom in',
-                        onPressed: () => _zoomBy(1.15),
-                        icon: const Icon(Icons.add),
-                      ),
-                      Container(
-                        width: 28,
-                        height: 1,
-                        color: Colors.white.withOpacity(0.3),
-                      ),
-                      IconButton(
-                        visualDensity: VisualDensity.compact,
-                        iconSize: 18,
-                        color: Colors.white,
-                        tooltip: 'Zoom out',
-                        onPressed: () => _zoomBy(1 / 1.15),
-                        icon: const Icon(Icons.remove),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            // Web: Play/Pause + Reset buttons on the opposite side
+            // Web: Play/Pause + Reset buttons (top-left)
             if (kIsWeb)
               Positioned(
                 left: 10,
-                bottom: 10,
+                top: 10,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.45),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Column(
+                  child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
@@ -298,9 +293,9 @@ class _PhysicsAnimationScaffoldState extends State<PhysicsAnimationScaffold>
                             Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
                       ),
                       Container(
-                        width: 28,
-                        height: 1,
-                        color: Colors.white.withOpacity(0.3),
+                        width: 1,
+                        height: 18,
+                        color: Colors.white.withOpacity(0.25),
                       ),
                       IconButton(
                         visualDensity: VisualDensity.compact,
