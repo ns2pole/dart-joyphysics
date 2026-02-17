@@ -16,6 +16,7 @@ import 'package:joyphysics/dataExporter.dart';
 import 'package:joyphysics/theory/TheoryView.dart'; //画面遷移用
 import 'package:html/dom.dart' as dom; // ← これが重要
 import 'package:joyphysics/shared_components.dart';
+import 'package:joyphysics/document_title.dart';
 
 // 表示モード
 enum VideoViewMode { byCategory, byFormula }
@@ -330,6 +331,16 @@ class VideoDetailView extends StatefulWidget {
 class _VideoDetailViewState extends State<VideoDetailView> {
   List<_EmbeddedSimState> _simStates = [];
 
+  String get _pageTitle {
+    final v = widget.video;
+    final prefix = (v.isExperiment == true)
+        ? '【実験】'
+        : (v.isSimulation == true)
+            ? '【アニメ】'
+            : '';
+    return '$prefix${v.title}';
+  }
+
   bool _isWideWeb(BuildContext context) {
     if (!kIsWeb) return false;
     final size = MediaQuery.sizeOf(context);
@@ -338,12 +349,25 @@ class _VideoDetailViewState extends State<VideoDetailView> {
     return size.width >= 900 && ratio >= 1.2;
   }
 
+  void _syncDocumentTitle() {
+    if (kIsWeb) {
+      setDocumentTitle(_pageTitle);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _syncDocumentTitle();
+  }
+
   @override
   void didUpdateWidget(covariant VideoDetailView oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.video != widget.video) {
       _simStates = [];
     }
+    _syncDocumentTitle();
   }
 
   _EmbeddedSimState _ensureSimState(int simIndex, PhysicsSimulation sim) {
@@ -561,9 +585,10 @@ class _VideoDetailViewState extends State<VideoDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    final title = _pageTitle;
     if (_isWideWeb(context)) {
       return Scaffold(
-        appBar: AppBar(title: Text(widget.video.title)),
+        appBar: AppBar(title: Text(title)),
         body: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -580,7 +605,7 @@ class _VideoDetailViewState extends State<VideoDetailView> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.video.title)),
+      appBar: AppBar(title: Text(title)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(6),
         child: Column(
