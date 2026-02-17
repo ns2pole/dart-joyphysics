@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../fields/wave_fields.dart';
 import '../utils/coordinate_transformer.dart';
@@ -16,7 +17,9 @@ class ThinFilmStackPainter extends CustomPainter {
     required this.thicknessLInternal,
     required this.scale,
     required this.rows,
+    required this.activeComponentIds,
     this.scaleFactor = 250.0,
+    this.glowGamma = 1.35,
   });
 
   final double time;
@@ -24,7 +27,9 @@ class ThinFilmStackPainter extends CustomPainter {
   final double thicknessLInternal;
   final double scale;
   final List<ThinFilmWavelengthRow> rows;
+  final Set<String> activeComponentIds;
   final double scaleFactor;
+  final double glowGamma;
 
   static const double _worldRange = 5.0; // x in [-5,5] like WaveLinePainter
 
@@ -62,10 +67,10 @@ class ThinFilmStackPainter extends CustomPainter {
 
     // Slab overlay (0..L)
     final slabPaint = Paint()
-      ..color = Colors.yellow.withOpacity(0.12)
+      ..color = Colors.white.withOpacity(0.22)
       ..style = PaintingStyle.fill;
     final slabBorder = Paint()
-      ..color = Colors.orange.withOpacity(0.25)
+      ..color = Colors.black.withOpacity(0.10)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
@@ -91,14 +96,14 @@ class ThinFilmStackPainter extends CustomPainter {
 
     // Styles
     Paint componentPaint(Color c) => Paint()
-      ..color = c.withOpacity(0.22)
-      ..strokeWidth = 1.0
+      ..color = c.withOpacity(0.30)
+      ..strokeWidth = 1.4
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
     Paint combinedPaint(Color c) => Paint()
       ..color = c.withOpacity(0.92)
-      ..strokeWidth = 2.8
+      ..strokeWidth = 3.0
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
@@ -119,6 +124,11 @@ class ThinFilmStackPainter extends CustomPainter {
       final row = rows[rowIndex];
       final lambdaInternal = row.lambdaNm / scaleFactor;
 
+      final showIncident = activeComponentIds.contains('incident');
+      final showR1 = activeComponentIds.contains('reflected1');
+      final showR2 = activeComponentIds.contains('reflected2');
+      final showCombined = activeComponentIds.contains('combinedReflected');
+
       final field = ThinFilmInterferenceField(
         lambda: lambdaInternal,
         periodT: 1.0,
@@ -134,6 +144,46 @@ class ThinFilmStackPainter extends CustomPainter {
         ..layout();
       tp.paint(canvas, Offset(8, rowBaselineY(rowIndex) - tp.height / 2));
 
+      // Intensity-based glow on the left side (x < 0), only when combined is shown
+      if (showCombined && slabX0 > 0) {
+        // Use time-averaged intensity based on optical path difference.
+        // DeltaPhi = 4*pi*n*L/lambda + pi (fixed-end reflection at x=0)
+        // I = (1 + cos(DeltaPhi))/2 = (1 - cos(4*pi*n*L/lambda))/2
+        final phase = 4 * math.pi * n * thicknessLInternal / lambdaInternal;
+        final iNorm = (1.0 - math.cos(phase)) * 0.5; // 0..1
+        final shaped = math.pow(iNorm.clamp(0.0, 1.0), glowGamma).toDouble();
+        final alpha = (0.42 * shaped).clamp(0.0, 0.42);
+
+        if (alpha > 0.01) {
+          final bandTop = rowIndex * rowHeight;
+          final bandBottom = (rowIndex + 1) * rowHeight;
+          final glowRect = Rect.fromLTRB(
+            0,
+            bandTop,
+            slabX0,
+            bandBottom,
+          );
+
+          final gradient = LinearGradient(
+            begin: Alignment.centerRight,
+            end: Alignment.centerLeft,
+            colors: [
+              row.color.withOpacity(alpha),
+              row.color.withOpacity(0.0),
+            ],
+          );
+
+          final glowPaint = Paint()
+            ..shader = gradient.createShader(glowRect)
+            ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 18);
+
+          canvas.save();
+          canvas.clipRect(glowRect);
+          canvas.drawRect(glowRect, glowPaint);
+          canvas.restore();
+        }
+      }
+
       // Collect paths
       final pathIncident = Path();
       final pathR1 = Path();
@@ -147,7 +197,7 @@ class ThinFilmStackPainter extends CustomPainter {
           x,
           0,
           time,
-          const {'incident', 'reflected1', 'reflected2', 'combinedReflected'},
+          activeComponentIds,
         );
 
         double vIncident = 0.0;
@@ -178,24 +228,24 @@ class ThinFilmStackPainter extends CustomPainter {
         final yc = valueToScreenY(rowIndex, vCombined);
 
         if (!started) {
-          pathIncident.moveTo(sx, yi);
-          pathR1.moveTo(sx, yr1);
-          pathR2.moveTo(sx, yr2);
-          pathCombined.moveTo(sx, yc);
+          if (showIncident) pathIncident.moveTo(sx, yi);
+          if (showR1) pathR1.moveTo(sx, yr1);
+          if (showR2) pathR2.moveTo(sx, yr2);
+          if (showCombined) pathCombined.moveTo(sx, yc);
           started = true;
         } else {
-          pathIncident.lineTo(sx, yi);
-          pathR1.lineTo(sx, yr1);
-          pathR2.lineTo(sx, yr2);
-          pathCombined.lineTo(sx, yc);
+          if (showIncident) pathIncident.lineTo(sx, yi);
+          if (showR1) pathR1.lineTo(sx, yr1);
+          if (showR2) pathR2.lineTo(sx, yr2);
+          if (showCombined) pathCombined.lineTo(sx, yc);
         }
       }
 
       final cp = componentPaint(row.color);
-      canvas.drawPath(pathIncident, cp);
-      canvas.drawPath(pathR1, cp);
-      canvas.drawPath(pathR2, cp);
-      canvas.drawPath(pathCombined, combinedPaint(row.color));
+      if (showIncident) canvas.drawPath(pathIncident, cp);
+      if (showR1) canvas.drawPath(pathR1, cp);
+      if (showR2) canvas.drawPath(pathR2, cp);
+      if (showCombined) canvas.drawPath(pathCombined, combinedPaint(row.color));
     }
   }
 
@@ -206,6 +256,8 @@ class ThinFilmStackPainter extends CustomPainter {
         oldDelegate.thicknessLInternal != thicknessLInternal ||
         oldDelegate.scale != scale ||
         oldDelegate.scaleFactor != scaleFactor ||
+        oldDelegate.glowGamma != glowGamma ||
+        oldDelegate.activeComponentIds != activeComponentIds ||
         oldDelegate.rows != rows;
   }
 }

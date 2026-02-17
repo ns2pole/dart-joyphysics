@@ -40,7 +40,12 @@ class ThinFilmInterference1DSimulation extends WaveSimulation {
       };
 
   @override
-  Set<String> get initialActiveIds => const {};
+  Set<String> get initialActiveIds => {
+        'incident',
+        'reflected1',
+        'reflected2',
+        'combinedReflected',
+      };
 
   @override
   List<Widget> buildControls(context, params, updateParam) {
@@ -67,7 +72,45 @@ class ThinFilmInterference1DSimulation extends WaveSimulation {
   }
 
   @override
-  Widget? buildExtraControls(context, activeIds, updateActiveIds) => null;
+  Widget? buildExtraControls(context, activeIds, updateActiveIds) {
+    return Wrap(
+      spacing: 8,
+      children: [
+        buildChip(
+          '入射波',
+          'incident',
+          Colors.purpleAccent,
+          activeIds,
+          updateActiveIds,
+          fontSize: 12,
+        ),
+        buildChip(
+          '反射1',
+          'reflected1',
+          Colors.greenAccent,
+          activeIds,
+          updateActiveIds,
+          fontSize: 12,
+        ),
+        buildChip(
+          '反射2',
+          'reflected2',
+          Colors.orangeAccent,
+          activeIds,
+          updateActiveIds,
+          fontSize: 12,
+        ),
+        buildChip(
+          '合成反射',
+          'combinedReflected',
+          Colors.blueAccent,
+          activeIds,
+          updateActiveIds,
+          fontSize: 12,
+        ),
+      ],
+    );
+  }
 
   @override
   Widget buildAnimation(
@@ -82,6 +125,7 @@ class ThinFilmInterference1DSimulation extends WaveSimulation {
         n: params['n']!,
         thicknessLInternal: thicknessLInternal,
         scale: scale,
+        activeComponentIds: activeIds,
         scaleFactor: scaleFactor,
         rows: const [
           ThinFilmWavelengthRow(lambdaNm: 650, color: Color(0xFFE53935)), // red
