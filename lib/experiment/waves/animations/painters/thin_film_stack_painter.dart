@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import '../fields/wave_fields.dart';
 import '../utils/coordinate_transformer.dart';
 
 class ThinFilmWavelengthRow {
@@ -120,8 +119,9 @@ class ThinFilmStackPainter extends CustomPainter {
     );
 
     // Sampling
-    const samples = 380;
-    const step = (_worldRange * 2) / samples;
+    final int samples =
+        ((size.width / 3).round()).clamp(160, 280); // adaptive, keeps it smooth
+    final double step = (_worldRange * 2) / samples;
 
     // Draw each row
     for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
@@ -133,14 +133,17 @@ class ThinFilmStackPainter extends CustomPainter {
       final showR2 = activeComponentIds.contains('reflected2');
       final showCombined = activeComponentIds.contains('combinedReflected');
 
-      final field = ThinFilmInterferenceField(
-        lambda: lambdaInternal,
-        periodT: 1.0,
-        n: n,
-        thicknessL: thicknessLInternal,
-        mode: ThinFilmMode.combinedReflected,
-        amplitude: 0.35, // slightly reduced for stack view
-      );
+      // Compute waves directly (avoid WaveComponent allocations / GC).
+      const double amplitude = 0.35;
+      const double periodT = 1.0;
+      const double xSource = -7.5;
+      final double v1 = lambdaInternal / periodT;
+      final double v2 = (n <= 0) ? v1 : (v1 / n);
+      final double k1 = 2 * math.pi / lambdaInternal;
+      final double k2 = k1 * n;
+      final double omega = 2 * math.pi / periodT;
+      final bool needR1 = showR1 || showCombined;
+      final bool needR2 = showR2 || showCombined;
 
       // Label (left)
       final labelSpan = TextSpan(text: '${row.lambdaNm}', style: labelStyle);
@@ -191,7 +194,7 @@ class ThinFilmStackPainter extends CustomPainter {
 
           final glowPaint = Paint()
             ..shader = gradient.createShader(glowRect)
-            ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 18);
+            ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 16);
 
           canvas.save();
           canvas.clipRect(glowRect);
@@ -210,33 +213,70 @@ class ThinFilmStackPainter extends CustomPainter {
       bool started = false;
       for (int i = 0; i <= samples; i++) {
         final x = -_worldRange + i * step;
-        final comps = field.getComponents(
-          x,
-          0,
-          time,
-          activeComponentIds,
-        );
 
         double vIncident = 0.0;
-        double vR1 = 0.0;
-        double vR2 = 0.0;
-        double vCombined = 0.0;
-        for (final c in comps) {
-          switch (c.id) {
-            case 'incident':
-              vIncident = c.value;
-              break;
-            case 'reflected1':
-              vR1 = c.value;
-              break;
-            case 'reflected2':
-              vR2 = c.value;
-              break;
-            case 'combinedReflected':
-              vCombined = c.value;
-              break;
+        if (showIncident) {
+          double tReachI = 0.0;
+          if (x < 0) {
+            tReachI = (x - xSource) / v1;
+          } else if (x <= thicknessLInternal) {
+            tReachI = (0 - xSource) / v1 + (x - 0) / v2;
+          } else {
+            tReachI = (0 - xSource) / v1 +
+                (thicknessLInternal - 0) / v2 +
+                (x - thicknessLInternal) / v1;
+          }
+
+          if (time >= tReachI) {
+            double phaseI = 0.0;
+            if (x < 0) {
+              phaseI = omega * time - k1 * (x - xSource);
+            } else if (x <= thicknessLInternal) {
+              phaseI = omega * time - k1 * (0 - xSource) - k2 * (x - 0);
+            } else {
+              phaseI = omega * time -
+                  k1 * (0 - xSource) -
+                  k2 * thicknessLInternal -
+                  k1 * (x - thicknessLInternal);
+            }
+            vIncident = amplitude * math.sin(phaseI);
           }
         }
+
+        double vR1 = 0.0;
+        if (needR1 && x <= 0) {
+          final distR1 = (0 - xSource) + (0 - x);
+          final tReachR1 = distR1 / v1;
+          if (time >= tReachR1) {
+            vR1 = -amplitude * math.sin(omega * time - k1 * distR1);
+          }
+        }
+
+        double vR2 = 0.0;
+        if (needR2 && x <= thicknessLInternal) {
+          double tReachR2 = 0.0;
+          double phaseR2 = 0.0;
+          if (x > 0) {
+            tReachR2 = (0 - xSource) / v1 +
+                (thicknessLInternal - 0) / v2 +
+                (thicknessLInternal - x) / v2;
+            phaseR2 = omega * time -
+                k1 * (0 - xSource) -
+                k2 * (2 * thicknessLInternal - x);
+          } else {
+            tReachR2 =
+                (0 - xSource) / v1 + (2 * thicknessLInternal) / v2 + (0 - x) / v1;
+            phaseR2 = omega * time -
+                k1 * (0 - xSource) -
+                k2 * (2 * thicknessLInternal) -
+                k1 * (0 - x);
+          }
+          if (time >= tReachR2) {
+            vR2 = amplitude * math.sin(phaseR2);
+          }
+        }
+
+        final double vCombined = vR1 + vR2;
 
         final sx = xToScreen(x);
         final yi = valueToScreenY(rowIndex, vIncident);
