@@ -1,10 +1,6 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:joyphysics/experiment/PhysicsAnimationBase.dart';
-import '../fields/wave_fields.dart';
-import '../painters/wave_line_painter.dart';
-import '../painters/wave_surface_painter.dart';
+import '../painters/thin_film_stack_painter.dart';
 import '../widgets/wave_slider.dart';
 
 final thinFilmInterference1D = createWaveVideo(
@@ -36,98 +32,66 @@ class ThinFilmInterference1DSimulation extends WaveSimulation {
         );
 
   @override
-  Map<String, double> get initialParameters => getInitialParamsWithObs(
-        baseParams: {
-          'lambda': 2.0,
-          'periodT': 1.0,
-          'n': 1.5,
-          'thicknessL': 1.0,
-        },
-        obsX: 2.0,
-      );
+  Map<String, double> get initialParameters => {
+        // 屈折率
+        'n': 1.50,
+        // nm 風のスケール（表示用）。内部計算は scaleFactor で割って [-5,5] スケールへ落とす。
+        'Lnm': 500.0,
+      };
 
   @override
-  Set<String> get initialActiveIds => {'incident', 'combinedReflected'};
+  Set<String> get initialActiveIds => const {};
 
   @override
   List<Widget> buildControls(context, params, updateParam) {
-    final opd = 2 * params['n']! * params['thicknessL']!;
+    final n = params['n']!;
+    final lnm = params['Lnm']!;
+    final opdNm = 2 * n * lnm;
     return [
       Text(
-        'λ = ${params['lambda']!.toStringAsFixed(2)}  n = ${params['n']!.toStringAsFixed(2)}  L = ${params['thicknessL']!.toStringAsFixed(2)}  2nL = ${opd.toStringAsFixed(3)}',
+        'n = ${n.toStringAsFixed(2)}   L = ${lnm.toStringAsFixed(0)}   2nL = ${opdNm.toStringAsFixed(0)}',
         style: const TextStyle(fontSize: 12),
       ),
-      LambdaSlider(
-        value: params['lambda']!,
-        onChanged: (v) => updateParam('lambda', v),
-      ),
-      PeriodTSlider(
-        value: params['periodT']!,
-        onChanged: (v) => updateParam('periodT', v),
-      ),
       RefractiveIndexSlider(
-        value: params['n']!,
+        value: n,
         onChanged: (v) => updateParam('n', v),
       ),
-      ThicknessLSlider(
-        value: params['thicknessL']!,
-        onChanged: (v) => updateParam('thicknessL', v),
+      WaveParameterSlider(
+        label: 'L',
+        value: lnm,
+        min: 0.0,
+        max: 1000.0,
+        onChanged: (v) => updateParam('Lnm', v),
       ),
-      ...buildObsSliders(params, updateParam, is2D: false),
     ];
   }
 
   @override
-  Widget buildExtraControls(context, activeIds, updateActiveIds) {
-    return Wrap(
-      spacing: 8,
-      children: [
-        buildChip('入射波', 'incident', Colors.purpleAccent, activeIds,
-            updateActiveIds,
-            fontSize: 12),
-        buildChip('反射1', 'reflected1', Colors.greenAccent, activeIds,
-            updateActiveIds,
-            fontSize: 12),
-        buildChip('反射2', 'reflected2', Colors.orangeAccent, activeIds,
-            updateActiveIds,
-            fontSize: 12),
-        buildChip('合成反射', 'combinedReflected', Colors.blueAccent, activeIds,
-            updateActiveIds,
-            fontSize: 12),
-      ],
-    );
-  }
+  Widget? buildExtraControls(context, activeIds, updateActiveIds) => null;
 
   @override
   Widget buildAnimation(
       context, time, azimuth, tilt, scale, params, activeIds) {
-    final field = ThinFilmInterferenceField(
-      lambda: params['lambda']!,
-      periodT: params['periodT']!,
-      n: params['n']!,
-      thicknessL: params['thicknessL']!,
-      mode: ThinFilmMode.combinedReflected,
-      amplitude: 0.5,
-    );
+    const scaleFactor = 250.0;
+    final thicknessLInternal = (params['Lnm']! / scaleFactor).clamp(0.0, 5.0);
+
     return CustomPaint(
       size: Size.infinite,
-      painter: WaveLinePainter(
+      painter: ThinFilmStackPainter(
         time: time,
-        field: field,
-        surfaceColor: Colors.blue,
-        showTicks: true,
-        boundaryX: params['thicknessL']!,
-        activeComponentIds: activeIds,
+        n: params['n']!,
+        thicknessLInternal: thicknessLInternal,
         scale: scale,
-        markers: [
-          getObsMarker(params, label: '合成波の観測点'),
+        scaleFactor: scaleFactor,
+        rows: const [
+          ThinFilmWavelengthRow(lambdaNm: 650, color: Color(0xFFE53935)), // red
+          ThinFilmWavelengthRow(lambdaNm: 600, color: Color(0xFFFB8C00)), // orange
+          ThinFilmWavelengthRow(lambdaNm: 570, color: Color(0xFFFDD835)), // yellow
+          ThinFilmWavelengthRow(lambdaNm: 530, color: Color(0xFF43A047)), // green
+          ThinFilmWavelengthRow(lambdaNm: 500, color: Color(0xFF1E88E5)), // cyan/blue
+          ThinFilmWavelengthRow(lambdaNm: 450, color: Color(0xFF3949AB)), // indigo
+          ThinFilmWavelengthRow(lambdaNm: 400, color: Color(0xFF8E24AA)), // violet
         ],
-        mediumSlab: MediumSlabOverlay(
-          xStart: 0.0,
-          xEnd: params['thicknessL']!,
-          color: Colors.yellow,
-          opacity: 0.4,
-        ),
       ),
     );
   }
