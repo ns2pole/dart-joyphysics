@@ -140,13 +140,23 @@ class ThinFilmStackPainter extends CustomPainter {
       const double xSource = -7.5;
       // Keep light speed constant across wavelengths: v = lambda * f (same v for all rows).
       final double v1 = baseSpeed;
-      final double v2 = (n <= 0) ? v1 : (v1 / n);
       final double periodT = lambdaInternal / v1; // per-row period to keep v constant
       final double k1 = 2 * math.pi / lambdaInternal;
-      final double k2 = k1 * n;
       final double omega = 2 * math.pi / periodT;
       final bool needR1 = showR1 || showCombined;
       final bool needR2 = showR2 || showCombined;
+
+      // --- Dispersion (thin film only) ---
+      // Baseline: slider n is n(650nm). Make violet slightly slower inside film by increasing n(λ).
+      // Target: very small effect (650nm -> 400nm about 0.5% slower in-film).
+      const int lambdaRedNm = 650;
+      const int lambdaVioletNm = 400;
+      const double epsilonAtViolet = 0.005; // +0.5% on n at 400nm (thin-film only)
+      final double tDisp = ((lambdaRedNm - row.lambdaNm) / (lambdaRedNm - lambdaVioletNm))
+          .clamp(0.0, 1.0);
+      final double nEff = n * (1.0 + epsilonAtViolet * tDisp);
+      final double v2 = (nEff <= 0) ? v1 : (v1 / nEff);
+      final double k2 = k1 * nEff;
 
       // Label (left)
       final labelSpan = TextSpan(text: '${row.lambdaNm}', style: labelStyle);
@@ -162,7 +172,7 @@ class ThinFilmStackPainter extends CustomPainter {
         // tReachR2 = (0 - xSource)/v1 + (2*L)/v2, where v1=lambda/periodT, v2=v1/n
         const xSource = -7.5;
         final v1 = baseSpeed;
-        final v2 = (n <= 0) ? v1 : (v1 / n);
+        final v2 = (nEff <= 0) ? v1 : (v1 / nEff);
         final tReachR2AtBoundary =
             (0 - xSource) / v1 + (2 * thicknessLInternal) / v2;
         if (time < tReachR2AtBoundary) {
@@ -171,7 +181,8 @@ class ThinFilmStackPainter extends CustomPainter {
         // Use time-averaged intensity based on optical path difference.
         // DeltaPhi = 4*pi*n*L/lambda + pi (fixed-end reflection at x=0)
         // I = (1 + cos(DeltaPhi))/2 = (1 - cos(4*pi*n*L/lambda))/2
-        final phase = 4 * math.pi * n * thicknessLInternal / lambdaInternal;
+        final phase =
+            4 * math.pi * nEff * thicknessLInternal / lambdaInternal;
         final iNorm = (1.0 - math.cos(phase)) * 0.5; // 0..1
         final shaped = math.pow(iNorm.clamp(0.0, 1.0), glowGamma).toDouble();
         final alpha = (0.42 * shaped).clamp(0.0, 0.42);
