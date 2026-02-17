@@ -19,6 +19,7 @@ class ThinFilmStackPainter extends CustomPainter {
     required this.activeComponentIds,
     this.scaleFactor = 250.0,
     this.glowGamma = 1.35,
+    this.baseSpeed = 2.0,
   });
 
   final double time;
@@ -29,6 +30,7 @@ class ThinFilmStackPainter extends CustomPainter {
   final Set<String> activeComponentIds;
   final double scaleFactor;
   final double glowGamma;
+  final double baseSpeed;
 
   static const double _worldRange = 5.0; // x in [-5,5] like WaveLinePainter
 
@@ -135,10 +137,11 @@ class ThinFilmStackPainter extends CustomPainter {
 
       // Compute waves directly (avoid WaveComponent allocations / GC).
       const double amplitude = 0.35;
-      const double periodT = 1.0;
       const double xSource = -7.5;
-      final double v1 = lambdaInternal / periodT;
+      // Keep light speed constant across wavelengths: v = lambda * f (same v for all rows).
+      final double v1 = baseSpeed;
       final double v2 = (n <= 0) ? v1 : (v1 / n);
+      final double periodT = lambdaInternal / v1; // per-row period to keep v constant
       final double k1 = 2 * math.pi / lambdaInternal;
       final double k2 = k1 * n;
       final double omega = 2 * math.pi / periodT;
@@ -158,7 +161,7 @@ class ThinFilmStackPainter extends CustomPainter {
         // Use the reach time at x=0 (boundary) for reflected2:
         // tReachR2 = (0 - xSource)/v1 + (2*L)/v2, where v1=lambda/periodT, v2=v1/n
         const xSource = -7.5;
-        final v1 = lambdaInternal; // periodT=1.0
+        final v1 = baseSpeed;
         final v2 = (n <= 0) ? v1 : (v1 / n);
         final tReachR2AtBoundary =
             (0 - xSource) / v1 + (2 * thicknessLInternal) / v2;
