@@ -42,7 +42,7 @@ class IsochoricSimulation extends PhysicsSimulation {
   }
 
   @override
-  Widget? buildExtraControls(context, parameters, activeIds, updateActiveIds) {
+  Widget? buildExtraControls(context, activeIds, updateActiveIds) {
     return Wrap(
       spacing: 8,
       children: [

@@ -38,12 +38,14 @@ abstract class PhysicsSimulation {
   final String? latex;
   final Widget? formula;
   final bool is3D;
+  final double aspectRatio;
 
   PhysicsSimulation({
     required this.title,
     this.latex,
     this.formula,
     this.is3D = false,
+    this.aspectRatio = 1.0,
   });
 
   /// 初期パラメータ
@@ -250,6 +252,7 @@ class _PhysicsSimulationViewState extends State<PhysicsSimulationView> {
       title: widget.simulation.title,
       formula: widget.simulation.formula,
       is3D: widget.simulation.is3D,
+      aspectRatio: widget.simulation.aspectRatio,
       height: widget.height,
       sliders:
           widget.simulation.buildControls(context, _parameters, _updateParam),
@@ -280,6 +283,7 @@ Video createWaveVideo({
   required String title,
   required String latex,
   required PhysicsSimulation simulation,
+  double height = 650,
 }) {
   return Video(
     category: 'waves',
@@ -291,7 +295,7 @@ Video createWaveVideo({
     isSimulation: true,
     latex: latex,
     experimentWidgets: [
-      PhysicsSimulationView(simulation: simulation),
+      PhysicsSimulationView(simulation: simulation, height: height),
     ],
   );
 }
