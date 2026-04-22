@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:google_fonts/google_fonts.dart'; // 等幅フォント
 import 'package:joyphysics/experiment/HasHeight.dart';
 import 'package:joyphysics/experiment/sensor_availability.dart';
 import 'package:joyphysics/experiment/sensor_availability_types.dart';
+import 'package:joyphysics/experiment/sensor_app_store_dialog.dart';
 import 'package:joyphysics/shared_components.dart';
 
 class AccelerometerExperimentWidget extends StatefulWidget with HasHeight {
@@ -44,6 +46,15 @@ class _AccelerometerExperimentWidgetState extends State<AccelerometerExperimentW
     setState(() {
       _availability = status;
     });
+    if (kIsWeb && widget.useScaffold) {
+      if (status.state == SensorAvailabilityState.unavailable) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            showSensorAppStoreDialog(context);
+          }
+        });
+      }
+    }
     if (status.isAvailable) {
       _startSubscription();
     }
@@ -86,15 +97,15 @@ class _AccelerometerExperimentWidgetState extends State<AccelerometerExperimentW
 
   @override
   Widget build(BuildContext context) {
-    final magnitude = sqrt(x * x + y * y + z * z);
-
     final bool isAvailable = _availability.isAvailable;
     final bool needsPermission = _availability.needsPermission;
+    final bool webStaticReadings = kIsWeb && !isAvailable && !needsPermission;
+    final magnitude = sqrt(x * x + y * y + z * z);
 
     final content = SensorDisplayCard(
       title: '加速度センサーの値',
       height: widget.height,
-      children: isAvailable
+      children: (isAvailable || webStaticReadings)
           ? [
               Text("X: ${formatValue(x)} (m/s²)",
                   style:

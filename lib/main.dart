@@ -3,7 +3,7 @@ import 'package:joyphysics/update_checker.dart';
 import 'package:joyphysics/experiment/ExperimentView.dart';
 import 'package:joyphysics/experiment/categoriesData.dart';
 import 'package:joyphysics/experiment/sensorListView.dart';
-import 'package:joyphysics/experiment/sensorArticlesView.dart';
+import 'package:joyphysics/joy_physics_store_uris.dart';
 import 'package:joyphysics/store/ProductListPage.dart';
 import 'package:joyphysics/aboutView.dart';
 import 'package:joyphysics/model.dart';
@@ -105,12 +105,8 @@ class CategoryList extends StatelessWidget {
   final List<Category> categories;
   const CategoryList({Key? key, required this.categories}) : super(key: key);
 
-  static final Uri _appStoreUri = Uri.parse(
-    'https://apps.apple.com/jp/app/%E5%AE%9F%E9%A8%93%E3%81%A7%E5%AD%A6%E3%81%B6%E9%AB%98%E6%A0%A1%E7%89%A9%E7%90%86-%E3%83%BC-joy-physics/id6748957698',
-  );
-  static final Uri _googlePlayUri = Uri.parse(
-    'https://play.google.com/store/apps/details?id=com.joyphysics',
-  );
+  static final Uri _appStoreUri = JoyPhysicsStoreUris.appStore;
+  static final Uri _googlePlayUri = JoyPhysicsStoreUris.googlePlay;
 
   Future<void> _openStoreLink(Uri uri) async {
     await launchUrl(
@@ -164,9 +160,11 @@ class CategoryList extends StatelessWidget {
         }
         // ---------- 先頭部分 ----------
         if (index == 1) {
-          final info = kIsWeb
-              ? _buildInfoText('Web版ではセンサーが使えません。\nアプリをダウンロードしてね。RR')
-              : _buildInfoText('スマホセンサーを活用！');
+          final info = _buildInfoText(
+            kIsWeb
+                ? 'スマホのセンサーで測定するならアプリ版が便利です。Webでは記事内の測定値は0表示になることがあります。'
+                : 'スマホセンサーを活用！',
+          );
           return Column(
             children: [
               info,
@@ -313,7 +311,7 @@ class CategoryList extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => kIsWeb ? const SensorArticlesView() : SensorListView(),
+              builder: (_) => const SensorListView(),
             ),
           ),
           child: Container(
@@ -325,12 +323,11 @@ class CategoryList extends StatelessWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(kIsWeb ? Icons.menu_book : Icons.sensors,
-                    color: Colors.white, size: 35),
+              children: const [
+                Icon(Icons.sensors, color: Colors.white, size: 35),
                 SizedBox(width: 8),
                 Text(
-                  kIsWeb ? 'センサー関係の記事' : 'センサーを使う！',
+                  'センサーを使う！',
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.white,

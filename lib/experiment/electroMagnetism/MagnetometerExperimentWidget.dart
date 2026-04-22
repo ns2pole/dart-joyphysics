@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:joyphysics/experiment/HasHeight.dart';
 import 'package:joyphysics/experiment/sensor_availability.dart';
 import 'package:joyphysics/experiment/sensor_availability_types.dart';
+import 'package:joyphysics/experiment/sensor_app_store_dialog.dart';
 import 'package:joyphysics/shared_components.dart';
 
 class MagnetometerExperimentWidget extends StatefulWidget with HasHeight {
@@ -41,6 +43,15 @@ class _MagnetometerExperimentWidgetState extends State<MagnetometerExperimentWid
     setState(() {
       _availability = status;
     });
+    if (kIsWeb && widget.useScaffold) {
+      if (status.state == SensorAvailabilityState.unavailable) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            showSensorAppStoreDialog(context);
+          }
+        });
+      }
+    }
     if (status.isAvailable) {
       _startSubscription();
     }
@@ -91,16 +102,17 @@ class _MagnetometerExperimentWidgetState extends State<MagnetometerExperimentWid
 
   @override
   Widget build(BuildContext context) {
+    final isAvailable = _availability.isAvailable;
+    final needsPermission = _availability.needsPermission;
+    final webStaticReadings = kIsWeb && !isAvailable && !needsPermission;
     final magnitude = sqrt(_x * _x + _y * _y + _z * _z);
     final color = getColorByMagnitude(magnitude);
     final warningText = getWarningText(magnitude);
-    final isAvailable = _availability.isAvailable;
-    final needsPermission = _availability.needsPermission;
 
     final content = SensorDisplayCard(
       title: "現在の磁場強度",
       height: widget.height,
-      children: isAvailable
+      children: (isAvailable || webStaticReadings)
           ? [
               Text("X: ${_x.toStringAsFixed(1)} μT",
                   style: const TextStyle(fontSize: 24, color: Colors.black)),

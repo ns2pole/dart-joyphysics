@@ -12,7 +12,6 @@ import 'package:joyphysics/experiment/waves/FrequencyMeasureWidget.dart';
 import 'package:joyphysics/experiment/sensor_availability.dart';
 import 'package:joyphysics/experiment/sensor_availability_types.dart';
 import 'package:joyphysics/shared_components.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SensorListView extends StatefulWidget {
   const SensorListView({super.key});
@@ -84,18 +83,15 @@ class _SensorListViewState extends State<SensorListView> {
           SnackBar(content: Text(granted.message)),
         );
       }
+      return;
     }
-  }
-
-  static final Uri _appStoreUri = Uri.parse(
-    'https://apps.apple.com/jp/app/%E5%AE%9F%E9%A8%93%E3%81%A7%E5%AD%A6%E3%81%B6%E9%AB%98%E6%A0%A1%E7%89%A9%E7%90%86-%E3%83%BC-joy-physics/id6748957698',
-  );
-  static final Uri _googlePlayUri = Uri.parse(
-    'https://play.google.com/store/apps/details?id=com.joyphysics',
-  );
-
-  Future<void> _openStoreLink(Uri uri) async {
-    await launchUrl(uri, webOnlyWindowName: '_blank');
+    if (kIsWeb) {
+      if (!context.mounted) return;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => target),
+      );
+    }
   }
 
   final List<Map<String, dynamic>> sensors = [
@@ -123,7 +119,7 @@ class _SensorListViewState extends State<SensorListView> {
       'widget': FrequencyMeasureWidget(),
       'key': '周波数センサー',
     },
-    if (!(kIsWeb || defaultTargetPlatform == TargetPlatform.iOS))
+    if (defaultTargetPlatform != TargetPlatform.iOS)
       {
         'name': '光センサー',
         'icon': Icons.wb_sunny,
@@ -142,63 +138,22 @@ class _SensorListViewState extends State<SensorListView> {
 
   @override
   Widget build(BuildContext context) {
-    final showWebCta = kIsWeb;
     return Scaffold(
       appBar: AppBar(title: Text('センサーを使う')),
       body: ListView.separated(
-        itemCount: sensors.length + 1 + (showWebCta ? 1 : 0), // +1 = 解説記事リンク
+        itemCount: sensors.length + 1, // +1 = 解説記事
         separatorBuilder: (_, __) => Divider(),
         itemBuilder: (context, index) {
-          if (showWebCta && index == 0) {
-            return Padding(
-              padding: const EdgeInsets.all(12),
-              child: Card(
-                elevation: 0,
-                color: Colors.blue[50],
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Web版ではセンサーが使えません。アプリをDLしてね！',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          OutlinedButton.icon(
-                            onPressed: () => _openStoreLink(_appStoreUri),
-                            icon: const Icon(Icons.apple),
-                            label: const Text('App Store'),
-                          ),
-                          OutlinedButton.icon(
-                            onPressed: () => _openStoreLink(_googlePlayUri),
-                            icon: const Icon(Icons.android),
-                            label: const Text('Google Play'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }
-
-          final adjustedIndex = showWebCta ? index - 1 : index;
-          if (adjustedIndex < sensors.length) {
-            final sensor = sensors[adjustedIndex];
+          if (index < sensors.length) {
+            final sensor = sensors[index];
             final availabilityKey = sensor['key'] as String;
             final status =
                 _availability[availabilityKey] ?? SensorAvailability.unavailable;
             final isAvailable = status.isAvailable;
-            final canTap = isAvailable || status.needsPermission;
+            final isChecking = status.state == SensorAvailabilityState.checking;
+            final canTap = isAvailable ||
+                status.needsPermission ||
+                (kIsWeb && !isChecking);
             final String titleSuffix;
             if (isAvailable) {
               titleSuffix = '';
@@ -215,12 +170,12 @@ class _SensorListViewState extends State<SensorListView> {
             return ListTile(
               leading: Icon(
                 sensor['icon'],
-                color: isAvailable ? null : Colors.grey,
+                color: (isAvailable || kIsWeb) ? null : Colors.grey,
               ),
               title: Text(
                 '${sensor['name']}$titleSuffix',
                 style: TextStyle(
-                  color: isAvailable ? null : Colors.grey,
+                  color: (isAvailable || kIsWeb) ? null : Colors.grey,
                 ),
               ),
               enabled: canTap,
@@ -261,18 +216,20 @@ class _SensorListViewState extends State<SensorListView> {
       BuildContext context, String categoryName, List<Video> videos) {
     final bool isAvailable =
         (_availability[categoryName] ?? SensorAvailability.unavailable).isAvailable;
+    final bool articleUsable = isAvailable || kIsWeb;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionHeader(name: categoryName, disabled: !isAvailable, fontSize: 16),
+        SectionHeader(
+            name: categoryName, disabled: !articleUsable, fontSize: 16),
         ...videos.map((video) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 32, vertical: 2),
             child: ListTile(
               contentPadding: EdgeInsets.symmetric(horizontal: 0),
               leading: Opacity(
-                opacity: isAvailable ? 1.0 : 0.5,
+                opacity: articleUsable ? 1.0 : 0.5,
                 child: Image.asset(
                   'assets/icon/smartphone_only.png',
                   width: 60,
@@ -284,16 +241,16 @@ class _SensorListViewState extends State<SensorListView> {
                 video.title,
                 style: TextStyle(
                   fontSize: 15,
-                  color: isAvailable ? Colors.black87 : Colors.grey,
+                  color: articleUsable ? Colors.black87 : Colors.grey,
                 ),
               ),
-              tileColor: isAvailable
+              tileColor: articleUsable
                   ? Colors.blue[50]?.withOpacity(0.1)
                   : Colors.grey[100]?.withOpacity(0.1),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
-              enabled: isAvailable,
-              onTap: isAvailable
+              enabled: articleUsable,
+              onTap: articleUsable
                   ? () {
                       Navigator.push(
                         context,

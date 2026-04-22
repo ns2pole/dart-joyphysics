@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:joyphysics/LatexView.dart';
 import 'package:joyphysics/dataExporter.dart';
 import 'package:joyphysics/model.dart';
+import 'package:joyphysics/joy_physics_store_uris.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SensorArticlesView extends StatelessWidget {
   const SensorArticlesView({super.key});
 
-  static final Uri _appStoreUri = Uri.parse(
-    'https://apps.apple.com/jp/app/%E5%AE%9F%E9%A8%93%E3%81%A7%E5%AD%A6%E3%81%B6%E9%AB%98%E6%A0%A1%E7%89%A9%E7%90%86-%E3%83%BC-joy-physics/id6748957698',
-  );
-  static final Uri _googlePlayUri = Uri.parse(
-    'https://play.google.com/store/apps/details?id=com.joyphysics',
-  );
+  static final Uri _appStoreUri = JoyPhysicsStoreUris.appStore;
+  static final Uri _googlePlayUri = JoyPhysicsStoreUris.googlePlay;
 
   Future<void> _openStoreLink(Uri uri) async {
     await launchUrl(

@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:light/light.dart';
 import 'dart:async';
 import 'package:joyphysics/experiment/HasHeight.dart';
+import 'package:joyphysics/experiment/sensor_app_store_dialog.dart';
 import 'package:joyphysics/shared_components.dart';
 
 class LuxMeasurementWidget extends StatefulWidget with HasHeight {
@@ -29,6 +31,23 @@ class _LuxMeasurementWidgetState extends State<LuxMeasurementWidget> {
   @override
   void initState() {
     super.initState();
+    if (kIsWeb) {
+      setState(() {
+        lux = 0.0;
+      });
+      if (widget.useScaffold) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            showSensorAppStoreDialog(
+              context,
+              title: '光センサーはアプリ版で',
+              message: 'Web版では照度の本番測定に対応していません。アプリをインストールしてフル体験してください。',
+            );
+          }
+        });
+      }
+      return;
+    }
     _subscription = _light.lightSensorStream.listen((luxValue) {
       if (!mounted) return;
       setState(() {
@@ -39,7 +58,9 @@ class _LuxMeasurementWidgetState extends State<LuxMeasurementWidget> {
 
   @override
   void dispose() {
-    _subscription?.cancel();
+    if (!kIsWeb) {
+      _subscription?.cancel();
+    }
     super.dispose();
   }
 

@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:joyphysics/experiment/HasHeight.dart';
+import 'package:joyphysics/experiment/sensor_app_store_dialog.dart';
 import 'package:joyphysics/shared_components.dart';
 
 class FrequencyMeasureWidget extends StatefulWidget with HasHeight {
@@ -31,6 +33,23 @@ class _FrequencyMeasureWidgetState extends State<FrequencyMeasureWidget> {
   @override
   void initState() {
     super.initState();
+    if (kIsWeb) {
+      setState(() {
+        _frequency = 0.0;
+      });
+      if (widget.useScaffold) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            showSensorAppStoreDialog(
+              context,
+              title: '周波数測定はアプリ版で',
+              message: 'Web版ではマイクからの本番測定に対応していません。アプリをインストールしてフル体験してください。',
+            );
+          }
+        });
+      }
+      return;
+    }
     _checkPermissionAndStartMic();
   }
 
@@ -118,6 +137,10 @@ class _FrequencyMeasureWidgetState extends State<FrequencyMeasureWidget> {
 
   @override
   void dispose() {
+    if (kIsWeb) {
+      super.dispose();
+      return;
+    }
     _timer?.cancel();
     _frequencyChannel.invokeMethod('stop');
     super.dispose();
